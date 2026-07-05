@@ -1,58 +1,36 @@
-﻿---
+---
 title: "What stolen content does to your search rankings"
-description: "When your product text is duplicated across the web, search engines pick one canonical version. Why the original does not always win, without the fearmongering."
+description: "There is no duplicate content penalty, but stolen text still costs rankings. How search engines choose one version to show, and how to keep it yours."
 cluster: "Text theft & what it costs"
-summary: "Duplicate text forces search engines to choose a canonical version, and the choice does not automatically favour the author. An honest look at what stolen text does and does not do to rankings."
+summary: "Search engines do not punish you when your text is stolen. They do something quieter: they pick one version to show. This article explains how that choice is made and how to influence it."
 pubDate: 2026-06-06
 related: ["when-thieves-outrank-original", "deindexing-stolen-copy", "text-watermarks-and-seo"]
 ---
 
-Plenty has been written about duplicate content, and a lot of it overstates the danger. So let us start with what is not true: there is no "duplicate content penalty" that punishes you because someone else stole your text. Google has said for years that duplication across sites is not treated as spam by default, and that most of it is handled quietly by filtering rather than by punishing anyone.
+Start with the myth, because it wastes more merchant money than the truth does. There is no duplicate content penalty. Google has said for years that text duplicated across different sites is normal, is not treated as spam, and triggers no punishment against anyone. A store whose descriptions get stolen is not marked down for it.
 
-That is the reassuring half. The unreassuring half is what "handled quietly" actually means for the store that wrote the words.
+What happens instead is quieter and can still cost you. When the same paragraphs exist on several sites, a search engine picks one version to show for a given query and folds the rest away. The cost of theft is not a penalty. It is the risk of losing that selection.
 
-## How search engines handle duplicated text
+## Search engines file duplicates, they do not punish them
 
-When substantially the same text exists at several URLs, a search engine does not want to show all of them for the same query. It groups the duplicates into a cluster and selects one URL as the canonical, the representative version that gets shown. The others are filtered from most results, not deleted from the index, but rarely surfaced.
+When a crawler finds your description on a second domain, it groups the pages as duplicates and elects one as the version worth showing. The others still exist in the index, but for most queries they are filtered out of the results. Searchers see one listing, not five.
 
-The selection is algorithmic and considers many signals: which version was crawled and indexed first, which sits on a more authoritative domain, internal and external links, page quality, redirects, canonical tags, and how the content is presented. Being the original author is not, by itself, one of the inputs. Search engines cannot see authorship. They see URLs, timestamps and signals.
+If the elected version is yours, theft has cost you nothing in search. If it is the thief's, your page quietly stops appearing for queries your own sentences used to win, and the traffic moves to the site that took them. Nothing in your dashboard announces this. Rankings erode for specific phrases while the rest of the site looks normal, which is why the damage is easy to misdiagnose as a general SEO problem.
 
-## Why the original does not always win
+## How the shown version is chosen
 
-Most of the time, an established store keeps its position when a small clone copies it. The clone has no links, no history and thin pages, and the filter goes the right way. It would be dishonest to tell you otherwise.
+Being the author is not a signal search engines can read. There is no field in a web page that proves who wrote the text, so the choice leans on what machines can measure: which page was indexed first, how strong each domain is, how the rest of each site links to the page, and how the page performs. A small store with a young domain can lose that contest to a larger site that copied it, particularly when the larger site is crawled more often. The mechanics of that outcome, and a worked example, are in [when the stolen version outranks the original](/learn/when-thieves-outrank-original/).
 
-But the ranking outcome tracks signals, not authorship, so the exceptions follow a pattern:
+You can check your own exposure in minutes. Take the most distinctive sentence from each of your best-selling descriptions, search for it inside quotation marks, and note every domain that returns it. Repeat monthly for your top products. Duplicates found early are far easier to deal with than duplicates found after a year of accumulated links.
 
-- **The copier has the stronger domain.** When an aggregator, marketplace listing or established content site republishes your description, its domain authority can outweigh yours entirely. Your original becomes the filtered duplicate on your own product.
-- **The copier gets indexed first.** New products are vulnerable in their first days. If a scraper republishes your description before your page is crawled, the timeline signal points the wrong way. Feeds make this practical: your text can be [fetched the hour it goes live](/learn/product-descriptions-scraped/).
-- **Your own signals are weak.** Slow crawling, thin internal linking or a young domain give the algorithm little reason to prefer you.
+Search Console shows the same erosion from the other side. When one page loses impressions and clicks for the specific queries its own sentences used to win, while the rest of the site holds steady, duplication is the explanation to rule out first. General SEO work will not repair it, because the page is not being ranked worse. It is being shown less, which is a different problem with a different fix.
 
-We walk through a typical bad case, and the signals that decide it, in [when the thief outranks you with your own words](/learn/when-thieves-outrank-original/).
+## Removal beats rewriting
 
-## What the damage actually looks like
+The instinctive response to a duplicate is to rewrite your own description. Resist it. Rewriting abandons the sentences your rankings were built on and leaves the thief holding the only version that matches the queries your page used to win. You would be conceding the contested text and starting again from nothing.
 
-When it goes wrong, it does not look dramatic. Nothing in Search Console says "duplicate detected". What you see is quieter:
+The correct response is to remove the duplicate. Report it to the marketplace carrying the listing or to the company that hosts the thief's site, and ask search engines to remove the infringing page from their results; the process is covered in [getting stolen content removed from Google's index](/learn/deindexing-stolen-copy/). Every one of these routes turns on the same question, who published first, and answers it with dates. An archived snapshot helps. A dated, verifiable record of the exact text is stronger.
 
-- Queries where your product page used to appear now show someone else's page, sometimes carrying sentences you recognise.
-- Impressions and clicks for affected pages drift down without any change on your side.
-- Long-tail queries drawn from distinctive phrases in your text, the exact phrases good descriptions are built to catch, resolve to the copier.
+Expect the repair to take days to weeks rather than hours: removal takes effect when the infringing page comes down and the search engine revisits it. That lag is one more argument for the monthly exact-phrase check, because the earlier a duplicate is caught, the fewer signals it has gathered by the time you act.
 
-The last one stings the most. Original text earns long-tail traffic precisely because the phrasing is unique. Once the phrasing exists on five domains, that uniqueness is spent, and it may be spent on someone else's page.
-
-Worth adding for balance: a great deal of scraping does no ranking damage at all. Auto-generated splogs and abandoned clone shells often never rank for anything, and duplicates on pages Google has already classified as low quality are filtered without troubling you. The harm concentrates in a minority of cases, the ones where the copier has real signals behind them. The trouble is that you cannot tell in advance which duplicates those will be, which is an argument for cheap, routine checking rather than for panic.
-
-## What changes the outcome
-
-Canonical selection is not appealable, but it is influenceable, and the influence comes down to evidence and cleanup.
-
-First, keep your own signals in order: fast indexing of new products, sensible internal links, a submitted sitemap. Request indexing for important new pages rather than waiting for the crawler to wander past. This wins the ordinary cases, because it keeps the timeline signal pointing at you.
-
-Second, when a stolen page is live and hurting, remove it rather than trying to outrank it. A DMCA notice to the host, or Google's own copyright removal process, takes the duplicate out of the cluster entirely. Both routes ask you to demonstrate that the content is yours, which is where most merchants get stuck: "my page says 2023" is a claim, not proof. The [enforcement guide](/enforcement/) covers the process, and [getting stolen content removed from Google's index](/learn/deindexing-stolen-copy/) covers the search-specific route.
-
-Proof is the lever. A dated record that the text existed on your store, with content fingerprints and an independent timeline, converts a he-said-she-said into a straightforward removal.
-
-## Where Kirpik fits
-
-One thing worth stating plainly, because it is the first question careful merchants ask: protecting your text with Kirpik does not touch your SEO. Your text is not rewritten, no scripts are added to your storefront, and search engines read exactly the words you wrote. The details are in [invisible watermarks and SEO](/learn/text-watermarks-and-seo/).
-
-What Kirpik adds is the missing evidence layer. Protected descriptions carry an algorithmic invisible watermark derived from your original text signature, so when a duplicate appears on a stronger domain, you can detect your markers in it and generate a [Proof of Ownership Certificate](/features/chain-of-proof/) that documents ownership with dates and fingerprints. The search engine picks the canonical. You get the tools to take the impostor out of the running.
+That record is what Kirpik produces. Text protected with its invisible watermark can be [detected](/features/detection/) on any site you check, and the resulting Proof of Ownership Certificate documents your protection date against the infringing page's own timestamps, which is the comparison a removal request is decided on.

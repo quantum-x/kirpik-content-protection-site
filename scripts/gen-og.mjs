@@ -42,11 +42,14 @@ const ARTICLES = {}; // slug -> [clusterTitle, articleTitle]
   }
 }
 
-// Features: tag (eyebrow) + title per slug.
-const FEATURES = {}; // slug -> [tag, title]
+// Features: title per slug (the tag field no longer exists; cards use a
+// fixed "Kirpik" eyebrow).
+const FEATURES = {}; // slug -> [eyebrow, title]
 {
-  const re = /slug:\s*"([^"]+)",\s*tag:\s*"((?:[^"\\]|\\.)*)",\s*title:\s*"((?:[^"\\]|\\.)*)"/gs;
-  for (const m of dataTs.matchAll(re)) FEATURES[m[1]] = [m[2], m[3]];
+  const re = /slug:\s*"([^"]+)",\s*title:\s*"((?:[^"\\]|\\.)*)"/gs;
+  for (const m of dataTs.matchAll(re)) {
+    if (!ARTICLES[m[1]]) FEATURES[m[1]] = ["Kirpik", m[2]];
+  }
 }
 
 if (Object.keys(ARTICLES).length < 20) throw new Error("gen-og: failed to parse articles from src/data.ts");

@@ -1,8 +1,8 @@
-﻿---
+---
 title: "How to choose text protection for a Shopify store"
-description: "Blockers, visible notices, monitors and invisible watermarking compared honestly, plus the questions to ask any text protection vendor before you install."
+description: "Blockers, notices, plagiarism checkers and invisible watermarking, compared by the question that matters: what proof is left when text is stolen anyway?"
 cluster: "Choosing & getting started"
-summary: "Four approaches to protecting store text, what each one actually delivers, and the questions that separate real protection from deterrence theatre."
+summary: "The protection category sorts into four approaches, and only one of them leaves you holding anything after a theft. The questions to ask before installing any of them."
 pubDate: 2026-06-20
 related:
   - copy-paste-protection-apps
@@ -10,50 +10,34 @@ related:
   - watermark-shopify-descriptions
 ---
 
-Search the Shopify App Store for content protection and you will find dozens of apps that sound alike and work nothing alike. Some disable right-click. Some add copyright banners. Some promise to watch the web for you. A few do something genuinely different. Choosing between them is easier once you sort them by the only question that matters: when your text is stolen anyway, what does this tool leave you holding?
+Search the Shopify App Store for content protection and the results look interchangeable: shield icons, the word "protect", reassuring descriptions. Behind them sit four approaches that have almost nothing in common. The quickest way to sort them is to put one question to each: when your text is stolen anyway, what are you left holding?
 
-That framing is deliberate. Text on a public web page can always be copied. Your product descriptions are served as HTML to every visitor, exposed through [product feeds you cannot turn off](/learn/shopify-public-product-feed/), and readable by any script that requests the page. No app changes that. What the categories differ on is everything around that fact.
+The question is fair because the theft is always possible. Your product descriptions are served as plain HTML to every visitor and exposed through [machine-readable feeds that cannot be turned off](/learn/shopify-public-product-feed/). Any tool that promises to make text uncopyable is describing an aspiration, not a mechanism.
 
-## Category one: blockers
+## Blockers and notices
 
-Right-click disablers, text-selection blockers, copy-paste interceptors, developer-tools detectors. These add JavaScript to your storefront that interferes with right-clicking in a standard browser tab. The block is bypassed in seconds by reader mode, the page source or switching JavaScript off.
+Right-click disablers, text-selection blockers and copy-paste interceptors are storefront scripts. They interfere with the mouse and keyboard inside a standard browser tab, and that is the entire mechanism. Reader mode, the page source or switching JavaScript off restores normal copying in seconds, and a scraper reading the feeds never encounters the script at all. Meanwhile the friction lands on legitimate visitors, the customer trying to copy a size chart into a message or your address into a maps app. [What these apps actually do](/learn/copy-paste-protection-apps/) covers the category in detail, claim by claim.
 
-The honest description is deterrence theatre. A visitor who wants your text presses Ctrl+U or reads the page source; a scraper never runs your JavaScript at all, a point unpacked in [scrapers never see your storefront scripts](/learn/scrapers-vs-storefront-scripts/). Meanwhile the cost lands entirely on legitimate users: shoppers cannot copy your address or a product name to search it, accessibility tooling breaks, and you have added script weight to every page view. You pay a permanent storefront tax for protection that stops only the people who were never a threat. If you are evaluating one of these, [run the test yourself](/learn/right-click-blockers-text-test/) before paying for it.
+Copyright notices and footer warnings are the polite version of the same idea. They assert ownership without evidencing it, and they may deter the most casual taker. Put either kind of tool to the sorting question and the answer is the same: after a theft, you are left holding nothing. No record ties the stolen text to you, and the tool has no further part to play.
 
-## Category two: visible notices
+## Monitors and plagiarism checkers
 
-Copyright lines in the footer, "all descriptions are the property of..." pages, terms-of-service clauses. Cheap, harmless, and worth having: your work is copyrighted automatically in most jurisdictions, but saying so removes any pretence of innocence.
+Tools that scan the web for text matching yours answer a different and more respectable question: where does similar text exist? That is genuinely useful for finding problems, and a store can get value from it. It is weak for proving them, because similarity is symmetric. A match report shows that two pages share sentences; it does not show which page had them first. If the other side answers your complaint by claiming you are the one who copied, the same report supports them equally well. You are back to assembling dates from archives and screenshots, after the fact and under time pressure, which is precisely the work you hoped the tool had done.
 
-Just be clear about the ceiling. A notice deters nobody who copies at scale, and when you find your text elsewhere, the notice proves nothing about which page came first. The thief's site has a copyright line in its footer too.
+## Invisible text watermarking
 
-## Category three: monitors
+The fourth approach accepts that text will be taken and concentrates on what the taken text carries. An invisible watermark, algorithmic and derived from your original text's signature, is embedded in the content itself without changing anything a reader or a search engine sees. From that moment, every duplicate of the text contains your store's identity. Detection reads the watermark back out of a paste or a fetched URL, and because protection is dated, the question the other approaches cannot answer, who had this text first, has a documented answer that can be packaged for the people who process takedown requests.
 
-Plagiarism-scan services and duplicate-content monitors search the web for text matching yours and alert you to matches. Knowing is genuinely useful; these tools can shorten the time between theft and discovery.
+The honest boundaries belong in the same paragraph. Watermarking covers text from the moment of protection onward, so it cannot identify duplicates made before it was applied, and a full rewrite is no longer your text, so nothing follows a rewrite. Within those limits, it is the only approach on the list built for the day after the theft.
 
-The gap is what happens next. A monitor tells you that two pages contain matching text. It does not tell you, or anyone else, which page is the original. When you send a takedown notice, the host or marketplace hears from the other side that *you* copied *them*, and the monitoring report cannot settle it. You have an alert, not an argument. Monitors also bill continuously for scanning whether or not anything is ever found, which is worth weighing against tools that charge for protection instead.
+## Questions to ask before you install
 
-## Category four: invisible watermarking
+Whatever you are evaluating, a short list separates protection from reassurance:
 
-The fourth approach accepts that copying will happen and changes what a stolen version proves. An invisible watermark embedded in the text itself travels with every duplicate, so a stolen description can be tested and traced back to the specific store it came from, with dates. This turns "these pages match" into "this text carries my store's signature and I protected it on this date", which is the argument takedowns actually need. The plain-English background is in [what is an invisible text watermark](/learn/what-is-invisible-text-watermark/).
+- Does it change what a scraper receives from the store's public feeds? For every app in the category, the true answer is no.
+- Does it add scripts to the storefront, and what do they cost in page speed?
+- Does it alter the text your customers and search engines read?
+- After a theft, what evidence exists, and can anyone other than the vendor verify it?
+- Can you test the whole loop before paying: protect something, copy it yourself, detect it?
 
-The trade-off is the mirror image of monitoring: watermarking proves everything and watches nothing. The mark does not stop the copying, and finding infringing pages is still your job unless a tool adds monitoring on top.
-
-## The questions to ask any vendor
-
-Whatever category you are considering, these five questions expose the differences that marketing pages blur:
-
-1. **Does it change my text?** Some protection schemes rewrite, reformat or inject visible elements into your text. Your text is your conversion asset; anything that alters what customers and search engines read should be treated as a cost, and ideally refused outright.
-2. **Does it add scripts to my storefront?** Storefront JavaScript costs page speed and Core Web Vitals on every single visit, paid by every genuine customer, forever. Ask precisely what is injected into your theme and what happens to those leftovers when you uninstall.
-3. **What evidence do I get when I find stolen content?** An alert? A screenshot? Or a dated document with content fingerprints and a timeline that a host's abuse desk can act on? This is the question that separates knowing from proving.
-4. **Can the evidence be verified independently?** Evidence only you can vouch for is weak evidence. Look for verification a third party can perform without trusting you or the vendor's word: public verification pages, checkable fingerprints, corroboration from neutral sources like the Internet Archive.
-5. **What does it honestly not do?** Every tool in this market has limits. A vendor who tells you theirs plainly is describing a real product; a vendor promising to "stop copying" is describing a browser feature that does not exist.
-
-## Where Kirpik sits, honestly
-
-Kirpik is a category-four tool, so hold it to the same questions. It embeds an algorithmic invisible watermark, derived from your original text's signature, into product descriptions, blog articles and pages. It does not change your text: every word, heading and comma stays exactly as written, and SEO is unaffected. It adds no scripts to your storefront, so there is no page-speed cost. When you find a stolen version, detection by paste or URL identifies your store's watermark code in the stolen text, and a [Proof of Ownership Certificate](/features/chain-of-proof/) packages the evidence: protection date, SHA-256 content fingerprints, the infringing page's own headers, an Internet Archive timeline and a QR-linked public verification page.
-
-And the limits, stated plainly: Kirpik does not prevent copying, and it does not monitor the web automatically. Checking a suspect page is a manual paste or URL check, rate-limited by plan. A thief who rewrites your text from scratch is no longer carrying your words, and no text protection follows a rewrite. Kirpik protects products, blog articles and pages, not collections, and needs at least 20 words of content to work with.
-
-## Choosing in one paragraph
-
-If you want to feel protected, blockers are cheap theatre with a storefront cost. If you want to be notified, a monitor tells you duplicates exist but leaves you unable to prove whose they are. If you want theft to be provable, watermark the text before it is stolen, and accept that finding infringing pages stays a human habit. The full protection-to-certificate flow is on [how it works](/how-it-works/), and the [hands-on walkthrough](/learn/watermark-shopify-descriptions/) shows what setup looks like in practice.
+Kirpik is built to answer that list well: no storefront scripts, no change to your text, detection by paste or URL, and a Proof of Ownership Certificate that anyone can verify through a public verification page. The [free plan](/pricing/) covers 25 products and the full detection loop, which makes the last question on the list cheap to answer for yourself before a single invoice exists.

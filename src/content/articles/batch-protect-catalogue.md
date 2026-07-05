@@ -1,8 +1,8 @@
 ---
 title: "Protecting a large catalogue with batches and Auto-Protect"
-description: "How large Shopify stores protect hundreds of products with queued batch jobs and Auto-Protect, what happens on edits, and how downgrades are handled safely."
+description: "How large Shopify catalogues stay covered: batch protection on the Paid plan, Auto-Protect on Pro, and sensible handling of edits, downgrades and removal."
 cluster: "Choosing & getting started"
-summary: "One-click protection works for twenty products, not two thousand. Batches cover the backlog, Auto-Protect covers everything you save next, and edits and downgrades have sensible answers."
+summary: "One click per item covers 25 products, not 2,500. Batch runs cover the backlog, Auto-Protect covers everything you save afterwards, and the awkward edges have plain answers."
 pubDate: 2026-07-02
 related:
   - watermark-shopify-descriptions
@@ -10,52 +10,32 @@ related:
   - product-descriptions-scraped
 ---
 
-Protecting a product takes one click. That statement means very different things at 20 products and at 2,000. A large catalogue turns text protection from an action into an operations question: how do you get the backlog covered, how do you keep coverage as the catalogue changes daily, and what happens at the awkward edges, edits, new products, plan changes, without anyone having to remember anything?
+Protecting one product takes one click. That is a fine answer at 25 products and no answer at all at 2,500. For a large store, text protection is an operations question: cover the backlog once, cover new content without anyone remembering to, and behave sensibly at the edges, edits, plan changes, removals. Kirpik's answer comes in two halves, batch protection for the catalogue you already have and Auto-Protect for the catalogue you are about to write. If you have not yet protected anything, run [the hands-on walkthrough](/learn/watermark-shopify-descriptions/) on a few products first; everything here is that same loop at scale.
 
-Kirpik's answer has two halves: batch protection for the catalogue you already have, and Auto-Protect for the catalogue you are about to create. This article covers both, plus the edge cases that decide whether protection stays real six months in. If you have not protected anything yet, run through [the hands-on walkthrough](/learn/watermark-shopify-descriptions/) with a few products first; everything here builds on that flow.
+## Cover the backlog with Batch Protection
 
-## The backlog: batch protection
+Batch protection arrives with the Paid plan, which also raises the limits to 100 products and 50 blog articles and pages. In the Protect tab, instead of clicking items one at a time, you select across the Products, Articles and Pages views, or select everything at once, and start a single run. The job is queued and processed in the background, with progress you can watch; a large catalogue does not need you to sit with it.
 
-Batch protection is available on the Paid plan and up. In the Protect tab, instead of picking items one by one, you bulk-select across Products, Articles and Pages and start the run in one action.
+Two practical notes for a first big run. Items with fewer than 20 words of text cannot carry the watermark, so very short descriptions stay unprotected until they are expanded. Treat that as a free audit: a description too short to watermark was probably too short to persuade anyone, and the list of skipped items is a worklist for whoever writes your product text. And a batch run commits you to nothing, because protection stays reversible at every scale: remove it from one item or from everything, and the text returns to its exact prior state.
 
-Large runs are handled properly rather than optimistically. The job is queued and processed in the background, with progress you can watch from the app: items completed, items remaining. You do not babysit a browser tab, you do not keep the app open, and closing the admin does not abandon the run. Come back later and the batch has carried on without you.
+The order of work matters more than it looks. Protection covers content from the moment it is applied, and a description that has spent a year public and unprotected may already have unwatermarked duplicates elsewhere, which nothing can identify after the fact. That is the argument for running the backlog batch now rather than after the first clone turns up.
 
-A few practical notes for big runs:
+## Cover new content with Auto-Protect
 
-- **Short descriptions are reported, not fudged.** Kirpik needs at least 20 words of content per item. In a catalogue of hundreds there are usually a few two-line descriptions that fall short, and the run tells you about them instead of pretending. Treat that list as useful output: a two-line description is thin for conversion and SEO reasons too, and the items on it are the ones least worth stealing anyway.
-- **Re-running is safe.** Protection recognises content that is already covered, so overlapping batches or a re-run over the whole catalogue never double-processes anything. When in doubt, run it again.
-- **Prioritise if you are capped.** The Paid plan covers up to 100 products and 50 articles and pages. If your catalogue is larger than your plan, protect in order of theft value: best sellers, best-ranking pages, and the descriptions that took real work, before the long tail.
+The backlog is a one-time problem. New content is a forever one, and it is where manual coverage quietly dies: a catalogue that adds and edits products every week drifts out of protection unless someone remembers every change, and in practice nobody remembers.
 
-## The future: Auto-Protect on save
+Auto-Protect removes the remembering. It comes with the Pro plan, at $19.99 a month or $199 a year, and once switched on it watermarks new and updated products, blog articles and pages when they are saved. Content that is already protected is recognised and left alone, so there is no double handling and nothing to reconcile. Pro also removes the item caps entirely. For a store whose catalogue changes daily, that combination is the difference between protection as a project and protection as a property of the store: whatever gets written, gets covered, from the day it exists.
 
-The backlog is a one-time problem. The permanent problem is that catalogues move: new products weekly, descriptions polished, seasonal text swapped in and out. Manual protection decays against that churn, because it depends on someone remembering a second step after every save, and busy stores forget second steps.
+Writers and editors do not change anything about how they work. They write and save in the Shopify admin exactly as before; coverage follows the save.
 
-Auto-Protect, on the Pro plan, removes the step. With it switched on, Kirpik picks up new and updated products as they are saved and applies protection automatically in the background. Your team writes and edits in the Shopify admin exactly as before; coverage follows the saves. For a store adding products every week, this is the difference between "we protected the catalogue once, in March" and the catalogue simply being protected, which is the state you actually want. The [Auto-Protect feature page](/features/auto-protect/) has the fuller description.
+## Edits, downgrades and removing protection
 
-## The edge case that matters: editing a protected product
+Three edges decide whether coverage is still real six months in, and each has a plain answer.
 
-Here is the question every large store should ask any protection vendor: what happens when I edit content that is already protected?
+The first is editing. When you substantially rewrite a protected description, the newest version of your words deserves the same protection, so protect the item again after major edits. On Pro this takes care of itself, because Auto-Protect treats an update like any other save. On Free and Paid, fold it into your editing routine the way you already fold in checking the preview.
 
-The straight answer for Kirpik: an edit produces a new saved version of your text, and it is that version that needs to be covered. On Pro with Auto-Protect on, this is handled for you; the save is picked up and the updated product is re-covered in the background, no action needed. On Free and Paid, make re-protecting part of the edit itself: change the description, save, re-protect the item. It is one click, and because re-running protection over an item is always safe, there is no bookkeeping about what state a product was in before.
+The second is downgrading. Nothing breaks. If your protected content exceeds the new plan's limits, Kirpik restores the newest items over the cap to their unprotected state and leaves everything else protected. There is no in-between state and no stranded content; your text is always either protected or exactly as you wrote it, which are the same thing to every reader.
 
-The practical risk of skipping it is mundane rather than catastrophic: a heavily rewritten description is new text, and new text is only provable once protected. Stores that edit descriptions frequently, seasonal refreshes, conversion testing, ongoing SEO work, are exactly the stores Auto-Protect is priced for.
+The third is removal. Protection can be taken off any item, or all of them, at any time, and the text returns precisely to its prior state. A tool you can walk away from cleanly is easier to trust on the way in.
 
-## Plan changes without surprises
-
-Growth in reverse is worth planning for too. Suppose you protected 400 products on Pro and later downgrade to Paid, which covers 100. Nothing breaks and nothing is silently left in a misleading state: Kirpik restores the newest items over the new plan's cap back to their unprotected state, exactly as they were before protection, and your 100 covered items carry on as normal. Your text is never held hostage by a billing decision, and protection status in the app always reflects reality.
-
-The same reversibility applies at any scale by choice: you can remove protection from one item or from everything, and the text returns to its prior state. Protection that can be cleanly undone is easier to trust with two thousand products than protection that cannot.
-
-## Sizing the plan to the catalogue
-
-The plan ladder maps cleanly onto catalogue size:
-
-- **Free ($0):** 25 products and 3 articles or pages, protected one click at a time. Right for testing the loop and for small stores.
-- **Paid ($7.99/month):** 100 products, 50 articles and pages, and batch protection. Right for mid-size catalogues with an occasional-edit rhythm, plus 20 URL checks and 5 certificates a month for stores that expect to enforce.
-- **Pro ($19.99/month, or $199/year):** unlimited products, articles and pages, Auto-Protect on save, 100 URL checks a month and unlimited certificates. Right for large or fast-moving catalogues where coverage has to survive nobody thinking about it.
-
-The full comparison lives on the [pricing page](/pricing/).
-
-## Coverage is the point
-
-A large catalogue is a large surface: hundreds of descriptions exposed through pages and [feeds that scrapers read directly](/learn/product-descriptions-scraped/), any of which can turn up on a clone store next quarter. Protection at that scale is a coverage level you maintain rather than a feature you try once, and the mechanics above, queued batches, Auto-Protect, safe re-runs, honest downgrades, exist so that maintaining it costs nearly nothing. Set the backlog batch running today, turn on Auto-Protect if you are on Pro, and the next description a thief lifts from you will be one that can testify about where it came from. The end-to-end story is on [how it works](/how-it-works/).
+Set up this way, protection stops being a task anyone thinks about. The backlog was covered in one run, Auto-Protect has covered every save since, and the loop you first watched on a handful of products is simply running across the whole catalogue, quietly, with proof waiting for the day a duplicate of your text turns up somewhere it should not be.

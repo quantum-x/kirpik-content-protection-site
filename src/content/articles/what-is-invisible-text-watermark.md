@@ -1,8 +1,8 @@
-﻿---
+---
 title: "What is an invisible text watermark?"
-description: "An invisible text watermark is an ownership signature carried by the writing itself. How it differs from visible notices, metadata and fingerprints."
+description: "An invisible text watermark is an ownership mark carried inside the text itself. What it is, how it differs from notices, metadata and fingerprints."
 cluster: "How invisible text watermarking works"
-summary: "An invisible text watermark is an ownership signature carried inside the text itself, not on the page around it. Here is what that means and why it changes the argument when your text is stolen."
+summary: "An invisible text watermark is an ownership mark carried inside the text itself, not on the page around it. What it is, what it is not, and what a detection can tell you."
 pubDate: 2026-05-22
 related:
   - marking-text-without-changing-words
@@ -10,60 +10,33 @@ related:
   - proving-text-ownership
 ---
 
-Most store owners meet the problem the same way. A customer sends a link, or a competitor turns up in search, and there is your product description under someone else's logo. Word for word. You know you wrote it. Convincing a hosting company or a marketplace of that, weeks or months later, is a different job entirely.
+It usually starts with a link from a customer: another store, selling under another name, describing its products in text you recognise because you wrote it. Knowing that and demonstrating it are different problems. Weeks later, faced with the company that hosts the other site, "I wrote this" is a claim, not a fact, and claims are what the thief has too.
 
-An invisible text watermark exists for that gap. It is an ownership signature carried inside the text itself, derived from your original writing, invisible to anyone reading it, and readable by a detector when a stolen version turns up where it should not be.
+An invisible text watermark exists for that gap. It is an ownership mark carried inside the text itself. Kirpik's is an algorithmic invisible watermark derived from your original text signature: it changes nothing you wrote and nothing a reader or a search engine sees, it carries your store's unique watermark code, and Kirpik's detector can read it back out of a duplicate on any site you check.
 
-## The page is not the text
+## The page is not what gets stolen
 
-Almost everything sold as content protection lives on the page around your words. Copyright footers live on the page. Right-click blockers live on the page. Terms and conditions live on a different page altogether. The trouble is that theft does not take the page. It takes the text.
+Nearly everything sold as content protection guards the page around your text. Copyright footers sit on the page. Right-click scripts run on the page. Terms and conditions sit on a different page altogether. Theft does not take the page. It takes the text: selected and pasted into another store's admin, harvested by scrapers reading your store's public product data, or pulled in bulk by import tools. In every case the text leaves and the page stays behind, along with every protection attached to it.
 
-Text is lifted by selection and paste, by scrapers that read your storefront's public data, and by export tools that pull entire catalogues in minutes. In every one of those cases the words leave and the page stays behind, along with every protection you attached to it.
+A text watermark reverses that arrangement. The mark is part of the writing, so it goes wherever the writing goes. The act of taking the text is the act of carrying off the evidence.
 
-A text watermark inverts that. The signature is part of the writing, so wherever the writing goes, the signature goes with it. The act of stealing the text is the act of delivering the evidence.
+## What an invisible text watermark is not
 
-## Three things an invisible text watermark is not
+The phrase gets used loosely, so it is worth separating it from four techniques it is regularly confused with.
 
-The phrase gets used loosely, so it is worth separating it from three neighbours it is regularly confused with.
+- A visible notice. A line reading "do not reproduce" is a statement, not a mechanism. A thief deletes it in the second it takes to paste, and the deletion leaves no trace.
+- Metadata and content credentials. Meta tags, headers and provenance records describe a page and travel beside content, not inside it. Paste a paragraph somewhere else and all of it stays behind.
+- Zero-width characters. A widely known trick that hides invisible characters between letters. It is as easy to strip as it is to insert, and ordinary editing tools often remove it without anyone trying.
+- Fingerprinting. A content fingerprint, such as a SHA-256 hash, is a short value computed from text and stored in a database. It describes the text from outside, and it matches only an identical version; edit one word and it no longer matches anything.
 
-### A visible notice
+Kirpik uses none of these techniques. Its watermark is algorithmic, derived from your original text signature, and it lives in the text rather than on the page, beside the file or in a database.
 
-"Copyright 2026, do not reproduce" at the foot of a description is a statement, not a mechanism. A thief deletes it in the same second they paste your text into their own admin. It costs them nothing and leaves no trace. Visible notices have a place as deterrents, but they prove nothing once removed, and removal is trivial.
+## What a detection tells you
 
-### Metadata
+When a suspicious page appears, you paste its text into Kirpik or enter the URL. A match does not report that two passages resemble each other, the way plagiarism tools do. It reports that the text carries the watermark code belonging to your store, together with the number of Watermark Security Markers recovered and a Confidence figure. The claim on the table is no longer "this looks like mine". It is "this came from my store", which is a far harder claim to argue with.
 
-Pages carry information about themselves: meta tags, HTTP headers, sitemap dates, structured data. None of it travels with copied text. Select a paragraph, paste it elsewhere, and every scrap of metadata is left behind on your server. Metadata can help you argue about your own page. It says nothing at all about the stolen version sitting on someone else's.
+The watermark repeats through the text with redundancy, and that matters because thieves rarely take content in one clean block. They trim, reorder and lightly edit, and a shortened or edited version can still produce a confident, store-specific match because enough of the repeating mark survives. The honest boundary is a full rewrite: someone writing their own sentences is no longer carrying your text, and no text protection follows a rewrite. In practice that boundary matters less than it sounds, since theft at scale is verbatim; writing original text is precisely the work being avoided. Protection covers text from the moment it is applied, so a duplicate taken before you protected the original carries no watermark.
 
-### A fingerprint or hash
+A positive detection can then become a Proof of Ownership Certificate, a dated document that sets your protection record against the infringing page's details, ready to attach to a DMCA takedown notice.
 
-A content fingerprint, such as a SHA-256 hash, is a short fixed-length value computed from a piece of text. It is genuinely useful, and Kirpik records one for every protected item as its Protection Signature. But a fingerprint describes text, it does not live inside it. It sits in a database, and it only matches an exact duplicate. Edit one word and the fingerprint changes completely.
-
-Fingerprints answer "is this the identical text?" Similarity tools answer "does this look alike?" Neither answers the question that actually settles a dispute: "did this text come from that store?" That is the question a watermark answers.
-
-## Why "derived from your original text" matters
-
-Kirpik's watermark is algorithmic, derived from your original text's signature, and it carries your store's unique watermark code. Two consequences follow, and both matter when you need to prove something.
-
-First, a detection is specific. It does not report "this text is watermarked by somebody". It reports that the text carries the signature belonging to your store, along with a count of the security markers recovered and a confidence figure. The claim is not "these passages resemble each other". The claim is "this text came from that source", which is a much harder thing to argue with.
-
-Second, the signature repeats through the text with redundancy. A thief rarely takes your text in one pristine block. They trim, they reorder, they paste into a template that mangles the formatting. Because the signature is woven through the content rather than parked in one place, a partial or edited version can still produce a confident match. [Why the watermark survives copy and paste](/learn/why-watermarks-survive-copying/) covers this in detail.
-
-## What it looks like in practice
-
-On a Shopify store, the workflow is short. You protect the text you care about: product descriptions, blog articles and pages. Nothing about your storefront changes. Your text reads exactly as you wrote it, no script or badge is added to your theme, and shoppers and search engines see precisely what they saw before. [How Kirpik marks your text without changing a single word](/learn/marking-text-without-changing-words/) explains what "unchanged" means here, because the promise is stronger than it sounds.
-
-Then, when a suspicious page appears, you run [detection](/features/detection/). Paste the suspect text, or give Kirpik the URL and let it fetch the page. Within seconds you know whether your watermark is present, how many markers survived, and how confident the match is.
-
-A positive detection can then become a [Proof of Ownership Certificate](/features/chain-of-proof/): a dated document pairing your protection record with the detection details, built for DMCA notices and marketplace complaints, with a public verification page anyone can check.
-
-## The honest limits
-
-No text protection survives a full rewrite, because a rewrite stops using your words. A thief who retypes your ideas in their own sentences has plagiarised your thinking, but they are no longer carrying your text, and no watermark can follow them there.
-
-What a watermark protects is the thing that actually gets stolen at scale: the text itself. Cloners and scrapers take your words verbatim precisely because writing their own is the work they are avoiding. That laziness is the vulnerability, and a watermark is built to exploit it.
-
-## Where this leaves you
-
-The uncomfortable truth about text on the open web is that you cannot stop it being copied. Your product descriptions are served to every visitor and every bot that asks. What you can do is make every copied version traceable, so that the day one surfaces on a copycat store, you are holding proof rather than a grievance.
-
-That is the job an invisible text watermark does, and it is the job [Kirpik](/features/invisible-text-watermarking/) was built for: your words, unchanged, quietly carrying your name wherever they are taken.
+Text on the open web cannot be stopped from being copied. It can be made traceable, so that when a stolen version surfaces you can prove ownership instead of asserting it. That is the job of Kirpik's [invisible text watermarking](/features/invisible-text-watermarking/), applied to your product descriptions, blog articles and pages without changing a thing.

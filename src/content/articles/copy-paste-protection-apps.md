@@ -1,67 +1,36 @@
 ---
 title: "What copy-paste protection apps actually do"
-description: "A survey of copy protection apps: event suppression, CSS tricks, overlays and shortcut traps, each paired with the browser behaviour that undoes it."
+description: "Copy-paste protection apps rely on four browser techniques. What each one does, the browser behaviour that undoes it, and what running one costs you."
 cluster: "Why blockers don't work"
-summary: "Behind every 'disable copying' app is a short list of browser techniques. Here is each one, what it really does, and the ordinary browser behaviour that walks straight past it."
+summary: "Every app in the copy-paste protection category is built from the same four browser techniques. This article sets out each technique, the ordinary behaviour that defeats it, and the cost of running it."
 pubDate: 2026-06-10
 related: ["right-click-blockers-text-test", "scrapers-vs-storefront-scripts", "choosing-text-protection-shopify"]
 ---
 
-The copy-protection category is crowded, but the crowd is deceptive. Underneath the varied listings and screenshots, these apps draw on the same short menu of browser techniques, because the browser only offers so many levers to pull. This article surveys the menu, technique by technique, without naming apps. If you want named, quoted, dated comparisons of specific products, that is what our [comparison section](/compare/) is for.
+The copy-paste protection category looks varied from the App Store, and is uniform underneath. A browser offers a page only a few levers for interfering with copying, so every app in the category is assembled from the same four techniques. This article describes the techniques without naming apps; the named apps, with their listings quoted and dated, are compared one by one in our [comparison section](/compare/).
 
-One framing note before the list. Every technique here is JavaScript or CSS delivered with the page and executed by the visitor's browser. That placement, inside an environment the visitor fully controls, is the shared weakness. The techniques differ only in which browser feature they lean on.
+The techniques share one property before they differ in anything. Each is JavaScript or CSS delivered with the page and executed, or not, by the visitor's browser. The visitor's machine is where they live and the visitor's settings are what they answer to.
 
-## Technique 1: cancelling the context menu
+## The four techniques
 
-The app registers a handler for the `contextmenu` event and cancels it, so right-click produces nothing. This is the oldest trick in the category and the headline feature of many listings.
+Cancelling the context menu. The browser lets a page ask for the right-click menu to be suppressed, and the script asks on every click. The menu is one route to copying among several. Reader mode, the page source and the browser's own Edit menu carry the same text, and the [five-step test](/learn/right-click-blockers-text-test/) walks past this technique twice without noticing it.
 
-What undoes it: everything that does not involve the context menu, which is nearly everything. Keyboard copying, reader mode, view-source, the [store's own public feed](/learn/shopify-public-product-feed/), and disabling JavaScript. We published a [step-by-step test](/learn/right-click-blockers-text-test/) you can run in five minutes.
+Blocking selection. A CSS rule tells the browser not to show text as selectable, or a script clears the selection as fast as the visitor makes it. The text itself is untouched and fully present in the page. Reader mode ignores the rule, the page source never had it, and printing to PDF produces selectable text again.
 
-## Technique 2: suppressing selection and copy events
+Trapping keyboard shortcuts. A script listens for Ctrl+C, Ctrl+U, Ctrl+P or F12 and swallows them. The script can only hear keys pressed while its own tab has focus, and every one of those shortcuts has a menu equivalent the page cannot touch. The browser's toolbar performs the same actions the shortcuts do.
 
-Handlers on `selectstart`, `copy` and `cut` cancel the events, so dragging across text selects nothing and Ctrl+C copies nothing. Some variants clear the clipboard or replace copied text with a warning message.
+Discouraging developer tools. Scripts detect a resized window or trigger debugger interruptions to make inspection annoying. By the time any of this runs, the browser has already received the complete text, and switching JavaScript off for the site ends the annoyance along with the app.
 
-What undoes it: the text still arrived in the HTML, so view-source and saving the page produce it intact. Reader mode re-renders it outside the page's authority. Turning JavaScript off removes the handlers entirely. And because search engines must be able to read the text for the page to rank, the readable version is by definition always being served.
+There is a fifth item worth naming that is not a technique but a hope: several listings promise screenshot or screen-capture prevention, which no web page can perform at all. That claim belongs to [the list of things a browser cannot do](/learn/things-a-browser-cannot-do/).
 
-## Technique 3: CSS user-select
+## What all four have in common
 
-A stylesheet rule, `user-select: none`, tells the browser not to visually select the text. No script involved, which listings sometimes present as a strength.
+None of the four touches the copying that costs merchants money. Bulk copying reads [Shopify's public feeds](/learn/shopify-public-product-feed/), which serve full descriptions with no page and no scripts, and which no app can close. Scrapers that do fetch pages never execute what they fetch. The four techniques apply only to a human, in a normal browser, with JavaScript on, who does not know about reader mode. That is a description of your customers.
 
-What undoes it: it is a presentation hint, not an access control. The text sits in the DOM and the source untouched. Any reader mode, any saved HTML, any devtools panel shows it. A visitor can even override the rule with one line of their own CSS, since browsers let users restyle any page.
+Which is the second common property: the costs land on paying visitors. Selection blocking breaks translation tools, note-taking and some accessibility software. Shortcut traps break habits visitors do not know they have until the page fights them. Every visitor pays this toll on every visit, and the people the apps are aimed at never encounter it. An app in this category can be working exactly as designed and still deliver friction to customers and nothing to you.
 
-## Technique 4: transparent overlays
+## A fair test before you pay
 
-An invisible element is stretched over the content so that clicks and selections land on the overlay instead of the text beneath. More common for images, occasionally applied to text blocks.
+The category is cheap, and cheap invites the thought that it cannot hurt. Run the arithmetic the other way: the apps cost little because they do little, and the real price is paid in customer friction rather than subscription fees. Before paying for any of them, test the claims on a store that runs the app, using reader mode, the page source and the store's own `/products.json`. Check them in that order: reader mode is one keystroke, the page source is another, and the feed is the route no app touches at all. Every claim in the category fails at least one of the three checks, and most fail all of them.
 
-What undoes it: the overlay changes what the mouse touches, not what the server sent. Source view, feeds and reader mode never interact with the overlay. In devtools, deleting one element removes the "protection" in a keystroke.
-
-## Technique 5: keyboard shortcut interception
-
-Scripts watch for Ctrl+C, Ctrl+U, Ctrl+S, F12 and friends, and cancel them, sometimes with a scolding popup. The aim is to close the doors the other techniques leave open.
-
-What undoes it: browser menus reach the same functions without the shortcuts, and the `view-source:` URL prefix bypasses shortcut interception entirely. Shortcut traps also cannot see anything that happens outside the page, which includes the entire operating system. The hard ceiling on this idea is the subject of [things a browser cannot do](/learn/things-a-browser-cannot-do/).
-
-## Technique 6: devtools detection and deterrents
-
-Some apps try to detect open developer tools, then blank the page, break the layout or redirect. Others print console warnings.
-
-What undoes it: detection heuristics are unreliable and browsers do not expose a genuine "devtools open" signal, so these tricks misfire both ways. A false positive blanks the page for an innocent visitor with a docked window or an unusual screen size. More fundamentally, a visitor who wants the text does not need devtools, as techniques 1 through 5 already showed.
-
-## The summary table
-
-| Technique | Layer | Defeated by |
-| --- | --- | --- |
-| Context menu cancel | JS event | Keyboard, reader mode, source, feed, JS off |
-| Selection/copy suppression | JS event | Source view, reader mode, JS off |
-| `user-select: none` | CSS | Source view, reader mode, user CSS |
-| Transparent overlay | DOM | Source view, feed, element deletion |
-| Shortcut interception | JS event | Menus, `view-source:`, JS off |
-| Devtools deterrents | JS heuristics | Not needing devtools |
-
-Two absences from this table matter more than anything in it. Scrapers do not appear, because [scrapers never execute storefront scripts](/learn/scrapers-vs-storefront-scripts/) and are untouched by all six techniques at once. And the public product feed does not appear, because no technique on this list runs there.
-
-## The honest trade
-
-What these apps deliver is friction for humans on the rendered storefront: mostly your customers, occasionally an unmotivated copier who will retype the paragraph or move on. What they cannot deliver is control over text the server has already handed out. That is not a criticism of any developer's competence. It is the browser working as designed, keeping pages inside their sandbox and users in charge of their own machines.
-
-Kirpik sits on the other side of that trade. It runs no scripts on your storefront, adds no friction for anyone, and accepts that copying will happen. Instead, it embeds an algorithmic invisible watermark, derived from your original text signature, into the text itself, so any duplicate that surfaces elsewhere can be traced back to your store and [proven yours](/features/chain-of-proof/). Blockers try to stop the copying and fail. A watermark makes the stolen text testify.
+Kirpik is not part of this category and does not compete with it. It adds no scripts to a storefront, so it runs alongside any blocker without conflict, and it works after the copying that blockers cannot stop: the invisible watermark inside your text lets you identify and certify stolen content wherever you find it. The Free plan protects 25 products, so the approach [can be tried without spending anything](/pricing/).

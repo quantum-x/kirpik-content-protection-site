@@ -178,7 +178,7 @@ export const ARTICLE_CLUSTERS: ArticleCluster[] = [
       { title: "The copycat store playbook: cloning a catalogue in an afternoon", slug: "copycat-store-playbook" },
       { title: "What stolen content does to your search rankings", slug: "stolen-copy-seo-damage" },
       { title: "Where stolen product text ends up", slug: "where-stolen-copy-ends-up" },
-      { title: "When the thief outranks you with your own words", slug: "when-thieves-outrank-original" },
+      { title: "When the stolen version outranks the original", slug: "when-thieves-outrank-original" },
     ],
   },
   {
@@ -218,11 +218,11 @@ export const ARTICLE_CLUSTERS: ArticleCluster[] = [
     title: "By use case",
     blurb: "Text protection for the stores that get copied the most.",
     items: [
-      { title: "Fashion and apparel: when your product text walks off with the trend", slug: "fashion-copy-theft" },
-      { title: "Beauty and skincare: protecting ingredient stories and routines", slug: "beauty-copy-theft" },
-      { title: "Supplements and food: copied claims are your problem twice", slug: "supplement-copy-theft" },
-      { title: "Dropshipping clones: same supplier, your words", slug: "dropship-clone-copy" },
-      { title: "Blogs and buying guides: protecting editorial that took weeks to write", slug: "protecting-blog-content" },
+      { title: "Fashion and apparel: protecting fit notes, size guidance and fabric text", slug: "fashion-copy-theft" },
+      { title: "Beauty and skincare: protecting ingredient explanations and routine text", slug: "beauty-copy-theft" },
+      { title: "Supplements and food: stolen claims are a regulatory problem too", slug: "supplement-copy-theft" },
+      { title: "Dropshipping clones: same supplier, your text", slug: "dropship-clone-copy" },
+      { title: "Protecting blog articles and buying guides from scrapers and content farms", slug: "protecting-blog-content" },
     ],
   },
   {

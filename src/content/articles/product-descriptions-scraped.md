@@ -1,59 +1,43 @@
 ---
 title: "Your product descriptions are being scraped right now"
-description: "How Shopify product text really gets scraped: public feeds rather than browsers, who is collecting it, and why the usual blockers never see it happen."
+description: "Shopify product text is scraped by download, not by browsing. Who collects your descriptions, how the feeds hand them over, and what you still control."
 cluster: "Text theft & what it costs"
-summary: "Scraping a Shopify catalogue does not involve a browser, a right click, or anything a blocker can watch for. Here is how it actually works, and who is doing it."
+summary: "Scraping a Shopify catalogue is an automated download that never touches your storefront. Here is how it works, who does it, and the one thing that remains in your control."
 pubDate: 2026-05-20
 pillar: true
 related: ["shopify-public-product-feed", "copycat-store-playbook", "where-stolen-copy-ends-up"]
 ---
 
-When merchants imagine their content being stolen, they usually picture a person: someone on the site, highlighting a paragraph, right-clicking, pasting it somewhere else. That person exists, but they are the least of it. Most product text leaves a Shopify store without anyone visiting a single page.
+The word scraping suggests labour. What happens to a Shopify catalogue is closer to a download. A program asks your store for its product data, the store answers, and every description you wrote arrives as structured text, ready to reuse. No page is opened. No mouse moves. Nothing is highlighted or right-clicked.
 
-Scraping is quiet, automated and cheap. It does not trip the tools sold to stop it, because those tools guard the storefront, and scraping rarely goes through the storefront at all.
+That is worth understanding before you spend anything on protection apps, because the whole blocker category watches the storefront: the pages, the mouse, the keyboard. Scraping rarely touches any of them.
 
-## Scraping does not look like browsing
+## Scraping is a download, not a visit
 
-A scraper is a program that sends HTTP requests and reads the responses. There is no window, no mouse, no scrolling. Where a human visitor loads your theme, your fonts, your scripts and your images, a scraper asks for exactly one thing: the data.
+Every Shopify store answers a fixed set of web addresses with machine-readable data. The best known is `/products.json`. It returns your products in batches of up to 250, page after page, until the catalogue runs out. Each entry carries the title, price, variants and image addresses, and in a field named `body_html` it carries the full text of your product description, exactly as you wrote it.
 
-That distinction matters more than any other fact in this subject. Every copy-protection script you can install runs inside a visitor's browser. A scraper is not a browser, does not run your scripts, and never sees them. The [comparison between scrapers and storefront scripts](/learn/scrapers-vs-storefront-scripts/) goes deeper, but the short version is that the two operate in different worlds.
+A catalogue of two thousand products takes eight requests. A simple program makes them in under a minute. The same program can walk `/sitemap.xml` to find your pages and read your blog articles from their own feeds. The complete list of these addresses, each one verified against a live store, is in our guide to [the public product feed](/learn/shopify-public-product-feed/).
 
-## The feed is the front door
+Two things follow. First, no theme loads and no storefront script runs, so a right-click blocker or copy-paste disabler installed on the store observes nothing. Second, the requests look like ordinary platform traffic, because sales channels, shopping integrations and search engines fetch the same addresses all day. There is no alarm to raise and no pattern to block.
 
-Shopify publishes structured product data for every store by design. Append `/products.json` to almost any Shopify storefront domain and you get a clean, machine-readable list of products. A single request returns up to 250 of them, and the response includes a field called `body_html`: your full product description, exactly as you wrote it, headings and all.
+## Who collects product text
 
-Page through that endpoint and a whole catalogue comes out in minutes. No login, no API key, no rate-limit gymnastics for a store of ordinary size. We cover every one of these endpoints, and why they cannot be switched off, in [the public product feed article](/learn/shopify-public-product-feed/). You can also point our [site check tool](/site-check/) at your own store and watch your descriptions come back over the wire.
+Not everyone reading your feed is a thief, which is exactly why the feeds exist and cannot be closed. The collectors fall into four groups, and only some of them cost you money.
 
-None of this is a flaw. Sales channels, integrations and search engines depend on these surfaces. But it means the text you spent evenings writing is available in bulk, in a format built for programs to consume.
+Copycat and dropship stores take descriptions in order to republish them. When a competitor sources the same product from the same supplier, your text is the one part of your listing worth stealing, and it tends to appear on their site verbatim or lightly trimmed. This group costs you sales and search positions, and the [copycat playbook](/learn/copycat-store-playbook/) shows how quickly it works.
 
-## Who is actually collecting it
+Product research tools ingest whole catalogues so that subscribers can browse proven listings and import them, text included, into stores of their own. One scrape becomes many storefronts, run by people who never saw your site.
 
-Four groups do most of the taking, and their motives differ.
+Price and market monitors fetch catalogues on a schedule. They store your text for analysis but rarely republish it. They are the least of your worries and the bulk of the traffic.
 
-**Dropship cloners.** They sell the same supplier products you do, often sourced from the same catalogue. Product photos come from the supplier, so the only thing distinguishing one listing from another is the text. Yours is written, tested and ranking, which makes it the obvious thing to lift. Spy tools aimed at dropshippers make importing a competitor's listing a button press.
+AI crawlers collect product text for training and for shopping answers. Your sentences can resurface in generated descriptions, almost never with a traceable source.
 
-**Copycat stores.** Some clones do not stop at a product. They take the catalogue, the collection structure and the About page, and stand up a lookalike store under a different name. The [copycat store playbook](/learn/copycat-store-playbook/) walks through how little effort that takes.
+## What you can do about it
 
-**Aggregators and comparison sites.** These crawl product data at scale to populate listings, price comparisons and affiliate pages. Some attribute and link back. Many republish your descriptions wholesale, and their domains often carry more authority than yours.
+Prevention is not on offer, from anyone. The feeds cannot be switched off, the download cannot be observed, and blocking the addresses would break the legitimate services your store depends on. Accepting this early saves money on apps that promise otherwise.
 
-**AI training and content crawlers.** Product descriptions are exactly the kind of clean, structured, commercially flavoured text that gets swept into training sets and into tools that generate "new" storefronts. Once your text is in that pipeline you will not see where it resurfaces.
+You can watch the mechanism yourself in under a minute. Add `/products.json` to your own store's address and read what comes back: every description, laid out as data, for anyone who asks. Our [site check](/site-check/) does the same reading for you and reports, product by product and article by article, what your store hands to any program that requests it.
 
-## The economics are the problem
+What stays in your control is what the text can prove after it leaves. Hosting companies, marketplaces and search engines act on removal requests when the requester shows the text was theirs first, with dates. [Our enforcement guide](/enforcement/) covers each route. The evidence has to exist before the theft: protection applied today covers whatever is taken from today onward, and does nothing for the version scraped last month. So the time to protect a catalogue is before you go looking for thieves, not after you find one.
 
-Writing a good product description takes real time: research, drafts, revisions, a voice that matches your brand. Taking one takes a fraction of a second, and taking three hundred takes barely longer. A few lines of code, or an off-the-shelf importer, moves an entire catalogue from your store to someone else's in an afternoon.
-
-That asymmetry is why this keeps happening. The cost of copying is close to zero, the duplicate is as good as the original by definition, and the person who wrote it usually never finds out.
-
-## Why you have not noticed
-
-Scraping leaves almost no trace a merchant would see. The requests land in server logs you do not read, they look like ordinary traffic, and nothing on your dashboard changes. The stolen text then surfaces somewhere you do not browse: a different market, a different niche label, an ad landing page that only paid traffic ever sees. We have catalogued the common destinations in [where stolen product text ends up](/learn/where-stolen-copy-ends-up/).
-
-Most merchants discover a clone one of two ways. A customer mentions a suspiciously similar store, or the merchant pastes one of their own distinctive sentences into Google inside quotation marks and finds it on a domain they have never heard of. Try that second one today. It is free and occasionally eye-opening.
-
-## What actually helps
-
-You cannot close the feed, and you cannot make a scraper run your scripts. The apps that promise otherwise are examined, neutrally and with sources, in our [comparison section](/compare/). What you can change is what stolen text is worth to the person who took it.
-
-Text that carries proof of origin is a liability to republish. When you can show that the words on a clone's page came from your store, and show it with dates, fingerprints and a verifiable certificate, takedowns stop being arguments and start being paperwork. The [enforcement guide](/enforcement/) covers that path from detection to DMCA notice.
-
-That is the gap Kirpik works in. It embeds an algorithmic invisible watermark, derived from your original text signature, into your product descriptions, articles and pages. Your text does not change, your storefront gains no scripts, and nothing slows down. But everything scraped quietly carries your store's mark, and [detection](/features/detection/) can read it back out of whatever page it lands on.
+Kirpik does this by embedding an algorithmic invisible watermark, derived from your original text signature, into your product descriptions, blog articles and pages. It changes nothing a reader or a search engine sees. The watermark survives scraping and feed export, so you can detect your text on any site you check and issue a Proof of Ownership Certificate for the takedown. [See how it works](/how-it-works/).

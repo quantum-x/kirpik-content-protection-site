@@ -34,7 +34,7 @@ const liveSlugs = new Set(published.map((a) => a.id));
                 <li class="article article--live">
                   <a class="article__link" href={`/learn/${a.slug}/`}>
                     <span class="article__title">{a.title}</span>
-                    <span class="article__go" aria-hidden="true">Read →</span>
+                    <span class="article__go" aria-hidden="true">→</span>
                   </a>
                 </li>
               ) : (
@@ -50,10 +50,7 @@ const liveSlugs = new Set(published.map((a) => a.id));
     </div>
   </section>
 
-  <CtaBand
-    heading="Reading is optional. Protecting is not."
-    sub="Watermark your text now, so the next scrape carries your proof with it. Free to start."
-  />
+  <CtaBand />
 </Base>
 
 <style>

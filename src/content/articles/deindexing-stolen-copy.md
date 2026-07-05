@@ -1,8 +1,8 @@
-﻿---
+---
 title: "Getting stolen content removed from Google's index"
-description: "How Google's DMCA removal process works for search results: filing the request, timelines, what deindexing achieves, and pairing it with host takedowns."
+description: "How Google's copyright removal process takes stolen content out of search results: filing the request, what removal achieves and what it cannot do."
 cluster: "Proof & enforcement"
-summary: "When a host will not act, or a copycat is stealing your search traffic right now, Google's own removal process is the lever. How it works, what to expect, and what it cannot do."
+summary: "When the company hosting a copycat will not act, Google's own removal process is the lever. How search removal works, what it achieves, and what it cannot do."
 pubDate: 2026-07-02
 related:
   - dmca-for-stolen-text
@@ -10,54 +10,34 @@ related:
   - inside-chain-of-proof
 ---
 
-There are two distinct fights over a page of stolen content. One is getting the page taken off the internet, which runs through whoever hosts it. The other is getting it out of search results, which runs through the search engine, and for most stores this second fight is the one with money on the line. A copycat page nobody can find in Google might as well not exist, whatever server it lives on.
+Getting a page of stolen content off the internet and getting it out of search results are different jobs, run through different companies. The first goes through whoever hosts the page. The second goes through the search engine, and for most stores it is the fight with money attached: a copying page that nobody can find in Google might as well not exist, whichever server it lives on. Google accepts copyright removal requests against its search results, processes them at scale, and does not care where the infringing site is hosted, which makes search removal one of the sharpest tools a merchant has and one of the least used. The caveat first: this is general information about a process, not legal advice, and a removal request contains legal statements you should make honestly; when in doubt, ask a lawyer.
 
-Google accepts copyright removal requests against search results, processes them at industrial scale, and does not care where the infringing site is hosted. That combination makes deindexing one of the sharpest tools available to a merchant, and one of the least used, mostly because people do not realise it exists. Here is how it works.
+## How Google's removal process works
 
-The usual caveat applies: this is general information about a process, not legal advice, and removal requests carry legal statements you should make honestly. When in doubt, ask a lawyer.
+Google operates a copyright removal system under the DMCA's provisions covering search tools: a service that points users to material can be notified of infringement much as a hosting company can, and Google honours valid notices by removing the reported URLs from its results. You file through Google's legal removals tool, choosing the copyright option for Google Search.
 
-## What Google's removal process is
+The request reads like a DMCA notice because legally it is the same instrument aimed at a different service. You identify your original text with URLs, list the infringing URLs you want removed, provide contact details, and make the standard statements: good-faith belief that the use is unauthorised, accuracy under penalty of perjury, and your authority over the work. Two practical points decide how fast it goes. Be precise with URLs, because Google removes the specific pages you report rather than the site, so report every infringing page. And make ownership easy to verify: a dated Proof of Ownership Certificate with its public verification link gives the reviewer evidence they can act on within a minute. Clean, well-documented requests can resolve in days; vague ones bounce back with questions and stretch into weeks.
 
-Google operates a copyright removal system under the DMCA's provisions for information location tools. In plain terms: search engines that point users to material can be notified of infringement in the same manner as hosts, and Google honours valid notices by removing the reported URLs from its search results. You file through Google's legal removals tool, the same reporting flow linked from its search help pages, choosing the copyright option for Google Search.
+## What search removal achieves
 
-The request looks a lot like [a DMCA notice to a host](/learn/dmca-for-stolen-text/), because legally it is the same instrument aimed at a different service. You identify your original work with URLs, list the infringing URLs you want removed from results, provide your contact details, and make the standard statements: good-faith belief the use is unauthorised, accuracy of the notice, and your authority over the work, signed under penalty of perjury.
+Once a request is approved, the reported URLs stop appearing in Google's results. For a copycat the consequences are immediate. The stolen page loses its search traffic, which for most clone stores is most of their traffic. Your original stops competing against a duplicate of itself for your own search terms, and if the thief had been outranking you with text you wrote, that ends.
 
-Two practical notes on filling it well. Be precise with URLs: Google removes the specific pages you report, so report every infringing page, not just the copycat's homepage. And make ownership easy to verify: a dated [Proof of Ownership Certificate](/features/chain-of-proof/) with its public verification link gives the reviewer a way to confirm your claim in a minute, which is a courtesy the queue rewards. [What counts as proof when your text is stolen](/learn/proving-text-ownership/) explains why verifiable beats emphatic.
+The route's most valuable property is that jurisdiction stops mattering. A hosting company that shrugs at complaints can keep a page online, but it cannot keep the page in Google's results. When the infringing site is hosted somewhere unreachable, search removal is often the decisive move rather than the fallback.
 
-## What deindexing achieves
+## What it does not do
 
-When Google approves the request, the reported URLs stop appearing in its search results. The consequences for a copycat are severe and immediate:
+The limits, stated plainly so expectations stay straight:
 
-- The stolen page loses its Google search traffic, which for most parasite stores is most of their traffic.
-- Your original no longer competes with a duplicate of itself for your own keywords. If the thief had been outranking you with your own words, that ends.
-- The duplicate-content muddle that stolen content creates in search, covered in [what stolen content does to your search rankings](/learn/stolen-copy-seo-damage/), gets cleaned at the source Google actually consults: its own index.
+- The page stays online. Removal deletes the pointer, not the page, and anyone with the direct link still reaches it.
+- The removal binds Google only. Bing operates its own equivalent process, worth the extra minutes for full coverage.
+- It works per URL. A thief who republishes your text at a new address obliges a new report.
+- It is public. Notices are typically forwarded to the Lumen database for anyone to read, though the trail of upheld removals against a domain is itself a record of its behaviour.
+- The site owner can file a counter-notice through Google, after which the URLs can be restored unless you escalate legally. As with hosting complaints, counter-notices against solid evidence are rare.
 
-Notice what makes this route special: jurisdiction stops mattering. A host in a country that shrugs at notices can keep the page online, but it cannot keep the page in Google. For infringing sites hosted somewhere unreachable, deindexing is often the decisive move rather than the fallback.
+One adjacent tool is worth knowing. Google Search Console cannot remove someone else's content, but once a complaint to the hosting company succeeds and the infringing page starts returning errors, the Refresh Outdated Content tool nudges the dead page's lingering search entry out of the index faster than natural recrawling would.
 
-## What deindexing does not achieve
+## Run both fights together
 
-Honesty about the limits keeps expectations straight:
+The two routes cover each other's gaps. The complaint to the hosting company can end the page but depends on that company cooperating; search removal works regardless but leaves the page alive. Filed in the same sitting, they leave a copycat holding a page that either no longer exists or can no longer be found. The sequence that works in practice: capture the evidence, generate the certificate, file with the hosting company and with Google together, then refresh the dead entry once the page goes.
 
-- **The page stays online.** Deindexing removes pointers, not the page. Anyone with the direct link still reaches it, and it can still be found through other channels.
-- **Other search engines are separate.** A Google removal binds Google. Bing runs its own equivalent process, and filing there too is worth the extra minutes for complete coverage.
-- **It is per-URL, not per-thief.** If the copycat republishes your text at a new URL, that URL needs its own report. Persistent offenders sometimes require a few rounds.
-- **It is public.** Removal notices are typically forwarded to the Lumen database, where anyone can read them. This is normal, and the transparency cuts both ways: the paper trail of upheld removals against a domain is itself a record of the thief's behaviour.
-- **The site owner can push back.** The affected site is notified and can file a counter-notice through Google, in which case the URLs can be restored unless you escalate legally. As with host takedowns, counter-notices to clear-cut theft are rare, and rarer still against solid evidence.
-
-## Timelines: what to expect
-
-Google's copyright queue moves quickly by legal-process standards, slowly by refund-request standards. Straightforward, well-documented requests are commonly resolved within days, sometimes hours. Requests with vague ownership claims, mismatched URLs or missing statements get bounced back with questions, which can stretch the affair into weeks. The single best predictor of a fast outcome is a clean filing: exact URLs, exact statements, and ownership evidence the reviewer can check rather than weigh.
-
-While a request is pending, resist the temptation to keep editing the infringing site's presentation in your head. File it completely, note the date, and give the process its days before following up.
-
-## One more tool: your own Search Console
-
-Google Search Console will not remove someone else's content, its removal tools govern only properties you have verified as yours. But it earns a mention for the adjacent case: once a host takedown succeeds and the infringing page starts returning errors, Google's Refresh Outdated Content tool lets you nudge the dead page's lingering search entry out of the index faster than natural recrawling would. It is the mop-up step after a successful takedown elsewhere.
-
-## Pairing deindexing with the host takedown
-
-The two fights work best fought together, because each covers the other's gap. The host takedown kills the page but depends on a cooperative host. Deindexing works regardless of the host but leaves the page alive. Run in parallel, they leave a copycat with a page that either no longer exists or can no longer be found, and every path between them is covered.
-
-The sequence that works in practice: capture evidence first, generate your certificate, file with the host and with Google in the same sitting, then use Search Console's refresh tool once the page dies. The [enforcement guide](/enforcement/) lays this out as a single workflow.
-
-All of it stands on the same foundation: being able to prove, quickly and checkably, that the text is yours. That is the part Kirpik automates, from the watermark that [travels inside every stolen version](/learn/why-watermarks-survive-copying/) to the dated certificate both reviewers can verify. If you have found the copycat but not yet the proof, [start by checking their page](/site-check/).
+Every filing stands on the same foundation: showing, quickly and checkably, that the text is yours. That is the part Kirpik prepares before you need it, from the watermark travelling inside every stolen version to the dated [Proof of Ownership Certificate](/features/chain-of-proof/) both reviewers can verify for themselves.

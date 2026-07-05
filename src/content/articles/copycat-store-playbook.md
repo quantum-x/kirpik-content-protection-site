@@ -1,61 +1,38 @@
-﻿---
+---
 title: "The copycat store playbook: cloning a catalogue in an afternoon"
-description: "How clone stores lift an entire Shopify catalogue in hours: scrape the feed, import by CSV or app, republish. And why your text is the part that convicts them."
+description: "How a copycat store clones a Shopify catalogue in an afternoon: download the feed, republish, undercut. And why the stolen text is the weakest link."
 cluster: "Text theft & what it costs"
-summary: "Standing up a lookalike store from your catalogue takes tools that already exist and a few hours of clicking. Here is the process, step by step, and the one thing about it that works in your favour."
+summary: "Cloning a store takes ordinary tools and a few hours. This is the workflow, step by step, and the point in it where the cloner hands you the evidence."
 pubDate: 2026-05-28
 related: ["product-descriptions-scraped", "where-stolen-copy-ends-up", "dropship-clone-copy"]
 ---
 
-A copycat store is not a sophisticated operation. It is a sequence of ordinary tools used without scruples, and the whole sequence fits comfortably into one afternoon. Understanding the workflow is worth your time, not because you can interrupt it, but because it tells you where the cloner is exposed.
+A copycat store is not a technical achievement. It is a short sequence of ordinary tools, and the whole sequence fits into an afternoon. The sequence is worth knowing, not because any step of it can be interrupted, but because the finished clone carries evidence its builder cannot easily remove.
 
-## Step one: take the catalogue
+## Step one: download the catalogue
 
-The cloner starts with data collection, and on Shopify that is the easy part. Your store publishes its products in structured form through [public endpoints that cannot be disabled](/learn/shopify-public-product-feed/). A request to `/products.json` returns up to 250 products at a time, complete with titles, variants, prices, image URLs and, in the `body_html` field, your full descriptions.
+Targets are not picked at random. Research tools rank stores by advertising activity and traffic, so a catalogue that sells is a catalogue that gets found. Being cloned is evidence your listings convert; the cloner is outsourcing product research to you.
 
-Nothing about this step requires skill. Free scripts that dump a Shopify catalogue to a spreadsheet have existed for years, and several commercial "spy" tools wrap the same fetch in a nicer interface with an import button at the end. The catalogue that took you a year to build transfers in minutes.
+Every Shopify store publishes its catalogue in machine-readable form at addresses no setting closes. A short run of requests returns every title, price, variant and full description; [how the download works](/learn/product-descriptions-scraped/) covers the mechanics, and cloners read the same feeds built for legitimate services.
 
-## Step two: import it
+Importer apps and CSV tools consume this data directly. Some cloning tools ask for nothing more than a store address and return a file ready to load into a new store. Nothing in this step touches the storefront: no page opens, no theme loads, and any blocker app installed on the store runs nowhere, because blockers are storefront scripts and this is not the storefront.
 
-Shopify makes bulk product import a first-class feature, because legitimate merchants migrating stores need it. The same CSV import that helps them helps the cloner. Alternatively, a category of migration and importer apps will pull products directly from a source store URL into a new one, mapping fields automatically.
+## Step two: republish and undercut
 
-Either way, the result is a fresh store whose products carry your titles, your descriptions and your imagery, often in the original display order. Total effort so far: perhaps an hour.
+The catalogue lands in a fresh Shopify store or a batch of marketplace listings. The store name is new and the theme is new. Everything else is yours: the titles, the descriptions, the images, often the exact order of the catalogue. Prices are set a little lower, because the cloner pays for no product development, no photography and no writing. Advertising is then pointed at the audience your listings have already proved will buy.
 
-## Step three: dress it up
+On marketplaces the same catalogue file becomes listings rather than a storefront, and these matter more than they look. A marketplace domain ranks easily, so your description can face customers under a stranger's name on the first page of search results within weeks.
 
-The cloner picks a free theme, generates a brand name, and buys a domain. Some go further and copy the About page, shipping policy and FAQ from the source store too, since those were also written by someone else and read convincingly.
+The descriptions are the part least likely to be edited. Rewriting them would cost the hours the clone exists to avoid, and the persuasive writing is precisely what made your listing worth taking. Where the text is touched at all, it is trimmed or lightly reworded. Images are easier to swap, since supplier photos are interchangeable, which leaves the text as the clone's most distinctive stolen asset.
 
-If the products come from a shared supplier, as they usually do in dropshipping, the product photos were never yours to begin with. Supplier images are the great equaliser of clone stores: every seller of that garlic press has the same six renders. This detail matters more than it first appears, and we will come back to it.
+The domain is disposable. When one clone is reported and taken down, the same catalogue file builds the next one in an hour, under a new name. That is why chasing clones one by one, without evidence that transfers, is slow work.
 
-Prices get adjusted in bulk, usually a few percent under the source store, since undercutting the site that wrote the text is part of the model. Some cloners run a light find-and-replace over the descriptions to swap the brand name for theirs. Few do more editing than that, because editing costs the time the whole exercise was designed to avoid.
+## Where the cloner is exposed
 
-## Step four: republish and monetise
+Everything that makes the clone cheap makes it traceable. Your sentences sit on its pages verbatim, so a search for one distinctive phrase in quotation marks finds it. Your publication dates precede the clone's entire existence, and archived snapshots of your store prove the order of events. Marketplaces, hosting companies and search engines all accept infringement reports, and they can act on the ones that arrive with evidence. [Our enforcement guide](/enforcement/) walks through each route.
 
-The finished clone goes one of several directions. Some run paid social ads straight at the product pages, spending on traffic instead of content. Some grind at SEO, and given enough domain age or link building, [a clone can outrank the store it copied](/learn/when-thieves-outrank-original/). Others list the products on marketplaces, where your descriptions do the selling under another seller's name. The full map of destinations is in [where stolen product text ends up](/learn/where-stolen-copy-ends-up/).
+The dispute, when there is one, comes down to a single fact: who published the text first. A cloner can claim you are the copier, and undated screenshots settle nothing. Dated, independently checkable proof settles it quickly, which is why the useful preparation happens before the clone appears, not after.
 
-From your side, the first symptom is usually indirect: a dip in rankings for descriptions you wrote, an ad screenshot from a confused customer, or your own sentence appearing on a strange domain when you search it in quotes.
+Evidence of that kind also travels. The same dated record that persuades one hosting company works on the next clone, on the marketplace and in a search removal request, so the disposable-domain trick stops paying. To answer it, the cloner would need older proof of authorship than yours, and no such proof exists.
 
-## Why the text is the giveaway
-
-Here is the part of the playbook that favours you.
-
-Everything else on a clone store is deniable. The products are from a common supplier. The images are the supplier's. The theme is free and used by thousands of stores. The prices are market prices. None of it proves the cloner took anything from you specifically.
-
-The descriptions are different. Your text is the one element on that page that was authored, by you, as original expression. Two stores selling the same product from the same supplier should have different descriptions, the way two reviewers of the same film write different reviews. When the paragraphs match yours line for line, that is not convergence. That is copying, and copied text is the strongest evidence a clone leaves behind.
-
-Which is why the practical question is not "how do I stop the scrape" but "when my text turns up, how quickly can I prove it is mine". Screenshots and publish dates help. What helps more is evidence generated from the text itself, assembled into a timeline a host or marketplace can verify. Our [enforcement guide](/enforcement/) walks through turning that evidence into a takedown.
-
-## The afternoon, summarised
-
-| Stage | Tooling | Time |
-| --- | --- | --- |
-| Scrape catalogue | Public feed, spy tool or script | Minutes |
-| Import products | CSV import or migration app | Under an hour |
-| Brand and theme | Free theme, generated name | An hour or two |
-| Go live | Ads, SEO or marketplace listings | Same day |
-
-No step requires writing a word of product text. That is the entire appeal, and the entire vulnerability.
-
-## Make your text expensive to steal
-
-You cannot make cloning slower. You can make it riskier. Kirpik embeds an algorithmic invisible watermark into your product descriptions, blog articles and pages, derived from your original text signature, without changing anything you wrote. When a cloner lifts your catalogue, the watermark rides along into their store, and a [Proof of Ownership Certificate](/features/chain-of-proof/) turns that into dated, verifiable evidence that the words are yours. The afternoon of cloning stays cheap. Keeping the clone up gets harder.
+This is the step Kirpik is built for. If your descriptions were protected before the clone was assembled, the stolen text itself identifies you: the invisible watermark carrying your store's unique code travels with every pasted paragraph, and a [Proof of Ownership Certificate](/features/chain-of-proof/) turns the detection into dated evidence a marketplace or hosting company can act on.

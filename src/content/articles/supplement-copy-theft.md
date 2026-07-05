@@ -1,8 +1,8 @@
-﻿---
-title: "Supplements and food: copied claims are your problem twice"
-description: "Copied supplement text costs you twice: lost writing, plus regulatory risk when your claims surface beside banned promises. Provenance lets you disown the stolen versions."
+---
+title: "Supplements and food: stolen claims are a regulatory problem too"
+description: "When supplement text is taken, your carefully worded claims surface beside promises you would never publish. Dated proof lets you disown every duplicate."
 cluster: "By use case"
-summary: "In supplements, stolen text costs more than the writing. Your carefully worded claims end up on cowboy sites next to promises you would never make, and provenance is how you disown them."
+summary: "Supplement text is drafted one authorised phrase at a time. When a rogue site lifts it and adds cure promises above it, dated proof of which version is yours becomes the fastest way out."
 pubDate: 2026-06-04
 related:
   - beauty-copy-theft
@@ -10,43 +10,26 @@ related:
   - proving-text-ownership
 ---
 
-Most merchants lose one thing when their product text is stolen: the work. Supplement and food brands lose two. The work, and then the control over where their claims appear. In a category where a single sentence can be the difference between a compliant listing and a warning letter, watching your sentences turn up on sites you have never heard of is exposure, plain and simple.
+Most stores lose one thing when product text is stolen: the work. A supplement brand loses two, the work and the control over where its claims appear. In a category where one sentence separates a compliant listing from a warning letter, the second loss is the more expensive one.
 
-## The most expensive sentences on your store
+## Claims written under regulation
 
-Supplement text is written under constraint. Depending on your market, the rules come from the FDA and FTC, from EFSA's authorised health claims register, or from a national food standards body, and they all share one theme: you may describe what a nutrient does for normal function, and you may not promise treatment or cure.
+Supplement text is drafted under constraint, and the constraint shows in every line. In the United States the workable register is the structure and function claim: "supports normal immune function" is available, "boosts immunity" starts an argument, and "treats colds" is a disease claim that ends one. The standard disclaimer block follows the brand everywhere: these statements have not been evaluated by the Food and Drug Administration; this product is not intended to diagnose, treat, cure or prevent any disease. In the EU the wording is stricter still, because permitted health claims come from an authorised register. That is why so many European labels carry the exact sentence "vitamin C contributes to the normal function of the immune system" rather than anything warmer: the warm version is not on the list.
 
-So the text gets built word by careful word. "Contributes to the normal function of the immune system" because that phrasing is authorised and "boosts immunity" is not. "Supports muscle recovery as part of a balanced diet" with the qualifier doing legal work. The asterisk and the disclaimer block that US brands know by heart: these statements have not been evaluated, this product is not intended to diagnose, treat, cure or prevent any disease. Dosage framing that matches the label. Allergen and pregnancy warnings phrased to be clear without being alarming.
+Around the claims sits more constrained writing. Dosage framing that matches the label panel. Allergen statements. Pregnancy and medication warnings phrased to be clear without being alarming. Serving language that does not drift into prescription. Every sentence on a good supplement page has been argued over, and several have been paid for, in regulatory review time if nothing else. It is some of the most expensive text in commerce, measured per word.
 
-Every one of those sentences is a small compliance decision. A good supplement product page might represent more regulatory review time than writing time. That is precisely what makes it attractive to copy: the thief gets language that sounds authoritative and reads as compliant, without paying for a single hour of the review that made it so.
+## Stolen claims cost you twice
 
-## The double problem
+Now follow that text after it is scraped. Picture a pattern the category knows well, with no particular store in mind: an anonymous storefront lifts a compliant product page wholesale, keeps the ingredient panel and the carefully hedged claims because they read credibly, then adds its own line above them promising rapid fat loss or a cure. Your sentences now sit directly beneath a promise you would never publish, on a site you have never heard of, selling a product you cannot vouch for.
 
-The first problem is ordinary theft. A competing store or affiliate site lifts your description, your ingredient breakdown, your FAQ about timing and dosage. Your search rankings now compete with your own words, a dynamic covered in [what stolen content does to your rankings](/learn/stolen-copy-seo-damage/).
+The first cost is the ordinary one: a duplicate page competing with yours in search results, sometimes for the exact authorised phrasing you ranked for. The second cost is adjacency. Customers who search a distinctive phrase from your label find the rogue listing. A marketplace reviewer, a complaints handler or a cautious retail buyer looking at that page sees your wording woven through it. Nobody has accused you of anything, and still you want the association gone quickly and cleanly.
 
-The second problem is the one unique to this category: context. Your compliant paragraph does not stay in compliant company. A typical pattern looks like this: a grey-market or cowboy site lifts your measured "contributes to the reduction of tiredness and fatigue" wording for the product section, then surrounds it with the promises you would never make. Cures. Melts fat. Replaces medication. Testimonials of the kind the FTC takes a professional interest in. Your text is now load-bearing in a page whose overall claims profile is radically non-compliant.
+Being able to show, with dates, that your page is the original and the rogue page is a later duplicate turns that conversation from a slow argument into a short one. Without dated proof you are asserting authorship; with it you are demonstrating it.
 
-Why does that matter to you? Because provenance flows both ways. If a platform, marketplace or regulator starts pulling on that page, your brand name or your recognisable claims language may be part of what they find. Distributors and retail buyers do due diligence by searching claims text. Customers land on the cowboy page, see your sentences, and associate the banned promises with your product. The overlap between your text and their page is a thread, and you want to be the one holding documentary proof of which end of the thread is which.
+## Dated proof lets you disown the duplicate
 
-## Provenance as a defence as well as a weapon
+Provenance is the tool that fits this problem. An invisible text watermark places your store's identity inside the text itself, an algorithmic invisible watermark derived from your original text's signature, without changing a single visible character. For a supplement brand the last point is the deciding one: the wording that passed review stays exactly as approved, to the comma. The watermark travels with the text through copying, trimming, reformatting and light rewording, so the duplicate keeps pointing back at you as its source, which is now what you want it to do.
 
-This is where text provenance earns its keep in a way that goes beyond takedowns. If your product text carries an algorithmic invisible watermark, derived from your original text's signature, then any lifted version of it can be tested and traced back to your store specifically, with dates.
+When a rogue listing surfaces, detection settles authorship in minutes: check the page in Kirpik, and a match identifies your store specifically, not just the presence of a watermark. From there you can generate a Proof of Ownership Certificate, a dated document pairing content fingerprints with your protection date and the infringing page's own timestamps, and send it with a takedown request to the marketplace or to the company hosting the site; [the DMCA process for stolen text](/learn/dmca-for-stolen-text/) walks through those steps in order. Kirpik provides the whole chain on Shopify, from one-click protection of products, articles and pages through to the certificate.
 
-That gives you two moves the unprotected brand does not have:
-
-- **Disown the stolen version.** You can demonstrate, with a dated [Proof of Ownership Certificate](/features/chain-of-proof/), that the text originated on your store on a specific date and that the cowboy site's page carries your watermark, meaning they took it from you rather than the reverse. Your protection date, the infringing page's own headers and the Internet Archive's earliest snapshot of their URL line up into a timeline anyone can check.
-- **Take the infringing page down.** The same certificate supports a DMCA notice to the site's host or a complaint to the marketplace, and it reads very differently from "we believe this text is ours". The mechanics are in [the DMCA process for stolen text](/learn/dmca-for-stolen-text/).
-
-To be precise about what this does and does not do: a watermark does not stop anyone from copying, and Kirpik does not patrol the web on your behalf. Detection happens when you paste suspect text or check a URL. What the watermark changes is the strength of your position once a stolen version is found. Suspicion becomes evidence.
-
-## Fitting protection into a regulated workflow
-
-Supplement brands already run their text through review gates, which makes the protection step easy to place: protect the page after final compliance sign-off, when the wording is frozen. Kirpik does not change your text, so protection cannot un-do a compliance review; the words, disclaimers and asterisks stay exactly as approved, readers and search engines see nothing different, and no scripts are added to your storefront. If legal later revises a claim, re-protect after the edit and the new wording is covered.
-
-Cover the education layer too. Ingredient explainer pages, "how much creatine per day" blog articles and dosage FAQs are heavily copied because they rank, and Kirpik protects blog articles and pages alongside products. Descriptions need at least 20 words, a floor that supplement text clears without noticing.
-
-Finding stolen content remains a manual habit worth scheduling. Once a month, search a few of your most distinctive sentences in quotes, the phrasings you know were custom-built rather than borrowed from the claims register. When something surfaces, run it through [Kirpik's detection](/features/detection/) by paste or URL, or point the [free site check](/site-check/) at the page.
-
-## The category where "prove it" cuts both ways
-
-Every niche benefits from being able to prove ownership of its text. Supplements are the niche where you may one day need to prove the opposite: that a page full of dangerous promises is not yours, took your text without permission, and did so after you published. A dated, independently verifiable trail is what makes both arguments in one document. Kirpik builds that trail from the moment you protect a page, and the [plans page](/pricing/) shows where the certificate allowances sit if you expect to need more than one.
+One boundary matters more here than anywhere: protection covers your text from the moment it is applied, and duplicates made before that moment carry no watermark. The right time to protect a supplement catalogue is before the next scrape, not after the first rogue listing, because the claims are already written, already paid for, and already public.

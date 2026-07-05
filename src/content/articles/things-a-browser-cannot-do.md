@@ -1,46 +1,32 @@
 ---
 title: "Screenshot blocking and other things a browser cannot do"
-description: "Screenshot prevention, print-screen traps, devtools blocking, view-source hiding: why the browser security model makes each one impossible for a web page."
+description: "No web page can block screenshots, hide its source or disable developer tools. The browser security model explains why, and it sorts app claims fast."
 cluster: "Why blockers don't work"
-summary: "Some protection claims are not weak, they are impossible. A calm tour of what the browser security model permits a web page to do, and the popular promises that fall outside it."
+summary: "Some protection features are not weak but impossible. What the browser security model lets a page do, the popular promises that fall outside it, and how to use the difference when reading app listings."
 pubDate: 2026-06-30
 related: ["right-click-blockers-text-test", "copy-paste-protection-apps", "what-is-invisible-text-watermark"]
 ---
 
-Most copy-protection features are weak but real: they do something, just not much. This article is about a different category, the features that are not possible at all. Screenshot blocking, print-screen interception, devtools prevention and view-source hiding get promised with straight faces, and a web page can deliver none of them. Not with clever code, not with the right app, not next year. The reasons live in the browser's security model, and they are worth ten minutes to understand, because they permanently sort real protection claims from decorative ones.
+Protection features come in two kinds. Most are weak: they do something, briefly, to some visitors. A smaller set is impossible: no web page can deliver them, with any code, from any vendor. Screenshot blocking, view-source hiding and developer-tools prevention all sit in the second set. The reason is the browser's security model, and it takes five minutes to understand. Those five minutes let you sort any protection claim you meet.
 
-## The model: a page is a guest
+## The browser treats every page as untrusted
 
-A web page is untrusted code from a stranger, and browsers treat it accordingly. Every page runs inside a sandbox with a deliberately short list of capabilities: render content, respond to input directed at the page, make network requests under restrictions, store a little data. The list is short by design, because the browser's first job is protecting the person at the keyboard from the page, never the other way round.
+A web page is a program written by a stranger, and the browser runs it on that basis. Each page operates inside a sealed compartment with a short list of permissions: draw content, respond to input aimed at the page, make limited network requests, store a little data. Everything else, the screen, the operating system, the other tabs, the browser's own controls, is off limits by design. The compartment ends at the tab's edge: a page knows nothing about the visitor's files, the other software running, or what the operating system is doing, including capturing the screen. The browser's first duty is to protect the person at the keyboard from the page, and it never delegates authority over that person's machine to the page.
 
-Everything a page learns about the outside world is information the browser chooses to pass in. Everything a page does happens through APIs the browser chooses to expose. Where no API exists, no app can act, whatever its listing says. With that model in hand, the impossible features explain themselves.
+This is not a gap waiting for a cleverer app. It is the arrangement that makes the web usable at all, and every browser maker enforces it. Any protection claim that requires the page to control the visitor's computer is therefore false before the details are examined. The limitation is a property of browsers, not a defect of any particular app.
 
-## Screenshots: the OS owns the screen
+## The impossible list
 
-When a visitor presses Win+Shift+S or Cmd+Shift+4, the operating system's own capture tool reads the screen's pixels. This happens entirely outside the browser. No event is delivered to the page, no API announces it, and the page has no way to know a capture occurred, let alone veto it. The same applies to capture from another application, a phone camera pointed at the monitor, or a video call sharing the screen.
+Screenshot blocking. A screenshot is taken by the operating system, outside the browser, in territory no page can observe or veto. A page script can notice the PrintScreen key while its own tab holds focus, which is why some apps claim capture prevention, but noticing a key is not preventing a capture: the screenshot happens regardless, and system shortcuts, capture tools and a phone camera pointed at the screen never touch the page at all. No web page anywhere prevents a screenshot.
 
-The pixels on the display belong to the operating system, which composited them there. A web page supplied some content for one window and has no further standing. Any script claiming to block screenshots is claiming authority over hardware and OS functions that were never delegated to it.
+View-source hiding. To display your page, the browser must receive its complete source, and the browser shows the visitor whatever it has received. That is what Ctrl+U displays. Scrambling the source changes its appearance, not its availability, and the readable text must still be present for customers to read. Anything a browser can display, its user can save. Scrambling is also self-defeating in a second way: search engines read the same delivered text, and obscuring it risks obscuring the page from the crawlers that rank it.
 
-## Print-screen traps: watching the wrong door
+Developer-tools blocking. The developer tools belong to the browser, not to the page, and a page cannot disable its host. Scripts can lay traps that make inspection tedious, and every trap is dismissed from inside the same tools it tries to block, or ended wholesale by switching the site's JavaScript off.
 
-Some scripts listen for the PrintScreen key, then clear the clipboard or flash a warning. Two facts sink this. Key events reach a page only when it has focus, and the OS capture shortcuts are typically handled by the system before or instead of the page. And modern snipping tools do not travel through the page's keyboard events at all. At best, the trap catches one legacy key on one platform in one focused window, which is to say it catches approximately nobody. Screen recording, of course, involves no key press whatsoever.
+Beneath all three runs the same fact: by the time any page script executes, the visitor's machine already holds the complete text. Protection that begins after delivery is negotiation, and [scrapers do not negotiate](/learn/scrapers-vs-storefront-scripts/).
 
-## Devtools blocking: the inspector belongs to the user
+## Reading app listings with this in hand
 
-Developer tools are part of the browser's own interface, on the trusted side of the sandbox boundary, exactly like the address bar and the bookmarks menu. Pages cannot detect them reliably, cannot disable them, and cannot tell the browser to refuse to open them. The tricks that try, timing checks, window-size heuristics, debugger statements in loops, are guesses that misfire on ordinary visitors and are shrugged off by anyone who actually opens the inspector. A browser that let pages disable inspection would be a browser nobody could trust, which is why no vendor builds one.
+The impossible list makes a fast screening tool. When a listing promises screen-capture prevention or view-source blocking, you now know that promise cannot be kept by any web page; its other claims warrant the same scrutiny. The general rule: a claim that requires controlling the visitor's machine is impossible, whatever the listing says, and a claim that only requires interfering with the page while it is open is possible, weak, and paid for in customer friction. The claims that remain, menu suppression and selection blocking among them, are possible and merely ineffective, as [the survey of copy-paste protection techniques](/learn/copy-paste-protection-apps/) shows check by check.
 
-## View-source hiding: the source is the page
-
-The HTML source is not a secret behind the page. It is the page: the document your server transmitted, which the browser kept and will show to its user on request. Hiding it from the visitor while showing it to the browser is a contradiction, since the browser is acting for the visitor. Scripts can intercept the Ctrl+U shortcut inside a focused page, but `view-source:` in the address bar, saving the file, or fetching the URL with any [HTTP client outside the browser](/learn/scrapers-vs-storefront-scripts/) reads the same bytes without asking the page's permission. For text, this is decisive: your descriptions are in that document, and on Shopify they are additionally in [feeds that never render a page at all](/learn/shopify-public-product-feed/).
-
-## Why the impossible keeps getting promised
-
-The features that are possible, cancelling menus and suppressing selection events, are unimpressive once [tested](/learn/right-click-blockers-text-test/), so the marketing gravitates toward stronger words. "Prevents screenshots" sells better than "cancels a menu that has four other equivalents". The claims survive because few merchants have a reason to know where the sandbox boundary sits, and because the features fail silently: nobody sees the screenshots that were taken anyway.
-
-The boundary is worth internalising in one sentence. A page may decorate its own sandbox however it likes, and may not reach outside it, and the screen, the clipboard manager, the OS, the browser chrome and the source document are all outside it.
-
-## Building on what is actually possible
-
-Accepting the boundary is clarifying rather than defeatist. Displayed text can always be captured, so protection that depends on preventing capture is ruled out from the start, and effort moves to the approach the model does permit: making the text itself carry evidence of its origin. That needs no authority over the visitor's machine, which is precisely why it works.
-
-This is Kirpik's territory. An algorithmic invisible watermark, derived from your original text signature, travels inside your text wherever it is pasted or scraped, and detection ties any duplicate back to your store. Honesty about limits applies here too: someone who retypes your paragraph from a screenshot, or rewrites it outright, is beyond any text-borne mark, and we say so plainly. But thieves copy because copying is free, and the duplicates are what turn up on other stores. What an invisible text watermark is, and why it holds where blockers cannot, is covered in [the watermarking explainer](/features/invisible-text-watermarking/).
+The same test clarifies what real text protection has to look like. It cannot operate in the visitor's browser, because the browser answers to the visitor. Kirpik operates in the text instead: an invisible watermark embedded in your descriptions, articles and pages, adding no scripts to the storefront, so that copied text stays identifiable and provable no matter what the copier's browser, or camera, was doing. The claims of every app in the category are examined against their listings in our [comparison section](/compare/).

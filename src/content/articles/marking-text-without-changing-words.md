@@ -1,8 +1,8 @@
-﻿---
+---
 title: "How Kirpik marks your text without changing a single word"
-description: "Kirpik watermarks your descriptions without altering anything you or a search engine reads. What algorithmic protection means and why there is no public spec."
+description: "Kirpik watermarks product descriptions, blog articles and pages without altering a single word. What stays identical, and why the method stays private."
 cluster: "How invisible text watermarking works"
-summary: "Kirpik's promise sounds impossible: a watermark in your text that changes nothing you wrote. Here is what that promise means precisely, what algorithmic means in practice, and why the internals stay private."
+summary: "The claim sounds contradictory: a watermark in your text that changes nothing you wrote. What stays identical, what algorithmic means, why the method stays private, and why 20 words is the floor."
 pubDate: 2026-05-27
 related:
   - what-is-invisible-text-watermark
@@ -10,50 +10,32 @@ related:
   - watermark-false-positives
 ---
 
-Merchants are right to be suspicious of this claim. A tool asks for permission to write to your product descriptions, then promises your product descriptions will not change. Both halves sound true only if one of them is doing some quiet redefinition.
-
-Neither is. But the claim deserves a precise explanation rather than a wink, so this article gives it one: what exactly stays the same, what "algorithmic" means here, and why Kirpik deliberately does not publish how the watermark works.
+On its face the claim contradicts itself. Kirpik asks for permission to write to your product descriptions, then promises that your product descriptions will not change. Both halves are true, but a merchant deserves the precise version rather than a reassuring one, so here it is: exactly what stays the same, what "algorithmic" means, and why the method itself is not published.
 
 ## The promise, stated exactly
 
-Protect a product description with Kirpik and compare what you read before with what you read after. They are identical. Every word is the same word. Every full stop, comma and apostrophe is where you left it. Headings, bold, italics, links, lists and images sit exactly as they did. The reading order, the paragraph breaks, the layout: unchanged.
+Protect a product description and compare the text before with the text after. Every word is the same word. Every full stop, comma and apostrophe is where you left it. Headings, links, lists, bold and italics sit exactly as they did, and the paragraphs break where they broke. A shopper reads what you wrote. A search engine crawls what you wrote and finds no new markup and no added script. In the Shopify admin, you carry on editing your own writing; Kirpik never rewrites, shortens, restyles or "optimises" anything.
 
-The same holds for every audience that matters:
+The protection is also reversible. Remove it from one item or from your whole catalogue and the content returns to exactly its prior state. None of this needs to be believed on trust: protect one item on your own store and run the comparison yourself.
 
-- A shopper reading the page sees your text exactly as you wrote it.
-- A search engine crawling the page reads the same words in the same order and finds no new markup, no added script, and no difference between what it is served and what visitors see. [Invisible watermarks and SEO](/learn/text-watermarks-and-seo/) walks through the SEO case in full.
-- You, editing in the Shopify admin, keep working on your own writing. Kirpik never rewrites, shortens, restyles or "optimises" anything.
+## What algorithmic means
 
-And the change is reversible. Remove protection from an item and it returns to exactly its prior state, which you can verify yourself on your own store any time you like.
+Kirpik's watermark is an algorithmic invisible watermark derived from your original text signature. Unpacked, that means a repeatable procedure takes your text and your store's unique watermark code as input and lays invisible markers through the content. The markers repeat along the length of the text with redundancy, which is why a trimmed or edited version still matches later. Detection is the same procedure run in reverse: it recovers the markers from a suspect text and names the store they belong to, with a count of the markers found and a Confidence figure.
 
-## So where is the watermark?
+It is equally useful to say what the watermark is not. It is not a badge or notice, not metadata stored beside the content, not zero-width characters hidden between letters, and not a fingerprint that exists only in a database. Those are all real techniques with well-known weaknesses, and Kirpik uses none of them. The mark is in the text, and only in the text.
 
-Inside the content, woven through the way it is stored, and derived from the text you wrote. Kirpik computes an algorithmic signature from your original content, combines it with your store's unique watermark code, and embeds the result invisibly through the text. The signature repeats along the length of the text with built-in redundancy, which is why edited and trimmed versions still match later.
+## Why the method is not published
 
-"Algorithmic" is doing real work in that sentence, so it is worth unpacking. It means the watermark is not a hidden message a human typed in, not a badge, not metadata bolted alongside the file, and not a record that only exists in Kirpik's database. It is produced by a repeatable procedure that takes your text and your watermark code as input, and it can be read back out by the matching procedure at [detection](/features/detection/) time. The same procedure that puts the signature in is the mirror of the one that finds it in a thief's version, which is what makes a match specific to your store rather than a vague similarity score.
+A fair reader now asks how, exactly, and the honest answer is that Kirpik does not say. The internals are not documented publicly, and detection runs only through Kirpik.
 
-If you want the one-line version for a sceptical colleague: the watermark is real, it is genuinely present in every protected item, and it lives below the level of anything a person or a crawler reads as writing.
+That is a security decision rather than evasiveness. An invisible watermark protects because two things hold at once: thieves cannot see it, and thieves do not know what to look for. A published specification preserves the first and surrenders the second, and with it a recipe for a stripping tool. The sensible comparison is a bank's fraud rules: real, effective and checkable by their results, but not printed in the annual report.
 
-## Why there is no public spec
+What replaces the specification is verifiability where it counts. Detections report recovered markers and Confidence rather than a bare yes or no, so the strength of any match is visible. A Proof of Ownership Certificate carries a QR code to a public verification page, so the company that hosts a thief's site, or a lawyer, can confirm the document is genuine without installing anything or taking your word for it.
 
-At this point a fair reader asks the obvious question: fine, but how, exactly? And here is the honest answer. We do not publish the internals, and detection runs only through Kirpik.
+## Why 20 words is the floor
 
-That is a security decision, not a marketing one. An invisible watermark's protection comes from two properties working together: thieves cannot see it, and thieves do not know what to look for. Publish a specification and you keep the first property but hand over the second, along with a recipe for a stripping tool. Every watermarking system that guards text on the open web faces the same trade-off, and the defensible choice is the same one banks make about fraud detection rules: the system is real, its outputs are verifiable, and its internals are not documentation for attackers.
+Kirpik declines to protect text shorter than 20 words, and the reason explains a good deal about how the protection holds. The watermark's resilience comes from repetition. A thief who deletes a paragraph or trims the opening removes some repetitions of the mark, and detection succeeds as long as enough of them survive. Short text offers too little room to repeat in. Below 20 words there is no meaningful redundancy, so Kirpik refuses rather than sell protection it cannot stand behind. Between 20 and 30 words the app shows a limited-redundancy warning, and from around 45 words the mark repeats with comfortable margin.
 
-What you get instead of a spec is verifiability where it counts. Detection results come with a recovered marker count and a confidence figure rather than a bare yes or no, so you can see how strong a match is. [How sure is a match?](/learn/watermark-false-positives/) explains how those numbers guard against false positives. And a Proof of Ownership Certificate carries a QR code to a public verification page, so a host or a lawyer can confirm a certificate is genuine without installing anything or taking your word for it.
+The floor rarely bites in practice. Any description that does real selling runs past 45 words, and blog articles and pages clear it many times over.
 
-## Why length matters: the 20-word floor
-
-Kirpik will not protect text shorter than 20 words, and it is worth understanding why, because the reason says a lot about how the protection works.
-
-The signature repeats through your content. Repetition is the whole defence: a thief who deletes a paragraph, trims the opening or reorders sections is removing some repetitions of the signature, and detection succeeds as long as enough survive. Short text gives the signature fewer places to repeat. Below 20 words there is simply not enough room for meaningful redundancy, so Kirpik declines to protect it rather than offer protection it cannot stand behind. Between 20 and 30 words you will see a limited-redundancy warning, and from around 45 words the signature has comfortable room to repeat several times over.
-
-In practice this is rarely a constraint. A product description that sells anything is longer than 45 words, and blog articles and pages clear the floor by an order of magnitude. But if you have ever wondered why a two-line description is not protectable, that is the reason: honesty about redundancy, not an arbitrary rule.
-
-## The before-and-after test you can run
-
-None of this asks for trust. Protect one product on your own store, then check it yourself. Read the live page next to your original draft. View the rendered storefront in another browser. Run the page through a speed test and confirm nothing new loads, because Kirpik adds no script, embed or tag to your theme. Then copy your own protected description, paste it into Kirpik's detector, and watch it identify your store with a marker count and confidence figure attached.
-
-That loop, unchanged text going in and a specific verifiable match coming out, is the entire product in miniature. [What is an invisible text watermark?](/learn/what-is-invisible-text-watermark/) covers the concept from first principles if you want the wider picture.
-
-The short version to keep: Kirpik changes nothing you wrote, nothing a shopper reads and nothing a search engine ranks. It adds one thing only, a signature no thief knows to look for, and with a free plan there is nothing stopping you [testing it on your own store](/site-check/) this afternoon.
+The whole promise fits a five-minute test: protect one description, read the live page beside your draft, then paste the protected text into Kirpik's detection and watch it name your store. [How Kirpik works](/how-it-works/) walks the full loop from protection to certificate, and the free plan covers the experiment.

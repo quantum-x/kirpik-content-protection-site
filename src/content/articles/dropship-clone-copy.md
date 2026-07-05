@@ -1,8 +1,8 @@
-﻿---
-title: "Dropshipping clones: same supplier, your words"
-description: "When every store has the same supplier photos, rewritten product text is the real differentiator. Clones steal it because it converts. Detection takes it back."
+---
+title: "Dropshipping clones: same supplier, your text"
+description: "Imported products arrive with identical supplier text and photos. The rewrite is what converts, which is why clone stores take it. Make the rewrite traceable."
 cluster: "By use case"
-summary: "In dropshipping, everyone starts with the same supplier assets. Your rewritten text is the moat, which is exactly why clone stores lift it, and why detection restores the edge."
+summary: "Every dropshipping store starts from the same AliExpress listing. The rewritten text is the only asset a competitor cannot order from the catalogue, so clones take it, and detection takes it back."
 pubDate: 2026-06-09
 related:
   - copycat-store-playbook
@@ -10,49 +10,26 @@ related:
   - stolen-copy-seo-damage
 ---
 
-Dropshipping has an open secret: the products are shared. The posture corrector you sell, the same factory sells to fifty other stores, through the same AliExpress listings, with the same supplier photos and the same machine-translated description that begins "New Fashion Hot Sale". Anyone with DSers or a similar importer can pull that listing into a Shopify store in one click, supplier text and all.
+Dropshipping runs on shared inventory. The posture corrector one store sells is listed by the same factory to any seller who asks, through an AliExpress listing with the same supplier photographs and a machine-translated description that reads like a parts list. One-click importer tools pull that listing into a Shopify store as it stands, title, variants, text and all. At that starting line, every store selling the item is identical.
 
-Which means the stores that win are not the ones with the best product. They are the ones that did the work the importer button does not do. And most of that work is writing.
+## The rewrite is the only real work
 
-## The rewrite is the business
+What separates a converting dropshipping store from the import-and-hope version is mostly text. The title becomes a product name instead of a keyword string. The description stops reciting specifications and starts answering the questions a buyer actually has: does it fit over clothing, how tight should it be, how long before posture improves, what happens if it does not fit. The shipping page turns a two-week delivery into a plain promise with tracking instead of a surprise. The FAQ is assembled from real customer messages rather than guessed. The returns page reads like it was written by someone who intends to honour it.
 
-Walk through what separates a converting dropshipping store from the import-and-pray version, and notice how much of it is text:
+A store that does this work can charge two or three times the AliExpress price it is built on, and the text is most of the reason. It is also the store's only defensible asset. The product is shared, the photographs belong to the supplier, the theme is a template anyone can buy. The rewrite is the one input a competitor cannot order from the same catalogue.
 
-- **The description rewritten from scratch.** The supplier's "Relieve Back Pain Corrector Belt Adjustable" becomes text that names the actual problem, sets honest expectations about the first week of wear, and explains sizing in centimetres a customer can measure. This rewrite is often the single highest-leverage task in the niche, and everyone in it knows that.
-- **The objections section.** The FAQ answering "will it work under a shirt", "how long until I feel a difference", "what if it doesn't fit". Written from real support tickets, not imagination.
-- **Shipping honesty.** Delivery-time wording that manages expectations instead of hiding them, which is the difference between a chargeback and a patient customer.
-- **The angle.** The specific customer, the specific pain, the specific promise. Ad text and landing page share this spine, and it took losing money on three other angles to find it.
+## Clones import your store, not the supplier's listing
 
-The photos, everyone has. The product, everyone has. The text is the differentiation. In this niche, that sentence is close to the entire strategy.
+The cloning pattern is well established. A competitor spots a product performing well, usually through the ads it is running, and finds the same supplier in minutes, because the supplier was never hidden. Then comes the choice of source text: the supplier's machine translation, or your rewrite. The rewrite converts, so the rewrite gets taken. The same class of tooling that imports an AliExpress listing reads a Shopify store's public product data just as easily, so the theft is a bulk operation, not an evening of retyping. [The copycat store playbook](/learn/copycat-store-playbook/) traces how far this goes: whole catalogues duplicated in an afternoon, descriptions, FAQ answers and shipping pages included.
 
-## Why clones take the words specifically
+The result is the worst competitive position in retail. A rival sells the identical item, with your text, often at a lower price, sometimes ranking for searches your description created. And because the goods genuinely are the same, you cannot argue the product. The words are the only thing on that page that is yours, which makes them the only thing you can enforce on.
 
-Clone operators are rational. They watch spy tools and ad libraries for products that are scaling, and when they find one, they do not copy the supplier listing. Everyone already has the supplier listing, and it does not convert. They copy the store that made it convert: the rewritten description, the FAQ, the shipping wording, the angle. Your text gets taken precisely because it is proven. The theft is a compliment with your margin attached.
+Worth saying plainly: none of this is stopped by right-click blockers or anti-theft scripts. A clone operation reading structured product data never encounters a storefront script at all. The theft is certain to be possible; whether it is provable is the open question.
 
-The mechanics are trivially easy. Beyond ordinary copy-paste, [every Shopify store publishes structured product data](/learn/shopify-public-product-feed/) that store-cloning tools ingest directly. The full playbook, from product research to a live lookalike in an afternoon, is laid out in [the copycat store playbook](/learn/copycat-store-playbook/). The clone then runs your text, sometimes your funnel structure, against your own audience, often at a lower price because they skipped every cost you paid: the copywriting, the testing, the support tickets that taught you the objections.
+## Make the rewrite traceable
 
-There is a second-order cost too. When several stores carry identical descriptions, search engines have to choose which one to rank, and [the original does not always win that choice](/learn/when-thieves-outrank-original/).
+An invisible text watermark restores the asymmetry: an algorithmic invisible watermark derived from your original text's signature, applied to your descriptions, marks the rewrite as yours. Shoppers and search engines see your text exactly as written, and whoever imports it imports the watermark with it. A clone that trims the description or lightly rewords a few lines is still holding text that identifies you as its source.
 
-## What actually restores the edge
+Finding clones stays a manual habit, and a cheap one. Search a distinctive sentence from a best-selling description in quotation marks now and then, and look at any ad whose text reads familiar. When something turns up, Kirpik settles it on the spot: check the clone's page, and a match names your store's watermark specifically. From there you can generate a Proof of Ownership Certificate, dated evidence that the text was yours first, ready to send with a takedown request to the platform or the company hosting the clone.
 
-Right-click blockers and copy-paste disablers do not help here; clone tooling reads product data, not your rendered storefront, so the scripts are never even seen. Rewriting your text every time it is stolen just resets the race. What changes the game is making the stolen text itself work against the thief.
-
-Kirpik embeds an algorithmic invisible watermark, derived from your original text's signature, into your product descriptions. Your text does not change: not a word, not a comma, nothing a customer or a crawler can see, and no scripts are added to your storefront. But every duplicate of that description now carries your store's unique watermark code inside the text. When a clone lifts your converting product page, they lift your signature with it, and the signature [survives the trimming and light rewording](/features/resilience/) clones typically apply to cover their tracks.
-
-Detection is then a two-minute job. Found a suspiciously familiar store through an ad library, a customer complaint or a quoted-phrase Google search? Paste their description into Kirpik's Detect tab, or check their URL directly, or run it through the [free site check](/site-check/). A match tells you it is your text, from your store, with a marker count and confidence figure attached.
-
-## From detection to takedown, while the product still matters
-
-Dropshipping moves fast, and a winning product has a shelf life. The point of detection is to shorten the clone's. From a positive detection, Kirpik generates a Proof of Ownership Certificate: a dated ownership document with content fingerprints, the infringing page's own headers, an Internet Archive timeline and a public verification page. That is what you attach to a DMCA notice to the clone's host, a report to Shopify if the clone runs on Shopify, or an ad platform complaint if your text is fronting their creatives.
-
-Takedowns backed by verifiable evidence move materially faster than takedowns backed by indignation. And each clone removed while the product is still scaling returns traffic and conversions to the page that earned them.
-
-## A workflow for stores that ship weekly
-
-Dropshipping catalogues churn. Products test, fail, scale and retire in weeks, so protection has to be frictionless or it will not happen:
-
-1. **Protect at the rewrite.** The moment a product's description is rewritten and published, protect it. That is the version worth stealing, so that is the version that needs a signature. The 20-word minimum is irrelevant here; any serious rewrite clears it many times over.
-2. **Batch the backlog.** Move an existing catalogue under protection in one queued job rather than clicking through items, as covered in [protecting a large catalogue](/learn/batch-protect-catalogue/).
-3. **Check on suspicion, not on schedule.** Kirpik does not monitor the web automatically. Your existing habits, ad library browsing, spy tools, quoted-phrase searches, surface the suspects; detection confirms or clears them in seconds.
-
-Everyone in your niche can source your product tomorrow. With your text watermarked, the one thing they cannot safely take is the thing that actually sells it. See [how Kirpik works](/how-it-works/) for the full path from protection to certificate.
+Timing decides how useful any of this is. Protection covers text from the moment it is applied, so a description that was scraped before you protected it left no watermark behind in that earlier duplicate. Protect descriptions as part of publishing them, before the ads run and the product starts winning, because winning products are the ones that get cloned. The [how it works page](/how-it-works/) shows the full flow, from one-click protection to the certificate.

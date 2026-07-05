@@ -1,58 +1,32 @@
 ---
 title: "Where stolen product text ends up"
-description: "Clone shops, marketplace listings, ad landing pages, scraper blogs, AI-built storefronts: where scraped product text resurfaces and how to spot each one."
+description: "Clone stores, marketplace listings, ad pages, aggregator blogs and AI answers: where scraped Shopify text resurfaces and the removal route for each one."
 cluster: "Text theft & what it costs"
-summary: "Scraped product text does not vanish. It resurfaces in a handful of predictable places, each with its own tells. Knowing the destinations makes the search for your own words much shorter."
+summary: "Scraped text resurfaces in a handful of predictable places, and each place has its own removal route. Knowing the destinations makes finding your text, and acting on it, much faster."
 pubDate: 2026-06-15
 related: ["copycat-store-playbook", "when-thieves-outrank-original", "dmca-for-stolen-text"]
 ---
 
-Once your descriptions leave your store, they travel. Merchants tend to imagine one destination, a rival shop, but scraped text flows into a wider ecosystem than that, and each destination behaves differently: different motives, different visibility, different removal paths. Here is the map.
+Scraped text does not disappear. It reappears, and it reappears in a small number of predictable places. That is useful, because each destination has a distinct removal route, and a merchant who knows the destinations can search for their own text methodically instead of stumbling on a clone by accident.
 
-## Clone shops
+## Clone stores and marketplace listings
 
-The classic case. A store selling the same or similar products imports your catalogue and republishes it, descriptions intact, sometimes lightly trimmed. Dropshipping makes this routine, because when everyone sources from the same supplier, [the written text is the only differentiator left to steal](/learn/copycat-store-playbook/).
+The clone store is the destination merchants imagine first, and it is common. A store selling the same or similar products imports your catalogue and republishes it, descriptions intact or lightly trimmed, usually at a slightly lower price. Dropshipping makes this routine: when two stores source from the same supplier, the written text is the only original asset either one has, so it is the asset that gets taken. The [copycat store playbook](/learn/copycat-store-playbook/) covers the workflow in detail. The removal route is a report to the company hosting the clone or, if it runs on a commerce platform, to the platform itself.
 
-Clones split into two temperaments. Ad-driven clones want conversion, not rankings; they run paid traffic at your text and may never appear in your search results at all. SEO-driven clones want your rankings too, and given time or a stronger domain, [they sometimes get them](/learn/when-thieves-outrank-original/).
+Marketplace listings are often the more expensive destination, because large marketplaces bring their own traffic and their domains rank easily. A seller lifts your description into a listing for the same supplier product, and your paragraphs start selling under a stranger's account, sometimes above your own page in search results. The removal route here is comparatively good: every major marketplace runs a formal infringement report process and has staff who handle it, and a report backed by dated evidence is the kind they can act on.
 
-How you find them: paste a distinctive sentence from one of your descriptions into a search engine, in quotation marks. Clones rarely bother rewording.
+## Ad pages, aggregator blogs and AI output
 
-## Marketplace listings
+Ad landing pages are single-product sites built quickly to sit behind paid social campaigns. They borrow whatever converts, and a proven product description converts. These pages are nearly invisible in ordinary search because only paid traffic ever reaches them, and they are deleted when the campaign ends. If one is reported while it runs, the report goes to the hosting company or the ad platform. The practical defence is speed: a page reported in week one is a campaign interrupted, while the same page found in month three is already gone, along with the sales it took.
 
-Your descriptions turn up on Amazon, eBay, Etsy and regional marketplaces, attached to another seller's listing of the same product. Marketplace sellers work in volume, listing tools encourage bulk imports, and a well-written description from an independent store is free material.
+Aggregator and affiliate blogs assemble product roundups from scraped catalogue text to catch search traffic and collect commissions. They are low effort and high volume, and they surface readily in an exact-phrase search. Their hosting companies accept infringement notices, and search engines can be asked to remove the pages from results; the process is described in [the DMCA guide for stolen text](/learn/dmca-for-stolen-text/).
 
-These listings are easy to underestimate and shouldn't be. Marketplace domains carry enormous authority, so a lifted description on a marketplace can dominate search results for your own phrasing. The good news: major marketplaces run established infringement programmes, and a documented ownership claim gets traction there faster than almost anywhere else. The [DMCA walkthrough](/learn/dmca-for-stolen-text/) applies, with marketplace-specific forms doing most of the work.
+AI systems are the newest destination. Catalogue text is collected for training and for shopping answers, and fragments of it can resurface in machine-written product descriptions on sites that never saw your store. Honesty requires saying that this destination has no practical removal route today. You will rarely trace a generated paragraph back to its source, and no takedown process covers it. It is one more reason the destinations you can act on deserve prompt action.
 
-## Ad landing pages
+## Finding your text, then acting on it
 
-A quieter destination. Disposable landing pages, spun up for paid social campaigns, borrow persuasive text wholesale: your benefit bullets, your guarantee paragraph, your FAQ answers. The pages live on throwaway domains, run for the life of the campaign, and disappear.
+The search method is the same for every destination. Take the two or three most distinctive sentences from each important description, search for each inside quotation marks, and record every domain that returns them. Fifteen minutes a month covers a typical catalogue, and duplicates found early carry far less accumulated ranking weight than duplicates found late.
 
-You will rarely find these through search, because they are often not indexed at all. They surface when a customer sends you a screenshot, or when you encounter the ad yourself. Their short lifespan makes chasing them frustrating, which is exactly what their operators count on.
+Titles deserve a separate check. Descriptions get trimmed, but product titles are usually pasted unchanged, because the title is the part that had to be searchable in the first place. A title search on the major marketplaces is the fastest single test you can run.
 
-## Scraper blogs and "inspiration" sites
-
-Content sites need content, and product text is content. Gift guides, "top 10" roundups, niche review blogs and auto-generated affiliate sites routinely reproduce product descriptions verbatim, occasionally with a link back, more often without. Some of these sites are honest but lazy; many are pure scraper operations that republish feeds automatically.
-
-Individually they look harmless. In aggregate they multiply the number of domains carrying your exact phrasing, which dilutes the uniqueness signals your text earns in search. The [rankings article](/learn/stolen-copy-seo-damage/) explains why that dilution matters even when no single copier outranks you.
-
-## AI-generated storefronts
-
-The newest destination, and the hardest to trace. Product text is scraped into datasets that feed store-generation tools, which assemble "new" storefronts and listings from existing material. Sometimes your text emerges verbatim. Sometimes it emerges lightly paraphrased, with your structure and phrasing showing through.
-
-The tell is uncanny familiarity: your opening hook, your unusual adjective, your exact size-chart wording, in a store that did not exist last month. Verbatim cases are enforceable like any other theft. Paraphrased ones are murkier, which is one more reason to care about the versions you can prove.
-
-## Running your own ten-minute audit
-
-Finding your text in the wild does not require tooling, just a method. Pick your three best-selling products and, from each description, choose the most distinctive full sentence you wrote: the one with your phrasing quirks, not the generic spec line. Search each sentence in quotation marks on Google and Bing. Exact-match search is unforgiving, which is what you want; if the sentence exists elsewhere, it will usually surface.
-
-Repeat with a sentence from your About page and one from your most-read blog article, since [article feeds are scraped as readily as product feeds](/learn/shopify-public-product-feed/). Note every domain you find, with the URL and the date. If you want an ongoing tripwire, a free Google Alert on one or two of those quoted sentences will occasionally catch new republications, though it is a convenience rather than a guarantee, and it only watches pages that get indexed.
-
-Ten minutes, once a quarter, tells you more about your exposure than any dashboard. Many merchants who run this audit for the first time find at least one surprise.
-
-## The pattern across all five
-
-Notice what these destinations share. None of them involved a person browsing your storefront and defeating a right-click blocker. The text arrived by scrape, feed or bulk import, routes that [no storefront script ever touches](/learn/shopify-public-product-feed/). And in every case, the practical bottleneck is the same: not finding the stolen content, but proving it is yours when you ask for it to come down.
-
-A takedown request supported by nothing but your word is easy to ignore. One supported by dated evidence, content fingerprints and an independently verifiable certificate is easy to grant. Hosts and marketplaces process thousands of claims; they favour the ones that arrive pre-proven. The [enforcement guide](/enforcement/) shows what that looks like in practice.
-
-That is what Kirpik is built to provide. Protected text carries an algorithmic invisible watermark derived from your original text signature, so wherever a stolen version resurfaces, on a clone, a marketplace, a landing page or a scraper blog, [detection](/features/detection/) can confirm it came from your store and back the takedown with proof rather than assertion.
+Every removal route then asks for the same thing: evidence that the text is yours and was published by you first. The strength of that evidence decides how fast the route moves. A report that asserts ownership moves slowly, because anyone can assert it. A report that shows a dated, checkable record of the exact text moves quickly, because it leaves nothing to argue about. This is where Kirpik earns its place: text protected before the theft carries an invisible watermark that identifies your store, so a suspect page can be checked from the app and the match certified. You can see whether your own store's text is protected right now with the [site check](/site-check/).

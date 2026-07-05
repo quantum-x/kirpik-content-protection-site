@@ -96,7 +96,7 @@ Text theft and what it costs:
 - [The copycat store playbook: cloning a catalogue in an afternoon](https://kirpik.app/learn/copycat-store-playbook/)
 - [What stolen content does to your search rankings](https://kirpik.app/learn/stolen-copy-seo-damage/)
 - [Where stolen product text ends up](https://kirpik.app/learn/where-stolen-copy-ends-up/)
-- [When the thief outranks you with your own words](https://kirpik.app/learn/when-thieves-outrank-original/)
+- [When the stolen version outranks the original](https://kirpik.app/learn/when-thieves-outrank-original/)
 
 Why blockers don't work:
 
@@ -118,17 +118,17 @@ Proof and enforcement:
 
 - [The DMCA process for stolen text, step by step](https://kirpik.app/learn/dmca-for-stolen-text/)
 - [What counts as proof when your text is stolen](https://kirpik.app/learn/proving-text-ownership/)
-- [Inside a Chain of Proof certificate](https://kirpik.app/learn/inside-chain-of-proof/)
+- [Inside a Proof of Ownership Certificate](https://kirpik.app/learn/inside-chain-of-proof/)
 - [Using the Internet Archive to prove who published first](https://kirpik.app/learn/wayback-machine-timeline-evidence/)
 - [Getting stolen content removed from Google's index](https://kirpik.app/learn/deindexing-stolen-copy/)
 
 By use case:
 
-- [Fashion and apparel: when your product text walks off with the trend](https://kirpik.app/learn/fashion-copy-theft/)
-- [Beauty and skincare: protecting ingredient stories and routines](https://kirpik.app/learn/beauty-copy-theft/)
-- [Supplements and food: copied claims are your problem twice](https://kirpik.app/learn/supplement-copy-theft/)
-- [Dropshipping clones: same supplier, your words](https://kirpik.app/learn/dropship-clone-copy/)
-- [Blogs and buying guides: protecting editorial that took weeks to write](https://kirpik.app/learn/protecting-blog-content/)
+- [Fashion and apparel: protecting fit notes, size guidance and fabric text](https://kirpik.app/learn/fashion-copy-theft/)
+- [Beauty and skincare: protecting ingredient explanations and routine text](https://kirpik.app/learn/beauty-copy-theft/)
+- [Supplements and food: stolen claims are a regulatory problem too](https://kirpik.app/learn/supplement-copy-theft/)
+- [Dropshipping clones: same supplier, your text](https://kirpik.app/learn/dropship-clone-copy/)
+- [Protecting blog articles and buying guides from scrapers and content farms](https://kirpik.app/learn/protecting-blog-content/)
 
 Choosing and getting started:
 

@@ -1,66 +1,38 @@
 ---
 title: "Right-click blockers don't protect text. Run the test yourself"
-description: "Right-click blocking is just a JavaScript event handler. A five-minute test you can run on any store that uses one, and the customers it actually stops."
+description: "A right-click blocker is one JavaScript event handler. Five checks anyone can run in five minutes show what it stops, what it misses and who pays for it."
 cluster: "Why blockers don't work"
-summary: "You do not have to take anyone's word on whether right-click blocking protects text. Five checks, five minutes, any store. The results are the same every time."
+summary: "Whether right-click blocking protects text is a testable claim. Five checks, five minutes, any store that runs one. The results do not vary."
 pubDate: 2026-06-02
 related: ["shopify-public-product-feed", "copy-paste-protection-apps", "things-a-browser-cannot-do"]
 ---
 
-Right-click blocking is one line of an argument that sounds reasonable: people copy text using the context menu, so remove the menu and the text stays put. The premise fails twice. The context menu is one of many doors to the same text, and the people worth worrying about were never using a door at all.
-
-This article gives you the test, not the lecture. Pick any store that uses a right-click blocker, including your own if you have one installed, and run the checks below.
+Whether a right-click blocker protects your text is not a matter of opinion. It is a claim you can test in five minutes, on any store that runs one, with nothing but the browser you already use. This article gives you the test. Run it on your own store if you have a blocker installed, and on any store whose listing persuaded you.
 
 ## What a right-click blocker is
 
-Technically, it is a small piece of JavaScript that listens for the `contextmenu` event and cancels it, so the browser never shows the menu. Variants also cancel `copy`, `cut` and `selectstart` events, or intercept keyboard shortcuts like Ctrl+C and Ctrl+U. All of it runs inside the visitor's browser, as page script, with the permissions of page script. That last detail decides everything that follows.
+Browsers tell a page when the visitor presses the right mouse button, and they allow the page to ask for the resulting menu to be suppressed. A right-click blocker is a script that asks, every time. The same mechanism covers the related features these apps bundle: a request to ignore text selection, a request to swallow certain keyboard shortcuts. Each one is a request the browser honours only while the page is open and its scripts are running. The listings describe layers of protection, but each layer is another request of the same kind, granted on the same terms.
 
-Page script can only influence the rendered page while it is running. It cannot change what the server sends, and it cannot control the browser's own features. Both of those facts are testable.
+Both of those terms belong to the visitor. The browser works for the person at the keyboard, not for the page, and it provides several ordinary ways to read a page without granting its scripts anything. None of them is a hack, and none takes longer than a few seconds. Nothing in the mechanism distinguishes a thief from a customer, either: the request is made to whoever visits, and honoured only by browsers configured to obey it.
 
-## The test
+## The test, in five steps
 
-Do these in order on a store with a blocker active. None require tools beyond the browser you already have.
+Open a product page on the store in question and work through the list.
 
-### 1. Open the feed
+- Switch the browser to reader mode, offered in or near the address bar in most browsers. The description appears as plain text, fully selectable, with the blocker gone.
+- View the page source with Ctrl+U or the browser menu. Every word of the description is present as text, because the source is what the browser was sent.
+- Turn JavaScript off for the site in the browser settings and reload. The blocker is JavaScript, so it never loads. The text loads without it.
+- Print the page to a PDF with Ctrl+P. The result is a file containing the description as selectable text, outside the page's reach.
+- Add `/products.json` to the store's address. The full catalogue returns as structured data, descriptions included, with no page involved at all. This last check matters most, because it is [the route bulk copying actually takes](/learn/shopify-public-product-feed/).
 
-Take the store's domain and append `/products.json`. On a Shopify store this returns the product catalogue as JSON, descriptions included in the `body_html` field. Notice that the blocker had no opportunity to object: this endpoint serves data, not a page, so [no storefront script runs there at all](/learn/shopify-public-product-feed/). Time taken: ten seconds, and you now have every description on the store.
+Five checks, no tools, no expertise. A protection measure that fails all five is not being defeated by specialists. It is being walked past by default browser features.
 
-### 2. View the source
+Record what you find, because the result generalises. These checks fail for every store and every blocker, since they exercise browser features the page is never consulted about. The test does not defeat a particular app. It demonstrates the category. And if a listing told you otherwise, you now hold direct evidence of how much weight its remaining claims deserve.
 
-Go back to any product page and press Ctrl+U, or prefix the URL with `view-source:`. You are now reading the HTML the server sent, before any script ran. The description text is in there, selectable and copyable, because it has to be: that is what the browser renders and what search engines read. Some blockers try to intercept Ctrl+U; the `view-source:` prefix does not care.
+## Who the blocker does stop
 
-### 3. Switch to reader mode
+The only people certain to run the blocker's script are the visitors who open the page normally and change nothing: your customers. They are the ones who cannot copy your address into a delivery note, cannot copy a product name to search for a review, and cannot use translation or accessibility tools that depend on selecting text, and the store gains a support conversation whenever one of them concludes the site is broken. Scrapers never execute the script, and anyone deliberate spends the five seconds reader mode costs. The friction lands entirely on the people you want on the site; the specific apps making these claims are examined, with their listings quoted and dated, in our [comparison section](/compare/).
 
-Most browsers offer a reading view that re-renders the page's main content in a clean layout. Reader mode extracts the text and displays it in the browser's own interface, where page scripts have no authority. Select and copy freely.
+If your own store runs a blocker, the test doubles as an exit review. Uninstalling costs no protection, because the copying that matters happens in the feeds the blocker never touched, and removal returns the ordinary browser behaviours your customers had silently lost.
 
-### 4. Disable JavaScript
-
-In the browser's site settings, turn JavaScript off for the store and reload. The blocker is JavaScript, so it no longer exists. The text does, because the text was never generated by the blocker's script. Right-click works, selection works, copying works. The protection was a guest on the page, and you just declined to host it.
-
-### 5. Print to PDF
-
-Ctrl+P, save as PDF. The result contains the page text as text. Open the PDF and copy from it.
-
-### A note on mobile
-
-On phones, the same story with different gestures. Long-press selection is governed by the mobile browser and the operating system, and blockers interfere with it unevenly at best. Reader views on iOS and Android extract the text cleanly, and the share sheet passes it wherever the visitor likes. Meanwhile the blocker reliably breaks the long-press actions mobile shoppers actually use, like opening a product in a new tab or sharing your page.
-
-Five checks, five successes, and we have not touched developer tools, extensions or anything a curious teenager would consider advanced. Scrapers, for what it is worth, would use none of these methods either; they [skip the storefront entirely](/learn/scrapers-vs-storefront-scripts/).
-
-## Who the blocker actually stops
-
-Everyone the blocker inconveniences is, by definition, someone using your storefront the way you want customers to use it. Consider what routine actions the blocked events power:
-
-- Copying your size chart into a message to ask a friend "will this fit you?"
-- Copying your product name to search for reviews, or your ingredients list to check against an allergy.
-- Right-clicking a product link to open it in a new tab while browsing your collections.
-- Assistive tools and browser accessibility features that rely on selection and standard events.
-- Translating a paragraph, quoting you in a blog post, pasting your address into a maps app.
-
-Each of those is a customer trying to move toward a purchase or share your store with someone. The blocker taxes all of them and, as the test above shows, collects nothing from the people it was aimed at. The wider family of these tools, and what each technique does under the hood, is covered in [what copy-paste protection apps actually do](/learn/copy-paste-protection-apps/). For the claims that go further still, screenshot prevention and the like, see [things a browser cannot do](/learn/things-a-browser-cannot-do/).
-
-## The conclusion the test forces
-
-Text that a browser can display is text a visitor can take. There is no configuration of page scripts that changes this, because the scripts run at the visitor's pleasure, on the visitor's machine, after the text has already arrived. Any honest protection strategy has to start from that fact rather than fight it.
-
-Kirpik starts exactly there. It does not add scripts to your storefront and does not try to make copying fail. Instead it embeds an algorithmic invisible watermark, derived from your original text signature, into the text itself, so everything copied, by menu, feed, source view or scraper, remains traceable to your store. You can see what your store exposes right now with the [site check tool](/site-check/), which is a good first step whether or not you ever install anything.
+Kirpik sits on the other side of this trade. It adds no scripts to your storefront and asks nothing of your visitors: the protection is an invisible watermark inside the text, so a description remains identifiable and provable after it is copied, whatever route it left by. [How it works](/how-it-works/) covers the three steps.
