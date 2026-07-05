@@ -8,6 +8,8 @@ Local working notes live in `docs/` (gitignored, see Security below): `docs/PLAN
 
 Live at https://kirpik.app via GitHub Pages (repo quantum-x/kirpik-content-protection-site, workflow deploy) behind Cloudflare (proxied, Full SSL). The `kirpik-agent-edge` Worker is deployed on route `kirpik.app/*` (Link headers + markdown negotiation; deploy manually with `wrangler deploy` from `worker/`).
 
+KNOWN GOTCHA 2: re-running a failed "Deploy to GitHub Pages" run usually fails again with "Deployment failed, try again later" (consumed deployment token). Push a fresh commit (git commit --allow-empty) instead of gh run rerun.
+
 KNOWN GOTCHA: Pages deployments FAIL with "Deployment failed, try again later" while the custom domain is attached but kirpik.app is not a verified/approved domain for the quantum-x org (tilkie.app is verified, kirpik.app was pending as of 2026-07-05). If deploys fail, check org Settings > Verified and approved domains. Do not remove the custom domain as a workaround for long: while it is detached, kirpik.app serves 404.
 
 ## Commands
