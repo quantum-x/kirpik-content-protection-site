@@ -47,6 +47,10 @@ Always accurate to the product (verified against the app codebase):
 
 Forbidden claims: "cryptographically signed", "encrypted", "HMAC", "blockchain", "notarized", "guaranteed", "stops/prevents copying" (we prove theft, we do not prevent it), collection protection, automated monitoring, surviving "any" transformation.
 
+## STYLEGUIDE.md is the canonical content standard
+
+**Read STYLEGUIDE.md before writing or reviewing ANY page, article, headline, CTA or design element.** It is binding and exhaustive: the content-pyramid method, voice rules with rejected-example calibration, the fixed CTA registry (including the mandatory standard closing band), terminology, structure and design rules, claims discipline, comparison-page law, the four-agent review process, the pre-ship checklist, and the locked-pages registry. The sections below are the historical summary; where they and STYLEGUIDE.md differ, STYLEGUIDE.md wins. When the owner hands down a correction, update STYLEGUIDE.md in the same commit.
+
 ## Editorial voice v2 (locked 2026-07-05, supersedes anything looser)
 
 Style guide: The Economist. Smart, limpid, objective, laser-focused. Every word must earn its place. Before writing any page: define the content pyramid (most important message first, each row supported by the next) and the page goal; write to it. The site's purpose: INFORM merchants who are worried about content theft so they conclude Kirpik is the only app providing real protection and enforcement.

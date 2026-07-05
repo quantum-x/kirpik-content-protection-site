@@ -1,4 +1,4 @@
----
+﻿---
 import Base from "../layouts/Base.astro";
 import PageHero from "../components/PageHero.astro";
 import CtaBand from "../components/CtaBand.astro";
@@ -7,15 +7,18 @@ import { SITE } from "../config";
 const steps = [
   {
     t: "Protect",
+    id: "step-protect",
     sum: "Open Kirpik in your Shopify admin, select your products, blog articles and pages, and click Protect. Kirpik embeds an invisible watermark carrying your store's unique code into each one.",
   },
   {
-    t: "Detect",
-    sum: "Paste suspect text into Kirpik, or enter a suspect URL. The detector reports whether your watermark is present, which store it belongs to, and a confidence figure.",
+    t: "Prove Infringement",
+    id: "step-prove",
+    sum: "Paste suspect text to confirm it's yours. Enter the URL of the site hosting the infringing content to issue a Proof of Ownership Certificate.",
   },
   {
     t: "Enforce",
-    sum: "Turn a confirmed detection into a Proof of Ownership Certificate: a dated document with content fingerprints, an independent timeline and a public verification page, built for a DMCA takedown.",
+    id: "step-enforce",
+    sum: "Use the Proof of Ownership Certificate to enforce your rights and issue DMCA takedown requests to platforms, search engines, hosts and registrars.",
   },
 ];
 
@@ -30,7 +33,7 @@ const howToJsonLd = {
     position: i + 1,
     name: s.t,
     text: s.sum,
-    url: `${SITE.url}/how-it-works/#step-${s.t.toLowerCase()}`,
+    url: `${SITE.url}/how-it-works/#${s.id}`,
   })),
 };
 ---
@@ -51,12 +54,6 @@ const howToJsonLd = {
       <div class="step__body" data-reveal>
         <h2>Protect your text</h2>
         <p class="lead">{steps[0].sum}</p>
-        <p class="step__more">
-          The watermark is algorithmic, derived from your original text.
-          Nothing a reader or a search engine sees changes, and protection
-          covers your content from this point on: copies taken before it was
-          protected cannot be detected.
-        </p>
         <ul class="step__list">
           <li>
             <svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M2 8.5 6 12l8-9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -65,10 +62,6 @@ const howToJsonLd = {
           <li>
             <svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M2 8.5 6 12l8-9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             One click per item, in batches, or automatically on Pro
-          </li>
-          <li>
-            <svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M2 8.5 6 12l8-9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Needs at least 20 words per item
           </li>
           <li>
             <svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M2 8.5 6 12l8-9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -88,17 +81,11 @@ const howToJsonLd = {
   </section>
 
   <!-- ======================= Detect ======================= -->
-  <section class="section section--tone" id="step-detect">
+  <section class="section section--tone" id="step-prove">
     <div class="container step step--flip">
       <div class="step__body" data-reveal>
-        <h2>Detect stolen copies</h2>
+        <h2>Prove Infringement</h2>
         <p class="lead">{steps[1].sum}</p>
-        <p class="step__more">
-          Kirpik does not crawl the web; you point it at pages you find. In
-          practice that is a store a customer mentions, a competitor you
-          already watch, or a search result for a distinctive sentence of
-          your own copy.
-        </p>
         <ul class="step__list">
           <li>
             <svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M2 8.5 6 12l8-9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -133,9 +120,10 @@ const howToJsonLd = {
       <div class="step__body" data-reveal>
         <h2>Enforce your rights</h2>
         <p class="lead">
-          A detection convinces you. Everyone else needs the Proof of
-          Ownership Certificate: a dated document that lays out the case for a
-          host, marketplace or lawyer who has never heard of your store.
+          eCommerce Platforms, Search Engines, Hosting Providers and Domain
+          Registrars have a legal obligation to respect Intellectual Property
+          laws: Use Kirpik's Proof of Ownership Certificates to enforce your
+          rights and issue DMCA takedown requests.
         </p>
         <ul class="step__list">
           <li>
@@ -154,14 +142,11 @@ const howToJsonLd = {
             <svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M2 8.5 6 12l8-9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             QR code to a verification page anyone can check
           </li>
+          <li>
+            <svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M2 8.5 6 12l8-9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Check our <a href="/enforcement/">Enforcement Guide</a> for more information
+          </li>
         </ul>
-        <p class="step__more">
-          You send the certificate yourself: attached to a DMCA notice to the
-          company that hosts the thief's site, to the marketplace carrying the
-          listing, or to Google to remove the copy from search results. The
-          <a href="/enforcement/">enforcement guide</a> covers each route,
-          step by step.
-        </p>
       </div>
       <div class="step__art" data-reveal>
         <img
@@ -208,10 +193,7 @@ const howToJsonLd = {
     </div>
   </section>
 
-  <CtaBand
-    heading="Protect first. Everything else depends on it."
-    sub="Detection and certificates work only for copy protected before it was stolen. Start on the free plan."
-  />
+  <CtaBand />
 </Base>
 
 <style>
@@ -222,6 +204,7 @@ const howToJsonLd = {
   .step__more a { color: var(--orange-deep); font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
   .step__list { margin-top: 1.4rem; display: grid; gap: 0.6rem; }
   .step__list li { display: flex; gap: 0.6rem; color: var(--ink); }
+  .step__list li a { color: var(--orange-deep); font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
   .step__list svg { color: var(--mint); flex: none; align-self: flex-start; margin-top: 0.32em; }
 
   .mock { padding: 1.3rem; }
