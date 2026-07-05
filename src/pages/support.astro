@@ -11,8 +11,8 @@ const supportEmail = "support@kirpik.app";
   description="Get help with Kirpik: browse the FAQ, see how protection and detection work, or email support@kirpik.app. Installed merchants can also use the in-app support form."
 >
   <PageHero
-    title="Stuck? Let's get you unstuck."
-    lead="The answers to most questions are one click away. For everything else, a human reads every message."
+    title="Support"
+    lead="Most questions are answered in the FAQ and the how-it-works guide. For everything else, email support@kirpik.app."
   />
 
   <section class="section" style="padding-top:0">
@@ -25,7 +25,7 @@ const supportEmail = "support@kirpik.app";
         </a>
         <a class="card sc" href="/how-it-works/" data-reveal>
           <h2>How Kirpik works</h2>
-          <p>The full Protect, Detect, Prove walkthrough, including what changes on your store (nothing you can see).</p>
+          <p>How protection, detection and Proof of Ownership Certificates work, step by step.</p>
           <span class="more">See the walkthrough →</span>
         </a>
         <a class="card sc" href={`mailto:${supportEmail}`} data-reveal>
@@ -35,14 +35,13 @@ const supportEmail = "support@kirpik.app";
         </a>
       </div>
 
-      <div class="card help" data-reveal>
-        <h3>Already installed?</h3>
+      <div class="help" data-reveal>
+        <h2>Already installed?</h2>
         <p>
           The fastest route is the app itself: open Kirpik in your Shopify
           admin and use the form on the Support page. It sends your store
-          details along with your message, which usually saves a round of
-          back-and-forth. Include the item or URL involved and we can start
-          from there.
+          details along with your message. Include the item or URL involved
+          and we can start from there.
         </p>
       </div>
     </div>
@@ -61,8 +60,8 @@ const supportEmail = "support@kirpik.app";
   .sc h2 { font-size: 1.25rem; }
   .sc p { color: var(--ink-soft); font-size: 0.97rem; }
   .more { margin-top: auto; padding-top: 0.7rem; font-weight: 700; font-size: 0.92rem; color: var(--orange-deep); }
-  .help { padding: 1.7rem; background: var(--paper-2); box-shadow: none; }
-  .help h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
+  .help { margin-top: 1rem; }
+  .help h2 { font-size: 1.25rem; margin-bottom: 0.5rem; }
   .help p { color: var(--ink-soft); max-width: 70ch; }
   @media (max-width: 880px) { .cards { grid-template-columns: 1fr; } }
 </style>
