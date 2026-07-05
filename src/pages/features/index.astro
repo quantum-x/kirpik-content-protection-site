@@ -7,11 +7,11 @@ import { FEATURES } from "../../data";
 
 <Base
   title="Features"
-  description="Invisible text watermarking, protection that survives copying and editing, on-demand detection, Proof of Ownership Certificates, Auto-Protect and flexible batch protection for Shopify stores."
+  description="Invisible text watermarking, resilient protection that survives copying and editing, detection of stolen content, Proof of Ownership Certificates, Auto-Protect and batch protection for Shopify stores."
 >
   <PageHero
-    title="Everything Kirpik does, in one place."
-    lead="Six pieces, one job: hide an invisible watermark in your product descriptions, articles and pages, find it wherever the text ends up, and hand you proof worth acting on."
+    title="Features"
+    lead="Kirpik watermarks your product descriptions, blog articles and pages invisibly, detects stolen content anywhere, and issues Proof of Ownership Certificates for enforcement."
   />
 
   <section class="section" style="padding-top:0">
@@ -19,7 +19,6 @@ import { FEATURES } from "../../data";
       <div class="grid">
         {FEATURES.map((f) => (
           <a class="card item" href={`/features/${f.slug}/`} data-reveal>
-            <span class="tag tag--orange">{f.tag}</span>
             <h2>{f.title}</h2>
             <p>{f.short}</p>
             <span class="more">Read more →</span>

@@ -23,7 +23,7 @@ const others = FEATURES.filter((f) => f.slug !== feature.slug);
     <div class="container detail" data-has-image={feature.image ? "yes" : "no"}>
       {feature.image && (
         <div class="detail__art" data-reveal>
-          <img src={feature.image} alt={feature.imageAlt} loading="lazy" width="620" height="877" />
+          <img src={feature.image} alt={feature.imageAlt} loading="lazy" width="620" height="404" />
         </div>
       )}
       <div class="detail__points">
@@ -39,18 +39,17 @@ const others = FEATURES.filter((f) => f.slug !== feature.slug);
 
   <SiteCheckForm
     tone="band"
-    sub="Your product text is published in machine-readable feeds whether you like it or not. See what a scraper sees on your own store."
-  >
-    <Fragment slot="heading">See how <em>exposed</em> your text is first.</Fragment>
-  </SiteCheckForm>
+    heading="Is your store's content protected?"
+    sub="Enter your Shopify store address and see exactly what a scraper sees, and whether your content is protected."
+    cta="Check my store"
+  />
 
   <section class="section section--tone">
     <div class="container">
-      <h2 class="more__title">The rest of Kirpik</h2>
+      <h2 class="more__title">More features</h2>
       <div class="more__grid">
         {others.map((f) => (
           <a class="card more__card" href={`/features/${f.slug}/`}>
-            <span class="tag tag--orange">{f.tag}</span>
             <h3>{f.title}</h3>
             <p>{f.short}</p>
           </a>

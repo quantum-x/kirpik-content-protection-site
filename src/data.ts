@@ -5,9 +5,8 @@
 
 export interface Feature {
   slug: string;
-  tag: string;
   title: string;
-  short: string; // homepage grid
+  short: string; // hub cards
   lead: string; // feature page intro
   points: { h: string; p: string }[];
   image?: string;
@@ -17,82 +16,76 @@ export interface Feature {
 export const FEATURES: Feature[] = [
   {
     slug: "invisible-text-watermarking",
-    tag: "Invisible",
     title: "Invisible text watermarking",
     short:
-      "An algorithmic watermark derived from your original text. Readers see your text, Kirpik sees your signature.",
-    lead: "Kirpik embeds an invisible, algorithmic watermark into your product descriptions, blog articles and pages. It is derived from your original text's signature, carries your store's unique watermark code, and changes nothing a reader or a search engine cares about.",
+      "An invisible watermark carrying your store's unique code, embedded in your product descriptions, blog articles and pages.",
+    lead: "Kirpik embeds an invisible watermark in your product descriptions, blog articles and pages. It carries your store's unique watermark code, so stolen content identifies you as the owner.",
     points: [
-      { h: "Your words stay your words", p: "Kirpik never rewrites, shortens or restyles your text. Every word, comma and heading stays exactly as you wrote it." },
-      { h: "Nothing for shoppers to see", p: "There is no badge, footer notice or visible marker. Your descriptions read and render exactly as before." },
-      { h: "One watermark code per store", p: "Each install carries its own identifier, so a detected watermark ties the text back to your shop specifically." },
+      { h: "Your text is not modified", p: "Every word, heading and comma stays exactly as you wrote it. Readers and search engines see your content, unchanged." },
+      { h: "Invisible to everyone", p: "No badge, notice or visible marker. Nobody can tell protected content from unprotected content by looking." },
+      { h: "One watermark code per store", p: "Each store gets its own code, so a detection names your store specifically, not just a Kirpik user." },
     ],
   },
   {
     slug: "resilience",
-    tag: "Travels with the text",
-    title: "Protection that travels",
+    title: "Resilient watermarking",
     short:
-      "The watermark lives in the text itself, so it survives copy-paste, scraping, editing and reformatting.",
-    lead: "Stolen text rarely arrives in one clean piece. It gets pasted into a new theme, trimmed, lightly reworded and reformatted. Kirpik's watermark repeats through your text with built-in redundancy, so a match can still be read from a stolen version that has been cut down or edited in places.",
+      "The watermark lives in the text itself and survives copying, scraping, editing and reformatting.",
+    lead: "Stolen text rarely stays intact: it gets pasted into a new theme, trimmed and lightly edited. Kirpik's watermark repeats through your content with built-in redundancy, so an altered version still reports a match.",
     points: [
-      { h: "Copying is the delivery mechanism", p: "The watermark is part of the text, not the page around it. Whoever takes your words takes the signature with them." },
-      { h: "Redundant by design", p: "The signature repeats throughout your content. Deleting a paragraph or rewording a few lines still leaves plenty for the detector to read." },
-      { h: "Honest about its limits", p: "A thief who rewrites your text from scratch is no longer using your words. Kirpik protects the thing that gets stolen: the text itself." },
+      { h: "Travels with the text", p: "The watermark is part of the content, not the page around it. Whoever takes your text takes the watermark with it." },
+      { h: "Survives editing", p: "Trimming, light rewording and reformatting leave the watermark detectable, with a count of the Watermark Security Markers that survived." },
+      { h: "Redundant by design", p: "The watermark repeats through your content, so even a partial theft can carry enough markers for a confident match." },
     ],
   },
   {
     slug: "chain-of-proof",
-    tag: "Evidence",
     title: "Proof of Ownership Certificate",
     short:
-      "Turn a detection into a dated, verifiable ownership certificate built for DMCA takedowns.",
-    lead: "Finding your text on someone else's store is not the same as proving it is yours. When Kirpik detects your watermark, it can generate a Proof of Ownership Certificate: a dated ownership document with content fingerprints, detection details and a public verification page.",
+      "Turn a detection into a dated, independently verifiable ownership document built for DMCA takedowns.",
+    lead: "When Kirpik detects your watermark on someone else's page, you can generate a Proof of Ownership Certificate: a dated document that lays out the case for the people who handle takedown complaints.",
     points: [
-      { h: "Technical and specific", p: "It records the Protection Signature of your original, the Detected Signature of the stolen text, detection date, Watermark Security Markers and a confidence figure." },
-      { h: "Independently verifiable", p: "A QR code links to a public verification page, so a host, marketplace or lawyer can confirm the certificate is genuine without trusting a PDF." },
-      { h: "A timeline, not just a claim", p: "The certificate pairs your protection date with the infringing page's own headers and Internet Archive records, so the order of events is visible at a glance." },
+      { h: "Specific and checkable", p: "It records the Protection Signature of your original, the Detected Signature of the stolen text, your protection date, the Watermark Security Markers recovered and a Confidence figure." },
+      { h: "Independently verifiable", p: "A QR code links to a public verification page, so a hosting company, marketplace or lawyer can confirm the certificate is genuine without trusting the PDF." },
+      { h: "A timeline, not just a claim", p: "Your protection date sits against the infringing page's dates and the earliest Wayback Machine snapshot, a record neither side controls." },
     ],
-    image: "/img/chain-of-proof.png",
+    image: "/img/chain-of-proof-top.png",
     imageAlt: "A Kirpik Proof of Ownership Certificate",
   },
   {
     slug: "detection",
-    tag: "Verify",
-    title: "Detection on demand",
+    title: "Detect stolen content",
     short:
-      "Paste suspect text or check a URL. In seconds you know whether it carries your watermark.",
-    lead: "Found a store that reads suspiciously like yours? Paste the text into Kirpik, or point it at the URL. The detector reports whether your watermark is present, how many security markers it recovered, and how confident the match is.",
+      "Paste suspect text or enter a URL. Kirpik reports whether your watermark is present and how confident the match is.",
+    lead: "Found a page that reads like yours? Paste the text into Kirpik or enter the URL. The detector reports whether your watermark is present, which store it belongs to, and a Confidence figure.",
     points: [
-      { h: "Two ways to check", p: "Paste any text directly, or let Kirpik fetch a live URL and check the page for you. If a site blocks automated visits, a guided paste flow covers it." },
-      { h: "Works on edited versions", p: "Detection tolerates the same abuse the watermark does, so a trimmed or lightly reworded version still reports a match." },
+      { h: "Two ways to check", p: "Paste text directly on any plan, or let Kirpik fetch a URL for you. If a site blocks automated visits, a guided paste flow gets the same answer." },
+      { h: "Works on altered versions", p: "Trimmed, edited or reformatted text still reports a match." },
       { h: "On every plan", p: "Paste detection is included on all plans, and every plan includes a monthly allowance of URL checks." },
     ],
   },
   {
     slug: "auto-protect",
-    tag: "Hands-off",
     title: "Auto-Protect",
     short:
-      "New and updated products are watermarked the moment you save them. Nothing to remember.",
-    lead: "Protection only counts if it is actually applied. With Auto-Protect on, Kirpik watermarks new and updated content automatically in the background, so your catalogue stays covered as it grows and changes.",
+      "New and updated products are watermarked automatically when you save them. Nothing to remember.",
+    lead: "Protection only counts if it is applied. With Auto-Protect on, Kirpik watermarks new and updated content automatically, so your catalogue stays covered as it grows.",
     points: [
-      { h: "Covers your workflow", p: "Write and edit in the Shopify admin exactly as you do now. Kirpik picks up saves automatically and applies protection behind the scenes." },
-      { h: "No double handling", p: "Kirpik recognises content that is already protected and leaves it alone, so nothing is processed twice." },
-      { h: "Pro plan feature", p: "Auto-Protect is included in Pro. Free and Paid plans protect manually or in batches with the same one-click flow." },
+      { h: "Covers your workflow", p: "Write and edit in the Shopify admin as you do now. Kirpik applies protection in the background." },
+      { h: "No double handling", p: "Content that is already protected is recognised and left alone." },
+      { h: "A Pro feature", p: "Auto-Protect is included in Pro. Free and Paid plans protect manually or in batches." },
     ],
   },
   {
     slug: "bulk-protection",
-    tag: "Flexible",
-    title: "Protect one item or the whole catalogue",
+    title: "Batch protection",
     short:
-      "Single products, batches, or everything at once. Remove protection any time with one click.",
-    lead: "Protect a single product from its page in the Shopify admin, tick a batch of products, articles and pages, or run your whole catalogue in one job. Protection is reversible: restore any item to its unwatermarked state whenever you choose.",
+      "Protect single items, batches, or your whole catalogue in one job. Reversible at any time.",
+    lead: "Protect a single product from its page in the Shopify admin, select a batch of products, articles and pages, or run your whole catalogue in one job.",
     points: [
-      { h: "Products, articles and pages", p: "Kirpik covers the text people actually steal: product descriptions, blog articles and store pages." },
-      { h: "Batch jobs that behave", p: "Large runs are queued and processed in the background with progress you can watch, not a browser tab you have to babysit." },
-      { h: "Reversible on demand", p: "Remove protection from one item or everything at once. Your text returns to exactly its prior state." },
+      { h: "Products, articles and pages", p: "Kirpik covers the content that gets stolen: product descriptions, blog articles and store pages." },
+      { h: "Background jobs", p: "Large runs are queued and processed in the background, with progress you can watch." },
+      { h: "Reversible", p: "Remove protection from one item or everything at once. Your text returns exactly to its prior state." },
     ],
   },
 ];
