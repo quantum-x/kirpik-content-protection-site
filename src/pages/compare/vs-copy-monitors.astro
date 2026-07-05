@@ -5,12 +5,12 @@ import CompareTable from "../../components/CompareTable.astro";
 import CtaBand from "../../components/CtaBand.astro";
 
 const rows = [
-  { label: "Actively looks for copies of your content", them: true, us: "On demand, by paste or URL" },
+  { label: "Actively looks for duplicates of your content", them: true, us: "On demand, by paste or URL" },
   { label: "Finds lightly reworded lookalikes", them: true, us: true },
   { label: "Shows that two pages match", them: true, us: true },
   { label: "Shows whose text it was first", them: false, us: true },
   { label: "Mark embedded in the content itself", them: false, us: true },
-  { label: "Works on a copy pasted outside the scanned sites", them: false, us: true },
+  { label: "Works on stolen text pasted outside the scanned sites", them: false, us: true },
   { label: "Produces an ownership document for a takedown", them: "Reports of matches", us: true },
 ];
 ---
@@ -40,7 +40,7 @@ const rows = [
       <p>
         Notably, these monitors are among the only apps in the category that engage with text at all.
         The seventy-odd blocker apps never leave the browser tab; a monitor at least goes looking where
-        stolen copy actually ends up.
+        stolen content actually ends up.
       </p>
 
       <h2>What a match is, and is not</h2>
@@ -53,7 +53,7 @@ const rows = [
         whose house it is.
       </p>
       <p>
-        There is also a coverage ceiling. Monitoring sees the sites it scans. A copy pasted into a
+        There is also a coverage ceiling. Monitoring sees the sites it scans. Stolen text pasted into a
         marketplace listing, a social shop or a site outside the scan set stays invisible until someone
         stumbles on it.
       </p>
@@ -62,7 +62,7 @@ const rows = [
       <p>
         Kirpik approaches the same problem from inside the content. Its invisible algorithmic watermark,
         derived from your original text and tied to your store's unique watermark code, travels inside
-        every copy of your words. When you check a suspect page or paste a sample, detection does not
+        the text wherever it is copied. When you check a suspect page or paste a sample, detection does not
         report "similar". It reports "this text carries this store's watermark", with a count of
         surviving security markers and a confidence figure. The Proof of Ownership Certificate then lays out
         fingerprints, dates and an Internet Archive timeline in a document anyone can verify through its
@@ -93,7 +93,7 @@ const rows = [
 
   <CtaBand
     heading="A match starts the argument. Proof ends it."
-    sub="Kirpik reads your store's own watermark out of a stolen copy and hands you the certificate. Free to start."
+    sub="Kirpik reads your store's own watermark out of stolen content and hands you the certificate. Free to start."
   />
 </Base>
 

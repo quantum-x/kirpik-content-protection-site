@@ -123,7 +123,7 @@ export const MECHANISMS: Record<MechanismId, Mechanism> = {
     label: "Invisible image watermark",
     what: "Embeds an identifying signal inside the pixels of an image rather than on top of it, so the photo looks unchanged.",
     bypass: [],
-    note: "Resilience to editing, whether a copy can be identified elsewhere, and what a detection produces all depend on the engine and the app around it. And it applies to pixels: a product description has none, so this class of watermark cannot be applied to text.",
+    note: "Resilience to editing, whether a duplicate can be identified elsewhere, and what a detection produces all depend on the engine and the app around it. And it applies to pixels: a product description has none, so this class of watermark cannot be applied to text.",
   },
   "c2pa-metadata": {
     label: "C2PA metadata and Content Credentials",
@@ -131,7 +131,7 @@ export const MECHANISMS: Record<MechanismId, Mechanism> = {
     bypass: [
       "Metadata travels beside content, not inside it. Text copied out of a page carries no metadata at all: a clipboard holds characters, nothing more.",
       "Many platforms and CDNs re-encode uploads and strip file metadata in the process.",
-      "Credentials disclose provenance on content that still carries them. They do not follow a copy that leaves them behind.",
+      "Credentials disclose provenance on content that still carries them. They do not follow a duplicate that leaves them behind.",
     ],
   },
   "copy-monitoring": {
@@ -139,8 +139,8 @@ export const MECHANISMS: Record<MechanismId, Mechanism> = {
     what: "A server-side service scans chosen sites, or the wider web, for images or text matching yours and reports lookalikes.",
     bypass: [
       "A match shows that two pages carry similar content. On its own it does not show whose content it was first.",
-      "Coverage follows where the service looks. A copy outside the scanned set is not found.",
-      "Nothing is embedded in the content itself, so the copy carries no marker tying it back to its origin.",
+      "Coverage follows where the service looks. A duplicate outside the scanned set is not found.",
+      "Nothing is embedded in the content itself, so the stolen text carries no marker tying it back to its origin.",
     ],
   },
   "takedown-service": {
@@ -148,12 +148,12 @@ export const MECHANISMS: Record<MechanismId, Mechanism> = {
     what: "A service finds infringing sites or marketplace listings and files removal requests on your behalf.",
     bypass: [
       "A takedown stands on evidence of ownership. The filing is only as strong as the proof behind it.",
-      "It acts after a copy has appeared. It does not mark or trace the content beforehand.",
+      "It acts after stolen content has appeared. It does not mark or trace the content beforehand.",
     ],
   },
   "invisible-text-watermark": {
     label: "Invisible text watermarking",
-    what: "Embeds an invisible algorithmic watermark, derived from the original text's signature, into the text itself, so any copy of the words can be identified and attributed.",
+    what: "Embeds an invisible algorithmic watermark, derived from the original text's signature, into the text itself, so any duplicate of the words can be identified and attributed.",
     bypass: [],
     note: "The honest limit of any text watermark: a full rewrite defeats it, because rewritten words are no longer the original text. Judge an implementation on what its detection reads back and what proof a detection produces.",
   },
@@ -173,15 +173,15 @@ export const APPROACH_LABEL: Record<Approach, string> = {
 
 export const APPROACH_BLURB: Record<Approach, string> = {
   blocker:
-    "Apps that add a script to the storefront to cancel right-click, text selection, copying, keyboard shortcuts, or the developer tools while a visitor is on the page. A script acts only inside a browser tab that runs it. Shopify's public feed surfaces are served without any storefront JavaScript, and nothing in the text itself changes, so a copy that does leave carries no trace of its origin.",
+    "Apps that add a script to the storefront to cancel right-click, text selection, copying, keyboard shortcuts, or the developer tools while a visitor is on the page. A script acts only inside a browser tab that runs it. Shopify's public feed surfaces are served without any storefront JavaScript, and nothing in the text itself changes, so text that does leave carries no trace of its origin.",
   bundle:
     "Apps that pair the same in-browser content blocking with country, IP, VPN, bot, or spy-extension filtering. The access rules decide who can load the store. For the words on the page, the protection half is the storefront script, with the same reach and the same limits.",
   watermark:
-    "Apps that stamp a visible logo or text onto product images, or otherwise process the image files. A mark on an image genuinely travels with a copy of that image. These apps work on photos; the product description beside the photo is not part of what gets marked.",
+    "Apps that stamp a visible logo or text onto product images, or otherwise process the image files. A mark on an image genuinely travels wherever that image is copied. These apps work on photos; the product description beside the photo is not part of what gets marked.",
   monitor:
     "Server-side services that scan other sites for content matching yours and report lookalikes, sometimes with evidence bundles. Monitoring finds matches; on its own, a match does not establish whose content it was first.",
   takedown:
-    "Services that detect infringing sites or marketplace listings and file removal requests for you. They act on copies after they appear, and a filing stands on whatever ownership evidence exists for the content in question.",
+    "Services that detect infringing sites or marketplace listings and file removal requests for you. They act after stolen content appears, and a filing stands on whatever ownership evidence exists for the content in question.",
 };
 
 /* ------------------------------------------------------------------------ */
@@ -205,7 +205,7 @@ export const CAPABILITIES: { id: CapId; label: string }[] = [
   { id: "noStorefrontScripts", label: "Adds no scripts to the storefront" },
   { id: "travelsWithText", label: "Protection travels with the text when it is copied off-site" },
   { id: "worksOnFeeds", label: "Has any effect on Shopify's public feed surfaces" },
-  { id: "detectAnywhere", label: "Can identify a copy found anywhere on the web" },
+  { id: "detectAnywhere", label: "Can identify stolen content found anywhere on the web" },
   { id: "proofArtifact", label: "Produces an ownership or evidence document" },
 ];
 
@@ -499,7 +499,7 @@ const FEATURED: Competitor[] = [
       "devtools-block",
     ],
     proofNote:
-      "Cozy AntiTheft's own listing frames the result as making it harder to steal content, which is an accurate description of what an in-browser blocker can do: add friction inside the tab, without changing what a copy carries once it leaves.",
+      "Cozy AntiTheft's own listing frames the result as making it harder to steal content, which is an accurate description of what an in-browser blocker can do: add friction inside the tab, without changing what copied text carries once it leaves.",
   },
   {
     slug: "storelock",
@@ -670,7 +670,7 @@ const FEATURED: Competitor[] = [
     ],
     mechanisms: ["copy-monitoring", "takedown-service"],
     proofNote:
-      "IP Moat's listing describes a monitoring and enforcement service operated for you, priced accordingly. That is a different job from marking content: the service finds and files. For product copy, an embedded watermark is one way to have the ownership evidence ready before it is needed.",
+      "IP Moat's listing describes a monitoring and enforcement service operated for you, priced accordingly. That is a different job from marking content: the service finds and files. For product text, an embedded watermark is one way to have the ownership evidence ready before it is needed.",
   },
   {
     slug: "spyblocker-block-competitors",
@@ -810,7 +810,7 @@ const FEATURED: Competitor[] = [
       worksOnFeeds: true,
     },
     textNote:
-      "Tilkie does nothing for text, in exactly the way Kirpik does nothing for images. The two apps split the same problem down the middle: photos carry Tilkie's invisible mark, copy carries Kirpik's. The two are designed to run side by side, and there is no bundling requirement in either direction.",
+      "Tilkie does nothing for text, in exactly the way Kirpik does nothing for images. The two apps split the same problem down the middle: photos carry Tilkie's invisible mark, text carries Kirpik's. The two are designed to run side by side, and there is no bundling requirement in either direction.",
   },
   {
     slug: "mintallkeep",
@@ -919,7 +919,7 @@ const FEATURED: Competitor[] = [
     ],
     mechanisms: ["right-click-block", "copy-paste-block", "keyboard-shortcut-block"],
     proofNote:
-      "CopyBlock's listing describes its aim as discouraging casual copying, which is what a storefront blocker does inside the tab. The open question for a store owner is what happens to the copies that casual friction does not stop, and that is a question about evidence, not blocking.",
+      "CopyBlock's listing describes its aim as discouraging casual copying, which is what a storefront blocker does inside the tab. The open question for a store owner is what happens to the copying that casual friction does not stop, and that is a question about evidence, not blocking.",
   },
   {
     slug: "qf-content-guard",

@@ -56,7 +56,7 @@ Rejected examples and why (keep these as calibration):
 
 Section micro-labels are dead: no eyebrows, no "Step 01", no "The problem"/"Two minute tour" cobwebs, no mono bylines under buttons ("Free plan available · ..."). If a line carries information it becomes a real heading or body copy; otherwise it does not exist. Exception (owner-accepted): the site-check tool's privacy line ("Runs in your browser · We never see your store or its data · No login"), set at readable size.
 
-Heading case: sentence case by default. Owner-authored headings keep their exact casing and punctuation ("Prove Infringement", "Your content is protected; your site's performance is untouched.").
+Heading case: Title Case for keywords in titles and headings ("Prove Infringement", "Proof of Ownership Certificate", "Enforcement Guide"); surrounding non-keyword words stay in sentence case. Owner-authored headings keep their exact casing and punctuation.
 
 ## 4. CTAs (fixed registry, do not improvise)
 
@@ -82,7 +82,7 @@ Never "Add to Shopify" (merchants do not "add things to Shopify"). Never a CTA w
 - **Proof of Ownership Certificate** is the certificate's name in ALL prose. "Chain of Proof" appears only as the document's printed title in imagery and inside verbatim competitor-listing quotes (Tilkie's). Existing URL slugs containing chain-of-proof stay.
 - App vocabulary, matched to the product UI: "watermark", "invisible text watermark", "Protect / Protection / Protected", "Auto-Protect", "Detect / Detection", "watermark code", "Protection Signature", "Watermark Security Markers", "Confidence", "product description", "blog article", "page", "DMCA takedown".
 - Approved description of the mechanism (the ONLY one, see CLAUDE.md non-disclosure): "algorithmic invisible watermark derived from your original text signature" / "invisible markers". Never anything more specific, and never crypto vocabulary (no "encrypted", "cryptographic", "HMAC", "blockchain", "notarised").
-- Prefer "content" and "text" as the nouns for the merchant's material; avoid "copy" where it could be misread as "a copy" (the duplicate). "Words" only in owner-approved lines.
+- **The noun "copy" is banned** (owner ruling: confusing). The merchant's material is "content" or "text", never "copy" ("product copy", "your copy", "stolen copy" are all violations). A duplicate is "the stolen content", "the infringing version" or "a duplicate". The verb remains allowed where unavoidable ("copy and paste", "copied", the "Copy text" button), but prefer constructions that do not need it. "Words" only in owner-approved lines.
 - Enforcement actors, in the owner's register: "eCommerce Platforms, Search Engines, Hosting Providers and Domain Registrars". In explanatory prose, plain forms: "the company that hosts the thief's site", "the marketplace carrying the listing".
 - Prices: Free $0 / Paid $7.99 per month / Pro $19.99 per month or $199 per year (17% less). USD. Certificates: 1 lifetime on Free, 5 a month on Paid, unlimited on Pro.
 

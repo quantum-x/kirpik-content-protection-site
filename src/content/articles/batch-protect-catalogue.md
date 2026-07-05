@@ -28,7 +28,7 @@ A few practical notes for big runs:
 
 ## The future: Auto-Protect on save
 
-The backlog is a one-time problem. The permanent problem is that catalogues move: new products weekly, descriptions polished, seasonal copy swapped in and out. Manual protection decays against that churn, because it depends on someone remembering a second step after every save, and busy stores forget second steps.
+The backlog is a one-time problem. The permanent problem is that catalogues move: new products weekly, descriptions polished, seasonal text swapped in and out. Manual protection decays against that churn, because it depends on someone remembering a second step after every save, and busy stores forget second steps.
 
 Auto-Protect, on the Pro plan, removes the step. With it switched on, Kirpik picks up new and updated products as they are saved and applies protection automatically in the background. Your team writes and edits in the Shopify admin exactly as before; coverage follows the saves. For a store adding products every week, this is the difference between "we protected the catalogue once, in March" and the catalogue simply being protected, which is the state you actually want. The [Auto-Protect feature page](/features/auto-protect/) has the fuller description.
 
@@ -38,7 +38,7 @@ Here is the question every large store should ask any protection vendor: what ha
 
 The straight answer for Kirpik: an edit produces a new saved version of your text, and it is that version that needs to be covered. On Pro with Auto-Protect on, this is handled for you; the save is picked up and the updated product is re-covered in the background, no action needed. On Free and Paid, make re-protecting part of the edit itself: change the description, save, re-protect the item. It is one click, and because re-running protection over an item is always safe, there is no bookkeeping about what state a product was in before.
 
-The practical risk of skipping it is mundane rather than catastrophic: a heavily rewritten description is new text, and new text is only provable once protected. Stores that edit copy frequently, seasonal refreshes, conversion testing, ongoing SEO work, are exactly the stores Auto-Protect is priced for.
+The practical risk of skipping it is mundane rather than catastrophic: a heavily rewritten description is new text, and new text is only provable once protected. Stores that edit descriptions frequently, seasonal refreshes, conversion testing, ongoing SEO work, are exactly the stores Auto-Protect is priced for.
 
 ## Plan changes without surprises
 

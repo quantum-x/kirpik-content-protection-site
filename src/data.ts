@@ -20,10 +20,10 @@ export const FEATURES: Feature[] = [
     tag: "Invisible",
     title: "Invisible text watermarking",
     short:
-      "An algorithmic watermark derived from your original text. Readers see your copy, Kirpik sees your signature.",
+      "An algorithmic watermark derived from your original text. Readers see your text, Kirpik sees your signature.",
     lead: "Kirpik embeds an invisible, algorithmic watermark into your product descriptions, blog articles and pages. It is derived from your original text's signature, carries your store's unique watermark code, and changes nothing a reader or a search engine cares about.",
     points: [
-      { h: "Your words stay your words", p: "Kirpik never rewrites, shortens or restyles your copy. Every word, comma and heading stays exactly as you wrote it." },
+      { h: "Your words stay your words", p: "Kirpik never rewrites, shortens or restyles your text. Every word, comma and heading stays exactly as you wrote it." },
       { h: "Nothing for shoppers to see", p: "There is no badge, footer notice or visible marker. Your descriptions read and render exactly as before." },
       { h: "One watermark code per store", p: "Each install carries its own identifier, so a detected watermark ties the text back to your shop specifically." },
     ],
@@ -33,12 +33,12 @@ export const FEATURES: Feature[] = [
     tag: "Travels with the text",
     title: "Protection that travels",
     short:
-      "The watermark lives in the copy itself, so it survives copy-paste, scraping, editing and reformatting.",
-    lead: "Stolen text rarely arrives in one clean piece. It gets pasted into a new theme, trimmed, lightly reworded and reformatted. Kirpik's watermark repeats through your text with built-in redundancy, so a match can still be read from a copy that has been cut down or edited in places.",
+      "The watermark lives in the text itself, so it survives copy-paste, scraping, editing and reformatting.",
+    lead: "Stolen text rarely arrives in one clean piece. It gets pasted into a new theme, trimmed, lightly reworded and reformatted. Kirpik's watermark repeats through your text with built-in redundancy, so a match can still be read from a stolen version that has been cut down or edited in places.",
     points: [
       { h: "Copying is the delivery mechanism", p: "The watermark is part of the text, not the page around it. Whoever takes your words takes the signature with them." },
       { h: "Redundant by design", p: "The signature repeats throughout your content. Deleting a paragraph or rewording a few lines still leaves plenty for the detector to read." },
-      { h: "Honest about its limits", p: "A thief who rewrites your copy from scratch is no longer using your words. Kirpik protects the thing that gets stolen: the text itself." },
+      { h: "Honest about its limits", p: "A thief who rewrites your text from scratch is no longer using your words. Kirpik protects the thing that gets stolen: the text itself." },
     ],
   },
   {
@@ -47,9 +47,9 @@ export const FEATURES: Feature[] = [
     title: "Proof of Ownership Certificate",
     short:
       "Turn a detection into a dated, verifiable ownership certificate built for DMCA takedowns.",
-    lead: "Finding your copy on someone else's store is not the same as proving it is yours. When Kirpik detects your watermark, it can generate a Proof of Ownership Certificate: a dated ownership document with content fingerprints, detection details and a public verification page.",
+    lead: "Finding your text on someone else's store is not the same as proving it is yours. When Kirpik detects your watermark, it can generate a Proof of Ownership Certificate: a dated ownership document with content fingerprints, detection details and a public verification page.",
     points: [
-      { h: "Technical and specific", p: "It records the Protection Signature of your original, the Detected Signature of the copy, detection date, Watermark Security Markers and a confidence figure." },
+      { h: "Technical and specific", p: "It records the Protection Signature of your original, the Detected Signature of the stolen text, detection date, Watermark Security Markers and a confidence figure." },
       { h: "Independently verifiable", p: "A QR code links to a public verification page, so a host, marketplace or lawyer can confirm the certificate is genuine without trusting a PDF." },
       { h: "A timeline, not just a claim", p: "The certificate pairs your protection date with the infringing page's own headers and Internet Archive records, so the order of events is visible at a glance." },
     ],
@@ -65,7 +65,7 @@ export const FEATURES: Feature[] = [
     lead: "Found a store that reads suspiciously like yours? Paste the text into Kirpik, or point it at the URL. The detector reports whether your watermark is present, how many security markers it recovered, and how confident the match is.",
     points: [
       { h: "Two ways to check", p: "Paste any text directly, or let Kirpik fetch a live URL and check the page for you. If a site blocks automated visits, a guided paste flow covers it." },
-      { h: "Works on edited copies", p: "Detection tolerates the same abuse the watermark does, so a trimmed or lightly reworded copy still reports a match." },
+      { h: "Works on edited versions", p: "Detection tolerates the same abuse the watermark does, so a trimmed or lightly reworded version still reports a match." },
       { h: "On every plan", p: "Paste detection is included on all plans, and every plan includes a monthly allowance of URL checks." },
     ],
   },
@@ -97,7 +97,7 @@ export const FEATURES: Feature[] = [
   },
 ];
 
-/** Things a stolen copy goes through that the watermark is designed to survive. */
+/** Things stolen content goes through that the watermark is designed to survive. */
 export const ATTACKS = [
   "Copy and paste",
   "Web scraping",
@@ -114,10 +114,10 @@ export const ATTACKS = [
 ];
 
 export const BENEFITS: [string, string][] = [
-  ["Your copy, untouched", "Kirpik never rewrites or restyles your text. What you wrote is exactly what shoppers and search engines read."],
-  ["Invisible to readers", "No badges, notices or visible markers. Nobody can tell protected copy from unprotected copy by looking."],
+  ["Your content, untouched", "Kirpik never rewrites or restyles your text. What you wrote is exactly what shoppers and search engines read."],
+  ["Invisible to readers", "No badges, notices or visible markers. Nobody can tell protected text from unprotected text by looking."],
   ["No storefront scripts", "Kirpik adds no code to your theme. Zero effect on page speed, Core Web Vitals or checkout."],
-  ["Travels with the text", "The watermark lives in the copy itself, so it goes wherever the thief takes it, on any site."],
+  ["Travels with the text", "The watermark lives in the text itself, so it goes wherever the thief takes it, on any site."],
   ["Proof, not suspicion", "Detection turns 'this reads like mine' into a dated certificate with verifiable content fingerprints."],
   ["Set and forget", "Auto-Protect covers new and updated products the moment you save them, with no per-item busywork."],
 ];
@@ -178,12 +178,12 @@ export interface ArticleCluster {
 export const ARTICLE_CLUSTERS: ArticleCluster[] = [
   {
     title: "Text theft & what it costs",
-    blurb: "Who takes product copy, how they do it, and what it does to the store that wrote it.",
+    blurb: "Who takes product text, how they do it, and what it does to the store that wrote it.",
     items: [
       { title: "Your product descriptions are being scraped right now", slug: "product-descriptions-scraped" },
       { title: "The copycat store playbook: cloning a catalogue in an afternoon", slug: "copycat-store-playbook" },
-      { title: "What stolen copy does to your search rankings", slug: "stolen-copy-seo-damage" },
-      { title: "Where stolen product copy ends up", slug: "where-stolen-copy-ends-up" },
+      { title: "What stolen content does to your search rankings", slug: "stolen-copy-seo-damage" },
+      { title: "Where stolen product text ends up", slug: "where-stolen-copy-ends-up" },
       { title: "When the thief outranks you with your own words", slug: "when-thieves-outrank-original" },
     ],
   },
@@ -203,7 +203,7 @@ export const ARTICLE_CLUSTERS: ArticleCluster[] = [
     blurb: "What an algorithmic text watermark is and why it holds up, in plain English.",
     items: [
       { title: "What is an invisible text watermark?", slug: "what-is-invisible-text-watermark" },
-      { title: "How Kirpik marks your copy without changing a single word", slug: "marking-text-without-changing-words" },
+      { title: "How Kirpik marks your text without changing a single word", slug: "marking-text-without-changing-words" },
       { title: "Why the watermark survives copy and paste", slug: "why-watermarks-survive-copying" },
       { title: "How sure is a match? False positives, explained", slug: "watermark-false-positives" },
       { title: "Invisible watermarks and SEO: what changes (nothing)", slug: "text-watermarks-and-seo" },
@@ -214,17 +214,17 @@ export const ARTICLE_CLUSTERS: ArticleCluster[] = [
     blurb: "Turning a detection into a takedown: evidence, timelines and the DMCA.",
     items: [
       { title: "The DMCA process for stolen text, step by step", slug: "dmca-for-stolen-text" },
-      { title: "What counts as proof when your copy is stolen", slug: "proving-text-ownership" },
+      { title: "What counts as proof when your text is stolen", slug: "proving-text-ownership" },
       { title: "Inside a Proof of Ownership Certificate", slug: "inside-chain-of-proof" },
       { title: "Using the Internet Archive to prove who published first", slug: "wayback-machine-timeline-evidence" },
-      { title: "Getting stolen copy removed from Google's index", slug: "deindexing-stolen-copy" },
+      { title: "Getting stolen content removed from Google's index", slug: "deindexing-stolen-copy" },
     ],
   },
   {
     title: "By use case",
     blurb: "Text protection for the stores that get copied the most.",
     items: [
-      { title: "Fashion and apparel: when your product copy walks off with the trend", slug: "fashion-copy-theft" },
+      { title: "Fashion and apparel: when your product text walks off with the trend", slug: "fashion-copy-theft" },
       { title: "Beauty and skincare: protecting ingredient stories and routines", slug: "beauty-copy-theft" },
       { title: "Supplements and food: copied claims are your problem twice", slug: "supplement-copy-theft" },
       { title: "Dropshipping clones: same supplier, your words", slug: "dropship-clone-copy" },
@@ -253,16 +253,16 @@ export const FAQ_GROUPS: FaqGroup[] = [
     items: [
       { q: "What does Kirpik do?", a: "Kirpik invisibly watermarks the text on your Shopify store: product descriptions, blog articles and pages. If someone copies your writing, you can detect the watermark and generate a Proof of Ownership Certificate to support a takedown." },
       { q: "Will Kirpik change my text?", a: "No. Your words, spelling, punctuation, headings and formatting stay exactly as you wrote them. The watermark is algorithmic, derived from your original text's signature, and adds nothing a reader can see." },
-      { q: "Does it affect SEO?", a: "No. Your copy reads the same to search engines as it does to people. Kirpik adds no scripts or markup, and your pages render exactly as before." },
+      { q: "Does it affect SEO?", a: "No. Your text reads the same to search engines as it does to people. Kirpik adds no scripts or markup, and your pages render exactly as before." },
       { q: "Does it slow down my store?", a: "No. Kirpik adds zero code to your theme. There is no app embed, no script tag and no pixel, so your page speed and Core Web Vitals are untouched." },
     ],
   },
   {
     title: "The technology",
     items: [
-      { q: "How can a watermark be invisible in plain text?", a: "The watermark is not a visible element like a badge or a footer note. It is an algorithmic signature woven through the way your content is stored, derived from your original text. Readers see your copy exactly as written. Kirpik's detector reads the signature back out of any copy of it." },
-      { q: "Can someone remove the watermark?", a: "Someone who rewrites your copy from scratch is no longer using your words, and no text protection can follow a rewrite. Copying, trimming, light rewording and reformatting leave it detectable, and that is what thieves actually do." },
-      { q: "Does it survive editing?", a: "Yes, within reason. The signature repeats through your text with built-in redundancy, so a copy that has been trimmed, lightly reworded or restyled still reports a match, along with a count of the security markers that survived." },
+      { q: "How can a watermark be invisible in plain text?", a: "The watermark is not a visible element like a badge or a footer note. It is an algorithmic signature woven through the way your content is stored, derived from your original text. Readers see your text exactly as written. Kirpik's detector reads the signature back out of any duplicate of it." },
+      { q: "Can someone remove the watermark?", a: "Someone who rewrites your text from scratch is no longer using your words, and no text protection can follow a rewrite. Copying, trimming, light rewording and reformatting leave it detectable, and that is what thieves actually do." },
+      { q: "Does it survive editing?", a: "Yes, within reason. The signature repeats through your text with built-in redundancy, so a stolen version that has been trimmed, lightly reworded or restyled still reports a match, along with a count of the security markers that survived." },
       { q: "What is a watermark code?", a: "Every store gets its own unique watermark code when Kirpik is installed. A detection does not just say 'this text is watermarked', it says 'this text belongs to this specific store', which is what makes the proof useful." },
     ],
   },
@@ -278,11 +278,11 @@ export const FAQ_GROUPS: FaqGroup[] = [
   {
     title: "Proof and enforcement",
     items: [
-      { q: "What is a Proof of Ownership Certificate?", a: "A dated ownership document Kirpik generates when your watermark is detected in someone else's page. It records your Protection Signature, the Detected Signature of the copy, detection details, a confidence figure and a QR code that links to a public verification page." },
-      { q: "Why is a certificate better than screenshots?", a: "Screenshots show that two pages look similar. The certificate shows your content carried your store's watermark before the copy appeared, pairs content fingerprints with dates, and can be verified independently by anyone you send it to." },
+      { q: "What is a Proof of Ownership Certificate?", a: "A dated ownership document Kirpik generates when your watermark is detected in someone else's page. It records your Protection Signature, the Detected Signature of the stolen text, detection details, a confidence figure and a QR code that links to a public verification page." },
+      { q: "Why is a certificate better than screenshots?", a: "Screenshots show that two pages look similar. The certificate shows your content carried your store's watermark before the stolen version appeared, pairs content fingerprints with dates, and can be verified independently by anyone you send it to." },
       { q: "How does the certificate establish who published first?", a: "It combines your protection date, the infringing page's own HTTP headers and the earliest Internet Archive snapshot of the infringing URL. The timeline argument is laid out for you rather than left for you to assemble." },
       { q: "Can Kirpik take the content down for me?", a: "Kirpik gives you the evidence, and the Learn section walks you through DMCA notices, host complaints and search deindexing. Takedown decisions stay in your hands, and for stubborn cases we recommend a specialist." },
-      { q: "The theft already happened. Can Kirpik still help?", a: "Kirpik detects its own watermark, so text copied before you protected it cannot be identified that way. You can still pursue a takedown with other evidence, and the enforcement guide shows how. Protecting your store now means every future copy carries proof, and clone stores routinely scrape the same targets again." },
+      { q: "The theft already happened. Can Kirpik still help?", a: "Kirpik detects its own watermark, so text copied before you protected it cannot be identified that way. You can still pursue a takedown with other evidence, and the enforcement guide shows how. Protecting your store now means every future theft carries proof, and clone stores routinely scrape the same targets again." },
     ],
   },
   {

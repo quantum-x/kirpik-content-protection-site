@@ -1,8 +1,8 @@
 ﻿---
 title: "When the thief outranks you with your own words"
-description: "The worst duplicate-content outcome: a copier ranking above the store that wrote the copy. The signals that decide it, and the evidence that reverses it."
+description: "The worst duplicate-content outcome: a copier ranking above the store that wrote the text. The signals that decide it, and the evidence that reverses it."
 cluster: "Text theft & what it costs"
-summary: "Sometimes the copy outranks the original. Here is how that happens, told through a typical pattern, and what kind of evidence actually turns it around."
+summary: "Sometimes the duplicate outranks the original. Here is how that happens, told through a typical pattern, and what kind of evidence actually turns it around."
 pubDate: 2026-06-24
 related: ["stolen-copy-seo-damage", "proving-text-ownership", "wayback-machine-timeline-evidence"]
 ---
@@ -15,7 +15,7 @@ Picture a small homewares store, two years old, with descriptions the owner wrot
 
 In March, a scraper reads her catalogue through the store's [public product feed](/learn/shopify-public-product-feed/). She notices nothing, because there is nothing to notice.
 
-## The copy appears
+## The stolen version appears
 
 In April, the description surfaces on a general home-goods site, word for word, attached to a similar runner from the same overseas supplier. The copying site is older, has a few thousand referring domains from years of content marketing, and publishes at volume.
 
@@ -48,10 +48,10 @@ The claims that succeed share a structure. They demonstrate three things, each i
 2. **The match is exact and substantial.** Not "similar vibes" but identical passages, ideally fingerprinted, so the reviewer does not have to eyeball two pages.
 3. **The claimant is the specific origin.** This is the hardest leg. Archive dates prove earlier publication; they do not tie the text to you as author against, say, a third store claiming the same. Evidence generated from the text itself, tied uniquely to your store, closes that gap.
 
-With that package, the routes open up: a DMCA notice to the copier's host, and a copyright removal request to the search engine, both covered in the [enforcement guide](/enforcement/). Removal collapses the duplicate cluster back to a single version, hers, and the long-tail queries come back to the page that earned them. What counts as proof, in fuller legal-adjacent detail, is the subject of [what counts as proof when your copy is stolen](/learn/proving-text-ownership/).
+With that package, the routes open up: a DMCA notice to the copier's host, and a copyright removal request to the search engine, both covered in the [enforcement guide](/enforcement/). Removal collapses the duplicate cluster back to a single version, hers, and the long-tail queries come back to the page that earned them. What counts as proof, in fuller legal-adjacent detail, is the subject of [what counts as proof when your text is stolen](/learn/proving-text-ownership/).
 
 ## The uncomfortable moral
 
-The original lost, for a while, because originality is invisible to an algorithm and she could not make it visible to a reviewer. Every store that publishes good copy is exposed to the same sequence, and the exposure starts the day the copy goes live, when it is easiest to scrape and hardest to have already proven.
+The original lost, for a while, because originality is invisible to an algorithm and she could not make it visible to a reviewer. Every store that publishes good text is exposed to the same sequence, and the exposure starts the day the text goes live, when it is easiest to scrape and hardest to have already proven.
 
 This is the reason Kirpik puts the evidence in place before anything is stolen. Protecting a description embeds an algorithmic invisible watermark derived from your original text signature and records dated content fingerprints, without changing a word you wrote. If a copier ever outranks you with your own sentences, detection reads your markers out of their page and a [Proof of Ownership Certificate](/features/chain-of-proof/) hands the reviewer the timeline, the fingerprints and the store-specific match in one verifiable document. The pattern above still starts the same way. It ends differently.

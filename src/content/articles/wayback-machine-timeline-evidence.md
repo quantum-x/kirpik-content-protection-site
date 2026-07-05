@@ -10,13 +10,13 @@ related:
   - dmca-for-stolen-text
 ---
 
-Copy theft disputes usually collapse into a schoolyard argument: I wrote it first, no I did. Both sides point at dates on their own websites, and since anyone can type any date onto their own website, the pointing settles nothing. What the argument needs is a witness with no stake in the outcome, and for most of the public web that witness is the Internet Archive.
+Text theft disputes usually collapse into a schoolyard argument: I wrote it first, no I did. Both sides point at dates on their own websites, and since anyone can type any date onto their own website, the pointing settles nothing. What the argument needs is a witness with no stake in the outcome, and for most of the public web that witness is the Internet Archive.
 
-The Archive's Wayback Machine has been crawling and storing copies of web pages since 1996, billions of them, timestamped on arrival by the Archive's own systems. If it captured your product page in March and its first sighting of the copycat's page is in November, that ordering does not come from you. It comes from a nonprofit archive's records, and that independence is what gives it weight with abuse teams and beyond.
+The Archive's Wayback Machine has been crawling and storing snapshots of web pages since 1996, billions of them, timestamped on arrival by the Archive's own systems. If it captured your product page in March and its first sighting of the copycat's page is in November, that ordering does not come from you. It comes from a nonprofit archive's records, and that independence is what gives it weight with abuse teams and beyond.
 
 ## How snapshots actually work
 
-A Wayback Machine snapshot is a stored copy of a page as the Archive's crawler received it at a specific moment, filed under the page's URL and a precise timestamp. Look up any URL at web.archive.org and you get a calendar of every capture on record, and each capture opens as the page looked that day.
+A Wayback Machine snapshot is a stored capture of a page as the Archive's crawler received it at a specific moment, filed under the page's URL and a precise timestamp. Look up any URL at web.archive.org and you get a calendar of every capture on record, and each capture opens as the page looked that day.
 
 Two properties make this evidence rather than trivia. First, the timestamp is assigned by the Archive when its crawler fetches the page, so neither you nor the thief can backdate one. Second, the snapshot preserves content, not just existence: the capture of your product page contains your actual description, which means you can show not only that your page was live in March but that it already contained the specific text now sitting on someone else's store.
 
@@ -25,9 +25,9 @@ Two properties make this evidence rather than trivia. First, the timestamp is as
 For timeline purposes the capture that matters is the earliest one, for both your page and the infringing page. The calendar view will get you there by clicking back to the first recorded year, and for a cleaner answer the Archive also maintains a queryable index of every capture it holds for a URL, which is the systematic way to establish "first seen" without paging through a calendar by hand. The comparison you are building is simple:
 
 - Earliest capture of your page containing the disputed text: the earlier, the better.
-- Earliest capture of the infringing page: establishing the copy's appearance after your original was already on record.
+- Earliest capture of the infringing page: establishing the stolen page's appearance after your original was already on record.
 
-If the copy did substantial damage in search before you caught it, the same lookup on the infringing URL tells you roughly how long it has been live, which is useful context for [a takedown notice](/learn/dmca-for-stolen-text/) and for gauging what it may have cost you.
+If the stolen page did substantial damage in search before you caught it, the same lookup on the infringing URL tells you roughly how long it has been live, which is useful context for [a takedown notice](/learn/dmca-for-stolen-text/) and for gauging what it may have cost you.
 
 ## Save your pages before you need the favour
 
@@ -48,9 +48,9 @@ None of this undermines the core use. It just means the Archive works best confi
 
 ## Turning a timeline into a case
 
-A timeline establishes order: your text was public before their page appeared. What it cannot establish by itself is provenance, that the text on their page is your text rather than a coincidental lookalike. The strongest submissions pair the two, an independent timeline plus [evidence tying the copy directly to you](/learn/proving-text-ownership/), which is where watermark detection and content fingerprints do the work archives cannot.
+A timeline establishes order: your text was public before their page appeared. What it cannot establish by itself is provenance, that the text on their page is your text rather than a coincidental lookalike. The strongest submissions pair the two, an independent timeline plus [evidence tying the stolen text directly to you](/learn/proving-text-ownership/), which is where watermark detection and content fingerprints do the work archives cannot.
 
-This pairing is built into Kirpik's certificates. When a detection becomes a [Proof of Ownership Certificate](/features/chain-of-proof/), Kirpik automatically queries the Internet Archive's records and folds the earliest relevant snapshot into the document, alongside your protection date, the infringing page's own Last-Modified header, the fingerprints of original and copy, and the watermark detection itself with its marker count and confidence. The archive lookup you would have done by hand, calendar by calendar, arrives already done and already cited. [Inside a Proof of Ownership Certificate](/learn/inside-chain-of-proof/) shows where the timeline evidence sits in the finished document.
+This pairing is built into Kirpik's certificates. When a detection becomes a [Proof of Ownership Certificate](/features/chain-of-proof/), Kirpik automatically queries the Internet Archive's records and folds the earliest relevant snapshot into the document, alongside your protection date, the infringing page's own Last-Modified header, the fingerprints of the original and the stolen text, and the watermark detection itself with its marker count and confidence. The archive lookup you would have done by hand, calendar by calendar, arrives already done and already cited. [Inside a Proof of Ownership Certificate](/learn/inside-chain-of-proof/) shows where the timeline evidence sits in the finished document.
 
 ## The habit worth keeping
 

@@ -1,6 +1,6 @@
 ﻿---
 title: "The copycat store playbook: cloning a catalogue in an afternoon"
-description: "How clone stores lift an entire Shopify catalogue in hours: scrape the feed, import by CSV or app, republish. And why your copy is the part that convicts them."
+description: "How clone stores lift an entire Shopify catalogue in hours: scrape the feed, import by CSV or app, republish. And why your text is the part that convicts them."
 cluster: "Text theft & what it costs"
 summary: "Standing up a lookalike store from your catalogue takes tools that already exist and a few hours of clicking. Here is the process, step by step, and the one thing about it that works in your favour."
 pubDate: 2026-05-28
@@ -27,23 +27,23 @@ The cloner picks a free theme, generates a brand name, and buys a domain. Some g
 
 If the products come from a shared supplier, as they usually do in dropshipping, the product photos were never yours to begin with. Supplier images are the great equaliser of clone stores: every seller of that garlic press has the same six renders. This detail matters more than it first appears, and we will come back to it.
 
-Prices get adjusted in bulk, usually a few percent under the source store, since undercutting the site that wrote the copy is part of the model. Some cloners run a light find-and-replace over the descriptions to swap the brand name for theirs. Few do more editing than that, because editing costs the time the whole exercise was designed to avoid.
+Prices get adjusted in bulk, usually a few percent under the source store, since undercutting the site that wrote the text is part of the model. Some cloners run a light find-and-replace over the descriptions to swap the brand name for theirs. Few do more editing than that, because editing costs the time the whole exercise was designed to avoid.
 
 ## Step four: republish and monetise
 
-The finished clone goes one of several directions. Some run paid social ads straight at the product pages, spending on traffic instead of content. Some grind at SEO, and given enough domain age or link building, [a clone can outrank the store it copied](/learn/when-thieves-outrank-original/). Others list the products on marketplaces, where your descriptions do the selling under another seller's name. The full map of destinations is in [where stolen product copy ends up](/learn/where-stolen-copy-ends-up/).
+The finished clone goes one of several directions. Some run paid social ads straight at the product pages, spending on traffic instead of content. Some grind at SEO, and given enough domain age or link building, [a clone can outrank the store it copied](/learn/when-thieves-outrank-original/). Others list the products on marketplaces, where your descriptions do the selling under another seller's name. The full map of destinations is in [where stolen product text ends up](/learn/where-stolen-copy-ends-up/).
 
 From your side, the first symptom is usually indirect: a dip in rankings for descriptions you wrote, an ad screenshot from a confused customer, or your own sentence appearing on a strange domain when you search it in quotes.
 
-## Why the copy is the giveaway
+## Why the text is the giveaway
 
 Here is the part of the playbook that favours you.
 
 Everything else on a clone store is deniable. The products are from a common supplier. The images are the supplier's. The theme is free and used by thousands of stores. The prices are market prices. None of it proves the cloner took anything from you specifically.
 
-The descriptions are different. Your copy is the one element on that page that was authored, by you, as original expression. Two stores selling the same product from the same supplier should have different descriptions, the way two reviewers of the same film write different reviews. When the paragraphs match yours line for line, that is not convergence. That is copying, and copied text is the strongest evidence a clone leaves behind.
+The descriptions are different. Your text is the one element on that page that was authored, by you, as original expression. Two stores selling the same product from the same supplier should have different descriptions, the way two reviewers of the same film write different reviews. When the paragraphs match yours line for line, that is not convergence. That is copying, and copied text is the strongest evidence a clone leaves behind.
 
-Which is why the practical question is not "how do I stop the scrape" but "when my copy turns up, how quickly can I prove it is mine". Screenshots and publish dates help. What helps more is evidence generated from the text itself, assembled into a timeline a host or marketplace can verify. Our [enforcement guide](/enforcement/) walks through turning that evidence into a takedown.
+Which is why the practical question is not "how do I stop the scrape" but "when my text turns up, how quickly can I prove it is mine". Screenshots and publish dates help. What helps more is evidence generated from the text itself, assembled into a timeline a host or marketplace can verify. Our [enforcement guide](/enforcement/) walks through turning that evidence into a takedown.
 
 ## The afternoon, summarised
 
@@ -54,8 +54,8 @@ Which is why the practical question is not "how do I stop the scrape" but "when 
 | Brand and theme | Free theme, generated name | An hour or two |
 | Go live | Ads, SEO or marketplace listings | Same day |
 
-No step requires writing a word of product copy. That is the entire appeal, and the entire vulnerability.
+No step requires writing a word of product text. That is the entire appeal, and the entire vulnerability.
 
-## Make your copy expensive to steal
+## Make your text expensive to steal
 
 You cannot make cloning slower. You can make it riskier. Kirpik embeds an algorithmic invisible watermark into your product descriptions, blog articles and pages, derived from your original text signature, without changing anything you wrote. When a cloner lifts your catalogue, the watermark rides along into their store, and a [Proof of Ownership Certificate](/features/chain-of-proof/) turns that into dated, verifiable evidence that the words are yours. The afternoon of cloning stays cheap. Keeping the clone up gets harder.

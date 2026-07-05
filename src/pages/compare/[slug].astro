@@ -55,9 +55,9 @@ const approachLine = isTilkie
         ? "It is an image watermark app: it works on your product photos, not your words."
         : isMonitor
           ? hasC2pa
-            ? "It is a provenance service: per its listing, it attaches C2PA Content Credentials and provenance records to content and monitors for copies."
+            ? "It is a provenance service: per its listing, it attaches C2PA Content Credentials and provenance records to content and monitors for duplicates."
             : "It is a copy monitor: a service that scans other sites and reports lookalikes."
-          : "It is a takedown service: it finds copies and files removal requests for you.";
+          : "It is a takedown service: it finds infringing pages and files removal requests for you.";
 
 const launchedNice = app.launched
   ? new Date(`${app.launched}T00:00:00Z`).toLocaleDateString("en-GB", { month: "long", year: "numeric", timeZone: "UTC" })
@@ -150,7 +150,7 @@ const related = COMPETITORS_BY_POPULARITY.filter((c) => c.slug !== app.slug)
               Tilkie does not prevent copying, and it does not claim to: any image a browser can display
               can be saved. What it does is make a copied product photo identifiable, by embedding an
               invisible watermark in the pixels themselves, and give you detection and a certificate when
-              a copy is found elsewhere. Text is outside its scope in exactly the way images are outside
+              a duplicate is found elsewhere. Text is outside its scope in exactly the way images are outside
               Kirpik's. Both are built for proof rather than prevention, one for photos and one for
               words.
             </p>
@@ -164,7 +164,7 @@ const related = COMPETITORS_BY_POPULARITY.filter((c) => c.slug !== app.slug)
               one click. More to the point, an access rule says nothing about what happens to your text
               after an allowed visitor, or a permitted crawler, has it. Shopify serves the same product
               text through feeds built for customers, search engines and AI tools, and nothing in the
-              words themselves changes, so a copy that leaves carries no trace of where it came from.
+              words themselves changes, so text that leaves carries no trace of where it came from.
             </p>
             {app.textNote && <p>{app.textNote}</p>}
           </>
@@ -179,15 +179,15 @@ const related = COMPETITORS_BY_POPULARITY.filter((c) => c.slug !== app.slug)
               That covers one of the ways your content is served, and only that one. Shopify also serves
               that text through feeds for search engines and AI tools. Those feeds run no storefront
               JavaScript, so the script never runs where scrapers read it. Nothing in the text itself
-              changes either, so a copy that does leave carries no trace of where it came from.
+              changes either, so text that does leave carries no trace of where it came from.
             </p>
             {app.textNote && <p>{app.textNote}</p>}
           </>
         ) : isWatermark ? (
           <>
             <p>
-              {app.name} works on images, and a mark on an image genuinely travels with a copy of that
-              image, which is more than any blocking script can say. A product description has no pixels
+              {app.name} works on images, and a mark on an image genuinely travels wherever that image
+              is copied, which is more than any blocking script can say. A product description has no pixels
               to mark, so your words are left exactly as they were, in the page HTML and in the feeds
               Shopify serves to customers, search engines and AI tools. A copied description arrives at
               its new home carrying nothing that ties it back to you.
@@ -201,18 +201,18 @@ const related = COMPETITORS_BY_POPULARITY.filter((c) => c.slug !== app.slug)
                 {app.name} is not a blocking script: its listing describes evidence rather than
                 prevention.
                 {hasC2pa
-                  ? " Per the listing, it attaches C2PA Content Credentials and provenance records to your content, and it monitors for copies through what it calls IP monitoring, meaning intellectual property monitoring. Provenance metadata travels beside content rather than inside it, and text copied out of a page carries no metadata at all: a clipboard holds characters, nothing more, which is general platform behaviour rather than a defect of this app."
+                  ? " Per the listing, it attaches C2PA Content Credentials and provenance records to your content, and it monitors for duplicates through what it calls IP monitoring, meaning intellectual property monitoring. Provenance metadata travels beside content rather than inside it, and text copied out of a page carries no metadata at all: a clipboard holds characters, nothing more, which is general platform behaviour rather than a defect of this app."
                   : " Per the listing, it scans the domains you choose for copied text and images and assembles evidence packs from the matches it finds."}
                 {" "}A match report identifies similarity between two pages rather than authorship of
-                the words, so the copy itself still leaves your store carrying nothing that ties it back
+                the words, so the text itself still leaves your store carrying nothing that ties it back
                 to you.
               </p>
             ) : (
               <p>
                 {app.name} changes nothing on your store and nothing in your content: it is a service
                 that scans elsewhere and reports what it finds. That is detection after the fact. By the
-                time a lookalike appears in a report, the copy has already been made and published, and
-                it finds copies only on the sites it scans. It tells you theft has happened; it does not
+                time a lookalike appears in a report, the stolen content has already been published, and
+                it finds matches only on the sites it scans. It tells you theft has happened; it does not
                 stop it.
               </p>
             )}
@@ -221,8 +221,8 @@ const related = COMPETITORS_BY_POPULARITY.filter((c) => c.slug !== app.slug)
         ) : (
           <>
             <p>
-              {app.name} acts after a copy appears: it finds infringing sites or listings and files
-              removal requests. That is enforcement, not prevention; the copy is live before it is
+              {app.name} acts after stolen content appears: it finds infringing sites or listings and files
+              removal requests. That is enforcement, not prevention; the infringing page is live before it is
               found. A filing also stands on evidence of ownership, which for text is the difficult
               part, because copied words carry nothing of their origin by default. It works on theft
               that has already happened.
@@ -234,7 +234,7 @@ const related = COMPETITORS_BY_POPULARITY.filter((c) => c.slug !== app.slug)
           <p>
             Kirpik's answer to the same question is also no. Prevention is impossible: text a browser can
             display is text that can be copied. Kirpik's difference is proof, an invisible watermark
-            carried in the words themselves, so a copy can be detected and attributed wherever it
+            carried in the words themselves, so stolen content can be detected and attributed wherever it
             surfaces. Kirpik adds no scripts to your storefront, so it runs alongside any blocker
             without conflict.
           </p>
@@ -266,14 +266,14 @@ const related = COMPETITORS_BY_POPULARITY.filter((c) => c.slug !== app.slug)
           </p>
         ) : (
           <p>
-            {app.name}'s listing does not describe producing any ownership evidence for text. If a copy
-            of your description turns up on another site, nothing this app does would help you show the
+            {app.name}'s listing does not describe producing any ownership evidence for text. If a stolen
+            version of your description turns up on another site, nothing this app does would help you show the
             words were yours first.
           </p>
         )}
         {app.proofNote && <p>{app.proofNote}</p>}
         <p>
-          Kirpik is built for that question. Its detection reads your watermark out of a suspect copy,
+          Kirpik is built for that question. Its detection reads your watermark out of suspect text,
           pasted or from a URL. A confirmed detection becomes a certificate: dated fingerprints, the
           infringing page's own timestamps, Internet Archive corroboration and a public verification
           page, ready for a DMCA takedown.

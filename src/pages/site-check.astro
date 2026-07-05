@@ -100,8 +100,8 @@ const jsonLd = {
       <h2 class="sc-hook__title">What you can do about it.</h2>
       <p class="lead sc-hook__lead">
         These feeds cannot be closed, and your store needs them: search engines
-        and sales channels read them every day. What you control is whether a
-        stolen copy can be proven yours.
+        and sales channels read them every day. What you control is whether
+        stolen content can be proven yours.
       </p>
 
       <div class="sc-hook__split">
@@ -118,12 +118,12 @@ const jsonLd = {
           <h3>Content with a Kirpik watermark</h3>
           <p>
             Kirpik embeds an invisible watermark in the text itself, carrying
-            your store's unique watermark code. However the copy leaves,
+            your store's unique watermark code. However the text leaves,
             <strong>scraped from a feed, pasted from the page, exported and
             re-imported</strong>, the watermark stays embedded.
           </p>
           <p>
-            When you find a stolen copy, Kirpik generates a
+            When you find stolen content, Kirpik generates a
             <strong>Proof of Ownership Certificate</strong>: dated,
             independently verifiable, and built for DMCA takedowns.
           </p>
@@ -727,13 +727,13 @@ const jsonLd = {
               let text: string;
               switch (r.status) {
                 case "exposed":
-                  text = `${r.domain} is a Shopify store. ${r.products} products, ${r.blogPosts} blog posts and ${r.pages} pages (about ${r.words} words) are publicly readable via Shopify's feeds right now. None of it carries a Kirpik watermark, so a stolen copy has nothing tying it back to the store. Storefront "content protection" scripts do not affect these feeds.`;
+                  text = `${r.domain} is a Shopify store. ${r.products} products, ${r.blogPosts} blog posts and ${r.pages} pages (about ${r.words} words) are publicly readable via Shopify's feeds right now. None of it carries a Kirpik watermark, so stolen content has nothing tying it back to the store. Storefront "content protection" scripts do not affect these feeds.`;
                   break;
                 case "partial":
                   text = `${r.domain} is a Shopify store. ${r.protectedItems} items carry a Kirpik invisible watermark and are traceable; the rest are unmarked.`;
                   break;
                 case "protected":
-                  text = `${r.domain} is a Shopify store, and every item read from its public feeds carries a Kirpik invisible watermark. Copies remain traceable to the owner.`;
+                  text = `${r.domain} is a Shopify store, and every item read from its public feeds carries a Kirpik invisible watermark. Anything copied remains traceable to the owner.`;
                   break;
                 case "empty":
                   text = `${r.domain} is on Shopify but its public feeds are empty (new or password-protected store).`;

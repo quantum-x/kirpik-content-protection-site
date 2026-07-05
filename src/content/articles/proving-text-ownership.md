@@ -1,5 +1,5 @@
 ﻿---
-title: "What counts as proof when your copy is stolen"
+title: "What counts as proof when your text is stolen"
 description: "Hosts and marketplaces act on evidence, not indignation. What convinces an abuse team: publication timelines, content fingerprints and watermark provenance."
 cluster: "Proof & enforcement"
 summary: "Knowing the text is yours and demonstrating it to a stranger are different problems. Here is what abuse teams actually find convincing, ranked from weakest to strongest."
@@ -34,13 +34,13 @@ Other independent anchors exist in the same spirit: the infringing server's own 
 
 A timeline says who published first. A fingerprint says exactly what was published. A content fingerprint, such as a SHA-256 hash, is a short value computed from a piece of text, with the property that even a one-word change produces a completely different result. Record a fingerprint at protection time and you can later demonstrate that the exact text in question, not a vague approximation of it, existed in your hands on a specific date.
 
-Fingerprints have a sharp limitation, and it is worth being honest about: they only match identical text. A thief who trims two sentences has broken the exact match, and you are back to arguing similarity. That is why fingerprints work best as one layer in a stack, anchoring what your original was, while something else ties the modified copy back to you.
+Fingerprints have a sharp limitation, and it is worth being honest about: they only match identical text. A thief who trims two sentences has broken the exact match, and you are back to arguing similarity. That is why fingerprints work best as one layer in a stack, anchoring what your original was, while something else ties the modified version back to you.
 
 ## The strong end: provenance instead of similarity
 
 Everything above still argues from resemblance. These texts match, mine is older, therefore they copied me. It is a good argument, but it is inference, and a determined opponent argues with inference. Common phrases, shared suppliers, coincidence, "everyone describes this product that way".
 
-Watermark detection changes the category of the claim. When your copy is protected with an invisible watermark that carries your store's unique code, and [detection](/features/detection/) recovers that watermark from the text on the thief's page, you are no longer saying "these look alike". You are saying "the text on their page is physically my text, and it says so". The copy itself testifies to where it came from. There is no innocent explanation for another store's copy carrying your signature, because independently written text does not contain it.
+Watermark detection changes the category of the claim. When your text is protected with an invisible watermark that carries your store's unique code, and [detection](/features/detection/) recovers that watermark from the text on the thief's page, you are no longer saying "these look alike". You are saying "the text on their page is physically my text, and it says so". The stolen text itself testifies to where it came from. There is no innocent explanation for another store's page carrying your signature, because independently written text does not contain it.
 
 This is the difference between similarity and provenance, and abuse teams feel it immediately even without understanding the technology, because the claim is specific, checkable and hard to argue against. The detection reports how many security markers were recovered and a confidence figure, so the strength of the finding is itself documented rather than asserted.
 
@@ -53,10 +53,10 @@ The strongest submission is not one killer exhibit but a short stack in which ea
 - **Timeline:** your dated protection record, the infringing page's own headers, and the Internet Archive's earliest captures of both pages.
 - **Corroboration:** your CMS records and screenshots, now useful because independent anchors back them.
 
-Assembled by hand, that stack is an afternoon of work per infringement, which is precisely why most merchants never do it and most theft goes unchallenged. Kirpik generates it as a single document instead. The [Proof of Ownership Certificate](/features/chain-of-proof/) records your protection date and Protection Signature, the detection details with marker count and confidence, a side-by-side comparison of original and copy, and Wayback Machine timeline corroboration, all behind a QR code linking to a public verification page the analyst can check without trusting your PDF. [Inside a Proof of Ownership Certificate](/learn/inside-chain-of-proof/) walks through the sections one by one.
+Assembled by hand, that stack is an afternoon of work per infringement, which is precisely why most merchants never do it and most theft goes unchallenged. Kirpik generates it as a single document instead. The [Proof of Ownership Certificate](/features/chain-of-proof/) records your protection date and Protection Signature, the detection details with marker count and confidence, a side-by-side comparison of the original and the stolen text, and Wayback Machine timeline corroboration, all behind a QR code linking to a public verification page the analyst can check without trusting your PDF. [Inside a Proof of Ownership Certificate](/learn/inside-chain-of-proof/) walks through the sections one by one.
 
 ## Evidence is a decision you make in advance
 
 The uncomfortable structural fact about all of this: the strongest layers cannot be created after the theft. A watermark proves nothing unless it was in the text before it was copied. A fingerprint dates your content only from the moment it was recorded. Independent snapshots of your pages exist only if something captured them early.
 
-Merchants who prepare before anything goes wrong walk into ticket number forty-something holding provenance, fingerprints and a timeline. Merchants who start preparing after finding the copycat are holding "my page looks older". Kirpik exists to put you in the first group, and its free plan makes that decision cost nothing: protect your key descriptions now, and the day a copy surfaces, the proof is already made.
+Merchants who prepare before anything goes wrong walk into ticket number forty-something holding provenance, fingerprints and a timeline. Merchants who start preparing after finding the copycat are holding "my page looks older". Kirpik exists to put you in the first group, and its free plan makes that decision cost nothing: protect your key descriptions now, and the day a stolen version surfaces, the proof is already made.

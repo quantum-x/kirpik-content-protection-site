@@ -2,7 +2,7 @@
 title: "Every Shopify store has a public product feed you cannot turn off"
 description: "Shopify exposes your full product descriptions through public JSON, sitemap and feed endpoints. See each one, why it exists, and what it means for blockers."
 cluster: "Why blockers don't work"
-summary: "Your store publishes machine-readable copies of every product description through endpoints you cannot disable. Here is the full list, and why no blocker app touches them."
+summary: "Your store publishes machine-readable versions of every product description through endpoints you cannot disable. Here is the full list, and why no blocker app touches them."
 pubDate: 2026-05-22
 pillar: true
 related: ["right-click-blockers-text-test", "scrapers-vs-storefront-scripts", "product-descriptions-scraped"]
@@ -32,7 +32,7 @@ The one that matters most for text is `/products.json`. Each product in the resp
 
 The per-product endpoints are just as complete. `/products/<handle>.json` and `/products/<handle>.js` both return the full description for a single product, and the `.js` variant exists specifically so theme code and third-party scripts can fetch product data on the fly. The sitemap files round out the picture: they hand a crawler an orderly list of every product, page and article URL on the store, which is the polite way of saying they are a scraping itinerary as well as an SEO asset.
 
-The blog surfaces deserve a mention too. If you publish articles, `/blogs/<handle>.atom` serves them as a feed, full text included, which is precisely how article-scraping tools prefer to consume them. Anything you have written in a blog post, buying guide or brand story travels through that feed as readily as product copy travels through `/products.json`.
+The blog surfaces deserve a mention too. If you publish articles, `/blogs/<handle>.atom` serves them as a feed, full text included, which is precisely how article-scraping tools prefer to consume them. Anything you have written in a blog post, buying guide or brand story travels through that feed as readily as product text travels through `/products.json`.
 
 ## Why Shopify does this
 
@@ -58,6 +58,6 @@ We also built a [site check tool](/site-check/) that does this politely for you:
 
 ## What this means for protecting text
 
-Once you accept that the feed is permanent, the strategy question changes shape. You cannot control whether your descriptions can be fetched. You can control whether a fetched copy is anonymous.
+Once you accept that the feed is permanent, the strategy question changes shape. You cannot control whether your descriptions can be fetched. You can control whether the fetched text is anonymous.
 
-Plain text carries no evidence of where it came from. Watermarked text does. Kirpik embeds an algorithmic invisible watermark, derived from your original text signature, into the descriptions, articles and pages you choose to protect. It changes nothing a reader or a search engine sees, and it adds no scripts to your storefront. It simply means that the copy sitting in `body_html`, and every scrape of it, carries invisible markers tying it to your store. When your words surface on someone else's site, [detection](/features/detection/) reads the markers back and gives you something a blocker never could: proof.
+Plain text carries no evidence of where it came from. Watermarked text does. Kirpik embeds an algorithmic invisible watermark, derived from your original text signature, into the descriptions, articles and pages you choose to protect. It changes nothing a reader or a search engine sees, and it adds no scripts to your storefront. It simply means that the text sitting in `body_html`, and every scrape of it, carries invisible markers tying it to your store. When your words surface on someone else's site, [detection](/features/detection/) reads the markers back and gives you something a blocker never could: proof.

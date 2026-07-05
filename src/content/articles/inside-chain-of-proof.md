@@ -24,7 +24,7 @@ Document Scope states plainly what the certificate covers, which piece of conten
 
 This section records the "before" of the story, fixed at the moment you protected the content:
 
-- **Date of Protection.** When Kirpik watermarked the content. This is the anchor of the timeline argument: your claim to the text predates the copy's appearance, and here is the date.
+- **Date of Protection.** When Kirpik watermarked the content. This is the anchor of the timeline argument: your claim to the text predates the stolen page's appearance, and here is the date.
 - **Protection Signature.** A SHA-256 fingerprint of your protected content. This pins down exactly what your text was, in a form anyone can recompute and check. One changed word would produce a different fingerprint, which is precisely what makes it useful: the certificate is not gesturing at roughly-this-content, it is committing to exactly-this-content.
 - **Algorithm Version.** Which version of Kirpik's watermarking produced the protection, so the record stays interpretable as the system evolves.
 - **Content Title and Original Content URL.** The human-readable identity of the work and where the original lives, tying the technical fields back to a real page on your store.
@@ -38,7 +38,7 @@ The "after" of the story, recorded when your watermark was found:
 - **Infringing URL.** Where the copied text was detected.
 - **URL Last-Modified.** The infringing server's own declaration of when its page last changed, taken from its HTTP headers. Evidence from the opposing side's own server has a particular kind of weight.
 - **Detection Date and Detection ID.** When the detection ran, and a reference back to the detection event itself.
-- **Detected Signature.** The fingerprint of the text as found on the infringing page, sitting alongside your Protection Signature so the relationship between original and copy is on the record.
+- **Detected Signature.** The fingerprint of the text as found on the infringing page, sitting alongside your Protection Signature so the relationship between the original and the stolen text is on the record.
 - **Watermark Security Markers.** How many valid watermark recoveries the detector made in the infringing text. The signature repeats through protected content, so this count measures how much of it survived the thief's editing.
 - **Confidence.** The detector's overall confidence in the match, expressed as a percentage.
 
@@ -48,7 +48,7 @@ The last two fields deserve a sentence more. A bare "watermark found" would ask 
 
 When the original and the infringing text overlap enough for a meaningful comparison, the certificate includes a side-by-side page: your protected content and the infringing page's text, with modifications highlighted, the original rendering in green and altered material in yellow, plus a word-match percentage.
 
-This page does a job the technical fields cannot: it makes the theft visible to a non-technical reader in seconds. An abuse analyst who will never parse a fingerprint can look at two columns of highlighted text and see the copying, the trims and the light rewording immediately. It also preempts the commonest dodge, "we wrote it ourselves and it happens to be similar", because the highlighting shows the copy is your text with edits, not a coincidental cousin.
+This page does a job the technical fields cannot: it makes the theft visible to a non-technical reader in seconds. An abuse analyst who will never parse a fingerprint can look at two columns of highlighted text and see the copying, the trims and the light rewording immediately. It also preempts the commonest dodge, "we wrote it ourselves and it happens to be similar", because the highlighting shows their page is your text with edits, not a coincidental cousin.
 
 ## Timeline corroboration from the Internet Archive
 

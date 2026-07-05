@@ -27,7 +27,7 @@ What undoes it: the text still arrived in the HTML, so view-source and saving th
 
 A stylesheet rule, `user-select: none`, tells the browser not to visually select the text. No script involved, which listings sometimes present as a strength.
 
-What undoes it: it is a presentation hint, not an access control. The text sits in the DOM and the source untouched. Any reader mode, any copy of the HTML, any devtools panel shows it. A visitor can even override the rule with one line of their own CSS, since browsers let users restyle any page.
+What undoes it: it is a presentation hint, not an access control. The text sits in the DOM and the source untouched. Any reader mode, any saved HTML, any devtools panel shows it. A visitor can even override the rule with one line of their own CSS, since browsers let users restyle any page.
 
 ## Technique 4: transparent overlays
 
@@ -64,4 +64,4 @@ Two absences from this table matter more than anything in it. Scrapers do not ap
 
 What these apps deliver is friction for humans on the rendered storefront: mostly your customers, occasionally an unmotivated copier who will retype the paragraph or move on. What they cannot deliver is control over text the server has already handed out. That is not a criticism of any developer's competence. It is the browser working as designed, keeping pages inside their sandbox and users in charge of their own machines.
 
-Kirpik sits on the other side of that trade. It runs no scripts on your storefront, adds no friction for anyone, and accepts that copies will happen. Instead, it embeds an algorithmic invisible watermark, derived from your original text signature, into the text itself, so any copy that surfaces elsewhere can be traced back to your store and [proven yours](/features/chain-of-proof/). Blockers try to stop the copy and fail. A watermark makes the copy testify.
+Kirpik sits on the other side of that trade. It runs no scripts on your storefront, adds no friction for anyone, and accepts that copying will happen. Instead, it embeds an algorithmic invisible watermark, derived from your original text signature, into the text itself, so any duplicate that surfaces elsewhere can be traced back to your store and [proven yours](/features/chain-of-proof/). Blockers try to stop the copying and fail. A watermark makes the stolen text testify.

@@ -10,7 +10,7 @@ related:
   - deindexing-stolen-copy
 ---
 
-The DMCA has a reputation as lawyer territory, and for a small store facing a copycat that reputation does real damage: merchants who could have had stolen copy removed in a week decide the fight is above their pay grade and let it stand. The reality is friendlier. A DMCA takedown notice is a structured letter, most hosts process thousands of them through web forms, and the whole exercise is closer to filing a well-organised complaint than to litigation.
+The DMCA has a reputation as lawyer territory, and for a small store facing a copycat that reputation does real damage: merchants who could have had stolen content removed in a week decide the fight is above their pay grade and let it stand. The reality is friendlier. A DMCA takedown notice is a structured letter, most hosts process thousands of them through web forms, and the whole exercise is closer to filing a well-organised complaint than to litigation.
 
 This article walks the process for the specific case of stolen store text: product descriptions, blog articles and pages lifted onto someone else's site.
 
@@ -18,9 +18,9 @@ One note before the steps. This is general information about how the process wor
 
 ## Step 1: capture the evidence first
 
-Do this before anything else, because infringing pages have a habit of quietly changing once complaints start arriving. Record the infringing URLs, take dated screenshots of each page, and save a copy of the page itself. If you use the Internet Archive, [save a snapshot of the infringing page](/learn/wayback-machine-timeline-evidence/) so a third-party record exists with a date on it.
+Do this before anything else, because infringing pages have a habit of quietly changing once complaints start arriving. Record the infringing URLs, take dated screenshots of each page, and save the page itself as a file. If you use the Internet Archive, [save a snapshot of the infringing page](/learn/wayback-machine-timeline-evidence/) so a third-party record exists with a date on it.
 
-This is also the moment to establish that the text is provably yours rather than merely similar. If your copy was protected with Kirpik, run the infringing URL through detection and generate a [Proof of Ownership Certificate](/features/chain-of-proof/). The certificate packages your protection date, content fingerprints, the detection details and a public verification link into one dated document, which is exactly the shape of evidence the rest of this process wants. [What counts as proof when your copy is stolen](/learn/proving-text-ownership/) covers the evidence question more broadly.
+This is also the moment to establish that the text is provably yours rather than merely similar. If your text was protected with Kirpik, run the infringing URL through detection and generate a [Proof of Ownership Certificate](/features/chain-of-proof/). The certificate packages your protection date, content fingerprints, the detection details and a public verification link into one dated document, which is exactly the shape of evidence the rest of this process wants. [What counts as proof when your text is stolen](/learn/proving-text-ownership/) covers the evidence question more broadly.
 
 ## Step 2: identify who hosts the infringing site
 
@@ -52,13 +52,13 @@ Keep the tone factual and the notice short. Abuse teams process queues, and a no
 
 ## Step 5: send it and track what happens
 
-Submit through the host's channel, keep a copy, and note the date. Straightforward cases are often resolved within days: the host removes the material or disables the page and notifies its customer. If a week or two passes with silence, follow up once through the same channel, then consider the parallel routes below.
+Submit through the host's channel, keep a record, and note the date. Straightforward cases are often resolved within days: the host removes the material or disables the page and notifies its customer. If a week or two passes with silence, follow up once through the same channel, then consider the parallel routes below.
 
 ## If a counter-notice arrives
 
 The person who posted the material can respond with a counter-notice claiming the removal was a mistake or misidentification. If they do, the host forwards it to you, and after a statutory window of roughly ten to fourteen business days the material can be restored unless you tell the host you have filed a court action.
 
-Counter-notices to clear-cut text theft are rare, because a counter-notice requires the sender to swear to their claim and accept court jurisdiction, which is an uncomfortable thing to do over copy they scraped in an afternoon. Solid evidence makes it rarer still: a thief looking at a dated certificate with verifiable fingerprints and a watermark detection knows exactly how a dispute would end. If you do receive one, that is the moment to involve a lawyer.
+Counter-notices to clear-cut text theft are rare, because a counter-notice requires the sender to swear to their claim and accept court jurisdiction, which is an uncomfortable thing to do over text they scraped in an afternoon. Solid evidence makes it rarer still: a thief looking at a dated certificate with verifiable fingerprints and a watermark detection knows exactly how a dispute would end. If you do receive one, that is the moment to involve a lawyer.
 
 ## Non-US hosts
 
@@ -68,4 +68,4 @@ Some hosts, in some jurisdictions, will ignore you. When that happens, stop push
 
 ## Where the certificate fits
 
-Every step above goes smoother when ownership is a fact you demonstrate rather than a story you tell. That is the role of the Proof of Ownership Certificate: your protection date, the content fingerprints of original and copy, the watermark detection with its marker count and confidence, and a QR-linked public verification page an abuse team can check in thirty seconds. The [enforcement guide](/enforcement/) shows how detection, certificate and notice fit together into one workflow, and Kirpik generates the certificate the moment a detection lands, so the evidence is ready before you have opened the host's complaint form.
+Every step above goes smoother when ownership is a fact you demonstrate rather than a story you tell. That is the role of the Proof of Ownership Certificate: your protection date, the content fingerprints of the original and the stolen text, the watermark detection with its marker count and confidence, and a QR-linked public verification page an abuse team can check in thirty seconds. The [enforcement guide](/enforcement/) shows how detection, certificate and notice fit together into one workflow, and Kirpik generates the certificate the moment a detection lands, so the evidence is ready before you have opened the host's complaint form.

@@ -10,7 +10,7 @@ related:
   - marking-text-without-changing-words
 ---
 
-Imagine the worst version of this product. You paste a competitor's page into a detector, it flashes "MATCH", and you fire off a furious takedown notice. Then it turns out the detector was guessing, the competitor wrote their own copy, and you have accused an innocent business in writing.
+Imagine the worst version of this product. You paste a competitor's page into a detector, it flashes "MATCH", and you fire off a furious takedown notice. Then it turns out the detector was guessing, the competitor wrote their own text, and you have accused an innocent business in writing.
 
 A false positive in content protection is not a minor bug. It is the failure mode that destroys the entire point, because evidence you cannot trust is not evidence. So before you rely on any detection result, you should understand how the detector decides, and what would have to go wrong for it to be mistaken. Here is how Kirpik's [detection](/features/detection/) reaches a verdict.
 
@@ -24,13 +24,13 @@ The fix is not to look harder. It is to demand more before declaring anything, a
 
 ### 1. The signature must be found repeatedly
 
-Kirpik's watermark does not sit in one place in your text. The signature repeats through the content with built-in redundancy, partly so that [edited and trimmed copies survive](/learn/why-watermarks-survive-copying/), and partly for exactly this reason: a real watermarked copy offers the detector many chances to recover the signature, while random unwatermarked text offers only coincidence.
+Kirpik's watermark does not sit in one place in your text. The signature repeats through the content with built-in redundancy, partly so that [edited and trimmed versions survive](/learn/why-watermarks-survive-copying/), and partly for exactly this reason: real watermarked text offers the detector many chances to recover the signature, while random unwatermarked text offers only coincidence.
 
 One apparent recovery is never enough. The detector requires multiple independent recoveries from different parts of the text before a match is even on the table. Coincidence can fake one hit. Faking several independent ones in the same page is a different order of unlikely.
 
 ### 2. The recoveries must agree
 
-Finding several signature copies is still not sufficient, because noise does not just have to appear, it has to be consistent. Each recovered marker is read as a candidate signature, and the candidates then have to agree with each other by majority before the detector accepts them as one voice.
+Finding several signature repetitions is still not sufficient, because noise does not just have to appear, it has to be consistent. Each recovered marker is read as a candidate signature, and the candidates then have to agree with each other by majority before the detector accepts them as one voice.
 
 Think of it as interviewing witnesses separately. Three witnesses who each independently name the same store are compelling. Three witnesses telling three different stories are noise, and Kirpik treats them as noise, whatever their individual confidence.
 
@@ -50,13 +50,13 @@ Treat that figure the way it is offered: an engineering estimate of how hard the
 
 A detection result in Kirpik does not say a bare yes. It reports Watermark Security Markers, the count of validated signature recoveries, together with a Confidence figure. That is a deliberate choice about what evidence should look like.
 
-A bare yes/no hides everything that matters. Ten agreeing markers recovered from a full-page copy is a different situation from two markers recovered from a single lifted paragraph, and you should know which you are holding before you act on it. The marker count tells you how much of the signature survived the thief's editing. Confidence summarises how firmly the evidence clears the thresholds. Together they let you, and later a host's abuse team, weigh the finding rather than take it on faith.
+A bare yes/no hides everything that matters. Ten agreeing markers recovered from a full stolen page is a different situation from two markers recovered from a single lifted paragraph, and you should know which you are holding before you act on it. The marker count tells you how much of the signature survived the thief's editing. Confidence summarises how firmly the evidence clears the thresholds. Together they let you, and later a host's abuse team, weigh the finding rather than take it on faith.
 
 The same numbers flow into the paperwork. A [Proof of Ownership Certificate](/features/chain-of-proof/) records the marker count and confidence alongside the detection date, the infringing URL and the content fingerprints, so the strength of the match is documented in the evidence itself. [Inside a Proof of Ownership Certificate](/learn/inside-chain-of-proof/) walks through every field.
 
 ## What a low result means
 
-Sometimes detection comes back thin: a marker or two, below the threshold, no declared match. That is the system working, not failing. It can mean the page simply is not carrying your text. It can mean the thief took a fragment too short to hold enough of the repeating signature, which is one reason [longer protected text is stronger text](/learn/marking-text-without-changing-words/). Or it can mean the copy was reworked heavily enough that too little signature survived.
+Sometimes detection comes back thin: a marker or two, below the threshold, no declared match. That is the system working, not failing. It can mean the page simply is not carrying your text. It can mean the thief took a fragment too short to hold enough of the repeating signature, which is one reason [longer protected text is stronger text](/learn/marking-text-without-changing-words/). Or it can mean the stolen text was reworked heavily enough that too little signature survived.
 
 What Kirpik will not do is round a weak signal up to an accusation. The thresholds exist so that a declared match means something, and that discipline is precisely what makes a strong match usable against a thief.
 
