@@ -1,103 +1,109 @@
-﻿---
+---
 import Base from "../../layouts/Base.astro";
 import PageHero from "../../components/PageHero.astro";
 import CompareTable from "../../components/CompareTable.astro";
-import CtaBand from "../../components/CtaBand.astro";
+import SiteCheckForm from "../../components/SiteCheckForm.astro";
 
 const rows = [
-  { label: "Actively looks for duplicates of your content", them: true, us: "On demand, by paste or URL" },
-  { label: "Finds lightly reworded lookalikes", them: true, us: true },
-  { label: "Shows that two pages match", them: true, us: true },
-  { label: "Shows whose text it was first", them: false, us: true },
-  { label: "Mark embedded in the content itself", them: false, us: true },
-  { label: "Works on stolen text pasted outside the scanned sites", them: false, us: true },
-  { label: "Produces an ownership document for a takedown", them: "Reports of matches", us: true },
+  { label: "Watches chosen sites for lookalike content", them: "Yes", us: "-" },
+  { label: "Stops scrapers and feed copying", them: "No", us: "-" },
+  { label: "Protects your text once it leaves your store", them: "No", us: "Yes" },
+  { label: "Proves a stolen description was yours", them: "No", us: "Yes" },
+  { label: "Produces evidence for a DMCA takedown", them: "Match reports, not ownership proof", us: "Yes" },
 ];
 ---
 
 <Base
-  title="Kirpik vs copy monitors and plagiarism scanners"
-  description="Copy monitors find pages that match yours. A match is not ownership: it shows similarity, not origin. Why monitoring and text watermarking answer different questions, and how they combine."
+  title="Copy monitors vs Kirpik"
+  description="A plain comparison of copy monitors and plagiarism-style scanners with Kirpik: what a match report shows, whether monitoring prevents content theft, and why similarity is not authorship."
 >
   <PageHero
-    title="Copy monitors vs proof of ownership"
-    lead="Monitoring services scan other sites for text that matches yours and raise a flag when they find it. Genuinely useful, and closer to the real problem than any blocker. But a match answers the question that text matches. It leaves open the one that wins disputes: whose text is it?"
+    title="Copy monitors vs Kirpik"
+    lead="A copy monitor scans other sites for content that matches yours and reports what it finds. A match report shows similarity between two pages; it does not show whose text it was first."
   />
 
   <section class="section" style="padding-top:0">
     <div class="container narrow prose">
-      <h2>What monitoring does well</h2>
+      <h2>What a copy monitor does</h2>
       <p>
-        A monitor works server-side, comparing content from sites it scans against yours, the same
-        family of techniques as plagiarism scanners. Good ones catch partial matches and light
-        rewording, and they do the tedious part for you: watching. In the Shopify anti-theft category we
-        surveyed in June and July 2026, this approach is rare and worth naming. Spy Blocker (the copycat
-        monitor by FlowIntegrity Drive) scans domains you choose for "copied images, copied text, and
-        similar product pages" and assembles evidence packs. IP Moat runs marketplace scanning with a
-        managed takedown service on top. Mintall Keep lists IP monitoring alongside its provenance
-        records.
+        A monitor works server-side, comparing pages from sites it scans against yours, the same family
+        of techniques as plagiarism scanners. It can catch partial matches and light rewording, and it
+        does the watching for you.
       </p>
       <p>
-        Notably, these monitors are among the only apps in the category that engage with text at all.
-        The seventy-odd blocker apps never leave the browser tab; a monitor at least goes looking where
-        stolen content actually ends up.
-      </p>
-
-      <h2>What a match is, and is not</h2>
-      <p>
-        A match is a similarity report: page A and page B carry substantially the same words. It says
-        nothing, on its own, about direction. Did they copy you, did you copy them, did you both source
-        the same manufacturer text? You know your own answer, but knowing is not showing. A host,
-        marketplace or search engine processing a takedown wants evidence of ownership and priority, and
-        a similarity score does not carry either. The monitor has found the fire; you still have to prove
-        whose house it is.
-      </p>
-      <p>
-        There is also a coverage ceiling. Monitoring sees the sites it scans. Stolen text pasted into a
-        marketplace listing, a social shop or a site outside the scan set stays invisible until someone
-        stumbles on it.
+        Three apps in the Shopify anti-theft category describe this approach in their listings, as
+        recorded in June and July 2026. Spy Blocker scans domains you choose for "copied images, copied
+        text, and similar product pages" and assembles evidence packs. IP Moat runs marketplace scanning
+        with a managed takedown service. Mintall Keep lists IP monitoring alongside its provenance
+        records. Each is compared in full on its own page:
+        <a href="/compare/copycat-alert-product-monitor/">Spy Blocker</a>,
+        <a href="/compare/ip-moat/">IP Moat</a>,
+        <a href="/compare/mintallkeep/">Mintall Keep</a>.
       </p>
 
-      <h2>The missing half: a mark inside the text</h2>
+      <h2>Does it prevent content theft?</h2>
       <p>
-        Kirpik approaches the same problem from inside the content. Its invisible algorithmic watermark,
-        derived from your original text and tied to your store's unique watermark code, travels inside
-        the text wherever it is copied. When you check a suspect page or paste a sample, detection does not
-        report "similar". It reports "this text carries this store's watermark", with a count of
-        surviving security markers and a confidence figure. The Proof of Ownership Certificate then lays out
-        fingerprints, dates and an Internet Archive timeline in a document anyone can verify through its
-        public verification page.
+        <strong>No.</strong> A monitor acts after the event: by the time a match is reported, the
+        content has already been taken. Monitoring changes nothing on your store, so Shopify still
+        serves your content through the machine-readable feeds (JSON, XML and ATOM) that scrapers
+        actually read, and a monitor sees only the sites it scans; stolen text pasted anywhere else
+        stays unseen until someone finds it.
       </p>
       <p>
-        Monitoring tells you that text matches. A watermark proves whose text it was. If you run a
-        monitor, its alerts become Kirpik's work queue: every flagged URL is one detection away from a
-        certificate. The two approaches are complementary, and only one of them can be added after the
-        theft. Watermark first, watch second.
+        Kirpik does not claim to prevent content theft: it <strong>protects</strong> content. The
+        watermark travels inside the text itself, so stolen content stays identifiable and provable
+        wherever it surfaces. Kirpik adds no scripts to your storefront, so it runs alongside any
+        blocker without conflict.
+      </p>
+
+      <h2>Can it prove infringement?</h2>
+      <p>
+        <strong>No.</strong> A match report shows similarity, not authorship: two pages carry
+        substantially the same words, but nothing in the report shows who wrote them first. Where a
+        listing describes evidence packs, that is per its listing; the packs are built from matches, and
+        a match shows similarity rather than authorship.
+      </p>
+      <p>
+        Kirpik proves infringement through the watermark and the Proof of Ownership Certificate.
+        Detection reads your watermark out of the stolen text, and the certificate records dated
+        fingerprints, the infringing page's timestamps, Wayback Machine corroboration and a public
+        verification page, ready for a DMCA takedown.
       </p>
     </div>
   </section>
 
   <section class="section" style="padding-top:0">
     <div class="container narrow">
-      <CompareTable themLabel="Copy monitor" rows={rows} />
-      <p class="tnote">
-        The monitor column reflects scanning services as described in their own Shopify App Store
-        listings, June and July 2026, including the apps named above; capabilities vary by service. App
-        names and trademarks belong to their owners. Not legal advice. App-by-app pages:
-        <a href="/compare/copycat-alert-product-monitor/">Spy Blocker (Copycat Monitor)</a>,
-        <a href="/compare/ip-moat/">IP Moat</a>,
-        <a href="/compare/mintallkeep/">Mintall Keep</a>.
-      </p>
+      <h2 class="tablehead">Copy monitors vs Kirpik</h2>
+      <CompareTable themLabel="Copy monitors" rows={rows} />
     </div>
   </section>
 
-  <CtaBand
-    heading="A match starts the argument. Proof ends it."
-    sub="Kirpik reads your store's own watermark out of stolen content and hands you the certificate. Free to start."
-  />
+  <SiteCheckForm tone="band" heading="Is your store's content protected?" cta="Check my store">
+    <Fragment slot="sub">
+      Do you use <strong>a copy monitor</strong> or any other "Content Protection" App? Enter your
+      Shopify store address to see if your content is actually protected.
+    </Fragment>
+  </SiteCheckForm>
+
+  <section class="section" style="padding-top:0">
+    <div class="container narrow">
+      <section class="fineprint">
+        <p>
+          This page describes scanning services as presented in their own public Shopify App Store
+          listings, June and July 2026; capabilities vary by service and listings change. The
+          limitations discussed are general properties of matching techniques rather than defects of
+          any app. App names and trademarks belong to their respective owners and are used for
+          identification only. Nothing here is legal advice.
+        </p>
+      </section>
+    </div>
+  </section>
 </Base>
 
 <style>
-  .tnote { margin-top: 1rem; font-size: 0.84rem; color: var(--ink-faint); line-height: 1.65; }
-  .tnote a { color: var(--orange-deep); font-weight: 600; }
+  .tablehead { font-size: clamp(1.45rem, 1.15rem + 1.2vw, 2rem); }
+  .fineprint { padding-top: 1.4rem; border-top: 1px solid var(--line); }
+  .fineprint p { font-size: 0.85rem; color: var(--ink-faint); line-height: 1.65; max-width: 78ch; }
+  .fineprint a { color: var(--orange-deep); font-weight: 600; }
 </style>

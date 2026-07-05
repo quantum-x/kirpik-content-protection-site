@@ -1,105 +1,109 @@
-﻿---
+---
 import Base from "../../layouts/Base.astro";
 import PageHero from "../../components/PageHero.astro";
 import CompareTable from "../../components/CompareTable.astro";
-import CtaBand from "../../components/CtaBand.astro";
+import SiteCheckForm from "../../components/SiteCheckForm.astro";
 
 const rows = [
-  { label: "Inserts extra invisible characters into your text", them: true, us: false },
-  { label: "Flagged by scanners, linters and editor plugins", them: true, us: false },
-  { label: "Survives copy-paste, scraping and reformatting", them: "Often lost in handling", us: true },
-  { label: "Encodes which store the text belongs to", them: "DIY-dependent", us: true },
-  { label: "Detection tool included", them: false, us: true },
-  { label: "Produces an ownership document for a takedown", them: false, us: true },
+  { label: "Inserts zero-width characters into your text", them: "Yes", us: "No" },
+  { label: "Changes your text", them: "Yes", us: "No" },
+  { label: "Survives cleaner tools, editing and reformatting", them: "No", us: "Yes" },
+  { label: "Proves a stolen description was yours", them: "No", us: "Yes" },
+  { label: "Produces evidence for a DMCA takedown", them: "No", us: "Yes" },
 ];
 ---
 
 <Base
-  title="Kirpik vs zero-width character tricks"
-  description="Zero-width characters are a well-known DIY text fingerprinting trick, and a well-known thing to scan for and strip. Kirpik does not use zero-width characters. Here is the difference."
+  title="Zero-width characters vs Kirpik"
+  description="A plain comparison of the zero-width character trick with Kirpik: how the DIY fingerprint works, why it is detectable and strippable, and where proof of ownership comes from. Kirpik does not use zero-width characters."
 >
   <PageHero
-    title="Zero-width characters vs an algorithmic watermark"
-    lead="Search for DIY text fingerprinting and you will find the zero-width trick: sprinkle invisible Unicode characters through your text and catch thieves who paste them along. It is a clever idea with a public weakness. Kirpik does not use it."
+    title="Zero-width characters vs Kirpik"
+    lead="A well-known DIY technique hides zero-width Unicode characters in text so that a pasted duplicate carries them along. The characters are invisible to readers but not to software."
   />
 
   <section class="section" style="padding-top:0">
     <div class="container narrow prose">
-      <h2>The trick, as the blog posts tell it</h2>
+      <h2>What the zero-width trick is</h2>
       <p>
         Unicode includes characters with no visible width, designed for legitimate typography and text
-        processing. The DIY fingerprinting recipe inserts them at chosen spots in a piece of text. The
-        text looks unchanged, the pattern of insertions encodes a message, and if a copied paragraph
-        shows up elsewhere with the pattern intact, you have your match. People have used variants of
-        this to trace leaked documents and detect copy-paste plagiarism, and it does work, right up until
-        it meets anyone or anything that has read the same blog posts.
+        processing. The trick inserts them at chosen spots in a piece of text: the text looks
+        unchanged, the pattern of insertions encodes a message, and if a duplicate turns up elsewhere
+        with the pattern intact, you have a match. Variants of it have been used to trace leaked
+        documents and to detect copy-paste plagiarism.
+      </p>
+      <p>
+        The weakness is public. Zero-width characters are specific, known codepoints, so software can
+        search for them by name. Code editors and their plugins highlight them. Security tooling flags
+        them, because the same codepoints appear in phishing and obfuscation attacks. Online detector
+        and cleaner tools remove them in one paste, and a find and replace across a handful of
+        codepoints strips the rest. Many platforms normalise text on paste or save and drop the
+        characters without anyone trying.
+      </p>
+      <p>Kirpik does not use zero-width characters.</p>
+
+      <h2>Does it prevent content theft?</h2>
+      <p>
+        <strong>No.</strong> Inserting invisible characters does not stop anyone taking the text: your
+        content is still served through the machine-readable feeds (JSON, XML and ATOM) that scrapers
+        actually read. What the trick adds is a fingerprint, and the fingerprint is detectable and
+        strippable: it lasts only until the text meets an editor, a cleaner tool or a platform that
+        normalises what is pasted into it.
+      </p>
+      <p>
+        Kirpik does not claim to prevent content theft: it <strong>protects</strong> content. The
+        watermark travels inside the text itself, so stolen content stays identifiable and provable
+        wherever it surfaces. Kirpik adds no scripts to your storefront, so it runs alongside any
+        blocker without conflict.
       </p>
 
-      <h2>The publicly documented weakness</h2>
+      <h2>Can it prove infringement?</h2>
       <p>
-        Zero-width characters are famous, and famous is fatal for a hiding place. They are specific,
-        known codepoints, which means they can be searched for by name:
-      </p>
-      <ul>
-        <li>
-          Code editors and their plugins highlight zero-width characters, a practice that spread widely
-          after they were shown off as a vehicle for hidden text and source-code fingerprinting.
-        </li>
-        <li>
-          Security tooling and linters flag them, because invisible codepoints are also used in phishing
-          and obfuscation attacks.
-        </li>
-        <li>
-          Online "invisible character detectors" and cleaner tools remove them in one paste. So does a
-          find and replace across a handful of well-known codepoints.
-        </li>
-        <li>
-          Many platforms and editors normalise text on paste or save, quietly dropping the characters
-          without anyone even trying. The fingerprint dissolves in ordinary handling.
-        </li>
-      </ul>
-      <p>
-        There is also a subtler problem: even when the characters survive, presence is all they show. A
-        pile of zero-width codepoints in a paragraph does not, by itself, say whose paragraph it was,
-        unless your DIY encoding also carries an identity and you can decode it under scrutiny.
-      </p>
-
-      <h2>What Kirpik does instead</h2>
-      <p>
-        Kirpik does not use zero-width characters. Its watermark is an algorithmic signature derived from
-        your original text, embedded invisibly and tied to your store's unique watermark code, and we do
-        not publish its internals, for the same reason a bank does not publish its vault schematics.
-        What we do publish is what you can check from the outside: your words are not rewritten, nothing
-        is visible to readers, search engines see your text unchanged, and the signature survives
-        copy-paste, scraping, trimming and light rewording.
+        <strong>No.</strong> A surviving pattern shows that invisible characters are present, not whose
+        text it was, unless the DIY encoding also carries an identity that can be decoded and explained
+        under scrutiny. And it rarely survives, because the codepoints are removed by the tools and
+        platforms described above.
       </p>
       <p>
-        The other difference is that a watermark is only half the product. Kirpik pairs it with
-        detection, paste a sample or check a URL and get back a match with a confidence figure, and with
-        the Proof of Ownership Certificate, which turns a detection into a dated, independently verifiable
-        ownership document. A DIY fingerprint leaves you doing all of that yourself, with a technique the
-        whole internet knows how to strip.
+        Kirpik proves infringement through the watermark and the Proof of Ownership Certificate.
+        Detection reads your watermark out of the stolen text, and the certificate records dated
+        fingerprints, the infringing page's timestamps, Wayback Machine corroboration and a public
+        verification page, ready for a DMCA takedown.
       </p>
     </div>
   </section>
 
   <section class="section" style="padding-top:0">
     <div class="container narrow">
+      <h2 class="tablehead">Zero-width characters vs Kirpik</h2>
       <CompareTable themLabel="Zero-width trick" rows={rows} />
-      <p class="tnote">
-        The zero-width column describes the DIY technique as publicly documented in blog posts, editor
-        plugins and detector tools; behaviour varies with each implementation. Kirpik's statements are
-        limited to what it does not use and to externally checkable properties. Not legal advice.
-      </p>
     </div>
   </section>
 
-  <CtaBand
-    heading="A hiding place everyone knows is not a hiding place."
-    sub="Kirpik's watermark is algorithmic, invisible, and built to survive what actually happens to stolen text. Free to start."
-  />
+  <SiteCheckForm tone="band" heading="Is your store's content protected?" cta="Check my store">
+    <Fragment slot="sub">
+      Do you use <strong>zero-width characters</strong> or any other "Content Protection" App? Enter
+      your Shopify store address to see if your content is actually protected.
+    </Fragment>
+  </SiteCheckForm>
+
+  <section class="section" style="padding-top:0">
+    <div class="container narrow">
+      <section class="fineprint">
+        <p>
+          This page describes the zero-width technique as publicly documented in editor plugins,
+          security tooling and detector tools; behaviour varies with each implementation. It is a DIY
+          technique rather than a product, so no app is quoted here. App-by-app comparisons are in
+          <a href="/compare/">the full comparison survey</a>. Nothing here is legal advice.
+        </p>
+      </section>
+    </div>
+  </section>
 </Base>
 
 <style>
-  .tnote { margin-top: 1rem; font-size: 0.84rem; color: var(--ink-faint); line-height: 1.65; }
+  .tablehead { font-size: clamp(1.45rem, 1.15rem + 1.2vw, 2rem); }
+  .fineprint { padding-top: 1.4rem; border-top: 1px solid var(--line); }
+  .fineprint p { font-size: 0.85rem; color: var(--ink-faint); line-height: 1.65; max-width: 78ch; }
+  .fineprint a { color: var(--orange-deep); font-weight: 600; }
 </style>

@@ -1,130 +1,113 @@
-﻿---
+---
 import Base from "../../layouts/Base.astro";
 import PageHero from "../../components/PageHero.astro";
 import CompareTable from "../../components/CompareTable.astro";
-import CtaBand from "../../components/CtaBand.astro";
+import SiteCheckForm from "../../components/SiteCheckForm.astro";
 
 const rows = [
-  { label: "Adds friction for a casual copier while they are on your store", them: true, us: false },
-  { label: "Changes anything about the text itself", them: false, us: false },
-  { label: "Adds scripts to your storefront", them: true, us: false },
-  { label: "Has any effect on Shopify's public feed surfaces", them: false, us: true },
-  { label: "Protection still exists after the text is pasted elsewhere", them: false, us: true },
-  { label: "Identifies stolen content found on another site", them: false, us: true },
-  { label: "Produces an ownership document for a takedown", them: false, us: true },
+  { label: "Stops right-click copying in the browser", them: "Easily bypassed", us: "-" },
+  { label: "Stops scrapers and feed copying", them: "No", us: "-" },
+  { label: "Protects your text once it leaves your store", them: "No", us: "Yes" },
+  { label: "Proves a stolen description was yours", them: "No", us: "Yes" },
+  { label: "Produces evidence for a DMCA takedown", them: "No", us: "Yes" },
 ];
 ---
 
 <Base
-  title="Kirpik vs copy and right-click blockers"
-  description="Copy blockers, right-click disablers and devtools detectors act only inside a browser tab. Your descriptions also live in public feeds no script can reach. Run the test on any store, then see what invisible text watermarking does instead."
+  title="Copy blockers vs Kirpik"
+  description="A plain comparison of copy and right-click blockers with Kirpik: what a storefront blocking script does, whether it prevents content theft, and where proof of ownership comes from."
 >
   <PageHero
-    title="Copy blockers vs invisible text watermarking"
-    lead="Around seventy apps in Shopify's anti-theft category run a script that cancels right-click, text selection, copying or the developer tools. Here is what that script can genuinely do for your words, the one-minute test that shows where it stops, and what to put behind it."
+    title="Copy blockers vs Kirpik"
+    lead="Most apps in Shopify's anti-theft category run a script in the visitor's browser that cancels right-click, text selection, copying or keyboard shortcuts. This page covers the technique itself, across every app that uses it."
   />
 
   <section class="section" style="padding-top:0">
     <div class="container narrow prose">
-      <h2>What a blocker actually is</h2>
+      <h2>What a copy blocker is</h2>
       <p>
-        Install one of these apps and a small script joins your theme. While a visitor's browser runs
-        that script, it cancels selection and clipboard events, swallows Ctrl+C and Ctrl+U, hides the
-        context menu, and sometimes watches for the developer tools. That is the entire machine. It has
-        no server component acting on your content and it changes nothing about the text itself.
+        Install one of these apps and a small script joins your theme. While a page is open, the script
+        cancels selection and clipboard events, hides the context menu, swallows keyboard shortcuts, and
+        sometimes watches for the developer tools. It has no server component and it changes nothing
+        about the text itself.
       </p>
       <p>
-        Some vendors say this plainly, and credit to them. CopyBlock's listing offers to "discourage
-        casual copying on your storefront". Defendify calls itself "an extra layer of deterrence against
-        casual content theft". Cozy AntiTheft says it "makes it harder to steal content". The developer of
-        Content Protection by Webyze put it best in a public reply on its own listing: "there is no way
-        to protect the content 100%, just ways to add hurdles." Those descriptions, from the vendors
-        themselves in mid 2026, are accurate. And even inside the tab the block does not hold: reader
-        mode, the page source or switching JavaScript off bypasses it in seconds. Browsers keep those
-        controls with the user.
+        Some listings say this themselves. CopyBlock offers to "discourage casual copying on your
+        storefront". Defendify calls itself "an extra layer of deterrence against casual content theft".
+        Cozy AntiTheft says it "makes it harder to steal content". The developer of Content Protection by
+        Webyze wrote in a public reply on its own listing: "there is no way to protect the content 100%,
+        just ways to add hurdles." Even the hurdles do not hold: reader mode, the page source or
+        switching JavaScript off bypasses the script in seconds, and browsers keep those controls with
+        the user.
       </p>
 
-      <h2>Why the tab is the boundary</h2>
+      <h2>Does it prevent content theft?</h2>
       <p>
-        A storefront script exists only on pages that load it. Shopify, by design, publishes your product
-        data in several other places at the same time: the JSON feed at /products.json, per-product JSON
-        endpoints, sitemaps, and RSS for blogs. These surfaces exist so software can read your catalogue,
-        they cannot be switched off, and they are served without any storefront JavaScript running. A
-        scraper or dropship importer reads them directly. It never sees the blocker, not because it
-        defeated it, but because the blocker was never there.
+        <strong>No.</strong> A copy blocker relies on a script in the visitor's browser, and a storefront
+        script does not prevent content theft. It does not stop Shopify serving your content through the
+        machine-readable feeds (JSON, XML and ATOM) that scrapers actually read, it is easily bypassed
+        and easily disabled, and the friction it creates lands on legitimate customers rather than on
+        content thieves.
+      </p>
+      <p>
+        A scraper or dropship importer reads those feeds directly. It never encounters the blocker,
+        because the script exists only on pages that load it.
+      </p>
+      <p>
+        Kirpik does not claim to prevent content theft: it <strong>protects</strong> content. The
+        watermark travels inside the text itself, so stolen content stays identifiable and provable
+        wherever it surfaces. Kirpik adds no scripts to your storefront, so it runs alongside any
+        blocker without conflict.
+      </p>
+
+      <h2>Can it prove infringement?</h2>
+      <p>
+        <strong>No.</strong> A blocking script leaves no trace in the text and keeps no record of what
+        was taken, so when your description turns up on another site it offers nothing to show whose
+        text it was.
+      </p>
+      <p>
+        Kirpik proves infringement through the watermark and the Proof of Ownership Certificate.
+        Detection reads your watermark out of the stolen text, and the certificate records dated
+        fingerprints, the infringing page's timestamps, Wayback Machine corroboration and a public
+        verification page, ready for a DMCA takedown.
       </p>
     </div>
   </section>
 
   <section class="section" style="padding-top:0">
     <div class="container narrow">
-      <div class="trybox">
-        <h2>Sixty seconds, no tools, any store</h2>
-        <ol>
-          <li>Pick any Shopify store. One running a copy blocker makes the point best.</li>
-          <li>Add <code>/products.json</code> to the end of its address and open it in a new tab.</li>
-          <li>Read the response. Every product description is there in full, as plain text, with no
-            right-click block, no selection block, and no script of any kind in the way.</li>
-        </ol>
+      <h2 class="tablehead">Copy blockers vs Kirpik</h2>
+      <CompareTable themLabel="Copy blockers" rows={rows} />
+    </div>
+  </section>
+
+  <SiteCheckForm tone="band" heading="Is your store's content protected?" cta="Check my store">
+    <Fragment slot="sub">
+      Do you use <strong>a right-click blocker</strong> or any other "Content Protection" App? Enter
+      your Shopify store address to see if your content is actually protected.
+    </Fragment>
+  </SiteCheckForm>
+
+  <section class="section" style="padding-top:0">
+    <div class="container narrow">
+      <section class="fineprint">
         <p>
-          That page is what bulk copying actually looks like. Want to see your own store's version, plus
-          the other public surfaces? <a href="/site-check/">Run the site check</a>.
+          This page describes the storefront-blocker technique across the Shopify anti-theft category.
+          Quotes are from the named apps' own public Shopify App Store listings as recorded in June and
+          July 2026; listings change. The limitations discussed are general properties of browsers and
+          platforms rather than defects of any app. Each named app has its own page in
+          <a href="/compare/">the full comparison survey</a>. App names and trademarks belong to their
+          respective owners and are used for identification only. Nothing here is legal advice.
         </p>
-      </div>
+      </section>
     </div>
   </section>
-
-  <section class="section" style="padding-top:0">
-    <div class="container narrow prose">
-      <h2>The part that matters after the theft</h2>
-      <p>
-        Suppose the blocker does its job and a casual visitor gives up. The copying that still happens, via
-        the feed, the page source, or a browser with scripts off, shares one property: the words carry no
-        trace of where they came from. Text is just characters. Whoever pastes it owns the argument until
-        somebody proves otherwise.
-      </p>
-      <p>
-        That is the gap Kirpik fills, and it is a different job from blocking. Kirpik embeds an invisible
-        algorithmic watermark, derived from your original text, into your descriptions, articles and
-        pages. Nothing changes for readers or search engines, no script joins your theme, and your words
-        stay exactly as written. When a stolen version turns up, detection reads your store's watermark code back
-        out of it, and a Proof of Ownership Certificate turns the detection into a dated, verifiable
-        ownership document.
-      </p>
-      <p>
-        You can run a blocker and Kirpik together if the friction is worth it to you. Just be clear about
-        which one is doing which job: the blocker inconveniences the person standing in your shop, the
-        watermark follows the goods out the door.
-      </p>
-    </div>
-  </section>
-
-  <section class="section" style="padding-top:0">
-    <div class="container narrow">
-      <CompareTable themLabel="Copy blocker" rows={rows} />
-      <p class="tnote">
-        Blocker column reflects the typical storefront-script app in the anti-theft category, per the
-        listings we surveyed in June and July 2026. Vendor quotes above are from the named apps' own
-        public listings on those dates. App names and trademarks belong to their owners. Not legal advice.
-        See <a href="/compare/">the full category survey</a> for app-by-app pages.
-      </p>
-    </div>
-  </section>
-
-  <CtaBand
-    heading="Friction is optional. Proof is not."
-    sub="Kirpik puts invisible, provable attribution inside the text itself. Free to start, nothing added to your theme."
-  />
 </Base>
 
 <style>
-  .trybox { background: var(--amber-tint); border: 1px solid #ecd9b4; border-radius: var(--r-lg); padding: clamp(1.5rem, 4vw, 2.2rem); }
-  .trybox h2 { font-size: clamp(1.4rem, 1.1rem + 1.2vw, 1.9rem); margin-top: 0; }
-  .trybox ol { margin-top: 1rem; padding-left: 1.4rem; display: grid; gap: 0.6rem; color: var(--ink-soft); line-height: 1.65; }
-  .trybox code { font-family: var(--font-mono); font-size: 0.9em; background: #fff; padding: 0.15em 0.45em; border-radius: 6px; border: 1px solid var(--line); }
-  .trybox p { margin-top: 1.1rem; color: var(--ink-soft); }
-  .trybox a { color: var(--orange-deep); font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
-
-  .tnote { margin-top: 1rem; font-size: 0.84rem; color: var(--ink-faint); line-height: 1.65; }
-  .tnote a { color: var(--orange-deep); font-weight: 600; }
+  .tablehead { font-size: clamp(1.45rem, 1.15rem + 1.2vw, 2rem); }
+  .fineprint { padding-top: 1.4rem; border-top: 1px solid var(--line); }
+  .fineprint p { font-size: 0.85rem; color: var(--ink-faint); line-height: 1.65; max-width: 78ch; }
+  .fineprint a { color: var(--orange-deep); font-weight: 600; }
 </style>

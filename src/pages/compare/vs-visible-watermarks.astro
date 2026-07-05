@@ -1,103 +1,105 @@
-﻿---
+---
 import Base from "../../layouts/Base.astro";
 import PageHero from "../../components/PageHero.astro";
 import CompareTable from "../../components/CompareTable.astro";
-import CtaBand from "../../components/CtaBand.astro";
+import SiteCheckForm from "../../components/SiteCheckForm.astro";
 
 const rows = [
-  { label: "Works on product images", them: true, us: false },
-  { label: "Works on product descriptions, articles and pages", them: false, us: true },
-  { label: "Invisible to customers", them: false, us: true },
-  { label: "Mark travels with a duplicate of what it protects", them: "For images", us: true },
-  { label: "Survives cropping or removal tools", them: false, us: "Survives editing and trimming" },
-  { label: "Identifies stolen content found on another site", them: false, us: true },
-  { label: "Produces an ownership document for a takedown", them: false, us: true },
+  { label: "Puts a visible mark on product images", them: "Yes", us: "-" },
+  { label: "Invisible to customers", them: "No", us: "Yes" },
+  { label: "Travels with the content when it is copied", them: "Images only", us: "Yes" },
+  { label: "Proves a stolen description was yours", them: "No", us: "Yes" },
+  { label: "Produces evidence for a DMCA takedown", them: "No", us: "Yes" },
 ];
 ---
 
 <Base
-  title="Kirpik vs visible watermarks"
-  description="Visible image watermarks solve an image problem, at a visible cost. There is no visible equivalent for text, and a copyright footer is not protection. What invisible text watermarking does instead."
+  title="Visible watermarks vs Kirpik"
+  description="A plain comparison of visible image watermarks with Kirpik: what a stamped mark does for product photos, whether it prevents content theft, and what protects the text beside the images."
 >
   <PageHero
-    title="Visible watermarks vs invisible text protection"
-    lead="A logo stamped across a product photo travels wherever that photo is copied, and that is genuinely useful. But it answers an image question. Your descriptions, articles and pages need a different answer, because no visible mark can ride along inside a sentence."
+    title="Visible watermarks vs Kirpik"
+    lead="Several apps in Shopify's anti-theft category stamp a logo, name or badge onto product images. A visible mark travels with the image wherever it is copied; the text beside the image is out of its scope."
   />
 
   <section class="section" style="padding-top:0">
     <div class="container narrow prose">
-      <h2>What visible watermarking gets right</h2>
+      <h2>What a visible watermark does</h2>
       <p>
-        Ten apps in Shopify's anti-theft category stamp a visible logo, text or badge onto product
-        images, several of them in bulk with automatic application and restorable originals. Against the
-        blockers that dominate the category, this approach has one honest advantage: the mark is part of
-        the file. Save the image, screenshot it, re-upload it, and the mark is still there. The
-        protection travels, which is exactly what a storefront script cannot offer.
+        These apps lay a visible mark over your product photos, usually in bulk, keeping the originals
+        so the mark can be removed later. Because the mark is part of the image file, it stays in place
+        when the image is saved, screenshotted or re-uploaded: the mark travels with the image.
+      </p>
+      <p>
+        Two boundaries follow. The mark can be taken off: a corner logo crops out, and image-editing
+        tools can reconstruct the picture beneath a mark laid across the frame. And it is an image
+        technique only. Your product descriptions, blog articles and pages have no pixels to carry a
+        mark, and there is no visible equivalent for text: anything a reader can see in text, an editor
+        can delete.
       </p>
 
-      <h2>What it costs, and where it ends</h2>
+      <h2>Does it prevent content theft?</h2>
       <p>
-        The price is paid in the open. Every customer sees the mark on every photo, which is why these
-        apps compete on making marks subtle, and why store owners agonise over opacity sliders. And the
-        mark can be taken off: a corner logo crops out, and inpainting tools reconstruct the pixels
-        underneath a mark laid across the whole frame. A visible mark deters and brands; it does not
-        bind.
+        <strong>No.</strong> A watermarked image can still be saved and reposted; the mark identifies
+        the image but does not stop the taking. For text the technique is out of scope entirely: it does
+        not stop Shopify serving your descriptions through the machine-readable feeds (JSON, XML and
+        ATOM) that scrapers actually read, and it leaves the words on the page untouched.
       </p>
       <p>
-        More fundamental for this site's subject: it is an image technique. The description next to the
-        photo, the buying guide, the ingredient story that took a week to write, none of that is touched.
-        In the whole ninety-app category we surveyed in June and July 2026, not one app applies any kind
-        of watermark to text.
-      </p>
-
-      <h2>Why there is no visible watermark for words</h2>
-      <p>
-        You could try. A copyright line under every description? The thief's paste selection simply stops
-        one line short, and a footer proves nothing anyway, since anyone can type one. Your store name
-        woven into every paragraph? Find and replace removes it faster than you added it. Wording so
-        distinctive it acts as a signature? That is just writing the thief will lightly edit. Anything a
-        reader can see in text, an editor can delete, and text is edited far more casually than images
-        are. A visible mark on words is either destroyed in the first thirty seconds or it was never
-        really a mark.
+        Kirpik does not claim to prevent content theft: it <strong>protects</strong> content. The
+        watermark travels inside the text itself, so stolen content stays identifiable and provable
+        wherever it surfaces. Kirpik adds no scripts to your storefront, so it runs alongside any
+        blocker without conflict.
       </p>
 
-      <h2>The text-side equivalent is invisible</h2>
+      <h2>Can it prove infringement?</h2>
       <p>
-        Kirpik gives text the property that makes image watermarks worth having, without the visible
-        cost. It embeds an invisible algorithmic watermark, derived from your original text, into your
-        product descriptions, blog articles and pages. Your words do not change, readers and search
-        engines see nothing, and the signature repeats through the content with redundancy to spare. Copy
-        it, trim it, reword a few lines, paste it into another theme: detection still reads your store's
-        watermark code out of the stolen text, and a Proof of Ownership Certificate turns that into a dated,
-        verifiable ownership document for a DMCA takedown.
+        <strong>No.</strong> A visible mark puts your name on the image, but the listings in this group
+        describe no detection and no ownership document, and for the text on the page a stamped logo
+        does nothing.
       </p>
       <p>
-        If your photos are your crown jewels too, a visible mark or an invisible image watermark is a
-        sensible companion. The point is that words were the unprotected half, and visibility was never
-        an option for them.
+        Kirpik proves infringement through the watermark and the Proof of Ownership Certificate.
+        Detection reads your watermark out of the stolen text, and the certificate records dated
+        fingerprints, the infringing page's timestamps, Wayback Machine corroboration and a public
+        verification page, ready for a DMCA takedown.
       </p>
     </div>
   </section>
 
   <section class="section" style="padding-top:0">
     <div class="container narrow">
-      <CompareTable themLabel="Visible watermark" rows={rows} />
-      <p class="tnote">
-        The visible-watermark column reflects the typical image-watermark app in the Shopify anti-theft
-        category, per each app's own public listing, June and July 2026. Removal notes describe what
-        cropping and image-editing tools do in general. App names and trademarks belong to their owners.
-        Not legal advice. Full survey at <a href="/compare/">the comparison hub</a>.
-      </p>
+      <h2 class="tablehead">Visible watermarks vs Kirpik</h2>
+      <CompareTable themLabel="Visible watermarks" rows={rows} />
     </div>
   </section>
 
-  <CtaBand
-    heading="Your photos can wear a badge. Your words need a signature."
-    sub="Invisible, algorithmic, derived from your original text, and there when you need to prove ownership. Free to start."
-  />
+  <SiteCheckForm tone="band" heading="Is your store's content protected?" cta="Check my store">
+    <Fragment slot="sub">
+      Do you use <strong>a visible image watermark</strong> or any other "Content Protection" App?
+      Enter your Shopify store address to see if your content is actually protected.
+    </Fragment>
+  </SiteCheckForm>
+
+  <section class="section" style="padding-top:0">
+    <div class="container narrow">
+      <section class="fineprint">
+        <p>
+          This page describes visible image watermarking as implemented across the Shopify anti-theft
+          category, per each app's own public App Store listing as recorded in June and July 2026;
+          listings change. Removal notes describe what cropping and image-editing tools do in general,
+          not defects of any app. App-by-app pages are in
+          <a href="/compare/">the full comparison survey</a>. App names and trademarks belong to their
+          respective owners and are used for identification only. Nothing here is legal advice.
+        </p>
+      </section>
+    </div>
+  </section>
 </Base>
 
 <style>
-  .tnote { margin-top: 1rem; font-size: 0.84rem; color: var(--ink-faint); line-height: 1.65; }
-  .tnote a { color: var(--orange-deep); font-weight: 600; }
+  .tablehead { font-size: clamp(1.45rem, 1.15rem + 1.2vw, 2rem); }
+  .fineprint { padding-top: 1.4rem; border-top: 1px solid var(--line); }
+  .fineprint p { font-size: 0.85rem; color: var(--ink-faint); line-height: 1.65; max-width: 78ch; }
+  .fineprint a { color: var(--orange-deep); font-weight: 600; }
 </style>
