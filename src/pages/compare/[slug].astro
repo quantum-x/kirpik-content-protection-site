@@ -9,6 +9,7 @@ import {
   COMPETITORS_BY_POPULARITY,
   SCRIPT_MECHS,
   appCaps,
+  rebutClaim,
   type Competitor,
 } from "../../compare-data";
 
@@ -90,6 +91,20 @@ const sideRows: { label: string; them: Answer; kirpik: Answer }[] = [
   { label: "Produces evidence for a DMCA takedown", them: row5Them, kirpik: YES },
 ];
 
+// Every listing claim on a script or access-control app, paired with its
+// technical rebuttal. A null rebuttal is a deliberate out-of-scope call.
+const claimItems =
+  !isTilkie && (scriptBased || geoOnly)
+    ? (app.claims ?? []).map((claim) => ({ claim, rebuttal: rebutClaim(claim) }))
+    : [];
+
+// The few listings that themselves use deterrence-only language get the
+// accurate framing line; the rest get the plain non-disclosure fact.
+const CANDID = new Set(["copyblock", "defendify", "cozy-antitheft-for-images-and-more"]);
+const disclosureLine = CANDID.has(app.slug)
+  ? "Its listing frames this as deterrence rather than prevention."
+  : `${app.name}'s listing does not state these limits.`;
+
 const related = COMPETITORS_BY_POPULARITY.filter((c) => c.slug !== app.slug)
   .sort((a, b) => Number(b.primary === app.primary) - Number(a.primary === app.primary))
   .slice(0, 3);
@@ -158,25 +173,43 @@ const related = COMPETITORS_BY_POPULARITY.filter((c) => c.slug !== app.slug)
         ) : geoOnly ? (
           <>
             <p>
-              <strong>No.</strong> {app.name} decides who can load your store, and a VPN or proxy
-              changes an apparent location in one click. An access rule also says nothing about what
-              happens to your text once an allowed visitor or a permitted crawler has it: Shopify serves
-              the same text through feeds for customers, search engines and AI tools, and nothing in the
-              words themselves changes.
+              <strong>No.</strong> {app.name} relies on rules about who can load your store, and an
+              access rule does not prevent content theft. It does not stop Shopify serving your
+              content through the machine-readable feeds (JSON, XML and ATOM) that scrapers actually
+              read, it is bypassed by a VPN in one click, and the friction it creates lands on
+              legitimate customers rather than on content thieves.
             </p>
+            <p class="rebuts__head">Its claims, one by one:</p>
+            <ul class="rebuts">
+              {claimItems.map((it) => (
+                <li>
+                  <span class="rebuts__claim">{it.claim}</span>
+                  <span class="rebuts__answer">{it.rebuttal ?? "Out of scope for content theft."}</span>
+                </li>
+              ))}
+            </ul>
+            <p>{disclosureLine}</p>
             {app.textNote && <p>{app.textNote}</p>}
           </>
         ) : scriptBased ? (
           <>
             <p>
-              <strong>No.</strong> {app.name} runs a script in the visitor's browser.
-              {hasCopyBlock
-                ? " A context-menu script does not prevent right-clicks: browsers keep those controls with the user, and reader mode, the page source or switching JavaScript off bypass it in seconds."
-                : " That script only affects what a browser tab does while the page is open."}
-              {hasAccessRules ? " Its access rules decide who can load the store, not what happens to the text afterwards." : ""}
-              {" "}And no storefront script reaches the feeds: Shopify serves the same text to search
-              engines and AI tools with no storefront JavaScript at all, which is where scrapers read.
+              <strong>No.</strong> {app.name} relies on a script in the visitor's browser, and a
+              storefront script does not prevent content theft. It does not stop Shopify serving
+              your content through the machine-readable feeds (JSON, XML and ATOM) that scrapers
+              actually read, it is easily bypassed and easily disabled, and the friction it creates
+              lands on legitimate customers rather than on content thieves.
             </p>
+            <p class="rebuts__head">Its claims, one by one:</p>
+            <ul class="rebuts">
+              {claimItems.map((it) => (
+                <li>
+                  <span class="rebuts__claim">{it.claim}</span>
+                  <span class="rebuts__answer">{it.rebuttal ?? "Out of scope for content theft."}</span>
+                </li>
+              ))}
+            </ul>
+            <p>{disclosureLine}</p>
             {app.textNote && <p>{app.textNote}</p>}
           </>
         ) : isWatermark ? (
@@ -281,9 +314,13 @@ const related = COMPETITORS_BY_POPULARITY.filter((c) => c.slug !== app.slug)
     <SiteCheckForm
       tone="band"
       heading="Is your store's content protected?"
-      sub="Enter your Shopify store address and see exactly what a scraper sees, and whether your content is protected."
       cta="Check my store"
-    />
+    >
+      <Fragment slot="sub">
+        Do you use <strong>{app.name}</strong> or any other "Content Protection" App? Enter your
+        Shopify store address to see if your content is actually protected.
+      </Fragment>
+    </SiteCheckForm>
 
     <div class="container narrow cbody cbody--tail">
       <section class="fineprint">
@@ -354,6 +391,16 @@ const related = COMPETITORS_BY_POPULARITY.filter((c) => c.slug !== app.slug)
     content: "\201C"; position: absolute; left: 0; top: -0.05em;
     font-weight: 800; font-size: 1.25em; color: var(--amber);
   }
+
+  .block > p.rebuts__head { margin-top: 1.1rem; color: var(--ink); font-weight: 700; }
+  .rebuts { margin-top: 0.9rem; display: grid; gap: 1.05rem; max-width: 72ch; }
+  .rebuts li { position: relative; padding-left: 1.6rem; }
+  .rebuts li::before {
+    content: "\201C"; position: absolute; left: 0; top: -0.05em;
+    font-weight: 800; font-size: 1.25em; color: var(--amber);
+  }
+  .rebuts__claim { display: block; color: var(--ink); font-weight: 600; line-height: 1.55; }
+  .rebuts__answer { display: block; margin-top: 0.3rem; color: var(--ink-soft); line-height: 1.65; }
 
   .tablewrap { margin-top: 1.2rem; overflow-x: auto; }
   .ctable { width: 100%; border-collapse: collapse; min-width: 560px; }

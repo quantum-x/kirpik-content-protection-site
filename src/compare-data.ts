@@ -1847,6 +1847,344 @@ const TABLE_ONLY: Competitor[] = [
 ];
 
 export const COMPETITORS: Competitor[] = [...FEATURED, ...TABLE_ONLY];
+
+/* ------------------------------------------------------------------------ */
+/* Claim rebuttals (script and access-control apps)                          */
+/* ------------------------------------------------------------------------ */
+
+/**
+ * Owner ruling, July 2026: a storefront script does not prevent content
+ * theft, and neither does an access rule. On every blocker and bundle page
+ * the app's own listing claims are answered one by one with the technical
+ * fact that applies. Every rebuttal below states a property of browsers,
+ * operating systems or Shopify's platform, never an accusation. Claims with
+ * no bearing on content theft (order screening, checkout rules, cosmetic
+ * settings) are classified out of scope instead of rebutted.
+ *
+ * Rules are ordered: bespoke matches first, then combined claims, then the
+ * general categories. The first rule whose every pattern matches wins.
+ */
+
+interface ClaimRule {
+  id: string;
+  /** Every pattern must match the claim text for the rule to apply. */
+  all: RegExp[];
+  rebuttal: string;
+}
+
+const OUT_OF_SCOPE_CLAIMS: RegExp[] = [
+  /auto.?cancel risky orders/i,
+  /block checkout/i,
+  /stop fraud before it happens/i,
+  /no banners or popups/i,
+  /keeps search, signup, and checkout working/i,
+];
+
+const CLAIM_RULES: ClaimRule[] = [
+  /* Bespoke rules for unusual claims. */
+  {
+    id: "nuclear-mode",
+    all: [/nuclear mode/i],
+    rebuttal:
+      "The listing does not say what the mode does. Whatever a storefront script does at full strength, it still acts only inside the visitor's browser tab and leaves Shopify's public feeds untouched.",
+  },
+  {
+    id: "reverse-engineering",
+    all: [/reverse.?engineering/i],
+    rebuttal:
+      "A storefront arrives in every browser as readable HTML, CSS and script; that is how the web delivers pages. The browser's own tools read it from outside the page's reach.",
+  },
+  {
+    id: "theme-name",
+    all: [/theme name/i],
+    rebuttal:
+      "A theme's name and a sort order are storefront presentation. Hiding them changes what a visitor sees, not what Shopify serves: the text stays in the page and in the public feeds.",
+  },
+  {
+    id: "best-seller",
+    all: [/best.?sell/i],
+    rebuttal:
+      "Best-seller sorting is a storefront convenience. Hiding it does not touch the catalogue itself: titles, prices and descriptions are still served in full through Shopify's public feeds.",
+  },
+  {
+    id: "shopify-badge",
+    all: [/shopify badge/i],
+    rebuttal:
+      "Hiding a platform badge is presentation. It changes nothing about what the store serves, on the page or in the feeds.",
+  },
+  {
+    id: "browser-block-cn",
+    all: [/chinese browser/i],
+    rebuttal:
+      "Browser blocking reads the user-agent string, a label the browser sends and any client can change. Scrapers do not arrive as a Chinese browser, or as any browser: they read Shopify's public feeds directly.",
+  },
+  {
+    id: "browser-block-ua",
+    all: [/chrome or safari/i],
+    rebuttal:
+      "A browser announces itself through a user-agent string that any client can change in a setting. Scrapers are not browsers at all: they read Shopify's public feeds directly.",
+  },
+  {
+    id: "fake-data",
+    all: [/fake data|sales data manipulator/i],
+    rebuttal:
+      "Feeding fabricated sales figures to a spy extension does nothing for the text content, which remains in the public feeds.",
+  },
+  {
+    id: "fake-purchase",
+    all: [/fake purchase/i],
+    rebuttal:
+      "Screening purchases is an order matter, out of scope for content. Blocking developer mode reaches for tools that sit outside the page's tab, where a page script cannot act.",
+  },
+  {
+    id: "attribution-link",
+    all: [/attribution link/i],
+    rebuttal:
+      "The link is appended by the same script a scraper never runs, and whoever pastes the text deletes it in one keystroke. The words themselves carry nothing.",
+  },
+  {
+    id: "blocked-attempts",
+    all: [/blocked.?attempt/i],
+    rebuttal:
+      "The analytics count visitors who triggered the script. Scrapers and feed readers never run it, so the copying that matters is not in the count.",
+  },
+  {
+    id: "clone-detection",
+    all: [/clone detection/i],
+    rebuttal:
+      "A clone is detected after the content has been taken, which is monitoring rather than prevention. The copied text carries no mark tying it back to your store.",
+  },
+  {
+    id: "any-content",
+    all: [/copying any of your content/i],
+    rebuttal:
+      "The text is delivered to every visitor and every feed reader before any script runs. What a script cancels in the browser, reader mode or the page source restores in seconds.",
+  },
+  {
+    id: "solves-theft",
+    all: [/solves the problem/i],
+    rebuttal:
+      "The context menu is one route among many. The text remains in the page source, in reader mode and in Shopify's public feeds, none of which a right-click script touches.",
+  },
+  {
+    id: "makes-it-harder",
+    all: [/makes it harder/i],
+    rebuttal:
+      "Harder is accurate: the script adds friction inside the tab it runs in. The page source and Shopify's public feeds, where theft actually reads, are unchanged.",
+  },
+  {
+    id: "casual-copying",
+    all: [/casual copying/i],
+    rebuttal:
+      "Casual is the operative word: the script inconveniences a visitor with a mouse, not a scraper with a feed address. The text is served in full through Shopify's public feeds either way.",
+  },
+  {
+    id: "deterrence",
+    all: [/deterrence/i],
+    rebuttal:
+      "Deterrence here means friction for whoever runs the script, and scrapers never run it. A visitor feels the block; the page source and the feeds carry the text regardless.",
+  },
+  {
+    id: "text-in-feeds",
+    all: [/product descriptions|blog posts/i],
+    rebuttal:
+      "Product descriptions and blog posts are exactly what Shopify serves through its public feeds (JSON, XML and ATOM), where no storefront script runs. Protection that lives in a page script cannot follow the text there.",
+  },
+  {
+    id: "screenshot-id-watermark",
+    all: [/identify who screenshots/i],
+    rebuttal:
+      "Identifying who captures an image is not preventing the capture, and the listing does not describe finding a duplicate elsewhere on the web or producing an ownership document. The description text beside those images is not part of what is marked.",
+  },
+  {
+    id: "screenshot-deter-watermark",
+    all: [/watermark to discourage screenshots/i],
+    rebuttal:
+      "No watermark prevents a screenshot; at most it identifies content afterwards. The listing does not state what carries the mark, how a detection reads it back, or what proof it produces.",
+  },
+  {
+    id: "blank-file-swap",
+    all: [/blank transparent files/i],
+    rebuttal:
+      "The genuine image still has to be delivered to be displayed, so it sits in the browser's network panel ready to save. A blank file catches only the most casual route.",
+  },
+  {
+    id: "auto-blur",
+    all: [/auto blur/i],
+    rebuttal:
+      "A blur is drawn by the same page script inside the tab. Capture tools photograph what the operating system draws, and a scraper never renders the page at all.",
+  },
+  {
+    id: "crawler-whitelist",
+    all: [/welcomes googlebot|whitelisting googlebot/i],
+    rebuttal:
+      "The whitelist is necessary: a store that blocks search crawlers disappears from search. It also means the full text is served to automated readers by design, and a scraper can announce itself as any permitted client.",
+  },
+  {
+    id: "spy-extensions-conceded",
+    all: [/alihunter, ppspy, and shophunter/i],
+    rebuttal:
+      "Browser extensions run with higher privileges than any page script, so a page cannot reliably detect or disable them. The developer's own public reply to a review states the limit: \"it blocks spy extensions from the browser, nothing else can be blocked by any tool.\"",
+  },
+  {
+    id: "unstated-image-protection",
+    all: [/content protection for images/i],
+    rebuttal:
+      "The listing does not say how the images are protected. Whatever the method, an image a browser displays has already been downloaded, and the text beside it is untouched.",
+  },
+  {
+    id: "page-specific",
+    all: [/page.?specific/i],
+    rebuttal:
+      "Choosing which pages run the script changes where the friction lands, not what it achieves. Every page's text is still served through Shopify's public feeds.",
+  },
+  {
+    id: "code-protection",
+    all: [/stealing your code|security vulnerabilit/i],
+    rebuttal:
+      "A storefront's code arrives in every visitor's browser as readable text; that is how the web delivers pages. What a script hides from a menu, the network panel and the page source still contain.",
+  },
+  {
+    id: "user-agent-filter",
+    all: [/user.?agent/i],
+    rebuttal:
+      "A user-agent is a label the client itself sends, and any scraper sets it freely. Every permitted visitor still receives the text in full.",
+  },
+  /* Combined claims. */
+  {
+    id: "copy-plus-screenshot",
+    all: [/right.?click|copy/i, /screenshot|print.?screen|screen capture/i],
+    rebuttal:
+      "The context menu and clipboard belong to the user, not the page: reader mode, the page source or switching JavaScript off restores them in seconds. And no web page can prevent a screenshot, because capture happens in the operating system, outside the browser tab.",
+  },
+  {
+    id: "screenshot-plus-print",
+    all: [/screenshot block/i, /print block/i],
+    rebuttal:
+      "No web page can prevent a screenshot: capture happens in the operating system, outside the browser tab. Printing is likewise a browser and OS function; a script can discourage it, not remove it.",
+  },
+  {
+    id: "spy-plus-access",
+    all: [/spy/i, /countr|vpn|geo|\bips?\b/i],
+    rebuttal:
+      "A page script cannot reliably detect browser extensions, which run with higher privileges than any page. And access rules only narrow who visits: every permitted visitor and crawler still receives the text in full.",
+  },
+  /* General categories, most overreaching first. */
+  {
+    id: "screenshot",
+    all: [/screenshot|print.?screen|screen capture/i],
+    rebuttal:
+      "No web page can prevent a screenshot. Screen capture happens in the operating system, outside the browser tab, where a page script cannot see or stop it.",
+  },
+  {
+    id: "scrapers",
+    all: [/scrap/i],
+    rebuttal:
+      "Scrapers do not browse the storefront. They read Shopify's machine-readable feeds (JSON, XML and ATOM), which are served without any storefront script running.",
+  },
+  {
+    id: "server-data",
+    all: [/sales data|customer data|store data|seo content|website code/i],
+    rebuttal:
+      "A storefront script cannot protect server-side data: sales and customer records never pass through the storefront page. The content the page does hold is served raw in Shopify's public feeds.",
+  },
+  {
+    id: "spy-extensions",
+    all: [/spy/i],
+    rebuttal:
+      "Browser extensions run with higher privileges than any page script; a page cannot reliably detect or disable them.",
+  },
+  {
+    id: "right-click",
+    all: [/right.?click|context menu|save image as|save as/i],
+    rebuttal:
+      "The context menu and clipboard belong to the user, not the page. Reader mode, the page source or switching JavaScript off restores them in seconds, and scrapers never run the script at all.",
+  },
+  {
+    id: "keyboard",
+    all: [/keyboard|shortcut/i],
+    rebuttal:
+      "A page script sees only keys pressed inside its own browser tab. The same copy, save and view-source actions sit in the browser's menus, and nothing a shortcut script does changes what feed readers download.",
+  },
+  {
+    id: "print",
+    all: [/print/i],
+    rebuttal:
+      "Printing is a browser and OS function; a page script can discourage it, not remove it, and the text remains one feed request away.",
+  },
+  {
+    id: "devtools",
+    all: [/developer|devtools|f12|ctrl\+u|view.?source|inspect|console|debugger|source code|theme code|toolbox/i],
+    rebuttal:
+      "The page source is always available: it is what the browser downloaded. Developer tools sit outside the page's reach, and Shopify serves the same content raw in its public feeds.",
+  },
+  {
+    id: "copy-select",
+    all: [/copy|paste|selection|select text|highlight|clipboard|drag/i],
+    rebuttal:
+      "Selection and copying are browser functions a script can only interrupt while its page is open. Reader mode and the page source present the same text clean, and a scraper never executes the script at all.",
+  },
+  {
+    id: "image-save",
+    all: [/image/i],
+    rebuttal:
+      "An image a browser displays has already been downloaded. Disabling the save menu removes a convenience, not the image.",
+  },
+  {
+    id: "access-rules",
+    all: [/countr|\bips?\b|ip address|vpn|proxy|\btor\b|\bbots?\b|geo|\bstates?\b|\bcity\b|\bcities\b|timezone|language|region|\basn\b|\bisp\b|referrer/i],
+    rebuttal:
+      "Access rules narrow who can visit. A VPN changes an apparent location in one click, and every permitted visitor and crawler still receives the text in full.",
+  },
+  {
+    id: "legal-notice",
+    all: [/copyright message|legal notice|legal warning/i],
+    rebuttal: "A notice informs; it does not restrain. The feeds are unaffected.",
+  },
+  {
+    id: "client-side-disclosure",
+    all: [/client.?side|theme embed|theme app extension|theme.?editor embed|js sdk|theme block/i],
+    rebuttal:
+      "The listing says plainly where this runs: in the visitor's browser. That is the fact that sets its reach, because nothing running there touches Shopify's public feeds or a scraper reading them.",
+  },
+  {
+    id: "mobile",
+    all: [/mobile/i],
+    rebuttal:
+      "Mobile browsers keep the same routes around a script: reader mode, source view and JavaScript settings. The feeds a scraper reads are the same from any device.",
+  },
+];
+
+/** The id of the rule a claim resolves to, for coverage tooling. */
+export function classifyClaim(claim: string): string | null {
+  if (OUT_OF_SCOPE_CLAIMS.some((re) => re.test(claim))) return null;
+  const rule = CLAIM_RULES.find((r) => r.all.every((re) => re.test(claim)));
+  if (!rule) {
+    throw new Error(
+      `compare-data: no rebuttal or out-of-scope classification for claim "${claim}"`,
+    );
+  }
+  return rule.id;
+}
+
+/**
+ * Maps a listing claim to its technical rebuttal. Returns null only for
+ * claims deliberately classified out of scope for content theft; throws at
+ * build time if a claim matches nothing, so no claim ships unanswered.
+ */
+export function rebutClaim(claim: string): string | null {
+  const id = classifyClaim(claim);
+  if (id === null) return null;
+  return CLAIM_RULES.find((r) => r.id === id)!.rebuttal;
+}
+
+/* Build-time coverage check: every claim on a blocker or bundle app must map
+ * to a rebuttal or a deliberate out-of-scope classification. Runs on import,
+ * so an unclassified claim fails the build with a named error. */
+for (const app of COMPETITORS) {
+  if (app.primary !== "blocker" && app.primary !== "bundle") continue;
+  for (const claim of app.claims ?? []) classifyClaim(claim);
+}
 export const FEATURED_COMPETITORS = FEATURED;
 export const TOTAL_COMPARED = COMPETITORS.length; // 83 relevant apps (7 off-category apps excluded)
 

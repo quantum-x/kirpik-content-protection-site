@@ -26,13 +26,14 @@ const {
   note = true,
 } = Astro.props;
 const hasHeadingSlot = Astro.slots.has("heading");
+const hasSubSlot = Astro.slots.has("sub");
 ---
 
 <section class="scf" data-tone={tone}>
   <div class="container">
     <div class="scf__inner" data-reveal>
       <h2 class="scf__title">{hasHeadingSlot ? <slot name="heading" /> : heading}</h2>
-      {sub && <p class="lead scf__sub">{sub}</p>}
+      {hasSubSlot ? <p class="lead scf__sub"><slot name="sub" /></p> : sub && <p class="lead scf__sub">{sub}</p>}
       <form class="scf__form" action="/site-check/" method="get" role="search">
         <label class="scf__field">
           <span class="sr-only">Your Shopify store URL</span>
