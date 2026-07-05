@@ -47,7 +47,22 @@ Always accurate to the product (verified against the app codebase):
 
 Forbidden claims: "cryptographically signed", "encrypted", "HMAC", "blockchain", "notarized", "guaranteed", "stops/prevents copying" (we prove theft, we do not prevent it), collection protection, automated monitoring, surviving "any" transformation.
 
-## Editorial voice (locked)
+## Editorial voice v2 (locked 2026-07-05, supersedes anything looser)
+
+Style guide: The Economist. Smart, limpid, objective, laser-focused. Every word must earn its place. Before writing any page: define the content pyramid (most important message first, each row supported by the next) and the page goal; write to it. The site's purpose: INFORM merchants who are worried about content theft so they conclude Kirpik is the only app providing real protection and enforcement.
+
+Hard rules learned from owner review (violations were rejected wholesale):
+- NO decorative micro-labels/eyebrows/bylines ("The problem", "Two minute tour", "Free plan available · ..."). If a line matters it becomes a real heading or body copy; otherwise it does not exist.
+- NO inserted aside/note/blockquote boxes of secondary commentary. Fold hard facts into body prose or drop them.
+- Headlines: short, concrete, answer a question the reader has or should have ("Is your store's content protected?"). Never metaphor ("shake off the proof"), never invented cleverness ("zero storefront weight" -> say "No speed impact"), never oddly specific colour ("four seconds", "Photoshop", "clipboard").
+- CTAs: "Install now for free" / "Protect your content" register. Never "Add to Shopify" (jargon: merchants do not "add things to Shopify").
+- Design serves content: no stat tiles, pill/label confetti, or fiddly small elements that carry no information. Favour removal over redesign.
+- Comparison pages: NEVER link out to competitor app listings (no free SEO for them). Every app mentioned on the site must have its own comparison page, or must not be mentioned. Order lists by popularity (review count); visually highlight the 27 most popular.
+- Site check: no paste-a-text tool (prospects only ever get a negative). Verdict banner carries "Protect your content now" CTA; product cards say "N words · No watermark · Unprotected" and a green "Protect now" install button; no image ZIP download.
+- Standing review panel for all content changes: (1) Economist editor agent, (2) worried-merchant reader agent, (3) value-pyramid agent, (4) human UI/UX anti-AI-design agent. Run them and resolve findings before shipping.
+- Page headlines and section headings are proposed to the owner page by page and iterated before body rewrite. Owner-approved lines are not re-litigated.
+
+## Editorial voice (original rules, still binding where not superseded)
 
 Written by a smart, technical, approachable human expert. **No em-dashes, ever.** No AI tells: no "In today's digital landscape", no "It's not just X, it's Y", no rule-of-three adjective stacks, no grandiose statements, no excessive sub-headers or orphan text fragments. No fabricated reviews, testimonials, or statistics. "Strong track record", never "guaranteed". Concrete over abstract; name real threats (dropship cloners, copycat stores, scrapers). Recurring narrative: you cannot stop text from being copied, so make every copy traceable and provable. Comparisons are strictly neutral: quote competitor listings verbatim (dated 2026-07), frame limitations as general browser/platform behavior, include method + trademark + not-legal-advice notes on every comparison page.
 

@@ -73,7 +73,6 @@ const isTakedown = app.primary === "takedown";
             <img src="/brand/kirpik-glyph.svg" alt="" width="44" height="22" loading="eager" />
           </span>
         </div>
-        <span class="eyebrow">Comparison · {APPROACH_LABEL[app.primary]}</span>
         <h1>{app.name} vs Kirpik</h1>
         <p class="lead">{app.summary}</p>
         {meta.length > 0 && (
@@ -262,7 +261,6 @@ const isTakedown = app.primary === "takedown";
 
     <SiteCheckForm
       tone="band"
-      eyebrow="Prove it to yourself"
       heading="See what a scraper sees on your store"
       sub={scriptBased
         ? "Enter your store address and look at the public surfaces where your descriptions live. No storefront script runs there, whichever apps are installed."
@@ -331,8 +329,7 @@ const isTakedown = app.primary === "takedown";
   .versus__tile--us { border-color: #f2d4bd; background: var(--orange-tint); }
   .versus__tile--us img { width: 60%; height: auto; }
   .versus__vs { font-family: var(--font-mono); font-weight: 600; font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-faint); }
-  .chead .eyebrow { display: inline-flex; margin-top: 1.4rem; }
-  .chead h1 { font-size: var(--fs-h1); margin: 0.8rem 0 1rem; }
+  .chead h1 { font-size: var(--fs-h1); margin: 1.4rem 0 1rem; }
   .chead .lead { max-width: 64ch; }
   .chead__meta { margin-top: 1.2rem; font-family: var(--font-mono); font-size: 0.78rem; color: var(--ink-faint); line-height: 1.8; }
   .chead__meta a { color: var(--orange-deep); }

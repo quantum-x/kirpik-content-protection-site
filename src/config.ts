@@ -22,4 +22,4 @@ export const NAV = [
   { label: "FAQ", href: "/faq/" },
 ];
 
-export const CTA_LABEL = "Add to Shopify";
+export const CTA_LABEL = "Install free";

@@ -26,7 +26,6 @@ const jsonLd = {
   <!-- ============================ HERO / INPUT ======================= -->
   <section class="sc-hero">
     <div class="container narrow sc-hero__inner">
-      <span class="eyebrow">Live text check</span>
       <h1 class="sc-hero__title">What can a scraper read from your store <em>right now</em>?</h1>
       <p class="lead sc-hero__lead">
         Enter your Shopify URL. In a few seconds you will see every product
@@ -64,38 +63,11 @@ const jsonLd = {
   </section>
 
   <!-- ============================ RESULTS ============================ -->
-  <section class="sc-results container" id="sc-results" hidden aria-live="polite"></section>
-
-  <!-- ======================= PASTE ANY TEXT ========================== -->
-  <section class="section" id="paste-check">
-    <div class="container narrow">
-      <span class="eyebrow">Check any text</span>
-      <h2 class="sc-paste__title">Paste text, get an answer.</h2>
-      <p class="lead">
-        Found copy somewhere that reads suspiciously familiar? Paste it here.
-        Kirpik's detector runs in your browser and reports whether the text
-        carries a Kirpik watermark.
-      </p>
-      <div class="sc-paste card">
-        <textarea
-          id="sc-paste-input"
-          rows="6"
-          placeholder="Paste at least a paragraph of text to check it for a Kirpik watermark…"
-          aria-label="Text to check for a Kirpik watermark"
-        ></textarea>
-        <div class="sc-paste__bar">
-          <button class="btn btn--primary" type="button" id="sc-paste-btn">Check for watermark</button>
-          <span class="sc-paste__hint">Tip: use the Copy text button on any product above, then paste it here. The watermark travels with the copy.</span>
-        </div>
-        <div class="sc-paste__result" id="sc-paste-result" aria-live="polite"></div>
-      </div>
-    </div>
-  </section>
+  <section class="sc-results container" id="sc-results" data-shop={shop} hidden aria-live="polite"></section>
 
   <!-- ====================== HOW DOES THIS WORK? ===================== -->
   <section class="section section--tone" id="how" hidden>
     <div class="container narrow">
-      <span class="eyebrow">How does this work?</span>
       <h2 class="sc-how__title">No tricks. We asked your store, and it answered.</h2>
       <div class="sc-how prose">
         <p>
@@ -128,7 +100,6 @@ const jsonLd = {
   <!-- ============================= THE HOOK ========================= -->
   <section class="section section--ink sc-hook">
     <div class="container narrow">
-      <span class="eyebrow">What this means</span>
       <h2 class="sc-hook__title">Your words will travel. The only question is whether proof travels with them.</h2>
       <p class="lead sc-hook__lead">
         No app can close these feeds, and honestly, you would not want to: they are how search
@@ -160,12 +131,11 @@ const jsonLd = {
             dated, fingerprinted and publicly verifiable. That is what turns an argument into a
             takedown.
           </p>
-          <p class="sc-hook__punch">You saw the detector work above. That is the whole pitch.</p>
         </div>
       </div>
 
       <div class="sc-hook__cta">
-        <a class="btn btn--primary" href={shop} rel="noopener" target="_blank">{CTA_LABEL} for free</a>
+        <a class="btn btn--primary" href={shop} rel="noopener" target="_blank">Install now for free</a>
         <a class="btn btn--light" href="/how-it-works/">See how Kirpik works →</a>
       </div>
     </div>
@@ -178,8 +148,6 @@ const jsonLd = {
 </Base>
 
 <script>
-  import { zipSync } from "fflate";
-
   type ShopifyImage = { id?: number; src: string; alt?: string | null };
   type ShopifyProduct = {
     id: number;
@@ -197,6 +165,7 @@ const jsonLd = {
   const results = document.getElementById("sc-results") as HTMLElement | null;
   const feedLinks = document.getElementById("sc-feed-links") as HTMLElement | null;
   const howBlock = document.getElementById("how") as HTMLElement | null;
+  const SHOP_URL = results?.dataset.shop || "https://apps.shopify.com/kirpik-content-protection";
 
   const el = (tag: string, cls?: string, text?: string) => {
     const n = document.createElement(tag);
@@ -412,6 +381,13 @@ const jsonLd = {
     const vText = el("div", "sc-verdict__text");
     vText.append(el("h2", "sc-verdict__title", titles[state]));
     vText.append(el("p", "sc-verdict__sub", subs[state]));
+    if (state === "exposed" || state === "partial") {
+      const protectCta = el("a", "btn btn--primary sc-verdict__cta", "Protect your content now") as HTMLAnchorElement;
+      protectCta.href = SHOP_URL;
+      protectCta.target = "_blank";
+      protectCta.rel = "noopener";
+      vText.append(protectCta);
+    }
     banner.append(vIcon, vText);
     results.append(banner);
 
@@ -429,11 +405,7 @@ const jsonLd = {
     copyAllBtn.type = "button";
     copyAllBtn.innerHTML = `<span class="sc-dlall__label">⧉ Copy every description (${products.length} products)</span>`;
     copyAllBtn.addEventListener("click", () => copyAllText(scanned, copyAllBtn));
-    const zipBtn = el("button", "btn btn--ghost sc-dlall") as HTMLButtonElement;
-    zipBtn.type = "button";
-    zipBtn.innerHTML = `<span class="sc-dlall__label">⬇ Images too (${imgs.length}, ZIP)</span>`;
-    zipBtn.addEventListener("click", () => downloadAllZip(domain, imgs, zipBtn));
-    actions.append(copyAllBtn, zipBtn);
+    actions.append(copyAllBtn);
     toolbar.append(actions);
     results.append(toolbar);
 
@@ -492,7 +464,7 @@ const jsonLd = {
         el("span", "sc-tile__hudline", `security markers ${verdict.markers} · confidence ${verdict.conf}%`)
       );
     } else {
-      hud.append(el("span", "sc-tile__hudline", `no watermark · ${words.toLocaleString()} words, free to take`));
+      hud.append(el("span", "sc-tile__hudline", `${words.toLocaleString()} words · No watermark · Unprotected`));
     }
     body.append(hud);
 
@@ -511,9 +483,11 @@ const jsonLd = {
     jsonLink.rel = "noopener nofollow";
     jsonLink.textContent = "Raw .json";
     row.append(jsonLink);
-    if (images.length) {
-      row.append(el("span", "sc-tile__imgcount", `${images.length} image${images.length === 1 ? "" : "s"}`));
-    }
+    const protectLink = el("a", "sc-mini sc-mini--protect", "Protect now") as HTMLAnchorElement;
+    protectLink.href = SHOP_URL;
+    protectLink.target = "_blank";
+    protectLink.rel = "noopener";
+    row.append(protectLink);
     body.append(row);
 
     tile.append(body);
@@ -547,71 +521,6 @@ const jsonLd = {
     }, 4000);
   }
 
-  async function downloadAllZip(
-    domain: string,
-    imgs: { src: string; name: string }[],
-    btn: HTMLButtonElement
-  ) {
-    const label = btn.querySelector(".sc-dlall__label") as HTMLElement | null;
-    const setLabel = (t: string) => {
-      if (label) label.textContent = t;
-    };
-    btn.disabled = true;
-    const files: Record<string, Uint8Array> = {};
-    const used = new Set<string>();
-    let done = 0;
-
-    const jobs = imgs.map((img, i) => {
-      let name = img.name || `image-${i + 1}`;
-      if (used.has(name)) {
-        const dot = name.lastIndexOf(".");
-        name = dot > 0 ? `${name.slice(0, dot)}-${i + 1}${name.slice(dot)}` : `${name}-${i + 1}`;
-      }
-      used.add(name);
-      return { src: img.src, name };
-    });
-
-    const POOL = 8;
-    let next = 0;
-    async function worker() {
-      while (next < jobs.length) {
-        const job = jobs[next++];
-        try {
-          const res = await fetch(job.src);
-          files[job.name] = new Uint8Array(await res.arrayBuffer());
-        } catch {
-          /* skip images that fail */
-        }
-        done++;
-        setLabel(`Fetching images… ${done} of ${jobs.length}`);
-      }
-    }
-    await Promise.all(Array.from({ length: Math.min(POOL, jobs.length) }, worker));
-
-    setLabel("Building catalogue.zip…");
-    try {
-      const zipped = zipSync(files, { level: 0 });
-      const blob = new Blob([zipped], { type: "application/zip" });
-      const safe = domain.replace(/[^a-z0-9.-]/gi, "-");
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = `${safe}-catalogue.zip`;
-      document.body.append(a);
-      a.click();
-      a.remove();
-      setTimeout(() => URL.revokeObjectURL(url), 1000);
-      setLabel(`⬇ Downloaded ${Object.keys(files).length} images`);
-    } catch {
-      setLabel("Couldn't build the zip");
-    } finally {
-      setTimeout(() => {
-        setLabel(`⬇ Images too (${imgs.length}, ZIP)`);
-        btn.disabled = false;
-      }, 4000);
-    }
-  }
-
   function flash(btn: HTMLButtonElement, msg: string, restore?: string) {
     const original = restore ?? btn.textContent ?? "";
     btn.textContent = msg;
@@ -639,29 +548,6 @@ const jsonLd = {
       feedLinks.append(a);
     }
   }
-
-  // --- Paste checker -------------------------------------------------------------
-  const pasteInput = document.getElementById("sc-paste-input") as HTMLTextAreaElement | null;
-  const pasteBtn = document.getElementById("sc-paste-btn") as HTMLButtonElement | null;
-  const pasteResult = document.getElementById("sc-paste-result") as HTMLElement | null;
-
-  pasteBtn?.addEventListener("click", () => {
-    if (!pasteInput || !pasteResult) return;
-    const text = pasteInput.value;
-    pasteResult.innerHTML = "";
-    if (wordCount(text) < 10) {
-      pasteResult.append(el("p", "sc-paste__msg", "Paste a little more text, at least a couple of sentences."));
-      return;
-    }
-    const v = kdetect(text);
-    const hud = el("div", "hud sc-paste__hud");
-    if (v.found) {
-      hud.innerHTML = `<span class="ok">✓ WATERMARK DETECTED</span><br>store watermark code <b>${v.code}</b><br>security markers <b>${v.markers}</b> · confidence <b>${v.conf}%</b><br><span>This text is protected by Kirpik and traceable to its owner.</span>`;
-    } else {
-      hud.innerHTML = `<span>NO KIRPIK WATERMARK FOUND</span><br><span>Nothing in this text ties it to an owner. If it is yours, that is the problem worth fixing.</span>`;
-    }
-    pasteResult.append(hud);
-  });
 
   // --- Orchestration -----------------------------------------------------------
   type CheckResult = {
@@ -850,6 +736,7 @@ const jsonLd = {
   .sc-verdict.is-partial .sc-verdict__title { color: #8a6414; }
   .sc-verdict.is-protected .sc-verdict__title { color: #1f7d4d; }
   .sc-verdict__sub { margin-top: 0.5rem; color: var(--ink-soft); max-width: 72ch; }
+  .sc-verdict__cta { margin-top: 1rem; }
 
   .sc-toolbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; margin-top: 1.4rem; }
   .sc-toolbar__count { font-family: var(--font-mono); font-size: 0.85rem; color: var(--ink-faint); }
@@ -882,7 +769,6 @@ const jsonLd = {
   .sc-tile__hudline--ok { color: var(--mint); font-weight: 600; }
 
   .sc-tile__actions { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
-  .sc-tile__imgcount { margin-left: auto; font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink-faint); }
 
   .sc-mini {
     flex: none; font-family: var(--font-mono); font-size: 0.72rem; font-weight: 600;
@@ -894,23 +780,8 @@ const jsonLd = {
   .sc-mini:hover { border-color: var(--orange); color: var(--orange-deep); }
   .sc-mini:disabled { opacity: 0.6; cursor: progress; }
   .sc-mini.is-flash { background: var(--mint); border-color: var(--mint); color: #fff; }
-
-  /* ---- Paste checker ---- */
-  .sc-paste__title { margin: 0.9rem 0 0.7rem; }
-  #paste-check .lead { max-width: 56ch; }
-  .sc-paste { margin-top: 1.6rem; padding: 1.2rem; }
-  .sc-paste textarea {
-    width: 100%; resize: vertical; min-height: 130px;
-    font: inherit; font-size: 0.95rem; color: var(--ink);
-    background: var(--paper); border: 1.5px solid var(--line-strong); border-radius: var(--r-md);
-    padding: 0.9rem 1rem; outline: none;
-    transition: border-color 0.15s ease, box-shadow 0.15s ease;
-  }
-  .sc-paste textarea:focus { border-color: var(--orange); box-shadow: var(--ring); }
-  .sc-paste__bar { display: flex; align-items: center; gap: 1rem; margin-top: 0.9rem; flex-wrap: wrap; }
-  .sc-paste__hint { font-size: 0.85rem; color: var(--ink-faint); max-width: 44ch; }
-  .sc-paste__msg { margin-top: 0.9rem; color: var(--ink-soft); }
-  .sc-paste__hud { margin-top: 1rem; }
+  .sc-mini--protect,
+  .sc-mini--protect:hover { background: var(--mint); border-color: var(--mint); color: #fff; }
 
   /* ---- How ---- */
   .sc-how__title { margin: 0.9rem 0 1.2rem; }
@@ -936,6 +807,5 @@ const jsonLd = {
   .sc-hook__col--good h3 { color: #fff; }
   .sc-hook__col--good p { color: #fff; opacity: 0.96; margin-bottom: 0.8rem; }
   .sc-hook__col--good strong { color: #fff; }
-  .sc-hook__punch { font-weight: 800; font-size: 1.05rem; opacity: 1 !important; margin-bottom: 0 !important; }
   .sc-hook__cta { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 1.6rem; }
 </style>

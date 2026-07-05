@@ -3,14 +3,23 @@ import Base from "../layouts/Base.astro";
 import TextXray from "../components/TextXray.astro";
 import SiteCheckForm from "../components/SiteCheckForm.astro";
 import CtaBand from "../components/CtaBand.astro";
-import { SITE, CTA_LABEL } from "../config";
-import { FEATURES, ATTACKS, BENEFITS, PLANS, MATRIX, FAQ_GROUPS } from "../data";
+import { SITE } from "../config";
+import { PLANS, MATRIX, FAQ_GROUPS } from "../data";
 
 const faqTeaser = [
   FAQ_GROUPS[0].items[0],
   FAQ_GROUPS[0].items[1],
-  FAQ_GROUPS[0].items[2],
+  FAQ_GROUPS[3].items[4],
   FAQ_GROUPS[1].items[1],
+];
+
+const SURVIVES = [
+  "Copy and paste",
+  "Automated scraping",
+  "Bulk export",
+  "Cutting and rewording",
+  "Reformatting",
+  "Reposting",
 ];
 
 const jsonLd = [
@@ -46,109 +55,48 @@ const jsonLd = [
   <section class="hero">
     <div class="container hero__grid">
       <div class="hero__copy">
-        <span class="eyebrow">Text protection for Shopify</span>
-        <h1 class="display">Anyone can copy your words. Nobody can shake off the <em>proof</em> inside them.</h1>
+        <h1 class="display">Protect your text. <em>Protect your brand.</em></h1>
         <p class="lead">
-          Kirpik hides an invisible watermark in your product descriptions, blog
-          articles and pages. Your copy looks and reads exactly the same. But when
-          someone lifts it, you can detect it anywhere, certify ownership, and get
-          it taken down.
+          Kirpik invisibly watermarks your product descriptions, articles and
+          pages. If your content is stolen, Kirpik generates legal Proof of
+          Ownership Certificates for DMCA takedowns and enforcement action.
         </p>
         <div class="hero__ctas">
-          <a class="btn btn--primary" href={SITE.shopifyAppUrl} rel="noopener" target="_blank">
-            <svg class="shopify-bag" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9 8a3 3 0 0 1 6 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-            {CTA_LABEL}
-          </a>
-          <a class="btn btn--ghost" href="/how-it-works/">See how it works</a>
+          <a class="btn btn--primary" href={SITE.shopifyAppUrl} rel="noopener" target="_blank">Install now for free</a>
+          <a class="btn btn--ghost" href="/how-it-works/">How it works</a>
         </div>
-        <p class="hero__note">Free plan available · No scripts added to your theme · Nothing visible changes</p>
       </div>
       <div class="hero__widget" data-reveal>
         <TextXray />
-        <p class="hero__hint" aria-hidden="true">Drag the divider to see what Kirpik sees</p>
+        <p class="hero__hint" aria-hidden="true">Drag the divider to reveal the watermark</p>
       </div>
     </div>
   </section>
 
   <!-- ======================= Site check band ======================= -->
-  <SiteCheckForm tone="wide" sub="Every Shopify store publishes its products in formats built for software to read, and no blocker app changes that. Enter your store address and see exactly what a scraper sees.">
-    <Fragment slot="heading">Your product copy is sitting in a <em>public feed</em> right now.</Fragment>
-  </SiteCheckForm>
+  <SiteCheckForm
+    tone="wide"
+    heading="Is your store's content protected?"
+    sub="Enter your Shopify store address and see exactly what a scraper sees, and whether your content is protected."
+    cta="Check my store"
+  />
 
-  <!-- ======================= Video (placeholder) ======================= -->
-  <section class="section">
-    <div class="container narrow video__head">
-      <span class="eyebrow">Two minute tour</span>
-      <h2>Watch Kirpik protect a store</h2>
-      <p class="lead">Protect a catalogue, catch a copycat, and download the certificate that settles it.</p>
-    </div>
-    <div class="container">
-      <div class="video card" data-reveal>
-        <div class="video__poster" aria-hidden="true">
-          <img class="video__mark" src="/brand/kirpik-glyph.svg" alt="" width="130" height="66" />
-          <span class="video__badge">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
-            Walkthrough video, coming soon
-          </span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ======================= Problem ======================= -->
+  <!-- ======================= How it works ======================= -->
   <section class="section section--tone">
     <div class="container">
       <div class="narrow" style="text-align:center">
-        <span class="eyebrow">The problem</span>
-        <h2>Copying text is the cheapest theft on the internet.</h2>
-        <p class="lead" style="margin-top:1rem">
-          Nobody needs Photoshop to steal a product description. They need four
-          seconds and a clipboard, and most of them do not even need that.
-        </p>
-      </div>
-      <div class="problem__grid">
-        <div class="card problem__card" data-reveal>
-          <h3>Taken in bulk</h3>
-          <p>Scrapers do not browse your site the way people do. They read your product feed, and a full catalogue of descriptions exports in seconds.</p>
-        </div>
-        <div class="card problem__card" data-reveal>
-          <h3>Reworded just enough</h3>
-          <p>A copied description gets a new product title and two swapped adjectives, then goes live under someone else's brand the same day.</p>
-        </div>
-        <div class="card problem__card" data-reveal>
-          <h3>Ranked against you</h3>
-          <p>Search engines see two stores carrying the same copy and pick one to show. The winner is not always the store that wrote it.</p>
-        </div>
-      </div>
-      <p class="problem__punch narrow" data-reveal>
-        You will not stop the copying. What you can do is make every copy carry
-        invisible proof of where it came from.
-      </p>
-    </div>
-  </section>
-
-  <!-- ======================= How it works ======================= -->
-  <section class="section">
-    <div class="container">
-      <div class="narrow" style="text-align:center">
-        <span class="eyebrow">How it works</span>
-        <h2>Protect. Detect. <em>Prove.</em></h2>
+        <h2>Protect content. Prove infringement. Enforce your rights.</h2>
       </div>
       <div class="how__grid">
         <div class="card how__card" data-reveal>
           <span class="how__num">1</span>
-          <h3>Protect your copy</h3>
-          <p>Pick products, articles and pages, then click Protect. Kirpik embeds your store's invisible watermark without changing a single word you wrote.</p>
-          <div class="how__mock" aria-hidden="true">
-            <div class="how__row"><span class="how__line" style="width:62%"></span><span class="tag tag--mint">✓ Protected</span></div>
-            <div class="how__row"><span class="how__line" style="width:48%"></span><span class="tag tag--mint">✓ Protected</span></div>
-            <div class="how__row"><span class="how__line" style="width:55%"></span><span class="tag">Queued</span></div>
-          </div>
+          <h3>Protect your text</h3>
+          <p>Pick products, articles and pages, then click Protect. Kirpik embeds your store's invisible watermark without changing a single word.</p>
         </div>
         <div class="card how__card" data-reveal>
           <span class="how__num">2</span>
-          <h3>Detect a copy</h3>
-          <p>Found a store that reads like yours? Paste the text or check the URL. Kirpik reports the match, the surviving security markers and a confidence figure.</p>
+          <h3>Prove content infringement</h3>
+          <p>Paste suspect text or check a URL. Kirpik detects your watermark and reports the match with a confidence figure.</p>
           <div class="how__mock hud" aria-hidden="true">
             <span>&gt; checking onlinedirect-example.biz</span><br />
             <span class="ok">✓ watermark detected</span><br />
@@ -157,35 +105,32 @@ const jsonLd = [
         </div>
         <div class="card how__card" data-reveal>
           <span class="how__num">3</span>
-          <h3>Prove it is yours</h3>
-          <p>Generate a Chain of Proof certificate: dated, fingerprinted, and verifiable by anyone through its public verification page and QR code.</p>
-          <div class="how__mock how__cert" aria-hidden="true">
-            <span class="how__cert-head">CHAIN OF PROOF</span>
-            <span class="how__cert-line"></span>
-            <span class="how__cert-line" style="width:70%"></span>
-            <span class="tag tag--mint" style="margin-top:0.5rem">✓ Verified</span>
-          </div>
+          <h3>Enforce your rights, takedown infringing IP</h3>
+          <p>Generate a Proof of Ownership Certificate, dated and independently verifiable. Send it with a DMCA notice to the thief's host or marketplace; the <a href="/enforcement/">enforcement guide</a> walks you through it.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ======================= Features ======================= -->
-  <section class="section section--tone">
+  <!-- ======================= Nothing changes ======================= -->
+  <section class="section">
     <div class="container">
       <div class="narrow" style="text-align:center">
-        <span class="eyebrow">Features</span>
-        <h2>Built for one job: making your text provably yours.</h2>
+        <h2>Nothing changes for you or your customers.</h2>
       </div>
-      <div class="features__grid">
-        {FEATURES.map((f) => (
-          <a class="card features__card" href={`/features/${f.slug}/`} data-reveal>
-            <span class="tag tag--orange">{f.tag}</span>
-            <h3>{f.title}</h3>
-            <p>{f.short}</p>
-            <span class="features__more">Read more →</span>
-          </a>
-        ))}
+      <div class="nc__grid">
+        <div class="nc__col" data-reveal>
+          <h3>Your text is not modified</h3>
+          <p>Every word, heading and comma stays exactly as you wrote it. Readers see your copy, unchanged.</p>
+        </div>
+        <div class="nc__col" data-reveal>
+          <h3>No SEO impact</h3>
+          <p>Search engines read the same copy your customers do. There is nothing added for a crawler to penalise.</p>
+        </div>
+        <div class="nc__col" data-reveal>
+          <h3>No speed impact</h3>
+          <p>Kirpik adds nothing to your theme. Your page speed and checkout are untouched.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -194,24 +139,17 @@ const jsonLd = [
   <section class="section section--ink">
     <div class="container resilience__grid">
       <div>
-        <span class="eyebrow">Resilience</span>
-        <h2>Stolen copy goes through a lot. The watermark rides along.</h2>
+        <h2>The watermark survives copying.</h2>
         <p class="lead" style="margin-top:1rem">
-          Lifted text gets pasted into a page builder, trimmed for length,
-          restyled and lightly reworded. Kirpik's watermark repeats through your
-          content with redundancy to spare, so an altered copy still reports a
-          match.
-        </p>
-        <p class="resilience__honest">
-          The honest caveat: a full rewrite removes any text watermark. But a
-          thief who rewrites everything is no longer selling with your words,
-          and that was the point.
+          The watermark lives in the text itself, not in the page around it.
+          Wherever your copy is taken, the watermark travels with it and
+          identifies your store as the owner.
         </p>
       </div>
-      <ul class="resilience__chips" aria-label="What the watermark survives">
-        {ATTACKS.map((a) => (
-          <li class="resilience__chip" data-reveal>
-            <svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M2 8.5 6 12l8-9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <ul class="resilience__list" aria-label="What the watermark survives">
+        {SURVIVES.map((a) => (
+          <li data-reveal>
+            <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M2 8.5 6 12l8-9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
             {a}
           </li>
         ))}
@@ -219,62 +157,27 @@ const jsonLd = [
     </div>
   </section>
 
-  <!-- ======================= Benefits ======================= -->
-  <section class="section">
-    <div class="container narrow">
-      <span class="eyebrow">In plain terms</span>
-      <h2 style="margin-bottom:2rem">What that means for your store</h2>
-      <dl class="benefits">
-        {BENEFITS.map(([h, p]) => (
-          <div class="benefits__row" data-reveal>
-            <dt>{h}</dt>
-            <dd>{p}</dd>
-          </div>
-        ))}
-      </dl>
-    </div>
-  </section>
-
-  <!-- ======================= Chain of Proof ======================= -->
+  <!-- ======================= Enforcement ======================= -->
   <section class="section section--tone">
     <div class="container cop__grid">
       <div class="cop__img" data-reveal>
-        <img src="/img/chain-of-proof.png" alt="A Kirpik Chain of Proof text ownership certificate" width="620" height="877" loading="lazy" />
+        <img src="/img/chain-of-proof-top.png" alt="A Kirpik Proof of Ownership Certificate" width="620" height="404" loading="lazy" />
       </div>
       <div>
-        <span class="eyebrow">Chain of Proof</span>
-        <h2>The document that ends the argument.</h2>
+        <h2>Prove infringement and enforce your rights.</h2>
         <p class="lead" style="margin:1rem 0 1.4rem">
-          When Kirpik finds your watermark on someone else's page, it can issue a
-          Chain of Proof certificate. Not a screenshot. A dated, fingerprinted
-          ownership document.
+          When Kirpik detects your watermark on someone else's page, you can
+          issue a Proof of Ownership Certificate. Hosts, marketplaces and
+          search engines act on proof, and this certificate supplies it.
         </p>
         <ul class="cop__list">
-          <li>Protection Signature of your original and Detected Signature of the copy</li>
-          <li>Your protection date next to the infringing page's own timestamps</li>
-          <li>Earliest Internet Archive snapshot of the infringing URL</li>
-          <li>Count of recovered Watermark Security Markers and a confidence figure</li>
-          <li>QR code to a public verification page anyone can check</li>
+          <li>A record of your exact original text and of the stolen copy</li>
+          <li>Your protection date versus the infringing page's timestamps</li>
+          <li>Independent timeline evidence from the Internet Archive</li>
+          <li>Watermark match details and a confidence figure</li>
+          <li>A public verification page anyone can check via QR code</li>
         </ul>
         <a class="btn btn--ghost" href="/enforcement/" style="margin-top:1.6rem">How enforcement works</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ======================= Enforcement ======================= -->
-  <section class="section section--ink">
-    <div class="container narrow" style="text-align:center">
-      <span class="eyebrow">Enforcement</span>
-      <h2>Evidence first. Then the takedown.</h2>
-      <p class="lead" style="margin-top:1rem">
-        Hosts, marketplaces and search engines do not act on suspicion, they act
-        on proof. Kirpik hands you the proof, and our guides walk you through
-        DMCA notices, host complaints and getting stolen copy out of search
-        results.
-      </p>
-      <div class="hero__ctas" style="justify-content:center; margin-top:1.8rem">
-        <a class="btn btn--light" href="/enforcement/">The enforcement playbook</a>
-        <a class="btn btn--ghost enforcement__ghost" href="/learn/dmca-for-stolen-text/">DMCA for stolen text</a>
       </div>
     </div>
   </section>
@@ -283,14 +186,13 @@ const jsonLd = [
   <section class="section" id="pricing">
     <div class="container">
       <div class="narrow" style="text-align:center">
-        <span class="eyebrow">Pricing</span>
-        <h2>Start free. Upgrade when the catalogue grows.</h2>
+        <h2>Start free.</h2>
       </div>
 
       <div class="plans">
         {PLANS.map((p) => (
           <div class:list={["card", "plan", { "plan--featured": p.featured }]} data-reveal>
-            {p.featured && <span class="plan__flag">Most popular</span>}
+            {p.featured && <span class="plan__flag">Recommended</span>}
             <h3>{p.name}</h3>
             <p class="plan__price">{p.price}<span> {p.per}</span></p>
             <p class="plan__blurb">{p.blurb}</p>
@@ -326,22 +228,21 @@ const jsonLd = [
           </tbody>
         </table>
       </div>
-      <p class="pricing__note">Prices in USD. Pro is also available at $199 per year, around 17% less than monthly billing.</p>
+      <p class="pricing__note">Prices in USD. Pro is $199 per year, 17% less than monthly billing.</p>
     </div>
   </section>
 
-  <!-- ======================= FAQ teaser ======================= -->
+  <!-- ======================= FAQ ======================= -->
   <section class="section section--tone">
     <div class="container narrow">
-      <span class="eyebrow">Questions</span>
-      <h2 style="margin-bottom:1.8rem">The ones everybody asks first</h2>
+      <h2 style="margin-bottom:1.8rem">Common questions</h2>
       {faqTeaser.map((f) => (
         <details class="faq">
           <summary>{f.q}</summary>
           <p>{f.a}</p>
         </details>
       ))}
-      <p style="margin-top:1.6rem"><a class="btn btn--ghost" href="/faq/">All questions, answered</a></p>
+      <p style="margin-top:1.6rem"><a class="btn btn--ghost" href="/faq/">See the full FAQ</a></p>
     </div>
   </section>
 
@@ -354,41 +255,9 @@ const jsonLd = [
   .hero__grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(2rem, 4.5vw, 4rem); align-items: center; }
   .display { font-size: var(--fs-display); }
   .hero__copy .lead { margin: 1.4rem 0 1.9rem; max-width: 56ch; }
-  .hero__copy .eyebrow { margin-bottom: 1.1rem; }
   .hero__ctas { display: flex; flex-wrap: wrap; gap: 0.8rem; }
-  .hero__note { margin-top: 1.1rem; font-family: var(--font-mono); font-size: 0.74rem; letter-spacing: 0.02em; color: var(--ink-faint); }
-  .hero__hint { margin-top: 0.8rem; text-align: center; font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink-faint); }
+  .hero__hint { margin-top: 0.8rem; text-align: center; font-size: 0.88rem; color: var(--ink-soft); }
   @media (max-width: 960px) { .hero__grid { grid-template-columns: 1fr; } }
-
-  /* Video */
-  .video__head { text-align: center; margin-bottom: 2.2rem; }
-  .video__head h2 { margin-top: 1rem; }
-  .video__head .lead { margin-top: 0.8rem; }
-  .video { overflow: hidden; max-width: 940px; margin-inline: auto; }
-  .video__poster {
-    aspect-ratio: 16 / 9; display: grid; place-items: center; gap: 0;
-    background:
-      radial-gradient(120% 90% at 80% 10%, rgba(221,159,74,0.18), transparent 55%),
-      radial-gradient(110% 100% at 15% 90%, rgba(217,100,56,0.16), transparent 50%),
-      var(--ink);
-  }
-  .video__mark { width: clamp(84px, 12vw, 130px); height: auto; opacity: 0.95; }
-  .video__badge {
-    display: inline-flex; align-items: center; gap: 0.5em;
-    margin-top: 1.2rem;
-    font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.05em;
-    color: var(--sand); background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.15);
-    padding: 0.5em 0.9em; border-radius: var(--r-pill);
-  }
-
-  /* Problem */
-  .problem__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin-top: 2.6rem; }
-  .problem__card { padding: 1.6rem; }
-  .problem__card h3 { margin-bottom: 0.6rem; }
-  .problem__card p { color: var(--ink-soft); font-size: 0.98rem; }
-  .problem__punch { margin-top: 2.6rem; text-align: center; font-size: var(--fs-lead); font-weight: 700; color: var(--ink); }
-  @media (max-width: 880px) { .problem__grid { grid-template-columns: 1fr; } }
 
   /* How it works */
   .how__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin-top: 2.6rem; }
@@ -401,47 +270,30 @@ const jsonLd = [
   }
   .how__card h3 { margin-bottom: 0.55rem; }
   .how__card p { color: var(--ink-soft); font-size: 0.98rem; }
-  .how__mock { margin-top: auto; padding-top: 1.2rem; }
-  .how__row { display: flex; align-items: center; justify-content: space-between; gap: 0.8rem; padding: 0.55rem 0; border-top: 1px solid var(--line); }
-  .how__line { display: block; height: 9px; border-radius: 5px; background: var(--sand); }
+  .how__card p a { color: var(--orange-deep); font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
   .how__mock.hud { margin-top: 1.2rem; }
-  .how__cert { border: 1px solid var(--line); border-radius: var(--r-md); padding: 1rem; display: flex; flex-direction: column; gap: 0.5rem; align-items: flex-start; background: var(--paper); }
-  .how__cert-head { font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em; color: var(--ink); background: var(--amber-tint); padding: 0.3em 0.6em; border-radius: 4px; }
-  .how__cert-line { display: block; width: 100%; height: 7px; border-radius: 4px; background: var(--sand); }
   @media (max-width: 880px) { .how__grid { grid-template-columns: 1fr; } }
 
-  /* Features */
-  .features__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin-top: 2.6rem; }
-  .features__card { padding: 1.6rem; display: flex; flex-direction: column; gap: 0.7rem; transition: transform 0.18s ease, box-shadow 0.18s ease; }
-  .features__card:hover { transform: translateY(-3px); box-shadow: var(--shadow-pop); }
-  .features__card .tag { align-self: flex-start; }
-  .features__card p { color: var(--ink-soft); font-size: 0.97rem; flex: 1; }
-  .features__more { font-weight: 700; font-size: 0.92rem; color: var(--orange-deep); }
-  @media (max-width: 880px) { .features__grid { grid-template-columns: 1fr; } }
+  /* Nothing changes */
+  .nc__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1.5rem, 4vw, 3rem); margin-top: 2.6rem; }
+  .nc__col h3 { margin-bottom: 0.6rem; }
+  .nc__col p { color: var(--ink-soft); font-size: 0.98rem; }
+  @media (max-width: 880px) { .nc__grid { grid-template-columns: 1fr; } }
 
   /* Resilience */
   .resilience__grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(2rem, 5vw, 4rem); align-items: center; }
-  .resilience__honest { margin-top: 1.3rem; color: #9298b3; font-size: 0.95rem; border-left: 2px solid var(--amber); padding-left: 1rem; }
-  .resilience__chips { display: flex; flex-wrap: wrap; gap: 0.6rem; }
-  .resilience__chip {
-    display: inline-flex; align-items: center; gap: 0.5em;
-    font-family: var(--font-mono); font-size: 0.8rem;
-    color: var(--sand); background: var(--ink-2);
-    border: 1px solid rgba(233,229,220,0.14);
-    padding: 0.5em 0.85em; border-radius: var(--r-pill);
+  .resilience__list { display: grid; gap: 0.9rem; }
+  .resilience__list li {
+    display: flex; align-items: center; gap: 0.7em;
+    font-size: 1.05rem; font-weight: 600; color: var(--sand);
+    border-bottom: 1px solid rgba(233,229,220,0.12);
+    padding-bottom: 0.9rem;
   }
-  .resilience__chip svg { color: var(--mint); }
+  .resilience__list li:last-child { border-bottom: 0; padding-bottom: 0; }
+  .resilience__list svg { color: var(--mint); flex: none; }
   @media (max-width: 880px) { .resilience__grid { grid-template-columns: 1fr; } }
 
-  /* Benefits */
-  .benefits { display: grid; gap: 0; }
-  .benefits__row { display: grid; grid-template-columns: 1fr 2fr; gap: 1rem 2rem; padding: 1.1rem 0; border-top: 1px solid var(--line); }
-  .benefits__row:last-child { border-bottom: 1px solid var(--line); }
-  .benefits__row dt { font-weight: 800; }
-  .benefits__row dd { margin: 0; color: var(--ink-soft); }
-  @media (max-width: 680px) { .benefits__row { grid-template-columns: 1fr; gap: 0.3rem; } }
-
-  /* Chain of proof */
+  /* Enforcement */
   .cop__grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(2rem, 5vw, 4.5rem); align-items: center; }
   .cop__img img { border-radius: var(--r-md); box-shadow: var(--shadow-pop); border: 1px solid var(--line); }
   .cop__list { display: grid; gap: 0.6rem; }
@@ -452,9 +304,6 @@ const jsonLd = [
     background: var(--orange); box-shadow: 0 0 0 3px rgba(217,100,56,0.16);
   }
   @media (max-width: 880px) { .cop__grid { grid-template-columns: 1fr; } .cop__img { max-width: 420px; margin-inline: auto; } }
-
-  .enforcement__ghost { border-color: rgba(255,255,255,0.3); color: #fff; background: transparent; }
-  .enforcement__ghost:hover { border-color: #fff; }
 
   /* Pricing */
   .plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin-top: 2.6rem; align-items: start; }
@@ -484,7 +333,7 @@ const jsonLd = [
   .matrix__no { color: var(--ink-faint); }
   .pricing__note { margin-top: 1.1rem; text-align: center; font-size: 0.88rem; color: var(--ink-faint); }
 
-  /* FAQ teaser */
+  /* FAQ */
   .faq { border-top: 1px solid var(--line); }
   .faq:last-of-type { border-bottom: 1px solid var(--line); }
   .faq summary {

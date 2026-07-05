@@ -2,8 +2,9 @@
 /**
  * Signature element: drag to see the invisible watermark inside product copy.
  * The right-hand pane shows a stylised detector view with glowing markers and
- * a detection HUD. Marker positions are illustrative set dressing for the
- * demo, not a readout of anything real. Keyboard-accessible via the range.
+ * a short detection readout. Marker positions are illustrative set dressing
+ * for the demo, not a readout of anything real. Keyboard-accessible via the
+ * range input.
  */
 interface Props {
   domain?: string;
@@ -15,8 +16,8 @@ const { domain = "demo-store.myshopify.com", start = 55 } = Astro.props;
 // are placed on arbitrary letters purely for the visual.
 const TITLE = "Juniper & Cedar Soy Candle";
 const COPY = [
-  "Hand poured in small batches, Juniper & Cedar opens with crushed juniper berry over dry cedarwood, finished with a whisper of smoked vanilla. It reads like a walk through a cold pine forest, ten minutes after rain.",
-  "The 220g natural soy blend burns clean for around 45 hours in a reusable amber glass jar, with a lead free cotton wick and no synthetic dyes. Poured, cured and boxed by hand in our Yorkshire workshop.",
+  "Hand-poured in small batches, Juniper & Cedar opens with crushed juniper berry over dry cedarwood, finished with a trace of smoked vanilla. Like a walk through a cold pine forest after rain.",
+  "The 220g natural soy blend burns clean for around 45 hours in a reusable amber glass jar, with a lead-free cotton wick and no synthetic dyes. Cured and boxed by hand in our Yorkshire workshop.",
 ];
 
 /** Wrap arbitrary characters in marker spans for the detector pane. */
@@ -44,7 +45,6 @@ const marked = COPY.map((p, i) => markup(p, i * 3 + 1));
 <figure class="xray" data-reveal-widget style={`--pos:${start}%`}>
   <!-- plain pane: what everyone sees -->
   <div class="xray__page">
-    <p class="xray__crumb" aria-hidden="true">Home / Candles / {TITLE}</p>
     <p class="xray__title">{TITLE}</p>
     <p class="xray__price" aria-hidden="true">£24.00</p>
     {COPY.map((p) => <p class="xray__copy">{p}</p>)}
@@ -53,28 +53,17 @@ const marked = COPY.map((p, i) => markup(p, i * 3 + 1));
   <!-- detector pane: what Kirpik sees -->
   <div class="xray__over" aria-hidden="true">
     <div class="xray__page xray__page--dark">
-      <p class="xray__crumb">Home / Candles / {TITLE}</p>
       <p class="xray__title">{TITLE}</p>
       <p class="xray__price">£24.00</p>
       {marked.map((p) => <p class="xray__copy" set:html={p} />)}
     </div>
-    <div class="xray__scan"></div>
-    <span class="xray__corner xray__corner--tl"></span>
-    <span class="xray__corner xray__corner--tr"></span>
-    <span class="xray__corner xray__corner--bl"></span>
-    <span class="xray__corner xray__corner--br"></span>
 
     <div class="xray__hud">
       <span class="xray__detected">
         <svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><path d="M2 8.5 6 12l8-9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         WATERMARK DETECTED
       </span>
-      <dl class="xray__data">
-        <div><dt>owner</dt><dd>{domain}</dd></div>
-        <div><dt>security markers</dt><dd>14</dd></div>
-        <div><dt>signature</dt><dd>4e30·7f85·06e7·7557</dd></div>
-        <div><dt>confidence</dt><dd>100.0%</dd></div>
-      </dl>
+      <span class="xray__owner">{domain}</span>
     </div>
   </div>
 
@@ -100,15 +89,14 @@ const marked = COPY.map((p, i) => markup(p, i * 3 + 1));
     border: 1px solid var(--line);
     isolation: isolate;
     user-select: none; touch-action: pan-y;
-    min-height: 430px;
+    min-height: 400px;
   }
 
   .xray__page {
     position: absolute; inset: 0;
-    padding: 3.1rem clamp(1.2rem, 3vw, 2rem) 7.5rem;
+    padding: 3rem clamp(1.2rem, 3vw, 2rem) 5.5rem;
     overflow: hidden;
   }
-  .xray__crumb { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 0.9rem; }
   .xray__title { font-weight: 800; font-size: clamp(1.15rem, 2.4vw, 1.5rem); letter-spacing: -0.015em; margin-bottom: 0.15rem; }
   .xray__price { font-family: var(--font-mono); font-size: 0.85rem; color: var(--ink-soft); margin-bottom: 1rem; }
   .xray__copy { font-size: 0.92rem; line-height: 1.66; color: var(--ink-soft); margin-bottom: 0.8rem; max-width: 60ch; }
@@ -116,7 +104,6 @@ const marked = COPY.map((p, i) => markup(p, i * 3 + 1));
   /* detector pane */
   .xray__over { position: absolute; inset: 0; clip-path: inset(0 0 0 var(--pos)); background: var(--ink); }
   .xray__page--dark { background: var(--ink); }
-  .xray__page--dark .xray__crumb { color: #6d7390; }
   .xray__page--dark .xray__title { color: #eceef6; }
   .xray__page--dark .xray__price { color: #9298b3; }
   .xray__page--dark .xray__copy { color: #a7acc4; }
@@ -133,48 +120,31 @@ const marked = COPY.map((p, i) => markup(p, i * 3 + 1));
   }
   @media (prefers-reduced-motion: reduce) { .xray__page--dark :global(.txm) { animation: none; } }
 
-  .xray__scan {
-    position: absolute; inset: 0;
-    background: linear-gradient(180deg, transparent 0%, rgba(221,159,74,0) 44%, rgba(221,159,74,0.22) 50%, rgba(221,159,74,0) 56%, transparent 100%);
-    background-size: 100% 220%;
-    animation: xscan 3.8s ease-in-out infinite;
-    pointer-events: none;
-  }
-  @keyframes xscan { 0%,100% { background-position: 0 -60%; } 50% { background-position: 0 160%; } }
-  @media (prefers-reduced-motion: reduce) { .xray__scan { animation: none; opacity: 0.2; } }
-
-  .xray__corner { position: absolute; width: 20px; height: 20px; border: 2px solid rgba(221,159,74,0.75); }
-  .xray__corner--tl { top: 12px; left: calc(var(--pos) + 12px); border-right: 0; border-bottom: 0; }
-  .xray__corner--tr { top: 12px; right: 12px; border-left: 0; border-bottom: 0; }
-  .xray__corner--bl { bottom: 12px; left: calc(var(--pos) + 12px); border-right: 0; border-top: 0; }
-  .xray__corner--br { bottom: 12px; right: 12px; border-left: 0; border-top: 0; }
-
+  /* Detection readout: anchored inside the revealed region so the divider
+     never clips it. */
   .xray__hud {
-    position: absolute; right: 12px; bottom: 12px;
-    width: max(230px, calc(100% - var(--pos) - 24px));
-    max-width: calc(100% - 24px);
-    background: rgba(14, 17, 31, 0.82); backdrop-filter: blur(6px);
+    position: absolute; left: calc(var(--pos) + 12px); right: 12px; bottom: 12px;
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+    gap: 0.3rem 1rem;
+    background: rgba(14, 17, 31, 0.85);
     border: 1px solid rgba(233,229,220,0.14);
-    border-radius: 12px; padding: 0.7rem 0.85rem;
-    color: var(--sand);
+    border-radius: 10px; padding: 0.6rem 0.85rem;
+    overflow: hidden;
   }
   .xray__detected {
     display: inline-flex; align-items: center; gap: 0.45em;
     font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700;
-    letter-spacing: 0.08em; color: var(--amber);
-    margin-bottom: 0.5rem;
+    letter-spacing: 0.07em; color: var(--amber);
+    white-space: nowrap;
   }
-  .xray__detected svg { color: var(--mint); }
-  .xray__data { display: grid; grid-template-columns: 1fr; gap: 0.2rem; margin: 0; }
-  .xray__data div { display: flex; justify-content: space-between; gap: 0.5rem; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 0.18rem; }
-  .xray__data dt { font-family: var(--font-mono); font-size: 0.64rem; letter-spacing: 0.06em; text-transform: uppercase; color: #8b90a8; }
-  .xray__data dd { font-family: var(--font-mono); font-size: 0.7rem; color: #fff; margin: 0; overflow-wrap: anywhere; text-align: right; }
+  .xray__detected svg { color: var(--mint); flex: none; }
+  .xray__owner { font-family: var(--font-mono); font-size: 0.72rem; color: #fff; overflow-wrap: anywhere; }
 
   .xray__tag {
     position: absolute; top: 12px; z-index: 3;
-    font-family: var(--font-mono); font-size: 0.64rem; font-weight: 600;
+    font-family: var(--font-mono); font-size: 0.7rem; font-weight: 600;
     letter-spacing: 0.07em; text-transform: uppercase;
-    padding: 0.34em 0.6em; border-radius: var(--r-pill);
+    padding: 0.4em 0.7em; border-radius: var(--r-pill);
   }
   .xray__tag--left { left: 12px; background: var(--paper-2); color: var(--ink); border: 1px solid var(--line); }
   .xray__tag--right { right: 12px; background: var(--orange); color: #fff; opacity: 0; transition: opacity 0.2s; }

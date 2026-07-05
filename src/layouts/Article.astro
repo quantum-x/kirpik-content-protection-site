@@ -45,7 +45,6 @@ const jsonLd = {
     <header class="ahead">
       <div class="container narrow">
         <a class="ahead__back" href="/learn/">← Learn</a>
-        <span class="eyebrow">{cluster}</span>
         <h1>{title}</h1>
         <p class="lead">{summary}</p>
         <div class="ahead__meta">
@@ -88,8 +87,7 @@ const jsonLd = {
   .ahead { padding-block: clamp(2.4rem, 2rem + 3vw, 4rem) clamp(1.4rem, 3vw, 2.2rem); }
   .ahead__back { font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-faint); text-decoration: none; }
   .ahead__back:hover { color: var(--orange-deep); }
-  .ahead .eyebrow { display: block; margin-top: 1.4rem; }
-  .ahead h1 { font-size: var(--fs-h1); margin: 0.8rem 0 1rem; max-width: 22ch; }
+  .ahead h1 { font-size: var(--fs-h1); margin: 1.4rem 0 1rem; max-width: 22ch; }
   .ahead .lead { max-width: 60ch; }
   .ahead__meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.7rem; margin-top: 1.6rem; font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.03em; text-transform: uppercase; color: var(--ink-faint); }
   .ahead__meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--ink-faint); opacity: 0.6; }

@@ -59,7 +59,6 @@ const howToJsonLd = {
   jsonLd={howToJsonLd}
 >
   <PageHero
-    eyebrow="How it works"
     title="Three steps from plain text to provable ownership."
     lead="Kirpik protects the words you already wrote, finds them when they surface on someone else's site, and turns the match into evidence a host will act on. Here is each step in detail."
   />
@@ -84,6 +83,8 @@ const howToJsonLd = {
           what you published, and nothing is added to your storefront theme:
           no script, no app embed, no pixel. Protection is also reversible, so
           any item can be restored to its prior state whenever you choose.
+          Kirpik asks for at least 20 words per item, and the watermark is at
+          its strongest from around 45 words up.
         </p>
         <ul class="step__list">
           {steps[0].list.map((li) => (
@@ -93,11 +94,6 @@ const howToJsonLd = {
             </li>
           ))}
         </ul>
-        <p class="step__note">
-          Kirpik asks for at least 20 words per item, and the watermark is at
-          its strongest from around 45 words up. Most product descriptions
-          clear that without trying.
-        </p>
       </div>
       <div class="step__art" data-reveal>
         <div class="mock card" aria-hidden="true">
@@ -119,7 +115,6 @@ const howToJsonLd = {
   <section class="section section--tone" style="padding-block:clamp(2.6rem,4vw,4rem)">
     <div class="container">
       <div class="narrow" style="text-align:center">
-        <span class="eyebrow">The part merchants worry about</span>
         <h2>What changes on your store? Nothing you can point at.</h2>
       </div>
       <div class="nochange__grid">
@@ -163,7 +158,9 @@ const howToJsonLd = {
           Paste detection is included on every plan. URL checks come with a
           monthly allowance: 5 on Free, 20 on Paid, 100 on Pro. If a site
           blocks automated visits, a guided paste flow walks you through
-          capturing the text yourself and costs no URL credit.
+          capturing the text yourself and costs no URL credit. Kirpik does not
+          crawl the web on a schedule; detection runs when you point it at
+          text or a URL.
         </p>
         <ul class="step__list">
           {steps[1].list.map((li) => (
@@ -173,11 +170,6 @@ const howToJsonLd = {
             </li>
           ))}
         </ul>
-        <p class="step__note">
-          One honest boundary: Kirpik does not crawl the web on a schedule.
-          Detection runs when you point it at text or a URL, which keeps every
-          result something you triggered and can explain.
-        </p>
       </div>
       <div class="step__art" data-reveal>
         <div class="hud mock__detect" aria-hidden="true">
@@ -247,7 +239,6 @@ const howToJsonLd = {
   <!-- ======================= Honest limits ======================= -->
   <section class="section section--ink">
     <div class="container narrow" style="text-align:center">
-      <span class="eyebrow">The fine print, up front</span>
       <h2>What Kirpik does not claim</h2>
       <p class="lead" style="margin-top:1rem">
         No tool stops text from being copied, and we will not pretend
@@ -279,10 +270,6 @@ const howToJsonLd = {
   .step__list { margin-top: 1.4rem; display: grid; gap: 0.6rem; }
   .step__list li { display: flex; align-items: baseline; gap: 0.6rem; font-weight: 600; }
   .step__list svg { color: var(--mint); flex: none; align-self: center; }
-  .step__note {
-    margin-top: 1.3rem; color: var(--ink-soft); font-size: 0.95rem;
-    border-left: 2px solid var(--amber); padding-left: 1rem;
-  }
 
   .mock { padding: 1.3rem; }
   .mock__head { font-family: var(--font-mono); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-faint); padding-bottom: 0.6rem; }

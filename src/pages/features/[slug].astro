@@ -17,7 +17,7 @@ const others = FEATURES.filter((f) => f.slug !== feature.slug);
 ---
 
 <Base title={feature.title} description={feature.short}>
-  <PageHero eyebrow={feature.tag} title={feature.title} lead={feature.lead} />
+  <PageHero title={feature.title} lead={feature.lead} />
 
   <section class="section" style="padding-top:0">
     <div class="container detail" data-has-image={feature.image ? "yes" : "no"}>
