@@ -20,10 +20,30 @@ interface Props {
 const {
   title,
   description = SITE.description,
-  ogImage = "/brand/kirpik-logo-1200.png",
+  ogImage: ogImageProp,
   jsonLd,
   mdAlternate,
 } = Astro.props;
+
+// Default OG card: match the URL against the cards scripts/gen-og.mjs emitted
+// into public/og at build time. "/" -> home.png, "/pricing/" -> pricing.png,
+// "/learn/<slug>/" and "/compare/<slug>/" -> <slug>.png. Pages can still pass
+// ogImage explicitly; anything without a matching card falls back to the logo.
+const ogCards = new Set(
+  Object.keys(import.meta.glob("../../public/og/*.png")).map((p) => p.split("/").pop() ?? "")
+);
+function defaultOgFor(pathname: string): string {
+  const parts = pathname.replace(/^\/+|\/+$/g, "").split("/").filter(Boolean);
+  const candidates: string[] = [];
+  if (parts.length >= 2) {
+    const leaf = parts[parts.length - 1];
+    candidates.push(`${leaf}.png`, `article-${leaf}.png`);
+  }
+  candidates.push(`${parts[0] ?? "home"}.png`);
+  for (const c of candidates) if (ogCards.has(c)) return `/og/${c}`;
+  return "/brand/kirpik-logo-1200.png";
+}
+const ogImage = ogImageProp ?? defaultOgFor(Astro.url.pathname);
 
 const fullTitle = title ? `${title} · ${SITE.name}` : `${SITE.name}: ${SITE.tagline}`;
 const canonical = new URL(Astro.url.pathname, SITE.url).href;

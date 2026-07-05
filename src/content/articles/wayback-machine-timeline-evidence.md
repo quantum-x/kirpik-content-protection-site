@@ -42,7 +42,7 @@ Archive evidence is good, and it is routinely used in disputes, but treat it as 
 - **Coverage is incomplete.** The Archive never claimed to capture everything. A missing snapshot of a page proves nothing about when that page existed, in either direction. Absence of evidence is exactly that.
 - **Earliest capture is a ceiling, not a birthday.** A first capture in November shows the page existed by November. The page may have been live long before its first crawl, which cuts both ways in a dispute.
 - **Captures can be imperfect.** Pages that lean heavily on scripts to render content sometimes archive incompletely, and a capture may miss images or styling. For text-centred store pages this is less of an issue, but check what the snapshot actually preserved before citing it.
-- **Site owners can affect availability.** Exclusion requests and site changes can make captures unavailable for some domains, so a URL that was archived is not guaranteed to stay viewable forever.
+- **Site owners can affect availability.** Exclusion requests and site changes can make captures unavailable for some domains, so a URL that was archived once is not certain to stay viewable forever.
 
 None of this undermines the core use. It just means the Archive works best confirming a timeline that other evidence also supports, rather than standing alone.
 

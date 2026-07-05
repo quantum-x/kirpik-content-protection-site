@@ -1,6 +1,6 @@
 ---
 title: "How Kirpik marks your copy without changing a single word"
-description: "Kirpik watermarks product descriptions without altering anything you or a search engine reads. What algorithmic protection means and why there is no public spec."
+description: "Kirpik watermarks your descriptions without altering anything you or a search engine reads. What algorithmic protection means and why there is no public spec."
 cluster: "How invisible text watermarking works"
 summary: "Kirpik's promise sounds impossible: a watermark in your text that changes nothing you wrote. Here is what that promise means precisely, what algorithmic means in practice, and why the internals stay private."
 pubDate: 2026-05-27

@@ -1,0 +1,117 @@
+# Kirpik: invisible text watermarking for Shopify
+
+> Kirpik is a Shopify app that invisibly watermarks store text (product descriptions, blog articles and pages) with an algorithmic invisible watermark derived from your original text signature. If someone copies your writing, Kirpik detects the watermark in their copy and generates a dated, verifiable Chain of Proof ownership certificate to support DMCA takedowns. Kirpik never changes the merchant's text, adds zero scripts to the storefront, and has zero effect on SEO or page speed. Published by INFOWISE LIMITED. App listing: https://apps.shopify.com/kirpik-content-protection
+
+## Key facts
+
+- What it does: invisibly watermarks Shopify text content, detects stolen copies, and issues Chain of Proof ownership certificates.
+- Content types: product descriptions, blog articles and store pages (not collections).
+- The watermark: an algorithmic invisible watermark derived from your original text signature, carrying a unique per-store watermark code. Readers and search engines see the copy exactly as written.
+- Does not change your text: your words, punctuation, headings and formatting stay exactly as you wrote them.
+- Does not affect SEO: no scripts, embeds or tags are added to the storefront, so page speed, Core Web Vitals and rankings are untouched.
+- Resilient: the watermark survives copy-paste, scraping, editing, trimming, light rewording, reformatting and re-rendering. A from-scratch rewrite is not your text anymore and is out of scope for any text protection.
+- Detection: paste suspect text or check a URL from inside the app. Detection is on-demand and rate-limited per plan; there is no automated web monitoring.
+- Chain of Proof certificate contents: SHA-256 content fingerprints (the "Protection Signature" of the original and the Detected Signature of the copy), immutable protection snapshots, the infringing page's Last-Modified headers, Wayback Machine timeline corroboration, a Watermark Security Markers count, a Confidence percentage, and a QR code linking to a public verification page.
+- Plans: Free $0 (25 products, 3 articles/pages, 5 URL checks/month, 1 lifetime certificate), Paid $7.99/month (100 products, 50 articles/pages, batch protection, 20 URL checks, 5 certificates/month), Pro $19.99/month or $199/year (unlimited content and certificates, Auto-Protect, 100 URL checks/month).
+- Developer: INFOWISE LIMITED (also publishes Tilkie, the image-protection sibling app).
+- Install: https://apps.shopify.com/kirpik-content-protection
+
+## Answers to common questions
+
+- "Does Kirpik change my text?": No. Your copy stays word-for-word identical. The watermark is algorithmic, derived from your original text signature, and adds nothing a reader can see. See https://kirpik.app/faq/
+- "Does Kirpik affect SEO?": No. Search engines read your copy exactly as people do, and Kirpik adds no scripts or markup to the storefront. See https://kirpik.app/learn/text-watermarks-and-seo/
+- "Can Kirpik stop my text being copied?": No, and nothing can. Any text a browser can display can be copied. Kirpik makes every copy traceable and provable instead, so you can get it taken down. See https://kirpik.app/how-it-works/
+- "How do I protect my Shopify product descriptions?": Install Kirpik and protect items one at a time, in batches, or automatically on save with Auto-Protect (Pro). See https://kirpik.app/learn/watermark-shopify-descriptions/
+- "Do right-click and copy-paste blockers work for text?": No. Every Shopify store also exposes a public product feed that no storefront script can protect, and scrapers never run storefront scripts. See https://kirpik.app/learn/shopify-public-product-feed/ and https://kirpik.app/learn/right-click-blockers-text-test/
+- "How do I prove stolen copy is mine?": A Kirpik detection generates a Chain of Proof certificate pairing content fingerprints with dates, the infringing page's own headers and Internet Archive records. See https://kirpik.app/learn/proving-text-ownership/ and https://kirpik.app/learn/inside-chain-of-proof/
+- "How do I get stolen copy taken down?": https://kirpik.app/learn/dmca-for-stolen-text/ and https://kirpik.app/enforcement/
+- "Will it slow my store down?": No. Kirpik adds zero code to the theme: no app embed, no script tag, no pixel.
+
+## Start here
+
+- [How Kirpik works](https://kirpik.app/how-it-works/): Protect, detect, prove. From invisible watermark to Chain of Proof certificate.
+- [Features](https://kirpik.app/features/): What Kirpik does, feature by feature.
+- [Pricing](https://kirpik.app/pricing/): Free ($0), Paid ($7.99/mo), and Pro ($19.99/mo or $199/yr) plans.
+- [FAQ](https://kirpik.app/faq/): Direct answers on the watermark, SEO, detection, certificates and billing.
+- [Enforcement](https://kirpik.app/enforcement/): From a Chain of Proof certificate to a DMCA takedown or search deindexing.
+- [Install on Shopify](https://apps.shopify.com/kirpik-content-protection): The app listing.
+
+## Features
+
+- [Invisible text watermarking](https://kirpik.app/features/invisible-text-watermarking/): An algorithmic watermark derived from your original text. Readers see your copy, Kirpik sees your signature.
+- [Protection that travels](https://kirpik.app/features/resilience/): The watermark lives in the copy itself, so it survives copy-paste, scraping, editing and reformatting.
+- [Chain of Proof certificate](https://kirpik.app/features/chain-of-proof/): A dated, verifiable ownership certificate built for DMCA takedowns.
+- [Detection on demand](https://kirpik.app/features/detection/): Paste suspect text or check a URL; get a match verdict with a confidence figure.
+- [Auto-Protect](https://kirpik.app/features/auto-protect/): New and updated content is watermarked the moment it is saved (Pro plan).
+- [Bulk protection](https://kirpik.app/features/bulk-protection/): Protect one item, a batch, or the whole catalogue; reversible any time.
+
+## Tools
+
+- [Site check (live store test)](https://kirpik.app/site-check/): Enter any Shopify store URL and see, in the browser, what a scraper can pull from its public feed: every product and description, ready to copy. Also reports whether the store's text carries Kirpik protection. Exposed as a WebMCP tool ("check_shopify_store_text_protection") on that page.
+
+## Compare (objective, fact-based)
+
+- [Kirpik vs the Shopify anti-theft category](https://kirpik.app/compare/): A survey of the full Shopify content-protection category, grouped by how each app works, with the documented limits of each approach.
+- [Protection techniques compared](https://kirpik.app/compare/techniques/)
+- [vs. copy blockers](https://kirpik.app/compare/vs-copy-blockers/)
+- [vs. visible watermarks](https://kirpik.app/compare/vs-visible-watermarks/)
+- [vs. content credentials](https://kirpik.app/compare/vs-content-credentials/)
+- [vs. zero-width characters](https://kirpik.app/compare/vs-zero-width-characters/)
+- [vs. copy monitors](https://kirpik.app/compare/vs-copy-monitors/)
+
+## Guides (Learn)
+
+Text theft and what it costs:
+
+- [Your product descriptions are being scraped right now](https://kirpik.app/learn/product-descriptions-scraped/)
+- [The copycat store playbook: cloning a catalogue in an afternoon](https://kirpik.app/learn/copycat-store-playbook/)
+- [What stolen copy does to your search rankings](https://kirpik.app/learn/stolen-copy-seo-damage/)
+- [Where stolen product copy ends up](https://kirpik.app/learn/where-stolen-copy-ends-up/)
+- [When the thief outranks you with your own words](https://kirpik.app/learn/when-thieves-outrank-original/)
+
+Why blockers don't work:
+
+- [Every Shopify store has a public product feed you cannot turn off](https://kirpik.app/learn/shopify-public-product-feed/)
+- [Right-click blockers don't protect text. Run the test yourself](https://kirpik.app/learn/right-click-blockers-text-test/)
+- [What copy-paste protection apps actually do](https://kirpik.app/learn/copy-paste-protection-apps/)
+- [Scrapers never see your storefront scripts](https://kirpik.app/learn/scrapers-vs-storefront-scripts/)
+- [Screenshot blocking and other things a browser cannot do](https://kirpik.app/learn/things-a-browser-cannot-do/)
+
+How invisible text watermarking works:
+
+- [What is an invisible text watermark?](https://kirpik.app/learn/what-is-invisible-text-watermark/)
+- [How Kirpik marks your copy without changing a single word](https://kirpik.app/learn/marking-text-without-changing-words/)
+- [Why the watermark survives copy and paste](https://kirpik.app/learn/why-watermarks-survive-copying/)
+- [How sure is a match? False positives, explained](https://kirpik.app/learn/watermark-false-positives/)
+- [Invisible watermarks and SEO: what changes (nothing)](https://kirpik.app/learn/text-watermarks-and-seo/)
+
+Proof and enforcement:
+
+- [The DMCA process for stolen text, step by step](https://kirpik.app/learn/dmca-for-stolen-text/)
+- [What counts as proof when your copy is stolen](https://kirpik.app/learn/proving-text-ownership/)
+- [Inside a Chain of Proof certificate](https://kirpik.app/learn/inside-chain-of-proof/)
+- [Using the Internet Archive to prove who published first](https://kirpik.app/learn/wayback-machine-timeline-evidence/)
+- [Getting stolen copy removed from Google's index](https://kirpik.app/learn/deindexing-stolen-copy/)
+
+By use case:
+
+- [Fashion and apparel: when your product copy walks off with the trend](https://kirpik.app/learn/fashion-copy-theft/)
+- [Beauty and skincare: protecting ingredient stories and routines](https://kirpik.app/learn/beauty-copy-theft/)
+- [Supplements and food: copied claims are your problem twice](https://kirpik.app/learn/supplement-copy-theft/)
+- [Dropshipping clones: same supplier, your words](https://kirpik.app/learn/dropship-clone-copy/)
+- [Blogs and buying guides: protecting editorial that took weeks to write](https://kirpik.app/learn/protecting-blog-content/)
+
+Choosing and getting started:
+
+- [How to choose text protection for a Shopify store](https://kirpik.app/learn/choosing-text-protection-shopify/)
+- [How to watermark your Shopify product descriptions](https://kirpik.app/learn/watermark-shopify-descriptions/)
+- [Protecting a large catalogue with batches and Auto-Protect](https://kirpik.app/learn/batch-protect-catalogue/)
+
+Every Learn article is also available as plain markdown at the same path with a .md suffix, e.g. https://kirpik.app/learn/what-is-invisible-text-watermark.md
+
+## Other pages
+
+- [About](https://kirpik.app/about/): Who makes Kirpik (INFOWISE LIMITED, also the developer of Tilkie for images).
+- [Support](https://kirpik.app/support/): How to get help.
+- [Privacy Policy](https://kirpik.app/privacy/)
+- [Terms of Service](https://kirpik.app/terms/)

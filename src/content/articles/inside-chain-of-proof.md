@@ -29,7 +29,7 @@ This section records the "before" of the story, fixed at the moment you protecte
 - **Algorithm Version.** Which version of Kirpik's watermarking produced the protection, so the record stays interpretable as the system evolves.
 - **Content Title and Original Content URL.** The human-readable identity of the work and where the original lives, tying the technical fields back to a real page on your store.
 
-A note on honest terminology, because evidence should not oversell itself. The Protection Signature is a content fingerprint, not a cryptographic signature, and Kirpik does not claim notarisation or similar. What the field proves is identity of content, and it proves that well.
+A note on honest terminology, because evidence should not oversell itself. The Protection Signature is a content fingerprint, nothing grander, and the certificate claims nothing beyond what it records. What the field proves is identity of content, and it proves that well.
 
 ## Detection Details: their side of the timeline
 

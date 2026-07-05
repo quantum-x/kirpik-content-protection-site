@@ -1,0 +1,17 @@
+{
+  "name": "kirpik-agent-edge",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Cloudflare Worker fronting kirpik.app: RFC 8288 Link headers + Accept: text/markdown negotiation for AI agents.",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "test:convert": "node test/convert.mjs"
+  },
+  "dependencies": {
+    "node-html-parser": "^6.1.13"
+  },
+  "devDependencies": {
+    "wrangler": "^4.60.0"
+  }
+}

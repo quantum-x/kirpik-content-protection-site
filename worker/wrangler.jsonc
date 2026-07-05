@@ -1,0 +1,9 @@
+{
+  "name": "kirpik-agent-edge",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-01-01",
+  // Fronts the whole apex. The worker fails open (returns the origin response)
+  // on any error, so it can never take the site down.
+  "routes": [{ "pattern": "kirpik.app/*", "zone_name": "kirpik.app" }],
+  "observability": { "enabled": true }
+}
