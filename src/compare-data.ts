@@ -596,7 +596,7 @@ const FEATURED: Competitor[] = [
     ],
     mechanisms: ["visible-image-watermark", "overlay-trick", "right-click-block"],
     proofNote:
-      "Oh's listing describes its goal as reducing casual copying, which matches what visible marks and storefront blocks can deliver. The description text beside the marked images is not part of what the app changes.",
+      "Oh's listing describes its goal as reducing casual copying. Its storefront block is bypassed like any storefront script, and the description text beside the marked images is not part of what the app changes.",
   },
   {
     slug: "photolock",
@@ -783,7 +783,7 @@ const FEATURED: Competitor[] = [
     ],
     mechanisms: ["right-click-block", "copy-paste-block", "keyboard-shortcut-block"],
     proofNote:
-      "Defendify's listing describes deterrence against casual theft, which is what a storefront blocker offers. Deterrence inside the tab is real; it is simply a different job from following the words after they leave.",
+      "Defendify's listing describes deterrence against casual theft. A context-menu script is bypassed in seconds by reader mode, the page source or switching JavaScript off, and it never runs where scrapers read.",
   },
   {
     slug: "tilkie-image-protection",
@@ -919,7 +919,7 @@ const FEATURED: Competitor[] = [
     ],
     mechanisms: ["right-click-block", "copy-paste-block", "keyboard-shortcut-block"],
     proofNote:
-      "CopyBlock's listing describes its aim as discouraging casual copying, which is what a storefront blocker does inside the tab. The open question for a store owner is what happens to the copying that casual friction does not stop, and that is a question about evidence, not blocking.",
+      "CopyBlock's listing describes its aim as discouraging casual copying. The block is bypassed like any storefront script, and it leaves the question that matters for a store owner unanswered: what happens when your text is taken anyway. That is a question about evidence, not blocking.",
   },
   {
     slug: "qf-content-guard",

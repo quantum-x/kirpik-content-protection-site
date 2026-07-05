@@ -132,7 +132,9 @@ The full truthful-claims register is in CLAUDE.md; the review-tested essentials:
 - Ordering by review count; the 27 most-reviewed subtly shaded, with a one-line caption saying so. Kirpik appears as the pinned first row with Yes/Yes.
 - Tilkie: same-developer disclosure box, complementary framing ("designed to run side by side"), no fabricated adoption claims.
 - Method + trademark + not-legal-advice note on the hub and on every detail page.
-- Each detail page answers, in order: what the app says it does; can it prevent content theft; can it prove infringement; side-by-side verdict rows; site-check band. Kirpik's no-conflict fact appears once ("Kirpik adds no scripts to your storefront, so it runs alongside any blocker without conflict").
+- Each detail page answers, in order: **"What X Claims"** (their listing, verbatim); **"Does it prevent content theft?"**; **"Can it prove infringement?"**; **"X vs Kirpik"** verdict rows; site-check band. The two question sections open with the answer in bold immediately (**No.** for nearly all), then at most two sentences of relevant summary; out-of-scope capability is stated as out of scope, not analysed. After the No: Kirpik's own position, exactly framed as "Kirpik does not claim to prevent content theft: it **protects** content", plus the no-conflict fact once ("Kirpik adds no scripts to your storefront, so it runs alongside any blocker without conflict").
+- **No blocker gets a pass, ever.** Right-click and copy scripts do not prevent right-clicks: reader mode, the page source or switching JavaScript off bypasses them in seconds, and browsers keep those controls with the user. Never write that their deterrence is "real", "a real thing" or "friction that works"; their own candid quotes may be cited, followed by the bypass facts. In verdict tables the blocker's right-click cell reads "Easily bypassed", never "Yes".
+- Kirpik's cells for capabilities it does not attempt (stopping right-clicks, stopping scraping) show "-", not "No": out of scope, not a failure.
 
 ## 10. Review process (mandatory before shipping any content change)
 

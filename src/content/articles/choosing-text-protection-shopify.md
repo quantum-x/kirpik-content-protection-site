@@ -16,7 +16,7 @@ That framing is deliberate. Text on a public web page can always be copied. Your
 
 ## Category one: blockers
 
-Right-click disablers, text-selection blockers, copy-paste interceptors, developer-tools detectors. These add JavaScript to your storefront that makes casual copying slightly less convenient in a standard browser.
+Right-click disablers, text-selection blockers, copy-paste interceptors, developer-tools detectors. These add JavaScript to your storefront that interferes with right-clicking in a standard browser tab. The block is bypassed in seconds by reader mode, the page source or switching JavaScript off.
 
 The honest description is deterrence theatre. A visitor who wants your text presses Ctrl+U or reads the page source; a scraper never runs your JavaScript at all, a point unpacked in [scrapers never see your storefront scripts](/learn/scrapers-vs-storefront-scripts/). Meanwhile the cost lands entirely on legitimate users: shoppers cannot copy your address or a product name to search it, accessibility tooling breaks, and you have added script weight to every page view. You pay a permanent storefront tax for protection that stops only the people who were never a threat. If you are evaluating one of these, [run the test yourself](/learn/right-click-blockers-text-test/) before paying for it.
 

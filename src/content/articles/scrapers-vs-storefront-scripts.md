@@ -1,4 +1,4 @@
----
+﻿---
 title: "Scrapers never see your storefront scripts"
 description: "HTTP clients, feed readers, headless browsers, spy extensions: how each obtains your text and why page JavaScript is invisible or irrelevant to them all."
 cluster: "Why blockers don't work"
@@ -43,7 +43,7 @@ So even the "human with a browser" case is not safe ground for blockers. The mom
 
 Read the fine print of the copy-protection category and you find quiet admissions. Listings describe their features as deterrents. Support pages acknowledge that a determined visitor can still access content, or note that disabling JavaScript defeats the protection, or exclude "advanced users" from expectations. Phrases like "makes it harder" and "discourages casual copying" carry the real message: the developers know the browser offers them nothing stronger, and the careful ones say so in their own documentation.
 
-That candour is worth respecting, and worth taking literally. Deterring casual copying is a real, small thing. It is not protection against scraping, and the vendors, read closely, do not claim it is. Our [comparison pages](/compare/) quote specific listings verbatim so you can read the wording yourself, and the [technique survey](/learn/copy-paste-protection-apps/) explains what each advertised feature does underneath.
+That candour is worth respecting, and worth taking literally. Even the deterrence is thin: reader mode, the page source or switching JavaScript off bypasses the block in seconds. It is not protection against scraping, and the vendors, read closely, do not claim it is. Our [comparison pages](/compare/) quote specific listings verbatim so you can read the wording yourself, and the [technique survey](/learn/copy-paste-protection-apps/) explains what each advertised feature does underneath.
 
 ## Where that leaves a merchant
 
