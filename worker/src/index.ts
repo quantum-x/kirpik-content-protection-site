@@ -21,6 +21,14 @@ export default {
 
 async function handle(request: Request): Promise<Response> {
   const url = new URL(request.url);
+
+  // Same-origin fetch helper for the site-check tool. Browsers cannot read a
+  // store's sitemap or blog feeds cross-origin, so the tool asks this worker.
+  // Only a fixed set of Shopify storefront path shapes can be requested.
+  if (url.pathname === "/sc-fetch" && request.method === "GET") {
+    return scFetch(url);
+  }
+
   const accept = request.headers.get("Accept") || "";
   const wantsMarkdown =
     request.method === "GET" && /text\/markdown/i.test(accept) && isPagePath(url.pathname);
@@ -53,6 +61,56 @@ async function handle(request: Request): Promise<Response> {
     });
   }
   return resp;
+}
+
+const SC_MAX_BYTES = 2_500_000;
+
+async function scFetch(url: URL): Promise<Response> {
+  const d = (url.searchParams.get("d") || "").toLowerCase();
+  const t = url.searchParams.get("t") || "";
+  const h = url.searchParams.get("h") || "";
+  const f = url.searchParams.get("f") || "";
+
+  const domainOk = /^[a-z0-9][a-z0-9.-]{2,80}$/.test(d) && d.includes(".") && !/^\d+\.\d+\.\d+\.\d+$/.test(d);
+  const handleOk = /^[a-zA-Z0-9._-]{1,120}$/.test(h);
+  let path: string | null = null;
+  if (t === "sitemap") path = "/sitemap.xml";
+  else if (t === "smpart" && /^sitemap[a-z0-9_]{0,40}\.xml(\?from=\d{1,20}&to=\d{1,20})?$/.test(f)) path = `/${f}`;
+  else if (t === "atom" && handleOk) path = `/blogs/${h}.atom`;
+  else if (t === "page" && handleOk) path = `/pages/${h}`;
+
+  if (!domainOk || !path) {
+    return scRespond("bad request", 400, "text/plain");
+  }
+
+  try {
+    const upstream = await fetch(`https://${d}${path}`, {
+      headers: {
+        "User-Agent": "Mozilla/5.0 (compatible; KirpikSiteCheck/1.0; +https://kirpik.app/site-check/)",
+        Accept: "text/html,application/xml,application/atom+xml,*/*",
+      },
+      redirect: "follow",
+      cf: { cacheEverything: true, cacheTtl: 600 },
+    } as RequestInit);
+    if (!upstream.ok) return scRespond(`upstream ${upstream.status}`, 404, "text/plain");
+    const text = (await upstream.text()).slice(0, SC_MAX_BYTES);
+    const ct = upstream.headers.get("Content-Type") || "text/plain";
+    return scRespond(text, 200, ct);
+  } catch {
+    return scRespond("fetch failed", 502, "text/plain");
+  }
+}
+
+function scRespond(body: string, status: number, contentType: string): Response {
+  return new Response(body, {
+    status,
+    headers: {
+      "Content-Type": contentType,
+      "Access-Control-Allow-Origin": "*",
+      "Cache-Control": "public, max-age=600",
+      "X-Content-Type-Options": "nosniff",
+    },
+  });
 }
 
 // A "page" is a directory-style path (ends in / or is extensionless), or an
