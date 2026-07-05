@@ -286,7 +286,7 @@ export const FAQ_GROUPS: FaqGroup[] = [
     ],
   },
   {
-    title: "Plans and billing",
+    title: "Pricing",
     items: [
       { q: "Is there a free plan?", a: "Yes. The Free plan protects up to 25 products and 3 articles or pages, includes paste detection, 5 URL checks a month and 1 Proof of Ownership Certificate, and never expires." },
       { q: "What do the paid plans add?", a: "Paid ($7.99/month) raises the limits to 100 products and 50 articles and pages, adds batch protection, 20 URL checks and 5 certificates a month. Pro ($19.99/month) removes the caps, adds Auto-Protect and 100 URL checks, and makes certificates unlimited." },
