@@ -1,0 +1,36 @@
+---
+import { SITE, CTA_LABEL } from "../config";
+interface Props {
+  heading?: string;
+  sub?: string;
+  tone?: "tint" | "ink";
+}
+const {
+  heading,
+  sub = "Your words stay exactly as you wrote them. The proof is there when you need it. Free to start.",
+  tone = "tint",
+} = Astro.props;
+---
+
+<section class="section">
+  <div class="container">
+    <div class="ctaband" data-tone={tone}>
+      {heading
+        ? <h2>{heading}</h2>
+        : <h2>Put invisible proof in your product copy, <em>for free</em>.</h2>}
+      <p class="lead">{sub}</p>
+      <a class="btn btn--primary ctaband__btn" href={SITE.shopifyAppUrl} rel="noopener" target="_blank">{CTA_LABEL}</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .ctaband { text-align: center; border-radius: var(--r-lg); padding: clamp(2.4rem, 5vw, 4rem); }
+  .ctaband[data-tone="tint"] { background: var(--orange-tint); border: 1px solid #f2d4bd; }
+  .ctaband[data-tone="ink"] { background: var(--ink); }
+  .ctaband h2 { font-size: var(--fs-h1); }
+  .ctaband[data-tone="ink"] h2, .ctaband[data-tone="ink"] :global(h2) { color: #fff; }
+  .ctaband .lead { margin: 1rem auto 1.8rem; max-width: 50ch; }
+  .ctaband[data-tone="ink"] .lead { color: #b8bdd0; }
+  .ctaband__btn { font-size: 1.05rem; padding: 1.05em 2em; }
+</style>

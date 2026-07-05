@@ -1,0 +1,137 @@
+---
+/**
+ * Reusable "check your store" prompt. Renders a native GET form that navigates
+ * to /site-check/?url=<store>, so it needs no client JS on the host page — the
+ * site-check page reads the query param and runs the check.
+ *
+ * tone="wide"  → full-bleed tinted band (homepage)
+ * tone="hero"  → dark contained card
+ * tone="band"  → compact inline band (comparison pages)
+ *
+ * For a heading that needs coloured <em> spans, pass a `heading` named slot
+ * instead of the `heading` string prop.
+ */
+interface Props {
+  eyebrow?: string;
+  heading?: string;
+  sub?: string;
+  cta?: string;
+  tone?: "hero" | "band" | "wide";
+  note?: boolean;
+}
+const {
+  eyebrow = "Test your protection",
+  heading,
+  sub,
+  cta = "Check my store",
+  tone = "hero",
+  note = true,
+} = Astro.props;
+const hasHeadingSlot = Astro.slots.has("heading");
+---
+
+<section class="scf" data-tone={tone}>
+  <div class="container">
+    <div class="scf__inner" data-reveal>
+      {eyebrow && <span class="eyebrow">{eyebrow}</span>}
+      <h2 class="scf__title">{hasHeadingSlot ? <slot name="heading" /> : heading}</h2>
+      {sub && <p class="lead scf__sub">{sub}</p>}
+      <form class="scf__form" action="/site-check/" method="get" role="search">
+        <label class="scf__field">
+          <span class="sr-only">Your Shopify store URL</span>
+          <span class="scf__lock" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none"><rect x="4" y="10" width="16" height="10" rx="2" stroke="currentColor" stroke-width="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="2"/></svg>
+          </span>
+          <input
+            type="text"
+            name="url"
+            inputmode="url"
+            autocomplete="url"
+            spellcheck="false"
+            placeholder="yourstore.com"
+            aria-label="Your Shopify store URL"
+            required
+          />
+        </label>
+        <button class="btn btn--primary scf__btn" type="submit">{cta}</button>
+      </form>
+      {note && <p class="scf__note">Runs entirely in your browser · Nothing is sent to us · Free</p>}
+    </div>
+  </div>
+</section>
+
+<style>
+  .scf__inner { text-align: center; }
+
+  /* ---- wide: full-bleed tinted band (homepage) ---- */
+  .scf[data-tone="wide"] {
+    background: var(--amber-tint);
+    border-block: 1px solid #ecd9b4;
+    padding-block: clamp(3.2rem, 2.6rem + 3.4vw, 5rem);
+  }
+  .scf[data-tone="wide"] .scf__inner { max-width: 1080px; margin-inline: auto; }
+  .scf[data-tone="wide"] .scf__title { color: var(--ink); font-size: clamp(1.9rem, 1.35rem + 2.3vw, 2.95rem); margin: 0; text-wrap: balance; }
+  .scf[data-tone="wide"] .scf__sub { color: var(--ink-soft); max-width: 64ch; }
+  .scf[data-tone="wide"] .scf__form { max-width: 560px; }
+  .scf[data-tone="wide"] .scf__note { color: var(--ink-faint); }
+
+  /* ---- hero: dark contained card ---- */
+  .scf[data-tone="hero"] { padding-block: var(--section-y); }
+  .scf[data-tone="hero"] .scf__inner {
+    max-width: 760px; margin-inline: auto;
+    background: var(--ink); color: #fff;
+    border-radius: var(--r-lg);
+    padding: clamp(2.2rem, 5vw, 3.6rem) clamp(1.4rem, 4vw, 3rem);
+    box-shadow: var(--shadow-pop);
+  }
+  .scf[data-tone="hero"] .scf__title { color: #fff; }
+  .scf[data-tone="hero"] .scf__sub { color: #b8bdd0; }
+  .scf[data-tone="hero"] .scf__note { color: rgba(255,255,255,0.5); }
+  .scf[data-tone="hero"] .eyebrow { color: var(--amber); }
+
+  /* ---- band: compact inline (comparison pages) ---- */
+  .scf[data-tone="band"] { padding-block: clamp(1.6rem, 4vw, 2.4rem); }
+  .scf[data-tone="band"] .scf__inner {
+    max-width: 720px; margin-inline: auto;
+    background: var(--amber-tint); border: 1px solid #ecd9b4;
+    border-radius: var(--r-lg);
+    padding: clamp(1.6rem, 4vw, 2.4rem);
+  }
+  .scf[data-tone="band"] .eyebrow { color: var(--orange-deep); }
+
+  .scf__title { font-size: clamp(1.5rem, 1.2rem + 1.4vw, 2.2rem); margin: 0.9rem 0 0; }
+  .scf__sub { margin: 0.8rem auto 0; max-width: 52ch; }
+
+  .scf__form {
+    display: flex; gap: 0.6rem; margin: 1.6rem auto 0;
+    max-width: 480px; width: 100%;
+  }
+  .scf__field {
+    display: flex; align-items: center; gap: 0.5rem;
+    flex: 1; background: #fff;
+    border: 1.5px solid var(--line-strong); border-radius: var(--r-md);
+    padding: 0 0.5rem 0 1rem;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  .scf__field:focus-within { border-color: var(--orange); box-shadow: var(--ring); }
+  .scf__lock { color: var(--ink-faint); display: flex; flex: none; }
+  .scf__field input {
+    flex: 1; min-width: 0; border: none; outline: none; background: none;
+    font: inherit; font-size: 1rem; color: var(--ink);
+    padding: 0.85em 0.2em;
+  }
+  .scf__field input::placeholder { color: var(--ink-faint); }
+  .scf__btn { flex: none; }
+  .scf__note {
+    margin-top: 1rem;
+    font-family: var(--font-mono); font-size: 0.74rem; letter-spacing: 0.02em;
+    color: var(--ink-faint);
+  }
+
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+  @media (max-width: 520px) {
+    .scf__form { flex-direction: column; }
+    .scf__btn { justify-content: center; }
+  }
+</style>

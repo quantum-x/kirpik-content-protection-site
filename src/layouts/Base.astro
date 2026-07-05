@@ -1,0 +1,175 @@
+---
+import "@fontsource-variable/manrope";
+import "@fontsource/ibm-plex-mono/400.css";
+import "@fontsource/ibm-plex-mono/500.css";
+import "@fontsource/ibm-plex-mono/600.css";
+import "../styles/global.css";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+import { SITE } from "../config";
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+  /** Path to a markdown mirror of this page, advertised to agents. */
+  mdAlternate?: string;
+}
+
+const {
+  title,
+  description = SITE.description,
+  ogImage = "/brand/kirpik-logo-1200.png",
+  jsonLd,
+  mdAlternate,
+} = Astro.props;
+
+const fullTitle = title ? `${title} · ${SITE.name}` : `${SITE.name}: ${SITE.tagline}`;
+const canonical = new URL(Astro.url.pathname, SITE.url).href;
+const ogImageUrl = new URL(ogImage, SITE.url).href;
+
+// Sitewide structured data (entity grounding for search engines and LLMs).
+const siteJsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": `${SITE.url}/#organization`,
+    name: SITE.name,
+    legalName: SITE.developer,
+    url: SITE.url,
+    logo: new URL("/brand/kirpik-logo-1200.png", SITE.url).href,
+    description: SITE.description,
+    sameAs: [SITE.shopifyAppUrl],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": `${SITE.url}/#website`,
+    name: SITE.name,
+    url: SITE.url,
+    description: SITE.description,
+    publisher: { "@id": `${SITE.url}/#organization` },
+  },
+];
+
+// Auto breadcrumbs from the URL path (last crumb = page title).
+const segs = Astro.url.pathname.replace(/^\/+|\/+$/g, "").split("/").filter(Boolean);
+const crumbLabels: Record<string, string> = {
+  learn: "Learn", compare: "Compare", features: "Features", "how-it-works": "How it works",
+  pricing: "Pricing", faq: "FAQ", enforcement: "Enforcement", about: "About",
+  "site-check": "Site check",
+  support: "Support", privacy: "Privacy Policy", terms: "Terms of Service",
+};
+if (segs.length) {
+  const items = [{ name: "Home", item: `${SITE.url}/` }];
+  let acc = "";
+  segs.forEach((seg, i) => {
+    acc += `/${seg}`;
+    const isLast = i === segs.length - 1;
+    const name = isLast && title
+      ? title
+      : crumbLabels[seg] ?? seg.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+    items.push({ name, item: `${SITE.url}${acc}/` });
+  });
+  siteJsonLd.push({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((it, idx) => ({
+      "@type": "ListItem",
+      position: idx + 1,
+      name: it.name,
+      item: it.item,
+    })),
+  } as any);
+}
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#faf9f6" />
+
+    <link rel="icon" type="image/svg+xml" href="/brand/kirpik-glyph.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <!-- Agent discovery (RFC 8288 link relations). Expressed as HTML <link>
+         elements because GitHub Pages cannot set Link response headers. -->
+    <link rel="describedby" type="text/markdown" href="/llms.txt" title="LLM-friendly site overview" />
+    {mdAlternate && (
+      <link rel="alternate" type="text/markdown" href={mdAlternate} title="Markdown version of this page" />
+    )}
+
+    <script type="application/ld+json" set:html={JSON.stringify(siteJsonLd)} />
+    {jsonLd && (
+      <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    )}
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <Nav />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+
+    <script>
+      // Sticky-nav shadow on scroll
+      const nav = document.querySelector("[data-nav]");
+      const onScroll = () => {
+        if (!nav) return;
+        if (window.scrollY > 8) nav.setAttribute("data-scrolled", "");
+        else nav.removeAttribute("data-scrolled");
+      };
+      onScroll();
+      window.addEventListener("scroll", onScroll, { passive: true });
+
+      // Mobile drawer
+      const burger = document.querySelector("[data-burger]");
+      burger?.addEventListener("click", () => {
+        const open = nav?.toggleAttribute("data-open");
+        burger.setAttribute("aria-expanded", String(open));
+      });
+
+      // Scroll-reveal
+      const reveals = document.querySelectorAll("[data-reveal]");
+      if (reveals.length && "IntersectionObserver" in window) {
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (e.isIntersecting) {
+                e.target.classList.add("is-in");
+                io.unobserve(e.target);
+              }
+            });
+          },
+          { rootMargin: "0px 0px -8% 0px", threshold: 0.05 }
+        );
+        reveals.forEach((el) => io.observe(el));
+      } else {
+        reveals.forEach((el) => el.classList.add("is-in"));
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,85 @@
+---
+import { NAV, SITE, CTA_LABEL } from "../config";
+const path = Astro.url.pathname;
+const isActive = (href: string) =>
+  href === "/" ? path === "/" : path.startsWith(href);
+---
+
+<header class="nav" data-nav>
+  <div class="container nav__inner">
+    <a class="nav__brand" href="/" aria-label={`${SITE.name} home`}>
+      <img class="nav__mark" src="/brand/kirpik-glyph.svg" alt="" width="55" height="28" />
+      <span class="nav__word">kirpik</span>
+    </a>
+
+    <nav class="nav__links" aria-label="Primary">
+      {NAV.map((item) => (
+        <a
+          href={item.href}
+          class:list={["nav__link", { "is-active": isActive(item.href) }]}
+        >
+          {item.label}
+        </a>
+      ))}
+    </nav>
+
+    <div class="nav__actions">
+      <a class="btn btn--primary nav__cta" href={SITE.shopifyAppUrl} rel="noopener" target="_blank">
+        <svg class="shopify-bag" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9 8a3 3 0 0 1 6 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        {CTA_LABEL}
+      </a>
+      <button class="nav__burger" aria-label="Open menu" aria-expanded="false" data-burger>
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="nav__drawer" data-drawer hidden>
+    {NAV.map((item) => <a href={item.href} class="nav__drawer-link">{item.label}</a>)}
+    <a class="btn btn--primary" href={SITE.shopifyAppUrl} rel="noopener" target="_blank">{CTA_LABEL}</a>
+  </div>
+</header>
+
+<style>
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    background: color-mix(in srgb, var(--paper) 88%, transparent);
+    backdrop-filter: saturate(1.4) blur(10px);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+  }
+  .nav[data-scrolled] { border-bottom-color: var(--line); }
+  .nav__inner { display: flex; align-items: center; gap: 1.5rem; height: 72px; }
+  .nav__brand { display: inline-flex; align-items: center; gap: 0.55rem; margin-right: auto; }
+  .nav__mark { height: 28px; width: auto; }
+  .nav__word { font-weight: 800; font-size: 1.42rem; letter-spacing: -0.03em; }
+
+  .nav__links { display: flex; align-items: center; gap: 0.35rem; }
+  .nav__link {
+    font-weight: 600; font-size: 0.95rem; color: var(--ink-soft);
+    padding: 0.5rem 0.7rem; border-radius: var(--r-sm);
+    transition: color 0.15s ease, background-color 0.15s ease;
+  }
+  .nav__link:hover { color: var(--ink); background: var(--sand); }
+  .nav__link.is-active { color: var(--orange-deep); }
+
+  .nav__actions { display: flex; align-items: center; gap: 0.6rem; }
+  .nav__cta { padding: 0.7em 1.15em; font-size: 0.95rem; }
+
+  .nav__burger { display: none; width: 44px; height: 44px; flex-direction: column; gap: 5px; align-items: center; justify-content: center; }
+  .nav__burger span { width: 22px; height: 2px; background: var(--ink); border-radius: 2px; transition: transform 0.2s ease, opacity 0.2s ease; }
+  .nav[data-open] .nav__burger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav[data-open] .nav__burger span:nth-child(2) { opacity: 0; }
+  .nav[data-open] .nav__burger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .nav__drawer { display: none; flex-direction: column; gap: 0.25rem; padding: 0.5rem var(--gutter) 1.5rem; border-bottom: 1px solid var(--line); background: var(--paper); }
+  .nav__drawer-link { padding: 0.85rem 0.5rem; font-weight: 600; border-bottom: 1px solid var(--line); }
+  .nav__drawer .btn { margin-top: 0.8rem; justify-content: center; }
+
+  @media (max-width: 900px) {
+    .nav__links { display: none; }
+    .nav__cta { display: none; }
+    .nav__burger { display: flex; }
+    .nav[data-open] .nav__drawer { display: flex; }
+  }
+</style>

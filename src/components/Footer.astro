@@ -1,0 +1,92 @@
+---
+import { SITE, CTA_LABEL } from "../config";
+const year = 2026;
+const cols = [
+  {
+    title: "Product",
+    links: [
+      { label: "Features", href: "/features/" },
+      { label: "How it works", href: "/how-it-works/" },
+      { label: "Pricing", href: "/pricing/" },
+      { label: "Detect stolen text", href: "/features/detection/" },
+    ],
+  },
+  {
+    title: "Compare",
+    links: [
+      { label: "vs. Right-click blockers", href: "/compare/vs-copy-blockers/" },
+      { label: "vs. Visible watermarks", href: "/compare/vs-visible-watermarks/" },
+      { label: "vs. Content credentials", href: "/compare/vs-content-credentials/" },
+      { label: "All comparisons", href: "/compare/" },
+    ],
+  },
+  {
+    title: "Learn",
+    links: [
+      { label: "The text-theft problem", href: "/learn/" },
+      { label: "Proof & DMCA", href: "/enforcement/" },
+      { label: "Chain of Proof", href: "/features/chain-of-proof/" },
+      { label: "FAQ", href: "/faq/" },
+    ],
+  },
+  {
+    title: "Company",
+    links: [
+      { label: "About", href: "/about/" },
+      { label: "Support", href: "/support/" },
+      { label: "Privacy", href: "/privacy/" },
+      { label: "Terms", href: "/terms/" },
+    ],
+  },
+];
+---
+
+<footer class="footer">
+  <div class="container footer__top">
+    <div class="footer__brand">
+      <a class="footer__logo" href="/" aria-label={`${SITE.name} home`}>
+        <span class="footer__mark"><img src="/brand/kirpik-glyph.svg" alt="" width="38" height="19" /></span>
+        <span>kirpik</span>
+      </a>
+      <p class="footer__pitch">Invisible watermarks for your product descriptions, articles and pages. When copy gets stolen, you get proof.</p>
+      <a class="btn btn--primary" href={SITE.shopifyAppUrl} rel="noopener" target="_blank">{CTA_LABEL}</a>
+    </div>
+
+    <nav class="footer__cols" aria-label="Footer">
+      {cols.map((col) => (
+        <div class="footer__col">
+          <h4 class="footer__col-title">{col.title}</h4>
+          <ul>
+            {col.links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+          </ul>
+        </div>
+      ))}
+    </nav>
+  </div>
+
+  <div class="container footer__bottom">
+    <p>© {year} {SITE.developer}. Kirpik and the Kirpik hedgehog are trademarks of {SITE.developer}.</p>
+    <p class="footer__mono">Shopify is a trademark of Shopify Inc. Kirpik is an independent product and is not endorsed by Shopify.</p>
+  </div>
+</footer>
+
+<style>
+  .footer { background: var(--ink); color: #c3c7d8; padding-block: clamp(3rem, 5vw, 5rem) 2rem; }
+  .footer__top { display: grid; grid-template-columns: 1.3fr 2.4fr; gap: clamp(2rem, 5vw, 4rem); }
+  .footer__logo { display: inline-flex; align-items: center; gap: 0.6rem; color: #fff; font-weight: 800; font-size: 1.5rem; letter-spacing: -0.03em; }
+  .footer__mark { display: grid; place-items: center; width: 46px; height: 46px; border-radius: 12px; background: #fff; }
+  .footer__mark img { height: 17px; width: auto; }
+  .footer__pitch { margin: 1rem 0 1.5rem; color: #a3a8bf; max-width: 36ch; }
+  .footer__cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+  .footer__col-title { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.12em; color: #fff; margin-bottom: 1rem; font-family: var(--font-mono); font-weight: 600; }
+  .footer__col li { margin-bottom: 0.6rem; }
+  .footer__col a { color: #c3c7d8; font-size: 0.95rem; transition: color 0.15s ease; }
+  .footer__col a:hover { color: var(--amber); }
+  .footer__bottom { margin-top: clamp(2.5rem, 5vw, 4rem); padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.1); display: flex; flex-wrap: wrap; gap: 0.5rem 2rem; justify-content: space-between; }
+  .footer__bottom p { font-size: 0.82rem; color: #878ca0; }
+  .footer__mono { font-family: var(--font-mono); }
+  @media (max-width: 760px) {
+    .footer__top { grid-template-columns: 1fr; }
+    .footer__cols { grid-template-columns: repeat(2, 1fr); gap: 1.5rem 1rem; }
+  }
+</style>
