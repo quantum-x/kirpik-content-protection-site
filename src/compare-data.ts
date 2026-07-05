@@ -296,7 +296,7 @@ const FEATURED: Competitor[] = [
     primary: "blocker",
     featured: true,
     summary:
-      "A free storefront script that disables right-click, copying, image saving, keyboard shortcuts, and states PrintScreen and screen capture prevention.",
+      "A free storefront script that disables right-click, copying, image saving, keyboard shortcuts, and lists PrintScreen and screen-capture prevention.",
     claims: [
       "Disable right-click to prevent cutting, copying, and saving images",
       "Disable copy and paste, text selection, and highlighting",
@@ -528,7 +528,7 @@ const FEATURED: Competitor[] = [
       "country-ip-block",
     ],
     proofNote:
-      "StoreLock's listing describes detecting impersonating sites and filing takedowns from a dashboard. A takedown request stands on evidence of ownership. For text, that is the difficult part: copied words carry nothing of their origin by default, which is the gap an embedded watermark is built to close.",
+      "StoreLock's listing describes detecting impersonating sites and filing takedowns from a dashboard. A takedown request stands on evidence of ownership; for text, that is the gap an embedded watermark is built to close.",
   },
   {
     slug: "viking-watermark",
@@ -670,7 +670,7 @@ const FEATURED: Competitor[] = [
     ],
     mechanisms: ["copy-monitoring", "takedown-service"],
     proofNote:
-      "IP Moat's listing describes a monitoring and enforcement service operated for you, priced accordingly. That is a different job from marking content: the service finds and files, and any filing still rests on the ownership evidence available for the content in question. For product copy, an embedded watermark is one way to have that evidence ready before it is needed.",
+      "IP Moat's listing describes a monitoring and enforcement service operated for you, priced accordingly. That is a different job from marking content: the service finds and files. For product copy, an embedded watermark is one way to have the ownership evidence ready before it is needed.",
   },
   {
     slug: "spyblocker-block-competitors",
@@ -701,7 +701,7 @@ const FEATURED: Competitor[] = [
       "country-ip-block",
     ],
     proofNote:
-      "SpyBlocker is the second app in the category to mention an invisible watermark, described as a way to discourage screenshots, with no stated mechanism, detection flow, or proof output. Its listing also discloses that the app is a lightweight JS SDK, which is a clearer statement than most listings make: everything it does happens in the visitor's browser.",
+      "SpyBlocker is the second app in the category to mention an invisible watermark, described as a way to discourage screenshots, with no stated mechanism, detection flow, or proof output. Its listing also discloses that the app is a lightweight JS SDK: everything it does happens in the visitor's browser.",
   },
   {
     slug: "disable-right-click",
@@ -775,7 +775,7 @@ const FEATURED: Competitor[] = [
     primary: "blocker",
     featured: true,
     summary:
-      "A free blocker whose listing describes itself, accurately, as an extra layer of deterrence against casual content theft.",
+      "A free blocker whose listing frames it as a deterrent against casual content theft.",
     claims: [
       "An extra layer of deterrence against casual content theft",
       "Disable right-click and Save As context menus",
@@ -783,7 +783,7 @@ const FEATURED: Competitor[] = [
     ],
     mechanisms: ["right-click-block", "copy-paste-block", "keyboard-shortcut-block"],
     proofNote:
-      "Defendify's own wording, an extra layer of deterrence against casual content theft, is the candid version of what every storefront blocker offers. Deterrence inside the tab is real; it is simply a different job from following the words after they leave.",
+      "Defendify's listing describes deterrence against casual theft, which is what a storefront blocker offers. Deterrence inside the tab is real; it is simply a different job from following the words after they leave.",
   },
   {
     slug: "tilkie-image-protection",
@@ -810,7 +810,7 @@ const FEATURED: Competitor[] = [
       worksOnFeeds: true,
     },
     textNote:
-      "Tilkie does nothing for text, in exactly the way Kirpik does nothing for images. The two apps split the same problem down the middle: photos carry Tilkie's invisible mark, copy carries Kirpik's. Many stores run both, and there is no bundling requirement in either direction.",
+      "Tilkie does nothing for text, in exactly the way Kirpik does nothing for images. The two apps split the same problem down the middle: photos carry Tilkie's invisible mark, copy carries Kirpik's. The two are designed to run side by side, and there is no bundling requirement in either direction.",
   },
   {
     slug: "mintallkeep",
@@ -910,7 +910,7 @@ const FEATURED: Competitor[] = [
     primary: "blocker",
     featured: true,
     summary:
-      "A theme-editor embed that disables right-click, copy, drag, and shortcuts while keeping search, signup, and checkout working, with the category's plainest self-description: discourage casual copying.",
+      "A theme-editor embed that disables right-click, copy, drag, and shortcuts while keeping search, signup, and checkout working.",
     claims: [
       "Discourage casual copying on your storefront",
       "Disable right-click, copy, drag, and shortcuts",
@@ -919,7 +919,7 @@ const FEATURED: Competitor[] = [
     ],
     mechanisms: ["right-click-block", "copy-paste-block", "keyboard-shortcut-block"],
     proofNote:
-      "CopyBlock's listing says exactly what a storefront blocker does: discourage casual copying. That framing needs no correction. The open question for a store owner is what happens to the copies that casual friction does not stop, and that is a question about evidence, not blocking.",
+      "CopyBlock's listing describes its aim as discouraging casual copying, which is what a storefront blocker does inside the tab. The open question for a store owner is what happens to the copies that casual friction does not stop, and that is a question about evidence, not blocking.",
   },
   {
     slug: "qf-content-guard",
@@ -1324,7 +1324,7 @@ const TABLE_ONLY: Competitor[] = [
     pricing: "Free",
     primary: "blocker",
     featured: false,
-    summary: "Free blocker with a copyright message and blocked-attempt analytics, and the category's clearest disclosure: it works as a theme embed.",
+    summary: "Free blocker with a copyright message and blocked-attempt analytics; its listing states it works as a theme embed.",
     claims: [
       "Disable right-click, copying, and shortcuts, with a copyright message",
       "Blocked-attempt analytics",
@@ -1791,7 +1791,7 @@ const TABLE_ONLY: Competitor[] = [
     pricing: "$5.99/mo",
     primary: "blocker",
     featured: false,
-    summary: "A single-purpose app that disables right-click, with modest wording.",
+    summary: "A single-purpose app that disables right-click.",
     claims: ["Disable right-click on the storefront"],
     mechanisms: ["right-click-block"],
   },

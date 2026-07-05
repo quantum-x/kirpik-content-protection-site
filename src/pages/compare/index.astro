@@ -77,7 +77,7 @@ const itemListJsonLd = {
       </p>
       <p>
         None of them prevent theft. Shopify serves your content through different feeds for customers,
-        search engines and AI tools. "Anti-theft" apps only try to lockdown what a customer sees - but
+        search engines and AI tools. "Anti-theft" apps only try to lock down what a customer sees - but
         don't protect the other feeds that scrapers and content thieves use.
       </p>
       <p>
@@ -123,6 +123,20 @@ const itemListJsonLd = {
         All {apps.length} relevant apps in the category, ordered by review count. Each name links to a
         full side-by-side comparison with Kirpik.
       </p>
+      <p class="sec-note">
+        Seven more apps listed in the category do theme backups, consent banners and similar
+        housekeeping rather than content protection, and are not compared.
+      </p>
+      <p class="filterrow">
+        <input
+          type="search"
+          id="app-filter"
+          placeholder="Filter by app name"
+          aria-label="Filter by app name"
+          autocomplete="off"
+          spellcheck="false"
+        />
+      </p>
       <div class="tablewrap">
         <table class="apps">
           <thead>
@@ -133,10 +147,10 @@ const itemListJsonLd = {
             </tr>
           </thead>
           <tbody>
-            {apps.map((c) => {
+            {apps.map((c, i) => {
               const ic = icon(c.slug);
               return (
-                <tr class:list={[{ hl: c.featured }]}>
+                <tr class:list={[{ hl: i < 27 }]}>
                   <td class="appcell">
                     <a href={`/compare/${c.slug}/`}>
                       {ic ? (
@@ -148,13 +162,14 @@ const itemListJsonLd = {
                     </a>
                   </td>
                   <td class="blurb">{BLURBS[c.slug]}</td>
-                  <td class="num">{typeof c.reviews === "number" ? c.reviews : ""}</td>
+                  <td class="num">{typeof c.reviews === "number" ? c.reviews : "None yet"}</td>
                 </tr>
               );
             })}
           </tbody>
         </table>
       </div>
+      <p class="table-note">The 27 most-reviewed apps are shaded.</p>
     </div>
   </section>
 
@@ -202,6 +217,19 @@ const itemListJsonLd = {
 
   h2 { margin-bottom: 1.2rem; }
   .sec-sub { color: var(--ink-soft); margin: -0.4rem 0 1.4rem; max-width: 72ch; }
+  .sec-note { color: var(--ink-soft); margin: -0.9rem 0 1.4rem; max-width: 72ch; }
+
+  .filterrow { margin: 0 0 1rem; }
+  .filterrow input {
+    width: 100%; max-width: 340px;
+    font: inherit; font-size: 0.95rem; color: var(--ink);
+    background: #fff; border: 1.5px solid var(--line-strong); border-radius: var(--r-md);
+    padding: 0.6em 0.9em; outline: none;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  .filterrow input:focus { border-color: var(--orange); box-shadow: var(--ring); }
+
+  .table-note { margin-top: 0.8rem; font-size: 0.88rem; color: var(--ink-faint); }
 
   .tablewrap { overflow-x: auto; }
 
@@ -242,3 +270,17 @@ const itemListJsonLd = {
 
   .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 </style>
+
+<script>
+  // Progressive enhancement: the table is fully rendered without JavaScript;
+  // this only hides rows whose app name does not match the filter text.
+  const filter = document.getElementById("app-filter") as HTMLInputElement | null;
+  const rows = Array.from(document.querySelectorAll<HTMLTableRowElement>("table.apps tbody tr"));
+  filter?.addEventListener("input", () => {
+    const q = filter.value.trim().toLowerCase();
+    for (const row of rows) {
+      const name = row.querySelector(".appname")?.textContent?.toLowerCase() ?? "";
+      row.hidden = q !== "" && !name.includes(q);
+    }
+  });
+</script>
