@@ -34,20 +34,20 @@ export const FEATURES: Feature[] = [
     lead: "Stolen text rarely stays intact: it gets pasted into a new theme, trimmed and lightly edited. Kirpik's watermark repeats through your content with built-in redundancy, so an altered version still reports a match.",
     points: [
       { h: "Travels with the text", p: "The watermark is part of the content, not the page around it. Whoever takes your text takes the watermark with it." },
-      { h: "Survives editing", p: "Trimming, light rewording and reformatting leave the watermark detectable, with a count of the Watermark Security Markers that survived." },
-      { h: "Redundant by design", p: "The watermark repeats through your content, so even a partial theft can carry enough markers for a confident match." },
+      { h: "Survives editing", p: "Trimming, light rewording and reformatting leave the watermark detectable. A full rewrite is no longer your text, and no watermark follows a rewrite." },
+      { h: "Verified on every detection", p: "Each match reports the Watermark Security Markers that survived and a Confidence figure, so you can see how much of the watermark came through." },
     ],
   },
   {
     slug: "chain-of-proof",
     title: "Proof of Ownership Certificate",
     short:
-      "Turn a detection into a dated, independently verifiable ownership document built for DMCA takedowns.",
+      "Turn a detection into a dated ownership document anyone can verify, built for DMCA takedowns.",
     lead: "When Kirpik detects your watermark on someone else's page, you can generate a Proof of Ownership Certificate: a dated document that lays out the case for the people who handle takedown complaints.",
     points: [
-      { h: "Specific and checkable", p: "It records the Protection Signature of your original, the Detected Signature of the stolen text, your protection date, the Watermark Security Markers recovered and a Confidence figure." },
+      { h: "Specific and checkable", p: "It records the signatures of your original and of the stolen text, your protection date, and how strong the match is. Every figure on it can be checked." },
       { h: "Independently verifiable", p: "A QR code links to a public verification page, so a hosting company, marketplace or lawyer can confirm the certificate is genuine without trusting the PDF." },
-      { h: "A timeline, not just a claim", p: "Your protection date sits against the infringing page's dates and the earliest Wayback Machine snapshot, a record neither side controls." },
+      { h: "A dated timeline", p: "Your protection date sits against the infringing page's dates and the earliest Wayback Machine snapshot, a record neither side controls." },
     ],
     image: "/img/chain-of-proof-top.png",
     imageAlt: "A Kirpik Proof of Ownership Certificate",
@@ -57,11 +57,12 @@ export const FEATURES: Feature[] = [
     title: "Detect stolen content",
     short:
       "Paste suspect text or enter a URL. Kirpik reports whether your watermark is present and how confident the match is.",
-    lead: "Found a page that reads like yours? Paste the text into Kirpik or enter the URL. The detector reports whether your watermark is present, which store it belongs to, and a Confidence figure.",
+    lead: "When a page reads like yours, paste the text into Kirpik or enter the URL. The detector reports whether your watermark is present, which store it belongs to, and a Confidence figure.",
     points: [
       { h: "Two ways to check", p: "Paste text directly on any plan, or let Kirpik fetch a URL for you. If a site blocks automated visits, a guided paste flow gets the same answer." },
-      { h: "Works on altered versions", p: "Trimmed, edited or reformatted text still reports a match." },
-      { h: "On every plan", p: "Paste detection is included on all plans, and every plan includes a monthly allowance of URL checks." },
+      { h: "Specific results", p: "A match names the store the watermark belongs to and shows a Confidence figure, not a vague similarity score." },
+      { h: "Checks what you bring", p: "Kirpik does not crawl the web; it checks the pages and text you point it at. Content copied before it was protected cannot be detected." },
+      { h: "On every plan", p: "Paste detection is included on every plan. URL checks carry a monthly allowance; the numbers are on the pricing page." },
     ],
   },
   {
@@ -69,11 +70,11 @@ export const FEATURES: Feature[] = [
     title: "Auto-Protect",
     short:
       "New and updated products are watermarked automatically when you save them. Nothing to remember.",
-    lead: "Protection only counts if it is applied. With Auto-Protect on, Kirpik watermarks new and updated content automatically, so your catalogue stays covered as it grows.",
+    lead: "With Auto-Protect on, Kirpik automatically watermarks new and updated products, blog articles and pages, so your catalogue stays covered as it grows.",
     points: [
       { h: "Covers your workflow", p: "Write and edit in the Shopify admin as you do now. Kirpik applies protection in the background." },
       { h: "No double handling", p: "Content that is already protected is recognised and left alone." },
-      { h: "A Pro feature", p: "Auto-Protect is included in Pro. Free and Paid plans protect manually or in batches." },
+      { h: "A Pro feature", p: "Auto-Protect is included in Pro. Free protects items one at a time; Paid adds batches." },
     ],
   },
   {
@@ -83,7 +84,7 @@ export const FEATURES: Feature[] = [
       "Protect single items, batches, or your whole catalogue in one job. Reversible at any time.",
     lead: "Protect a single product from its page in the Shopify admin, select a batch of products, articles and pages, or run your whole catalogue in one job.",
     points: [
-      { h: "Products, articles and pages", p: "Kirpik covers the content that gets stolen: product descriptions, blog articles and store pages." },
+      { h: "Included on Paid and Pro", p: "Free protects items one at a time; Paid and Pro run batches across your whole catalogue." },
       { h: "Background jobs", p: "Large runs are queued and processed in the background, with progress you can watch." },
       { h: "Reversible", p: "Remove protection from one item or everything at once. Your text returns exactly to its prior state." },
     ],
