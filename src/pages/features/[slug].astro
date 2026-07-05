@@ -1,0 +1,90 @@
+---
+import Base from "../../layouts/Base.astro";
+import PageHero from "../../components/PageHero.astro";
+import CtaBand from "../../components/CtaBand.astro";
+import SiteCheckForm from "../../components/SiteCheckForm.astro";
+import { FEATURES } from "../../data";
+
+export function getStaticPaths() {
+  return FEATURES.map((feature) => ({
+    params: { slug: feature.slug },
+    props: { feature },
+  }));
+}
+
+const { feature } = Astro.props;
+const others = FEATURES.filter((f) => f.slug !== feature.slug);
+---
+
+<Base title={feature.title} description={feature.short}>
+  <PageHero eyebrow={feature.tag} title={feature.title} lead={feature.lead} />
+
+  <section class="section" style="padding-top:0">
+    <div class="container detail" data-has-image={feature.image ? "yes" : "no"}>
+      {feature.image && (
+        <div class="detail__art" data-reveal>
+          <img src={feature.image} alt={feature.imageAlt} loading="lazy" width="620" height="877" />
+        </div>
+      )}
+      <div class="detail__points">
+        {feature.points.map((pt) => (
+          <div class="point" data-reveal>
+            <h3>{pt.h}</h3>
+            <p>{pt.p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <SiteCheckForm
+    tone="band"
+    sub="Your product copy is published in machine-readable feeds whether you like it or not. See what a scraper sees on your own store."
+  >
+    <Fragment slot="heading">See how <em>exposed</em> your copy is first.</Fragment>
+  </SiteCheckForm>
+
+  <section class="section section--tone">
+    <div class="container">
+      <h2 class="more__title">The rest of Kirpik</h2>
+      <div class="more__grid">
+        {others.map((f) => (
+          <a class="card more__card" href={`/features/${f.slug}/`}>
+            <span class="tag tag--orange">{f.tag}</span>
+            <h3>{f.title}</h3>
+            <p>{f.short}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>
+
+<style>
+  .detail { display: grid; gap: clamp(2rem, 5vw, 4rem); align-items: start; }
+  .detail[data-has-image="yes"] { grid-template-columns: 1fr 1.1fr; }
+  .detail__art { position: sticky; top: 96px; }
+  .detail__art img { border-radius: var(--r-lg); box-shadow: var(--shadow-pop); border: 1px solid var(--line); }
+  .detail__points { display: grid; gap: 1.5rem; max-width: 70ch; }
+  .point { border-left: 2px solid var(--orange); padding-left: 1.2rem; }
+  .point h3 { margin-bottom: 0.45rem; }
+  .point p { color: var(--ink-soft); }
+  @media (max-width: 860px) {
+    .detail[data-has-image="yes"] { grid-template-columns: 1fr; }
+    .detail__art { position: static; max-width: 440px; }
+  }
+
+  .more__title { margin-bottom: 1.6rem; }
+  .more__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.1rem; }
+  .more__card {
+    padding: 1.4rem; display: flex; flex-direction: column; align-items: flex-start; gap: 0.5rem;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  }
+  .more__card:hover { transform: translateY(-3px); box-shadow: var(--shadow-pop); border-color: var(--orange); }
+  .more__card h3 { font-size: 1.12rem; }
+  .more__card p { color: var(--ink-soft); font-size: 0.94rem; }
+  @media (max-width: 880px) { .more__grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .more__grid { grid-template-columns: 1fr; } }
+</style>

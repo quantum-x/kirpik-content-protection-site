@@ -1,0 +1,193 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import CtaBand from "../components/CtaBand.astro";
+import { SITE } from "../config";
+import { PLANS, MATRIX, FAQ_GROUPS } from "../data";
+
+const billingFaqs =
+  FAQ_GROUPS.find((g) => g.title === "Plans and billing")?.items ?? [];
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: SITE.name,
+  operatingSystem: "Web",
+  applicationCategory: "BusinessApplication",
+  description: SITE.description,
+  url: `${SITE.url}/pricing/`,
+  offers: [
+    {
+      "@type": "Offer",
+      name: "Free",
+      price: "0",
+      priceCurrency: "USD",
+      description:
+        "25 products, 3 blog articles or pages, paste detection, 5 URL checks a month, 1 Chain of Proof certificate.",
+    },
+    {
+      "@type": "Offer",
+      name: "Paid",
+      price: "7.99",
+      priceCurrency: "USD",
+      description:
+        "100 products, 50 blog articles and pages, batch protection, 20 URL checks and 5 certificates a month. Billed monthly.",
+    },
+    {
+      "@type": "Offer",
+      name: "Pro (monthly)",
+      price: "19.99",
+      priceCurrency: "USD",
+      description:
+        "Unlimited products, articles and pages, Auto-Protect, 100 URL checks a month, unlimited certificates. Billed monthly.",
+    },
+    {
+      "@type": "Offer",
+      name: "Pro (yearly)",
+      price: "199",
+      priceCurrency: "USD",
+      description:
+        "The Pro plan billed once a year, around 17% less than paying monthly.",
+    },
+  ],
+  publisher: { "@id": `${SITE.url}/#organization` },
+};
+---
+
+<Base
+  title="Pricing"
+  description="Kirpik plans for Shopify text protection: Free forever, Paid at $7.99/month, Pro at $19.99/month or $199/year. All prices USD, billed through Shopify."
+  jsonLd={jsonLd}
+>
+  <PageHero
+    eyebrow="Pricing"
+    title="Simple plans. Nothing held hostage."
+    lead="Every plan watermarks your text invisibly and includes paste detection. Move between plans whenever you like: protection is reversible, so a downgrade never damages your content."
+  />
+
+  <section class="section" style="padding-top:0">
+    <div class="container plans">
+      {PLANS.map((p) => (
+        <article class:list={["card", "plan", { "plan--featured": p.featured }]} data-reveal>
+          {p.featured && <span class="plan__flag">Most popular</span>}
+          <h2 class="plan__name">{p.name}</h2>
+          <p class="plan__price">{p.price}<span> {p.per}</span></p>
+          <p class="plan__blurb">{p.blurb}</p>
+          <ul class="plan__feats">
+            {p.feats.map((f) => (
+              <li>
+                <svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><path d="M2 8.5 6 12l8-9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                {f}
+              </li>
+            ))}
+          </ul>
+          <a class:list={["btn", p.featured ? "btn--primary" : "btn--ghost", "plan__cta"]} href={SITE.shopifyAppUrl} rel="noopener" target="_blank">{p.cta}</a>
+        </article>
+      ))}
+    </div>
+    <div class="container">
+      <p class="pricing__note">
+        Prices in USD. Pro is also available at $199 per year, about 17% off
+        monthly billing. All charges run through Shopify Managed Pricing and
+        appear on your regular Shopify invoice, so there is no separate card
+        to hand over.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--tone" style="padding-block:clamp(2.6rem,4vw,4.5rem)">
+    <div class="container">
+      <h2 class="matrix__title">Every plan, feature by feature</h2>
+      <div class="matrix card" data-reveal>
+        <table>
+          <caption class="sr-only">Feature comparison across Kirpik plans</caption>
+          <thead>
+            <tr><th scope="col">Feature</th><th scope="col">Free</th><th scope="col">Paid</th><th scope="col">Pro</th></tr>
+          </thead>
+          <tbody>
+            {MATRIX.map(([label, a, b, c]) => (
+              <tr>
+                <th scope="row">{label}</th>
+                {[a, b, c].map((v) => (
+                  <td>
+                    {v === true ? <span class="matrix__yes" aria-label="Included">✓</span>
+                      : v === false ? <span class="matrix__no" aria-label="Not included">✕</span>
+                      : v}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container narrow">
+      <span class="eyebrow">Billing questions</span>
+      <h2 style="margin:0.9rem 0 1.6rem">The money questions, answered straight</h2>
+      {billingFaqs.map((f) => (
+        <details class="faq">
+          <summary>{f.q}</summary>
+          <p>{f.a}</p>
+        </details>
+      ))}
+      <p style="margin-top:1.6rem"><a class="btn btn--ghost" href="/faq/">More questions in the full FAQ</a></p>
+    </div>
+  </section>
+
+  <CtaBand
+    heading="Start on Free. Stay as long as you like."
+    sub="The Free plan never expires. Protect a slice of your catalogue, run a detection, and upgrade only if the store grows into it."
+  />
+</Base>
+
+<style>
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+  .plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; align-items: start; }
+  .plan { padding: 1.8rem; position: relative; display: flex; flex-direction: column; }
+  .plan--featured { border-color: var(--orange); box-shadow: 0 0 0 1px var(--orange), var(--shadow-pop); }
+  .plan__flag {
+    position: absolute; top: -0.85em; left: 1.4rem;
+    font-family: var(--font-mono); font-size: 0.68rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+    background: var(--orange); color: #fff; padding: 0.35em 0.75em; border-radius: var(--r-pill);
+  }
+  .plan__name { font-size: 1.3rem; }
+  .plan__price { font-size: 2.3rem; font-weight: 800; letter-spacing: -0.03em; margin: 0.5rem 0 0.2rem; }
+  .plan__price span { font-size: 0.95rem; font-weight: 600; color: var(--ink-faint); letter-spacing: 0; }
+  .plan__blurb { color: var(--ink-soft); font-size: 0.95rem; margin-bottom: 1.1rem; }
+  .plan__feats { display: grid; gap: 0.5rem; margin-bottom: 1.6rem; }
+  .plan__feats li { display: flex; align-items: baseline; gap: 0.55em; font-size: 0.95rem; color: var(--ink-soft); }
+  .plan__feats svg { color: var(--mint); flex: none; }
+  .plan__cta { justify-content: center; margin-top: auto; }
+  @media (max-width: 880px) { .plans { grid-template-columns: 1fr; max-width: 440px; margin-inline: auto; } }
+
+  .pricing__note { margin: 1.6rem auto 0; text-align: center; font-size: 0.9rem; color: var(--ink-faint); max-width: 62ch; }
+
+  .matrix__title { margin-bottom: 1.6rem; }
+  .matrix { overflow-x: auto; padding: 0.4rem 1.2rem 1rem; }
+  .matrix table { width: 100%; border-collapse: collapse; font-size: 0.95rem; min-width: 560px; }
+  .matrix th, .matrix td { text-align: left; padding: 0.7rem 0.8rem; border-bottom: 1px solid var(--line); }
+  .matrix thead th { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); }
+  .matrix tbody th { font-weight: 600; color: var(--ink); }
+  .matrix td { color: var(--ink-soft); }
+  .matrix__yes { color: var(--mint); font-weight: 700; }
+  .matrix__no { color: var(--ink-faint); }
+
+  .faq { border-top: 1px solid var(--line); }
+  .faq:last-of-type { border-bottom: 1px solid var(--line); }
+  .faq summary {
+    cursor: pointer; list-style: none; position: relative;
+    font-weight: 700; padding: 1.05rem 2.2rem 1.05rem 0;
+  }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after {
+    content: "+"; position: absolute; right: 0.2rem; top: 50%; transform: translateY(-50%);
+    font-weight: 400; font-size: 1.4rem; color: var(--orange-deep);
+    transition: transform 0.18s ease;
+  }
+  .faq[open] summary::after { transform: translateY(-50%) rotate(45deg); }
+  .faq p { padding: 0 0 1.2rem; color: var(--ink-soft); max-width: 65ch; }
+</style>

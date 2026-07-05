@@ -1,0 +1,104 @@
+---
+import Base from "./Base.astro";
+import CtaBand from "../components/CtaBand.astro";
+import { SITE } from "../config";
+
+interface Props {
+  title: string;
+  description: string;
+  cluster: string;
+  summary: string;
+  pubDate: Date;
+  updated?: Date;
+  minutes: number;
+  related?: { title: string; slug: string }[];
+  ogImage?: string;
+  mdAlternate?: string;
+}
+
+const { title, description, cluster, summary, pubDate, updated, minutes, related = [], ogImage, mdAlternate } =
+  Astro.props;
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
+const shown = updated ?? pubDate;
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: title,
+  description,
+  datePublished: pubDate.toISOString(),
+  dateModified: (updated ?? pubDate).toISOString(),
+  author: { "@type": "Organization", name: SITE.name },
+  publisher: {
+    "@type": "Organization",
+    name: SITE.name,
+    logo: { "@type": "ImageObject", url: new URL("/brand/kirpik-logo-1200.png", SITE.url).href },
+  },
+  mainEntityOfPage: new URL(Astro.url.pathname, SITE.url).href,
+};
+---
+
+<Base title={title} description={description} jsonLd={jsonLd} ogImage={ogImage} mdAlternate={mdAlternate}>
+  <article>
+    <header class="ahead">
+      <div class="container narrow">
+        <a class="ahead__back" href="/learn/">← Learn</a>
+        <span class="eyebrow">{cluster}</span>
+        <h1>{title}</h1>
+        <p class="lead">{summary}</p>
+        <div class="ahead__meta">
+          <span>By the Kirpik team</span>
+          <span class="dot" aria-hidden="true"></span>
+          <span>{updated ? "Updated" : "Published"} {fmt(shown)}</span>
+          <span class="dot" aria-hidden="true"></span>
+          <span>{minutes} min read</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="container narrow prose abody">
+      <slot />
+    </div>
+
+    {related.length > 0 && (
+      <div class="container narrow">
+        <aside class="related">
+          <h2>Keep reading</h2>
+          <ul>
+            {related.map((r) => (
+              <li>
+                <a href={`/learn/${r.slug}/`}>{r.title}</a>
+              </li>
+            ))}
+          </ul>
+        </aside>
+      </div>
+    )}
+  </article>
+
+  <CtaBand
+    heading="Make your copy provably yours."
+    sub="Kirpik watermarks your descriptions, articles and pages invisibly, without changing a word, so a stolen copy can be traced back to you. Free to start."
+  />
+</Base>
+
+<style>
+  .ahead { padding-block: clamp(2.4rem, 2rem + 3vw, 4rem) clamp(1.4rem, 3vw, 2.2rem); }
+  .ahead__back { font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-faint); text-decoration: none; }
+  .ahead__back:hover { color: var(--orange-deep); }
+  .ahead .eyebrow { display: block; margin-top: 1.4rem; }
+  .ahead h1 { font-size: var(--fs-h1); margin: 0.8rem 0 1rem; max-width: 22ch; }
+  .ahead .lead { max-width: 60ch; }
+  .ahead__meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.7rem; margin-top: 1.6rem; font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.03em; text-transform: uppercase; color: var(--ink-faint); }
+  .ahead__meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--ink-faint); opacity: 0.6; }
+  .abody { padding-bottom: clamp(2.4rem, 5vw, 3.6rem); }
+  .abody :global(h2:first-child) { margin-top: 0; }
+
+  .related { max-width: 70ch; margin: 0 0 clamp(2rem, 5vw, 3.4rem); padding-top: 1.8rem; border-top: 1px solid var(--line); }
+  .related h2 { font-size: 0.8rem; font-family: var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 1rem; }
+  .related ul { list-style: none; display: grid; gap: 0.7rem; }
+  .related a { font-weight: 600; font-size: 1.1rem; color: var(--ink); text-decoration: none; }
+  .related a:hover { color: var(--orange-deep); }
+</style>

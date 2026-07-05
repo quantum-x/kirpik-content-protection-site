@@ -1,0 +1,306 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import CtaBand from "../components/CtaBand.astro";
+import { SITE } from "../config";
+
+const steps = [
+  {
+    n: "01",
+    t: "Protect",
+    sum: "Select products, blog articles and pages in Kirpik and click Protect. Kirpik embeds an algorithmic invisible watermark derived from your original text signature, carrying your store's unique watermark code, without changing a single word you wrote.",
+    list: [
+      "Product descriptions, blog articles and pages",
+      "Batch protection on Paid and Pro, Auto-Protect on Pro",
+      "Reversible: restore any item to its prior state at any time",
+    ],
+  },
+  {
+    n: "02",
+    t: "Detect",
+    sum: "When a page reads suspiciously like yours, paste the text into Kirpik or give it the URL. The detector reports whether your watermark is present, how many Watermark Security Markers it recovered, and a confidence figure.",
+    list: [
+      "Paste detection on every plan, including Free",
+      "URL checks: 5, 20 or 100 a month depending on plan",
+      "Guided paste flow for sites that block automated visits",
+    ],
+  },
+  {
+    n: "03",
+    t: "Prove",
+    sum: "Turn a confirmed match into a Chain of Proof certificate: a dated ownership document with content fingerprints, detection details, an Internet Archive timeline and a QR code to a public verification page. Built to sit behind a DMCA takedown.",
+    list: [
+      "SHA-256 fingerprints of your original and the copy",
+      "Timeline evidence a host can check for itself",
+      "Independently verifiable through the public QR page",
+    ],
+  },
+];
+
+const howToJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  name: "How to watermark your Shopify text content and prove ownership of stolen copy",
+  description:
+    "Watermark Shopify product descriptions, blog articles and pages invisibly, detect the watermark in copied text anywhere, and generate a Chain of Proof ownership certificate to support a DMCA takedown.",
+  step: steps.map((s, i) => ({
+    "@type": "HowToStep",
+    position: i + 1,
+    name: s.t,
+    text: s.sum,
+    url: `${SITE.url}/how-it-works/#step-${s.t.toLowerCase()}`,
+  })),
+};
+---
+
+<Base
+  title="How it works"
+  description="How Kirpik protects Shopify text in three steps: embed an invisible watermark in your descriptions, articles and pages, detect it in copied text anywhere, and generate a Chain of Proof certificate for the takedown."
+  jsonLd={howToJsonLd}
+>
+  <PageHero
+    eyebrow="How it works"
+    title="Three steps from plain text to provable ownership."
+    lead="Kirpik protects the words you already wrote, finds them when they surface on someone else's site, and turns the match into evidence a host will act on. Here is each step in detail."
+  />
+
+  <!-- ======================= Step 01: Protect ======================= -->
+  <section class="section" id="step-protect" style="padding-top:1rem">
+    <div class="container step">
+      <div class="step__body" data-reveal>
+        <span class="step__n">Step 01</span>
+        <h2>Protect your copy</h2>
+        <p class="lead">
+          Open Kirpik in your Shopify admin, pick the products, blog articles
+          and pages you want covered, and click Protect. Kirpik embeds an
+          algorithmic invisible watermark derived from your original text
+          signature. It carries your store's unique watermark code, so any copy
+          of the text traces back to your shop specifically, not just to
+          "a Kirpik user".
+        </p>
+        <p class="step__more">
+          Your copy does not change. Not a word, not a comma, not a heading.
+          Readers see exactly what you published, search engines index exactly
+          what you published, and nothing is added to your storefront theme:
+          no script, no app embed, no pixel. Protection is also reversible, so
+          any item can be restored to its prior state whenever you choose.
+        </p>
+        <ul class="step__list">
+          {steps[0].list.map((li) => (
+            <li>
+              <svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M2 8.5 6 12l8-9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              {li}
+            </li>
+          ))}
+        </ul>
+        <p class="step__note">
+          Kirpik asks for at least 20 words per item, and the watermark is at
+          its strongest from around 45 words up. Most product descriptions
+          clear that without trying.
+        </p>
+      </div>
+      <div class="step__art" data-reveal>
+        <div class="mock card" aria-hidden="true">
+          <div class="mock__head">Protect · Products</div>
+          <div class="mock__row"><span class="mock__line" style="width:64%"></span><span class="tag tag--mint">✓ Protected</span></div>
+          <div class="mock__row"><span class="mock__line" style="width:52%"></span><span class="tag tag--mint">✓ Protected</span></div>
+          <div class="mock__row"><span class="mock__line" style="width:58%"></span><span class="tag tag--mint">✓ Protected</span></div>
+          <div class="mock__row"><span class="mock__line" style="width:45%"></span><span class="tag">Queued</span></div>
+          <div class="hud mock__hud">
+            <span>&gt; batch run · 4 items</span><br />
+            <span class="ok">✓ text unchanged</span> · <span class="ok">✓ 0 scripts added</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= What does not change ======================= -->
+  <section class="section section--tone" style="padding-block:clamp(2.6rem,4vw,4rem)">
+    <div class="container">
+      <div class="narrow" style="text-align:center">
+        <span class="eyebrow">The part merchants worry about</span>
+        <h2>What changes on your store? Nothing you can point at.</h2>
+      </div>
+      <div class="nochange__grid">
+        <div class="card nochange__card" data-reveal>
+          <h3>Your text stays your text</h3>
+          <p>Kirpik never rewrites, trims or restyles your copy. Every word, spelling choice and line of formatting stays exactly as you wrote it.</p>
+        </div>
+        <div class="card nochange__card" data-reveal>
+          <h3>SEO is untouched</h3>
+          <p>Search engines read the same copy your customers do, rendered the same way. There is no cloaking, no hidden markup and nothing for a crawler to penalise.</p>
+        </div>
+        <div class="card nochange__card" data-reveal>
+          <h3>Zero storefront weight</h3>
+          <p>No script tag, no app embed, no theme edit. Your page speed, Core Web Vitals and checkout are exactly as fast as they were yesterday.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= Step 02: Detect ======================= -->
+  <section class="section" id="step-detect">
+    <div class="container step step--flip">
+      <div class="step__body" data-reveal>
+        <span class="step__n">Step 02</span>
+        <h2>Detect a copy</h2>
+        <p class="lead">
+          Sooner or later a listing turns up that reads like you wrote it,
+          because you did. Kirpik gives you two ways to check. Paste the
+          suspect text straight into the Detect tab, or enter the page's URL
+          and let Kirpik fetch it and run detection for you.
+        </p>
+        <p class="step__more">
+          The result is specific, not a vague similarity score. Kirpik reports
+          whether your watermark is present, which store's watermark code it
+          carries, how many Watermark Security Markers survived, and a
+          confidence figure. Because the watermark repeats through your text
+          with redundancy, a copy that has been trimmed, lightly reworded or
+          reformatted still reports a match.
+        </p>
+        <p class="step__more">
+          Paste detection is included on every plan. URL checks come with a
+          monthly allowance: 5 on Free, 20 on Paid, 100 on Pro. If a site
+          blocks automated visits, a guided paste flow walks you through
+          capturing the text yourself and costs no URL credit.
+        </p>
+        <ul class="step__list">
+          {steps[1].list.map((li) => (
+            <li>
+              <svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M2 8.5 6 12l8-9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              {li}
+            </li>
+          ))}
+        </ul>
+        <p class="step__note">
+          One honest boundary: Kirpik does not crawl the web on a schedule.
+          Detection runs when you point it at text or a URL, which keeps every
+          result something you triggered and can explain.
+        </p>
+      </div>
+      <div class="step__art" data-reveal>
+        <div class="hud mock__detect" aria-hidden="true">
+          <span>&gt; detect · url</span><br />
+          <span>&gt; fetching bargainreef-example.shop/products/copper-carafe</span><br />
+          <span class="ok">✓ watermark detected</span><br />
+          <span>owner &nbsp;&nbsp;&nbsp;&nbsp;<b>your-store.myshopify.com</b></span><br />
+          <span>markers &nbsp;&nbsp;<b>11 recovered</b></span><br />
+          <span>confidence <b>100.0%</b></span><br />
+          <span>&gt; generate chain of proof? [Y/n]</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= Step 03: Prove ======================= -->
+  <section class="section section--tone" id="step-prove">
+    <div class="container step">
+      <div class="step__body" data-reveal>
+        <span class="step__n">Step 03</span>
+        <h2>Prove it is yours</h2>
+        <p class="lead">
+          A detection convinces you. The Chain of Proof certificate is what
+          convinces everyone else: a dated ownership document that lays the
+          whole case out for a host, marketplace or lawyer who has never heard
+          of your store.
+        </p>
+        <p class="step__more">
+          Each certificate records the SHA-256 Protection Signature of your
+          original and the Detected Signature of the copy, your protection
+          date, the infringing URL with its own Last-Modified headers, the
+          count of recovered Watermark Security Markers and the confidence
+          figure. Kirpik also pulls the earliest Internet Archive snapshot of
+          the infringing page, so the order of events is corroborated by a
+          source nobody controls, and appends a side-by-side comparison of the
+          original and the copy.
+        </p>
+        <p class="step__more">
+          Every certificate carries a QR code linking to a public verification
+          page. Whoever you send it to can confirm the document is genuine
+          without trusting the PDF, or you. From there, our
+          <a href="/enforcement/">enforcement guide</a> walks you through the
+          DMCA notice, the host complaint and search deindexing.
+        </p>
+        <ul class="step__list">
+          {steps[2].list.map((li) => (
+            <li>
+              <svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M2 8.5 6 12l8-9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              {li}
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div class="step__art" data-reveal>
+        <img
+          class="step__cert"
+          src="/img/chain-of-proof.png"
+          alt="A Kirpik Chain of Proof text ownership certificate"
+          width="620"
+          height="877"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= Honest limits ======================= -->
+  <section class="section section--ink">
+    <div class="container narrow" style="text-align:center">
+      <span class="eyebrow">The fine print, up front</span>
+      <h2>What Kirpik does not claim</h2>
+      <p class="lead" style="margin-top:1rem">
+        No tool stops text from being copied, and we will not pretend
+        otherwise. A thief who rewrites your copy from scratch is no longer
+        carrying your watermark, but then they are no longer selling with your
+        words either. Kirpik's job is narrower and more useful: when your
+        actual writing turns up somewhere else, you can detect it, name the
+        store it belongs to, and prove it.
+      </p>
+    </div>
+  </section>
+
+  <CtaBand
+    heading="Protect first. Everything else depends on it."
+    sub="Detection and certificates only work for copy that was protected before it was stolen. Start with the free plan today."
+  />
+</Base>
+
+<style>
+  .step { display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(2rem, 5vw, 4.5rem); align-items: center; }
+  .step--flip .step__art { order: -1; }
+  .step__n {
+    font-family: var(--font-mono); font-weight: 600; font-size: 0.8rem;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--orange-deep);
+  }
+  .step h2 { margin: 0.5rem 0 1rem; }
+  .step__more { margin-top: 1rem; color: var(--ink-soft); }
+  .step__more a { color: var(--orange-deep); font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
+  .step__list { margin-top: 1.4rem; display: grid; gap: 0.6rem; }
+  .step__list li { display: flex; align-items: baseline; gap: 0.6rem; font-weight: 600; }
+  .step__list svg { color: var(--mint); flex: none; align-self: center; }
+  .step__note {
+    margin-top: 1.3rem; color: var(--ink-soft); font-size: 0.95rem;
+    border-left: 2px solid var(--amber); padding-left: 1rem;
+  }
+
+  .mock { padding: 1.3rem; }
+  .mock__head { font-family: var(--font-mono); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-faint); padding-bottom: 0.6rem; }
+  .mock__row { display: flex; align-items: center; justify-content: space-between; gap: 0.8rem; padding: 0.6rem 0; border-top: 1px solid var(--line); }
+  .mock__line { display: block; height: 9px; border-radius: 5px; background: var(--sand); }
+  .mock__hud { margin-top: 1rem; }
+  .mock__detect { padding: 1.4rem 1.5rem; font-size: 0.85rem; box-shadow: var(--shadow-pop); }
+
+  .step__cert { border-radius: var(--r-md); border: 1px solid var(--line); box-shadow: var(--shadow-pop); max-width: 440px; margin-inline: auto; }
+
+  .nochange__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin-top: 2.4rem; }
+  .nochange__card { padding: 1.6rem; }
+  .nochange__card h3 { margin-bottom: 0.55rem; }
+  .nochange__card p { color: var(--ink-soft); font-size: 0.97rem; }
+
+  @media (max-width: 880px) {
+    .step { grid-template-columns: 1fr; }
+    .step--flip .step__art { order: 0; }
+    .nochange__grid { grid-template-columns: 1fr; }
+  }
+</style>

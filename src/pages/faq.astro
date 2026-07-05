@@ -1,0 +1,74 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import CtaBand from "../components/CtaBand.astro";
+import { FAQ_GROUPS } from "../data";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: FAQ_GROUPS.flatMap((g) =>
+    g.items.map((i) => ({
+      "@type": "Question",
+      name: i.q,
+      acceptedAnswer: { "@type": "Answer", text: i.a },
+    }))
+  ),
+};
+---
+
+<Base
+  title="FAQ"
+  description="Straight answers about Kirpik: how invisible text watermarking behaves, what it survives, what it costs, and how a detection becomes a Chain of Proof certificate."
+  jsonLd={jsonLd}
+>
+  <PageHero
+    eyebrow="FAQ"
+    title="Ask us anything. Here is a head start."
+    lead="Everything merchants ask before installing Kirpik, grouped so you can skip to the part you care about."
+  />
+
+  <section class="section" style="padding-top:0">
+    <div class="container narrow faqwrap">
+      {FAQ_GROUPS.map((group) => (
+        <div class="group" data-reveal>
+          <h2 class="group__title">{group.title}</h2>
+          <div class="faqs">
+            {group.items.map((f) => (
+              <details class="faq">
+                <summary>{f.q}<span class="ic" aria-hidden="true"></span></summary>
+                <p>{f.a}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <CtaBand
+    heading="Question not on the list?"
+    sub="Ask us directly through the Support page, or install the free plan and put Kirpik through its paces on your own store."
+  />
+</Base>
+
+<style>
+  .faqwrap { display: grid; gap: clamp(2rem, 4vw, 3rem); }
+  .group__title {
+    font-size: var(--fs-h3); margin-bottom: 1rem; padding-bottom: 0.6rem;
+    border-bottom: 2px solid var(--orange); display: inline-block;
+  }
+  .faqs { display: grid; gap: 0.7rem; }
+  .faq { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-md); padding: 0 1.3rem; }
+  .faq summary {
+    display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+    padding: 1.15rem 0; font-weight: 700; cursor: pointer; list-style: none;
+  }
+  .faq summary::-webkit-details-marker { display: none; }
+  .ic { position: relative; width: 16px; height: 16px; flex: none; }
+  .ic::before, .ic::after { content: ""; position: absolute; background: var(--orange); border-radius: 2px; transition: transform 0.2s ease; }
+  .ic::before { top: 7px; left: 0; width: 16px; height: 2px; }
+  .ic::after { left: 7px; top: 0; width: 2px; height: 16px; }
+  .faq[open] .ic::after { transform: scaleY(0); }
+  .faq p { padding: 0 0 1.2rem; color: var(--ink-soft); max-width: 66ch; }
+</style>

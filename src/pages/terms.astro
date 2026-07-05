@@ -1,0 +1,90 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import { SITE } from "../config";
+const updated = "5 July 2026";
+---
+
+<Base
+  title="Terms of Service"
+  description="The terms that govern the kirpik.app website and the Kirpik text protection app for Shopify, operated by INFOWISE LIMITED."
+>
+  <PageHero eyebrow="Legal" title="Terms of Service" />
+
+  <section class="section" style="padding-top:0">
+    <div class="container narrow prose">
+      <p><strong>Last updated:</strong> {updated}</p>
+      <p>
+        These terms govern your use of the Kirpik text protection app for
+        Shopify and of this website, both operated by {SITE.developer}
+        ("Kirpik", "we", "us"). By installing or using the app, or using this
+        site, you agree to them.
+      </p>
+
+      <h2>The service</h2>
+      <p>
+        Kirpik embeds invisible watermarks in the Shopify text content you
+        choose to protect: product descriptions, blog articles and pages. It
+        lets you detect those watermarks in pasted text or at URLs you supply,
+        and generates Chain of Proof certificates from confirmed detections.
+        Features, content limits, URL check allowances and certificate
+        allowances depend on your plan.
+      </p>
+
+      <h2>Your responsibilities</h2>
+      <ul>
+        <li>You must own, or hold the necessary rights to, the content you protect and the text you check with Kirpik.</li>
+        <li>You are responsible for the accuracy of any takedown notice or complaint you send, and for how you use Chain of Proof certificates.</li>
+        <li>You must use the app and this site lawfully and in line with Shopify's terms.</li>
+      </ul>
+
+      <h2>Plans and billing</h2>
+      <p>
+        Paid plans are billed in USD through Shopify Managed Pricing and
+        appear on your Shopify invoice. You can change or cancel your plan at
+        any time from the app or your Shopify admin. Protection is reversible:
+        if a downgrade puts you over the new plan's limits, the most recently
+        protected items above the cap are restored to their unprotected state.
+      </p>
+
+      <h2>No legal advice, no promised outcomes</h2>
+      <p>
+        Kirpik provides tooling and evidence. It does not provide legal
+        advice, and nothing on this site is legal advice. We cannot promise
+        that any host, marketplace, search engine or other third party will
+        act on a notice, remove content or accept a certificate, since those
+        decisions belong to them.
+      </p>
+
+      <h2>Fair use of the service</h2>
+      <p>
+        Detection allowances and content limits exist to keep the service fast
+        and affordable for everyone. We may throttle or suspend accounts that
+        attempt to probe, reverse engineer or abuse the watermarking or
+        detection systems, or that use detection against content they have no
+        legitimate interest in.
+      </p>
+
+      <h2>Warranty and liability</h2>
+      <p>
+        The service is provided on an "as is" basis. To the maximum extent
+        permitted by law, we exclude implied warranties and are not liable for
+        indirect or consequential loss arising from use of the app or this
+        website.
+      </p>
+
+      <h2>Changes</h2>
+      <p>
+        We may update these terms from time to time. The date above shows the
+        current version. Continued use of the app or site after changes take
+        effect constitutes acceptance of the revised terms.
+      </p>
+
+      <h2>Contact</h2>
+      <p>
+        Questions about these terms go to {SITE.developer} at
+        <a href="mailto:support@kirpik.app">support@kirpik.app</a>.
+      </p>
+    </div>
+  </section>
+</Base>

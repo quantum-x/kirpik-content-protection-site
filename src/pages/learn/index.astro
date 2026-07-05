@@ -1,0 +1,79 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import PageHero from "../../components/PageHero.astro";
+import CtaBand from "../../components/CtaBand.astro";
+import { ARTICLE_CLUSTERS } from "../../data";
+
+// Published articles. A roadmap slug with a matching Markdown file becomes a
+// link; the rest render as "Coming soon".
+const published = await getCollection("articles", ({ data }) => !data.draft);
+const liveSlugs = new Set(published.map((a) => a.id));
+---
+
+<Base
+  title="Learn"
+  description="Guides on how Shopify product copy gets scraped, why copy blockers fail, how invisible text watermarking holds up, and how to turn proof into a DMCA takedown."
+>
+  <PageHero
+    eyebrow="Learn"
+    title="Everything we know about text theft."
+    lead="Who copies product descriptions, how they get away with it, and what a store owner can actually do about it. Guides written for merchants, not lawyers."
+  />
+
+  <section class="section" style="padding-top:0">
+    <div class="container library">
+      {ARTICLE_CLUSTERS.map((c) => (
+        <div class="cluster">
+          <div class="cluster__head">
+            <h2>{c.title}</h2>
+            <p>{c.blurb}</p>
+          </div>
+          <ul class="cluster__list">
+            {c.items.map((a) => (
+              liveSlugs.has(a.slug) ? (
+                <li class="article article--live">
+                  <a class="article__link" href={`/learn/${a.slug}/`}>
+                    <span class="article__title">{a.title}</span>
+                    <span class="article__go" aria-hidden="true">Read →</span>
+                  </a>
+                </li>
+              ) : (
+                <li class="article">
+                  <span class="article__title">{a.title}</span>
+                  <span class="article__soon">Coming soon</span>
+                </li>
+              )
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <CtaBand
+    heading="Reading is optional. Protecting is not."
+    sub="Watermark your copy now, so the next scrape carries your proof with it. Free to start."
+  />
+</Base>
+
+<style>
+  .library { display: grid; gap: clamp(2rem, 4vw, 3rem); }
+  .cluster { display: grid; grid-template-columns: 1fr 1.6fr; gap: clamp(1.2rem, 4vw, 3rem); align-items: start; padding-bottom: clamp(2rem, 4vw, 3rem); border-bottom: 1px solid var(--line); }
+  .cluster:last-child { border-bottom: 0; padding-bottom: 0; }
+  .cluster__head h2 { font-size: var(--fs-h3); }
+  .cluster__head p { color: var(--ink-soft); margin-top: 0.5rem; }
+  .cluster__list { display: grid; gap: 0.55rem; }
+
+  .article { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 0.95rem 1.1rem; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-md); }
+  .article__title { font-weight: 600; }
+
+  /* Published rows are clickable and lift slightly on hover. */
+  .article--live { padding: 0; background: transparent; border: 0; }
+  .article__link { display: flex; justify-content: space-between; align-items: center; gap: 1rem; width: 100%; padding: 0.95rem 1.1rem; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-md); text-decoration: none; color: var(--ink); transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease; }
+  .article__link:hover { border-color: var(--orange); transform: translateY(-1px); box-shadow: var(--shadow-card); }
+  .article__go { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--orange-deep); white-space: nowrap; flex: none; }
+
+  .article__soon { font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-faint); background: var(--sand); padding: 0.35em 0.6em; border-radius: var(--r-pill); white-space: nowrap; flex: none; }
+  @media (max-width: 760px) { .cluster { grid-template-columns: 1fr; } }
+</style>

@@ -1,0 +1,163 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import CtaBand from "../components/CtaBand.astro";
+---
+
+<Base
+  title="Enforcement & takedowns"
+  description="How a Kirpik Chain of Proof certificate supports a DMCA notice, a hosting complaint and Google deindexing when your Shopify text is stolen. Practical, honest, and not legal advice."
+>
+  <PageHero
+    eyebrow="Enforcement"
+    title="From proof to takedown."
+    lead="Detecting your copy on another store is the easy part. This page covers what happens next: the certificate, the DMCA notice, the host complaint and the search deindexing request."
+  />
+
+  <section class="section" style="padding-top:0">
+    <div class="container enf">
+      <div class="prose">
+        <h2>Takedowns run on evidence, not indignation</h2>
+        <p>
+          Hosts, registrars and search engines process complaints at industrial
+          scale. The person reading yours has never heard of your store, has no
+          way to know who wrote what, and sees dozens of claims a day that turn
+          out to be competitors squabbling. What moves them is a specific,
+          checkable demonstration that the text is yours and predates the copy.
+        </p>
+        <p>
+          That is a harder bar for text than for images. Two product
+          descriptions can legitimately resemble each other, and "we sell the
+          same thing" is a common defence. The job of the evidence is to close
+          that door: not "these pages are similar" but "this exact text carries
+          this store's watermark, was protected on this date, and appeared on
+          the infringing page later".
+        </p>
+
+        <h2>What a Chain of Proof certificate contains</h2>
+        <p>
+          When Kirpik detects your watermark in a suspect page, it can generate
+          a Chain of Proof certificate: a dated ownership document built to be
+          read by an abuse desk. Each certificate records:
+        </p>
+        <ul>
+          <li>A unique certificate ID and the scope of the document</li>
+          <li>Your date of protection and the Protection Signature, a SHA-256 fingerprint of your original content</li>
+          <li>The content title and the original URL on your store</li>
+          <li>The infringing URL, its own Last-Modified headers and the detection date</li>
+          <li>The Detected Signature of the copy, the count of recovered Watermark Security Markers and a confidence figure</li>
+          <li>The earliest Internet Archive snapshot of the infringing page, corroborating the timeline through a source neither side controls</li>
+          <li>A side-by-side comparison of your original and the modified copy</li>
+          <li>A QR code linking to a public verification page, so anyone can confirm the certificate is genuine without trusting the PDF</li>
+        </ul>
+        <p>
+          The point of all that detail is simple: the person handling your
+          complaint should be able to verify your claim in minutes, from their
+          desk, without taking your word for anything.
+        </p>
+
+        <h2>Route one: the DMCA notice</h2>
+        <p>
+          For most stolen text the first move is a DMCA takedown notice sent to
+          the infringing site's host. A valid notice identifies your original
+          work, identifies the infringing material by URL, and includes the
+          required statements and your signature. Attach or link the Chain of
+          Proof certificate as your supporting evidence. Text is fully
+          protected by copyright the moment you write it, so product
+          descriptions, buying guides and blog articles all qualify.
+        </p>
+        <p>
+          Our guide <a href="/learn/dmca-for-stolen-text/">The DMCA process for
+          stolen text, step by step</a> walks through finding the right
+          recipient, wording each required element, and what to do when a
+          counter-notice arrives.
+        </p>
+
+        <h2>Route two: the hosting complaint</h2>
+        <p>
+          Some sites sit with hosts that operate their own abuse processes
+          alongside or instead of the DMCA, especially outside the United
+          States. The approach is the same: identify the host through a WHOIS
+          or DNS lookup, find their abuse contact, and submit the infringing
+          URL together with your certificate. Hosts vary widely in speed, but a
+          verifiable evidence package consistently outperforms an angry email.
+        </p>
+
+        <h2>Route three: deindexing from Google</h2>
+        <p>
+          Sometimes the practical damage is not that the copy exists but that
+          it ranks. Google accepts copyright removal requests for search
+          results, and a successful request removes the infringing page from
+          results even while the page itself stays up. For a store whose stolen
+          copy is outranking the original, this is often the fastest way to
+          stop the bleeding. See
+          <a href="/learn/deindexing-stolen-copy/">Getting stolen copy removed
+          from Google's index</a> for the process.
+        </p>
+
+        <h2>When to bring in a specialist</h2>
+        <p>
+          Most cases end after one well-evidenced notice. A minority do not:
+          the infringer hides behind privacy services, reposts under a new
+          domain, or ignores everything. For those, we recommend engaging an
+          intellectual property solicitor or a takedown specialist rather than
+          grinding through it alone. Arrive with your Chain of Proof
+          certificate and the paper trail of notices you have already sent, and
+          you have done most of their discovery work for them, which tends to
+          show up in the bill.
+        </p>
+
+        <h2>A note on what this page is</h2>
+        <p>
+          This page is general information about how takedown processes work,
+          written by a software company, not a law firm. It is not legal
+          advice, and enforcement rules differ between countries. For anything
+          contested or high-stakes, talk to a qualified professional in your
+          jurisdiction.
+        </p>
+      </div>
+
+      <aside class="enf__side">
+        <div class="card sidecard sidecard--steps">
+          <h3>The playbook</h3>
+          <ol>
+            <li>Detect your watermark in the suspect page</li>
+            <li>Generate the Chain of Proof certificate</li>
+            <li>Send the DMCA notice or host complaint</li>
+            <li>Request Google deindexing if the copy ranks</li>
+            <li>Bring in a specialist for the stubborn few</li>
+          </ol>
+        </div>
+        <div class="card sidecard">
+          <span class="tag tag--orange">Evidence first</span>
+          <h3>The certificate only exists if you protected first</h3>
+          <p>Kirpik can only certify text that carried your watermark before it was copied. Protection is the step you cannot do retroactively.</p>
+          <a class="btn btn--ghost sidecard__btn" href="/how-it-works/">How protection works</a>
+        </div>
+        <div class="card sidecard sidecard--muted">
+          <p>General information, not legal advice. For contested cases, consult a qualified professional in your jurisdiction.</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <CtaBand
+    heading="Put the evidence in place before you need it."
+    sub="Watermark your descriptions, articles and pages now, so the day a copy appears you are generating a certificate instead of gathering screenshots."
+  />
+</Base>
+
+<style>
+  .enf { display: grid; grid-template-columns: 1.7fr 1fr; gap: clamp(2rem, 5vw, 3.5rem); align-items: start; }
+  .enf__side { display: grid; gap: 1.1rem; position: sticky; top: 96px; }
+  .sidecard { padding: 1.5rem; }
+  .sidecard h3 { margin: 0.6rem 0 0.5rem; font-size: 1.15rem; }
+  .sidecard p { color: var(--ink-soft); font-size: 0.95rem; }
+  .sidecard__btn { margin-top: 1rem; font-size: 0.92rem; padding: 0.75em 1.1em; }
+  .sidecard--steps ol { margin: 0.4rem 0 0; padding-left: 1.2rem; display: grid; gap: 0.55rem; }
+  .sidecard--steps li { color: var(--ink-soft); padding-left: 0.2rem; }
+  .sidecard--steps li::marker { color: var(--orange); font-weight: 600; font-family: var(--font-mono); }
+  .sidecard--muted { background: var(--paper-2); box-shadow: none; }
+  .sidecard--muted p { font-size: 0.85rem; color: var(--ink-faint); }
+  @media (max-width: 880px) { .enf { grid-template-columns: 1fr; } .enf__side { position: static; } }
+</style>

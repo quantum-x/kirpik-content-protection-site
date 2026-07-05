@@ -1,0 +1,48 @@
+---
+import Base from "../../layouts/Base.astro";
+import PageHero from "../../components/PageHero.astro";
+import CtaBand from "../../components/CtaBand.astro";
+import { FEATURES } from "../../data";
+---
+
+<Base
+  title="Features"
+  description="Invisible text watermarking, protection that survives copying and editing, on-demand detection, Chain of Proof certificates, Auto-Protect and flexible batch protection for Shopify stores."
+>
+  <PageHero
+    eyebrow="Features"
+    title="Everything Kirpik does, in one place."
+    lead="Six pieces, one job: hide an invisible watermark in your product descriptions, articles and pages, find it wherever the text ends up, and hand you proof worth acting on."
+  />
+
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <div class="grid">
+        {FEATURES.map((f) => (
+          <a class="card item" href={`/features/${f.slug}/`} data-reveal>
+            <span class="tag tag--orange">{f.tag}</span>
+            <h2>{f.title}</h2>
+            <p>{f.short}</p>
+            <span class="more">Read more →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>
+
+<style>
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+  .item {
+    padding: 1.7rem; display: flex; flex-direction: column; align-items: flex-start; gap: 0.6rem;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  }
+  .item:hover { transform: translateY(-3px); box-shadow: var(--shadow-pop); border-color: var(--orange); }
+  .item h2 { font-size: 1.35rem; margin-top: 0.2rem; }
+  .item p { color: var(--ink-soft); font-size: 0.97rem; flex: 1; }
+  .more { margin-top: auto; padding-top: 0.6rem; font-weight: 700; font-size: 0.92rem; color: var(--orange-deep); }
+  @media (max-width: 880px) { .grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .grid { grid-template-columns: 1fr; } }
+</style>
