@@ -60,17 +60,24 @@ const jsonLd = {
   jsonLd={jsonLd}
 >
   <PageHero
-    title="Simple plans. Nothing held hostage."
-    lead="Every plan watermarks your text invisibly and includes paste detection. Move between plans whenever you like: protection is reversible, so a downgrade never damages your content."
+    title="Plans that scale with your business"
+    lead="Free tier provides complete protection. Paid and Pro tiers support larger catalogues, more Proof of Ownership Certificates and extra features."
   />
 
   <section class="section" style="padding-top:0">
     <div class="container plans">
       {PLANS.map((p) => (
-        <article class:list={["card", "plan", { "plan--featured": p.featured }]} data-reveal>
-          {p.featured && <span class="plan__flag">Most popular</span>}
+        <article class:list={["card", "plan", { "plan--featured": p.featured }]} data-plan={p.name} data-reveal>
+          {p.featured && <span class="plan__flag">Recommended</span>}
           <h2 class="plan__name">{p.name}</h2>
-          <p class="plan__price">{p.price}<span> {p.per}</span></p>
+          {p.name === "Pro" && (
+            <div class="billing" role="group" aria-label="Pro billing period">
+              <button type="button" class="billing__opt is-on" data-billing="monthly">Monthly</button>
+              <button type="button" class="billing__opt" data-billing="yearly">Yearly</button>
+            </div>
+          )}
+          <p class="plan__price"><span class="plan__amount">{p.price}</span><span class="plan__per"> {p.per}</span></p>
+          {p.name === "Pro" && <p class="plan__save" hidden>17% less than monthly billing</p>}
           <p class="plan__blurb">{p.blurb}</p>
           <ul class="plan__feats">
             {p.feats.map((f) => (
@@ -83,14 +90,6 @@ const jsonLd = {
           <a class:list={["btn", p.featured ? "btn--primary" : "btn--ghost", "plan__cta"]} href={SITE.shopifyAppUrl} rel="noopener" target="_blank">{p.cta}</a>
         </article>
       ))}
-    </div>
-    <div class="container">
-      <p class="pricing__note">
-        Prices in USD. Pro is also available at $199 per year, about 17% off
-        monthly billing. All charges run through Shopify Managed Pricing and
-        appear on your regular Shopify invoice, so there is no separate card
-        to hand over.
-      </p>
     </div>
   </section>
 
@@ -124,7 +123,7 @@ const jsonLd = {
 
   <section class="section">
     <div class="container narrow">
-      <h2 style="margin:0 0 1.6rem">The money questions, answered straight</h2>
+      <h2 style="margin:0 0 1.6rem">Pricing FAQs</h2>
       {billingFaqs.map((f) => (
         <details class="faq">
           <summary>{f.q}</summary>
@@ -136,8 +135,8 @@ const jsonLd = {
   </section>
 
   <CtaBand
-    heading="Start on Free. Stay as long as you like."
-    sub="The Free plan never expires. Protect a slice of your catalogue, run a detection, and upgrade only if the store grows into it."
+    heading="Start for free, scale as you grow"
+    sub="Kirpik's protection scales as your business grows. Free tier provides real protection; Paid and Pro tiers protect larger catalogues and add auto-protection."
   />
 </Base>
 
@@ -154,7 +153,7 @@ const jsonLd = {
   }
   .plan__name { font-size: 1.3rem; }
   .plan__price { font-size: 2.3rem; font-weight: 800; letter-spacing: -0.03em; margin: 0.5rem 0 0.2rem; }
-  .plan__price span { font-size: 0.95rem; font-weight: 600; color: var(--ink-faint); letter-spacing: 0; }
+  .plan__price .plan__per { font-size: 0.95rem; font-weight: 600; color: var(--ink-faint); letter-spacing: 0; }
   .plan__blurb { color: var(--ink-soft); font-size: 0.95rem; margin-bottom: 1.1rem; }
   .plan__feats { display: grid; gap: 0.5rem; margin-bottom: 1.6rem; }
   .plan__feats li { display: flex; align-items: baseline; gap: 0.55em; font-size: 0.95rem; color: var(--ink-soft); }
@@ -162,7 +161,14 @@ const jsonLd = {
   .plan__cta { justify-content: center; margin-top: auto; }
   @media (max-width: 880px) { .plans { grid-template-columns: 1fr; max-width: 440px; margin-inline: auto; } }
 
-  .pricing__note { margin: 1.6rem auto 0; text-align: center; font-size: 0.9rem; color: var(--ink-faint); max-width: 62ch; }
+  .billing { display: inline-flex; border: 1.5px solid var(--line-strong); border-radius: var(--r-md); padding: 3px; gap: 3px; margin-top: 0.7rem; align-self: flex-start; }
+  .billing__opt {
+    font-size: 0.85rem; font-weight: 700; padding: 0.4em 0.9em;
+    border-radius: calc(var(--r-md) - 4px); color: var(--ink-soft);
+    transition: background-color 0.15s ease, color 0.15s ease;
+  }
+  .billing__opt.is-on { background: var(--orange); color: #fff; }
+  .plan__save { font-size: 0.88rem; font-weight: 700; color: var(--mint); margin-top: 0.1rem; }
 
   .matrix__title { margin-bottom: 1.6rem; }
   .matrix { overflow-x: auto; padding: 0.4rem 1.2rem 1rem; }
@@ -189,3 +195,24 @@ const jsonLd = {
   .faq[open] summary::after { transform: translateY(-50%) rotate(45deg); }
   .faq p { padding: 0 0 1.2rem; color: var(--ink-soft); max-width: 65ch; }
 </style>
+
+<script>
+  // Pro billing toggle: switches the displayed price between monthly and
+  // yearly. Progressive enhancement; the page defaults to monthly without JS.
+  const pro = document.querySelector('[data-plan="Pro"]');
+  if (pro) {
+    const amount = pro.querySelector(".plan__amount");
+    const per = pro.querySelector(".plan__per");
+    const save = pro.querySelector(".plan__save") as HTMLElement | null;
+    const opts = pro.querySelectorAll<HTMLButtonElement>(".billing__opt");
+    opts.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        opts.forEach((o) => o.classList.toggle("is-on", o === btn));
+        const yearly = btn.dataset.billing === "yearly";
+        if (amount) amount.textContent = yearly ? "$199" : "$19.99";
+        if (per) per.textContent = yearly ? " / year" : " / month";
+        if (save) save.hidden = !yearly;
+      });
+    });
+  }
+</script>

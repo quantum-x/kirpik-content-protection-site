@@ -148,7 +148,7 @@ export const PLANS: Plan[] = [
   {
     name: "Pro", price: "$19.99", per: "/ month",
     blurb: "Auto-Protect and unlimited certificates for large stores.",
-    feats: ["Unlimited products, articles & pages", "Auto-Protect on save", "100 URL checks / month", "Unlimited certificates", "$199/yr, save 17%"],
+    feats: ["Unlimited products, articles & pages", "Auto-Protect on save", "100 URL checks / month", "Unlimited certificates"],
     cta: "Go Pro", featured: false,
   },
 ];
