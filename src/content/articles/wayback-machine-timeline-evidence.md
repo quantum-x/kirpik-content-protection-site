@@ -1,4 +1,4 @@
----
+﻿---
 title: "Using the Internet Archive to prove who published first"
 description: "How Wayback Machine snapshots work, finding the earliest capture of a page, saving snapshots proactively, and the honest limits of archive evidence."
 cluster: "Proof & enforcement"
@@ -50,7 +50,7 @@ None of this undermines the core use. It just means the Archive works best confi
 
 A timeline establishes order: your text was public before their page appeared. What it cannot establish by itself is provenance, that the text on their page is your text rather than a coincidental lookalike. The strongest submissions pair the two, an independent timeline plus [evidence tying the copy directly to you](/learn/proving-text-ownership/), which is where watermark detection and content fingerprints do the work archives cannot.
 
-This pairing is built into Kirpik's certificates. When a detection becomes a [Chain of Proof certificate](/features/chain-of-proof/), Kirpik automatically queries the Internet Archive's records and folds the earliest relevant snapshot into the document, alongside your protection date, the infringing page's own Last-Modified header, the fingerprints of original and copy, and the watermark detection itself with its marker count and confidence. The archive lookup you would have done by hand, calendar by calendar, arrives already done and already cited. [Inside a Chain of Proof certificate](/learn/inside-chain-of-proof/) shows where the timeline evidence sits in the finished document.
+This pairing is built into Kirpik's certificates. When a detection becomes a [Proof of Ownership Certificate](/features/chain-of-proof/), Kirpik automatically queries the Internet Archive's records and folds the earliest relevant snapshot into the document, alongside your protection date, the infringing page's own Last-Modified header, the fingerprints of original and copy, and the watermark detection itself with its marker count and confidence. The archive lookup you would have done by hand, calendar by calendar, arrives already done and already cited. [Inside a Proof of Ownership Certificate](/learn/inside-chain-of-proof/) shows where the timeline evidence sits in the finished document.
 
 ## The habit worth keeping
 

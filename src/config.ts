@@ -1,4 +1,4 @@
-/** Site-wide constants. Edit here to update everywhere. */
+﻿/** Site-wide constants. Edit here to update everywhere. */
 
 export const SITE = {
   name: "Kirpik",
@@ -6,7 +6,7 @@ export const SITE = {
   url: "https://kirpik.app",
   tagline: "Invisible text watermarking for Shopify",
   description:
-    "Kirpik invisibly watermarks your Shopify product descriptions, blog articles and pages, detects stolen copy anywhere on the web, and issues Chain of Proof ownership certificates you can use in DMCA takedowns.",
+    "Kirpik invisibly watermarks your Shopify product descriptions, blog articles and pages, detects stolen copy anywhere on the web, and issues Proof of Ownership Certificates you can use in DMCA takedowns.",
   shopifyAppUrl: "https://apps.shopify.com/kirpik-content-protection",
   developer: "INFOWISE LIMITED",
 };

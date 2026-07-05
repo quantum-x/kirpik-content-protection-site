@@ -1,4 +1,4 @@
----
+﻿---
 title: "How sure is a match? False positives, explained"
 description: "How Kirpik's detector avoids crying wolf: repeated markers, majority agreement and an integrity check, for roughly a 1-in-65,000 per-page false positive rate."
 cluster: "How invisible text watermarking works"
@@ -52,7 +52,7 @@ A detection result in Kirpik does not say a bare yes. It reports Watermark Secur
 
 A bare yes/no hides everything that matters. Ten agreeing markers recovered from a full-page copy is a different situation from two markers recovered from a single lifted paragraph, and you should know which you are holding before you act on it. The marker count tells you how much of the signature survived the thief's editing. Confidence summarises how firmly the evidence clears the thresholds. Together they let you, and later a host's abuse team, weigh the finding rather than take it on faith.
 
-The same numbers flow into the paperwork. A [Chain of Proof certificate](/features/chain-of-proof/) records the marker count and confidence alongside the detection date, the infringing URL and the content fingerprints, so the strength of the match is documented in the evidence itself. [Inside a Chain of Proof certificate](/learn/inside-chain-of-proof/) walks through every field.
+The same numbers flow into the paperwork. A [Proof of Ownership Certificate](/features/chain-of-proof/) records the marker count and confidence alongside the detection date, the infringing URL and the content fingerprints, so the strength of the match is documented in the evidence itself. [Inside a Proof of Ownership Certificate](/learn/inside-chain-of-proof/) walks through every field.
 
 ## What a low result means
 

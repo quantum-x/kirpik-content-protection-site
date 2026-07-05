@@ -1,4 +1,4 @@
----
+﻿---
 title: "When the thief outranks you with your own words"
 description: "The worst duplicate-content outcome: a copier ranking above the store that wrote the copy. The signals that decide it, and the evidence that reverses it."
 cluster: "Text theft & what it costs"
@@ -54,4 +54,4 @@ With that package, the routes open up: a DMCA notice to the copier's host, and a
 
 The original lost, for a while, because originality is invisible to an algorithm and she could not make it visible to a reviewer. Every store that publishes good copy is exposed to the same sequence, and the exposure starts the day the copy goes live, when it is easiest to scrape and hardest to have already proven.
 
-This is the reason Kirpik puts the evidence in place before anything is stolen. Protecting a description embeds an algorithmic invisible watermark derived from your original text signature and records dated content fingerprints, without changing a word you wrote. If a copier ever outranks you with your own sentences, detection reads your markers out of their page and a [Chain of Proof certificate](/features/chain-of-proof/) hands the reviewer the timeline, the fingerprints and the store-specific match in one verifiable document. The pattern above still starts the same way. It ends differently.
+This is the reason Kirpik puts the evidence in place before anything is stolen. Protecting a description embeds an algorithmic invisible watermark derived from your original text signature and records dated content fingerprints, without changing a word you wrote. If a copier ever outranks you with your own sentences, detection reads your markers out of their page and a [Proof of Ownership Certificate](/features/chain-of-proof/) hands the reviewer the timeline, the fingerprints and the store-specific match in one verifiable document. The pattern above still starts the same way. It ends differently.

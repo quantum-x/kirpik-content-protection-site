@@ -1,8 +1,8 @@
----
-title: "Inside a Chain of Proof certificate"
-description: "A section-by-section tour of Kirpik's Chain of Proof certificate: protection details, detection details, the comparison page and public QR verification."
+﻿---
+title: "Inside a Proof of Ownership Certificate"
+description: "A section-by-section tour of Kirpik's Proof of Ownership Certificate: protection details, detection details, the comparison page and public QR verification."
 cluster: "Proof & enforcement"
-summary: "A takedown is won by the document you attach to it. Here is exactly what a Chain of Proof certificate contains, section by section, and what each field is for."
+summary: "A takedown is won by the document you attach to it. Here is exactly what a Proof of Ownership Certificate contains, section by section, and what each field is for."
 pubDate: 2026-06-24
 related:
   - proving-text-ownership
@@ -10,7 +10,7 @@ related:
   - wayback-machine-timeline-evidence
 ---
 
-Evidence documents live or die on specifics, so rather than describe the [Chain of Proof certificate](/features/chain-of-proof/) in adjectives, this article walks through the actual document: every section, what it records, and why that field earns its place. If you are about to attach one to a DMCA notice, or you have received one and want to know what you are looking at, this is the tour.
+Evidence documents live or die on specifics, so rather than describe the [Proof of Ownership Certificate](/features/chain-of-proof/) in adjectives, this article walks through the actual document: every section, what it records, and why that field earns its place. If you are about to attach one to a DMCA notice, or you have received one and want to know what you are looking at, this is the tour.
 
 The certificate is generated when Kirpik detects your watermark in someone else's page and you choose to certify the detection. It is a dated PDF titled as a text content ownership certificate, and every claim in it traces back to a recorded event: the moment you protected your content, and the moment your watermark was found somewhere it should not be.
 

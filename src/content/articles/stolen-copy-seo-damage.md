@@ -1,4 +1,4 @@
----
+﻿---
 title: "What stolen copy does to your search rankings"
 description: "When your product copy is duplicated across the web, search engines pick one canonical version. Why the original does not always win, without the fearmongering."
 cluster: "Text theft & what it costs"
@@ -55,4 +55,4 @@ Proof is the lever. A dated record that the text existed on your store, with con
 
 One thing worth stating plainly, because it is the first question careful merchants ask: protecting your text with Kirpik does not touch your SEO. Your copy is not rewritten, no scripts are added to your storefront, and search engines read exactly the words you wrote. The details are in [invisible watermarks and SEO](/learn/text-watermarks-and-seo/).
 
-What Kirpik adds is the missing evidence layer. Protected descriptions carry an algorithmic invisible watermark derived from your original text signature, so when a duplicate appears on a stronger domain, you can detect your markers in it and generate a [Chain of Proof certificate](/features/chain-of-proof/) that documents ownership with dates and fingerprints. The search engine picks the canonical. You get the tools to take the impostor out of the running.
+What Kirpik adds is the missing evidence layer. Protected descriptions carry an algorithmic invisible watermark derived from your original text signature, so when a duplicate appears on a stronger domain, you can detect your markers in it and generate a [Proof of Ownership Certificate](/features/chain-of-proof/) that documents ownership with dates and fingerprints. The search engine picks the canonical. You get the tools to take the impostor out of the running.

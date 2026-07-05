@@ -4,13 +4,18 @@ import { join } from "node:path";
 import Base from "../../layouts/Base.astro";
 import SiteCheckForm from "../../components/SiteCheckForm.astro";
 import { SITE } from "../../config";
-import { COMPETITORS_BY_POPULARITY, BLURBS } from "../../compare-data";
+import { COMPETITORS_BY_POPULARITY } from "../../compare-data";
 
 const apps = COMPETITORS_BY_POPULARITY;
 
-// Every app must have a plain-words one-liner; fail the build if one is missing.
-for (const c of apps) {
-  if (!BLURBS[c.slug]) throw new Error(`Missing hub blurb for ${c.slug}`);
+// Verdict columns, assessed for text content. Image watermark apps genuinely
+// mark images, so they get the honest "Images only" rather than a bare no.
+function verdicts(c: (typeof apps)[number]): [string, string] {
+  if (c.slug === "tilkie-image-protection") return ["Images only", "Images only"];
+  if (c.primary === "watermark") return ["Images only", "No"];
+  if (c.primary === "monitor") return ["No", "Match reports"];
+  if (c.primary === "takedown") return ["No", "Takedown filing"];
+  return ["No", "No"];
 }
 
 // Icons are fetched by scripts/gen-compare-icons.mjs; where one is missing the
@@ -19,22 +24,6 @@ for (const c of apps) {
 const iconsDir = join(process.cwd(), "public", "compare-icons");
 const icon = (slug: string) => (existsSync(join(iconsDir, `${slug}.png`)) ? `/compare-icons/${slug}.png` : null);
 const initial = (name: string) => name.replace(/[^A-Za-z0-9]/g, "").charAt(0).toUpperCase() || "A";
-
-type Answer = { text: string; yes?: boolean };
-const YES: Answer = { text: "Yes", yes: true };
-const NO: Answer = { text: "No" };
-
-// The two questions, technique by technique.
-const questionRows: { label: string; cells: [Answer, Answer, Answer, Answer] }[] = [
-  { label: "Stops right-click copying in the browser", cells: [YES, NO, NO, NO] },
-  { label: "Stops scrapers and feed copying", cells: [NO, NO, NO, NO] },
-  { label: "Protects your text once it leaves your store", cells: [NO, NO, NO, YES] },
-  { label: "Proves a stolen description was yours", cells: [NO, NO, NO, YES] },
-  {
-    label: "Produces evidence for a DMCA takedown",
-    cells: [NO, NO, { text: "Reports matches, no proof" }, YES],
-  },
-];
 
 const techniquePages = [
   { href: "/compare/techniques/", label: "All techniques, one table", desc: "Every protection technique in the category, side by side." },
@@ -68,7 +57,7 @@ const itemListJsonLd = {
   jsonLd={itemListJsonLd}
 >
   <header class="chub">
-    <div class="container narrow">
+    <div class="container">
       <h1>Kirpik vs other anti-theft apps</h1>
       <p class="lead">
         We analysed every app in Shopify's anti-theft category, over 90 of them, against two simple
@@ -88,35 +77,6 @@ const itemListJsonLd = {
   </header>
 
   <section class="section" style="padding-top:clamp(2rem, 4vw, 3rem)">
-    <div class="container">
-      <h2>The two questions</h2>
-      <div class="tablewrap">
-        <table class="qtable">
-          <thead>
-            <tr>
-              <th scope="col"><span class="sr-only">Question</span></th>
-              <th scope="col">Blockers</th>
-              <th scope="col">Image watermarks</th>
-              <th scope="col">Monitors</th>
-              <th scope="col" class="uscol">Kirpik</th>
-            </tr>
-          </thead>
-          <tbody>
-            {questionRows.map((row) => (
-              <tr>
-                <th scope="row">{row.label}</th>
-                {row.cells.map((a, i) => (
-                  <td class:list={[{ uscol: i === 3, yes: a.yes }]}>{a.text}</td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" style="padding-top:0">
     <div class="container">
       <h2>Every app, compared</h2>
       <p class="sec-sub">
@@ -142,13 +102,24 @@ const itemListJsonLd = {
           <thead>
             <tr>
               <th scope="col">App</th>
-              <th scope="col">What it does</th>
-              <th scope="col" class="num">Reviews</th>
+              <th scope="col" class="vcol">True protection</th>
+              <th scope="col" class="vcol">Proof &amp; enforcement</th>
             </tr>
           </thead>
           <tbody>
+            <tr class="kirpik-row">
+              <td class="appcell">
+                <a href="/how-it-works/">
+                  <img src="/brand/kirpik-glyph.svg" alt="" width="30" height="30" style="border:0" />
+                  <span class="appname">Kirpik</span>
+                </a>
+              </td>
+              <td class="vcol vyes">Yes</td>
+              <td class="vcol vyes">Yes</td>
+            </tr>
             {apps.map((c, i) => {
               const ic = icon(c.slug);
+              const [prot, proof] = verdicts(c);
               return (
                 <tr class:list={[{ hl: i < 27 }]}>
                   <td class="appcell">
@@ -161,15 +132,15 @@ const itemListJsonLd = {
                       <span class="appname">{c.name}</span>
                     </a>
                   </td>
-                  <td class="blurb">{BLURBS[c.slug]}</td>
-                  <td class="num">{typeof c.reviews === "number" ? c.reviews : "None yet"}</td>
+                  <td class:list={["vcol", { vno: prot === "No" }]}>{prot}</td>
+                  <td class:list={["vcol", { vno: proof === "No" }]}>{proof}</td>
                 </tr>
               );
             })}
           </tbody>
         </table>
       </div>
-      <p class="table-note">The 27 most-reviewed apps are shaded.</p>
+      <p class="table-note">Assessed for text content: product descriptions, blog posts and pages. The 27 most-reviewed apps are shaded; each app's page carries the detail.</p>
     </div>
   </section>
 
@@ -233,29 +204,22 @@ const itemListJsonLd = {
 
   .tablewrap { overflow-x: auto; }
 
-  /* The two questions */
-  .qtable { width: 100%; border-collapse: collapse; min-width: 720px; }
-  .qtable th, .qtable td { padding: 1rem 1.1rem; border-bottom: 1px solid var(--line); }
-  .qtable thead th { font-weight: 700; font-size: 0.98rem; color: var(--ink); text-align: center; }
-  .qtable tbody th { font-weight: 600; font-size: 1.02rem; color: var(--ink); text-align: left; width: 34%; }
-  .qtable td { text-align: center; font-size: 1rem; color: var(--ink-faint); }
-  .qtable td.yes { color: var(--ink); font-weight: 700; }
-  .qtable .uscol { background: var(--orange-tint); }
-  .qtable td.uscol.yes { color: var(--orange-deep); }
-
   /* Every app, compared */
-  .apps { width: 100%; border-collapse: collapse; min-width: 680px; }
+  .apps { width: 100%; border-collapse: collapse; min-width: 560px; }
   .apps th, .apps td { padding: 0.65rem 0.9rem; border-bottom: 1px solid var(--line); text-align: left; }
   .apps thead th { font-weight: 700; font-size: 0.92rem; color: var(--ink); }
-  .apps .num { text-align: right; font-family: var(--font-mono); font-size: 0.9rem; color: var(--ink-soft); white-space: nowrap; }
-  .apps thead .num { font-family: var(--font-sans); color: var(--ink); }
+  .apps .vcol { text-align: center; }
+  .apps td.vcol { font-size: 0.95rem; font-weight: 600; color: var(--ink-soft); }
+  .apps td.vcol.vno { color: var(--ink-faint); font-weight: 400; }
+  .apps td.vcol.vyes { color: var(--orange-deep); font-weight: 800; }
+  tr.kirpik-row { background: var(--orange-tint); }
+  tr.kirpik-row .appname { font-weight: 800; }
   .appcell a { display: flex; align-items: center; gap: 0.7rem; color: var(--ink); font-weight: 600; }
   .appcell a:hover .appname { color: var(--orange-deep); }
   .appcell img, .tile { width: 30px; height: 30px; border-radius: 7px; flex: none; }
   .appcell img { border: 1px solid var(--line); object-fit: cover; }
   .tile { display: grid; place-items: center; background: var(--sand); color: var(--ink-soft); font-family: var(--font-mono); font-size: 0.85rem; font-weight: 600; }
   .appname { font-size: 0.97rem; }
-  .blurb { color: var(--ink-soft); font-size: 0.95rem; }
   tr.hl { background: var(--surface); }
   tr.hl .appname { font-weight: 800; }
 

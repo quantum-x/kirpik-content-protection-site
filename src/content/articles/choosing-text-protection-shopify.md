@@ -1,4 +1,4 @@
----
+﻿---
 title: "How to choose text protection for a Shopify store"
 description: "Blockers, visible notices, monitors and invisible watermarking compared honestly, plus the questions to ask any text protection vendor before you install."
 cluster: "Choosing & getting started"
@@ -50,7 +50,7 @@ Whatever category you are considering, these five questions expose the differenc
 
 ## Where Kirpik sits, honestly
 
-Kirpik is a category-four tool, so hold it to the same questions. It embeds an algorithmic invisible watermark, derived from your original text's signature, into product descriptions, blog articles and pages. It does not change your text: every word, heading and comma stays exactly as written, and SEO is unaffected. It adds no scripts to your storefront, so there is no page-speed cost. When you find a copy, detection by paste or URL identifies your store's watermark code in the stolen text, and a [Chain of Proof certificate](/features/chain-of-proof/) packages the evidence: protection date, SHA-256 content fingerprints, the infringing page's own headers, an Internet Archive timeline and a QR-linked public verification page.
+Kirpik is a category-four tool, so hold it to the same questions. It embeds an algorithmic invisible watermark, derived from your original text's signature, into product descriptions, blog articles and pages. It does not change your text: every word, heading and comma stays exactly as written, and SEO is unaffected. It adds no scripts to your storefront, so there is no page-speed cost. When you find a copy, detection by paste or URL identifies your store's watermark code in the stolen text, and a [Proof of Ownership Certificate](/features/chain-of-proof/) packages the evidence: protection date, SHA-256 content fingerprints, the infringing page's own headers, an Internet Archive timeline and a QR-linked public verification page.
 
 And the limits, stated plainly: Kirpik does not prevent copying, and it does not monitor the web automatically. Checking a suspect page is a manual paste or URL check, rate-limited by plan. A thief who rewrites your copy from scratch is no longer carrying your words, and no text protection follows a rewrite. Kirpik protects products, blog articles and pages, not collections, and needs at least 20 words of content to work with.
 

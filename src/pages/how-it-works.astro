@@ -1,4 +1,4 @@
----
+﻿---
 import Base from "../layouts/Base.astro";
 import PageHero from "../components/PageHero.astro";
 import CtaBand from "../components/CtaBand.astro";
@@ -28,7 +28,7 @@ const steps = [
   {
     n: "03",
     t: "Prove",
-    sum: "Turn a confirmed match into a Chain of Proof certificate: a dated ownership document with content fingerprints, detection details, an Internet Archive timeline and a QR code to a public verification page. Built to sit behind a DMCA takedown.",
+    sum: "Turn a confirmed match into a Proof of Ownership Certificate: a dated ownership document with content fingerprints, detection details, an Internet Archive timeline and a QR code to a public verification page. Built to sit behind a DMCA takedown.",
     list: [
       "SHA-256 fingerprints of your original and the copy",
       "Timeline evidence a host can check for itself",
@@ -42,7 +42,7 @@ const howToJsonLd = {
   "@type": "HowTo",
   name: "How to watermark your Shopify text content and prove ownership of stolen copy",
   description:
-    "Watermark Shopify product descriptions, blog articles and pages invisibly, detect the watermark in copied text anywhere, and generate a Chain of Proof ownership certificate to support a DMCA takedown.",
+    "Watermark Shopify product descriptions, blog articles and pages invisibly, detect the watermark in copied text anywhere, and generate a Proof of Ownership Certificate to support a DMCA takedown.",
   step: steps.map((s, i) => ({
     "@type": "HowToStep",
     position: i + 1,
@@ -55,11 +55,11 @@ const howToJsonLd = {
 
 <Base
   title="How it works"
-  description="How Kirpik protects Shopify text in three steps: embed an invisible watermark in your descriptions, articles and pages, detect it in copied text anywhere, and generate a Chain of Proof certificate for the takedown."
+  description="How Kirpik protects Shopify text in three steps: embed an invisible watermark in your descriptions, articles and pages, detect it in copied text anywhere, and generate a Proof of Ownership Certificate for the takedown."
   jsonLd={howToJsonLd}
 >
   <PageHero
-    title="Three steps from plain text to provable ownership."
+    title="Protect, prove, enforce: how Kirpik works."
     lead="Kirpik protects the words you already wrote, finds them when they surface on someone else's site, and turns the match into evidence a host will act on. Here is each step in detail."
   />
 
@@ -68,7 +68,7 @@ const howToJsonLd = {
     <div class="container step">
       <div class="step__body" data-reveal>
         <span class="step__n">Step 01</span>
-        <h2>Protect your copy</h2>
+        <h2>Protect your text</h2>
         <p class="lead">
           Open Kirpik in your Shopify admin, pick the products, blog articles
           and pages you want covered, and click Protect. Kirpik embeds an
@@ -115,19 +115,19 @@ const howToJsonLd = {
   <section class="section section--tone" style="padding-block:clamp(2.6rem,4vw,4rem)">
     <div class="container">
       <div class="narrow" style="text-align:center">
-        <h2>What changes on your store? Nothing you can point at.</h2>
+        <h2>Kirpik does not modify your content, slow down your site or affect SEO.</h2>
       </div>
       <div class="nochange__grid">
         <div class="card nochange__card" data-reveal>
-          <h3>Your text stays your text</h3>
+          <h3>Your text is not modified</h3>
           <p>Kirpik never rewrites, trims or restyles your copy. Every word, spelling choice and line of formatting stays exactly as you wrote it.</p>
         </div>
         <div class="card nochange__card" data-reveal>
-          <h3>SEO is untouched</h3>
+          <h3>No SEO impact</h3>
           <p>Search engines read the same copy your customers do, rendered the same way. There is no cloaking, no hidden markup and nothing for a crawler to penalise.</p>
         </div>
         <div class="card nochange__card" data-reveal>
-          <h3>Zero storefront weight</h3>
+          <h3>No speed impact</h3>
           <p>No script tag, no app embed, no theme edit. Your page speed, Core Web Vitals and checkout are exactly as fast as they were yesterday.</p>
         </div>
       </div>
@@ -139,7 +139,7 @@ const howToJsonLd = {
     <div class="container step step--flip">
       <div class="step__body" data-reveal>
         <span class="step__n">Step 02</span>
-        <h2>Detect a copy</h2>
+        <h2>Detect stolen copies</h2>
         <p class="lead">
           Sooner or later a listing turns up that reads like you wrote it,
           because you did. Kirpik gives you two ways to check. Paste the
@@ -179,7 +179,7 @@ const howToJsonLd = {
           <span>owner &nbsp;&nbsp;&nbsp;&nbsp;<b>your-store.myshopify.com</b></span><br />
           <span>markers &nbsp;&nbsp;<b>11 recovered</b></span><br />
           <span>confidence <b>100.0%</b></span><br />
-          <span>&gt; generate chain of proof? [Y/n]</span>
+          <span>&gt; generate proof of ownership certificate? [Y/n]</span>
         </div>
       </div>
     </div>
@@ -190,9 +190,9 @@ const howToJsonLd = {
     <div class="container step">
       <div class="step__body" data-reveal>
         <span class="step__n">Step 03</span>
-        <h2>Prove it is yours</h2>
+        <h2>Enforce your rights</h2>
         <p class="lead">
-          A detection convinces you. The Chain of Proof certificate is what
+          A detection convinces you. The Proof of Ownership Certificate is what
           convinces everyone else: a dated ownership document that lays the
           whole case out for a host, marketplace or lawyer who has never heard
           of your store.
@@ -227,7 +227,7 @@ const howToJsonLd = {
         <img
           class="step__cert"
           src="/img/chain-of-proof.png"
-          alt="A Kirpik Chain of Proof text ownership certificate"
+          alt="A Kirpik Proof of Ownership Certificate"
           width="620"
           height="877"
           loading="lazy"

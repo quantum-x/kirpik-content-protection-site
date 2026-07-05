@@ -1,4 +1,4 @@
----
+﻿---
 title: "What counts as proof when your copy is stolen"
 description: "Hosts and marketplaces act on evidence, not indignation. What convinces an abuse team: publication timelines, content fingerprints and watermark provenance."
 cluster: "Proof & enforcement"
@@ -53,7 +53,7 @@ The strongest submission is not one killer exhibit but a short stack in which ea
 - **Timeline:** your dated protection record, the infringing page's own headers, and the Internet Archive's earliest captures of both pages.
 - **Corroboration:** your CMS records and screenshots, now useful because independent anchors back them.
 
-Assembled by hand, that stack is an afternoon of work per infringement, which is precisely why most merchants never do it and most theft goes unchallenged. Kirpik generates it as a single document instead. The [Chain of Proof certificate](/features/chain-of-proof/) records your protection date and Protection Signature, the detection details with marker count and confidence, a side-by-side comparison of original and copy, and Wayback Machine timeline corroboration, all behind a QR code linking to a public verification page the analyst can check without trusting your PDF. [Inside a Chain of Proof certificate](/learn/inside-chain-of-proof/) walks through the sections one by one.
+Assembled by hand, that stack is an afternoon of work per infringement, which is precisely why most merchants never do it and most theft goes unchallenged. Kirpik generates it as a single document instead. The [Proof of Ownership Certificate](/features/chain-of-proof/) records your protection date and Protection Signature, the detection details with marker count and confidence, a side-by-side comparison of original and copy, and Wayback Machine timeline corroboration, all behind a QR code linking to a public verification page the analyst can check without trusting your PDF. [Inside a Proof of Ownership Certificate](/learn/inside-chain-of-proof/) walks through the sections one by one.
 
 ## Evidence is a decision you make in advance
 

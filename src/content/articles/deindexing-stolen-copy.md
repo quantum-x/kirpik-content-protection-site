@@ -1,4 +1,4 @@
----
+﻿---
 title: "Getting stolen copy removed from Google's index"
 description: "How Google's DMCA removal process works for search results: filing the request, timelines, what deindexing achieves, and pairing it with host takedowns."
 cluster: "Proof & enforcement"
@@ -22,7 +22,7 @@ Google operates a copyright removal system under the DMCA's provisions for infor
 
 The request looks a lot like [a DMCA notice to a host](/learn/dmca-for-stolen-text/), because legally it is the same instrument aimed at a different service. You identify your original work with URLs, list the infringing URLs you want removed from results, provide your contact details, and make the standard statements: good-faith belief the use is unauthorised, accuracy of the notice, and your authority over the work, signed under penalty of perjury.
 
-Two practical notes on filling it well. Be precise with URLs: Google removes the specific pages you report, so report every infringing page, not just the copycat's homepage. And make ownership easy to verify: a dated [Chain of Proof certificate](/features/chain-of-proof/) with its public verification link gives the reviewer a way to confirm your claim in a minute, which is a courtesy the queue rewards. [What counts as proof when your copy is stolen](/learn/proving-text-ownership/) explains why verifiable beats emphatic.
+Two practical notes on filling it well. Be precise with URLs: Google removes the specific pages you report, so report every infringing page, not just the copycat's homepage. And make ownership easy to verify: a dated [Proof of Ownership Certificate](/features/chain-of-proof/) with its public verification link gives the reviewer a way to confirm your claim in a minute, which is a courtesy the queue rewards. [What counts as proof when your copy is stolen](/learn/proving-text-ownership/) explains why verifiable beats emphatic.
 
 ## What deindexing achieves
 

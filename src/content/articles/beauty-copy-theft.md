@@ -1,4 +1,4 @@
----
+﻿---
 title: "Beauty and skincare: protecting ingredient stories and routines"
 description: "INCI lists are public, but your ingredient explanations, routines and compliance-vetted claims are not. How beauty brands trace copied copy and prove it."
 cluster: "By use case"
@@ -41,7 +41,7 @@ For beauty stores specifically, protect more than the product pages. Routine gui
 
 ## From suspicion to certificate
 
-When you find a listing that reads like yours, paste its text into Kirpik's Detect tab or check the URL directly. A match reports your watermark code, the number of security markers recovered and a confidence figure. From there you can generate a [Chain of Proof certificate](/features/chain-of-proof/): a dated document pairing your protection date with content fingerprints, the infringing page's own headers and an Internet Archive timeline, verifiable by anyone through a public QR-linked page.
+When you find a listing that reads like yours, paste its text into Kirpik's Detect tab or check the URL directly. A match reports your watermark code, the number of security markers recovered and a confidence figure. From there you can generate a [Proof of Ownership Certificate](/features/chain-of-proof/): a dated document pairing your protection date with content fingerprints, the infringing page's own headers and an Internet Archive timeline, verifiable by anyone through a public QR-linked page.
 
 That document changes conversations. Marketplace abuse teams see a verifiable ownership claim instead of a he-said-she-said. A host handling your DMCA notice sees dates that settle who published first. And if a copied claim ever lands you in a conversation with a regulator or platform reviewer, you can show precisely which text is yours and which pages took it.
 

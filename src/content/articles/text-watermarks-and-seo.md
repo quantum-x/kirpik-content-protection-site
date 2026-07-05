@@ -1,4 +1,4 @@
----
+﻿---
 title: "Invisible watermarks and SEO: what changes (nothing)"
 description: "Kirpik adds no script, no markup and no wording changes, so search engines read exactly the copy you wrote. Why watermarking is invisible to SEO too."
 cluster: "How invisible text watermarking works"
@@ -48,7 +48,7 @@ Here is the irony in the usual framing of this question. Merchants worry that pr
 
 When your descriptions are scraped onto other stores, search engines meet the same text on multiple domains and have to pick a version to favour. Usually the original wins. Not always. A copying site with stronger domain signals can outrank the store that wrote the words, and duplicated copy spread across clone shops muddies the picture of who the canonical source is. That damage is real and slow to notice, and [what stolen copy does to your search rankings](/learn/stolen-copy-seo-damage/) covers it in depth.
 
-A watermark does not stop the scraping, nothing stops the scraping, but it converts it from an invisible loss into a provable event. The mark [travels with every copy](/learn/why-watermarks-survive-copying/), detection identifies your store in the stolen text, and a Chain of Proof certificate gives you the evidence to get the duplicate taken down or removed from the index. Which means the honest relationship between watermarking and SEO is the reverse of the worry: the watermark changes nothing about your rankings and gives you a weapon against the thing that does.
+A watermark does not stop the scraping, nothing stops the scraping, but it converts it from an invisible loss into a provable event. The mark [travels with every copy](/learn/why-watermarks-survive-copying/), detection identifies your store in the stolen text, and a Proof of Ownership Certificate gives you the evidence to get the duplicate taken down or removed from the index. Which means the honest relationship between watermarking and SEO is the reverse of the worry: the watermark changes nothing about your rankings and gives you a weapon against the thing that does.
 
 ## The bottom line
 

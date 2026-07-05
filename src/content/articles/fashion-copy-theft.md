@@ -1,4 +1,4 @@
----
+﻿---
 title: "Fashion and apparel: when your product copy walks off with the trend"
 description: "Fashion product copy carries sizing, fabric and styling knowledge that clones lift verbatim. How apparel stores trace stolen descriptions and prove ownership."
 cluster: "By use case"
@@ -47,7 +47,7 @@ For an apparel store the practical routine is simple: protect the new drop's pro
 
 Finding clones is still a human job; Kirpik does not crawl the web for you. The reliable manual trick is to search Google for one distinctive sentence from your description in quotation marks. Sizing lines and fabric notes work well because thieves rarely bother editing them.
 
-When something turns up, paste the suspect text into Kirpik's detector or point it at the URL, or run the page through the [free site check](/site-check/). A positive detection identifies your store's specific watermark code in their text, and from there you can generate a Chain of Proof certificate: your protection date, content fingerprints, the infringing page's own headers and a public verification link, assembled into a document a marketplace abuse team or host can act on. The step-by-step for what happens next is in [the DMCA process for stolen text](/learn/dmca-for-stolen-text/).
+When something turns up, paste the suspect text into Kirpik's detector or point it at the URL, or run the page through the [free site check](/site-check/). A positive detection identifies your store's specific watermark code in their text, and from there you can generate a Proof of Ownership Certificate: your protection date, content fingerprints, the infringing page's own headers and a public verification link, assembled into a document a marketplace abuse team or host can act on. The step-by-step for what happens next is in [the DMCA process for stolen text](/learn/dmca-for-stolen-text/).
 
 The certificate matters more in fashion than almost anywhere else because of the calendar. A dated, independently verifiable ownership document is the difference between a takedown that lands during the season and an argument that outlives the trend.
 

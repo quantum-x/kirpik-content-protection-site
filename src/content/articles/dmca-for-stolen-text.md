@@ -1,4 +1,4 @@
----
+﻿---
 title: "The DMCA process for stolen text, step by step"
 description: "A practical walkthrough of the DMCA for copied store text: finding the host, locating the agent, writing a valid notice, counter-notices and non-US hosts."
 cluster: "Proof & enforcement"
@@ -20,7 +20,7 @@ One note before the steps. This is general information about how the process wor
 
 Do this before anything else, because infringing pages have a habit of quietly changing once complaints start arriving. Record the infringing URLs, take dated screenshots of each page, and save a copy of the page itself. If you use the Internet Archive, [save a snapshot of the infringing page](/learn/wayback-machine-timeline-evidence/) so a third-party record exists with a date on it.
 
-This is also the moment to establish that the text is provably yours rather than merely similar. If your copy was protected with Kirpik, run the infringing URL through detection and generate a [Chain of Proof certificate](/features/chain-of-proof/). The certificate packages your protection date, content fingerprints, the detection details and a public verification link into one dated document, which is exactly the shape of evidence the rest of this process wants. [What counts as proof when your copy is stolen](/learn/proving-text-ownership/) covers the evidence question more broadly.
+This is also the moment to establish that the text is provably yours rather than merely similar. If your copy was protected with Kirpik, run the infringing URL through detection and generate a [Proof of Ownership Certificate](/features/chain-of-proof/). The certificate packages your protection date, content fingerprints, the detection details and a public verification link into one dated document, which is exactly the shape of evidence the rest of this process wants. [What counts as proof when your copy is stolen](/learn/proving-text-ownership/) covers the evidence question more broadly.
 
 ## Step 2: identify who hosts the infringing site
 
@@ -41,7 +41,7 @@ US-based providers register a designated DMCA agent with the US Copyright Office
 
 The law lists what a valid notice must contain, and hosts do reject notices that miss elements, so treat this as a checklist:
 
-1. **Identification of the copyrighted work.** Describe the text that was copied and where the original lives, with URLs to your pages. If you hold a Chain of Proof certificate, cite it here and include its public verification link, which lets the abuse team confirm your claim independently.
+1. **Identification of the copyrighted work.** Describe the text that was copied and where the original lives, with URLs to your pages. If you hold a Proof of Ownership Certificate, cite it here and include its public verification link, which lets the abuse team confirm your claim independently.
 2. **Identification of the infringing material.** The exact URLs where the copied text appears. One URL per infringing page, precise enough that the host can find the material without hunting.
 3. **Your contact information.** Name, address, email, and a phone number if you have one.
 4. **A good-faith statement.** Words to the effect that you have a good-faith belief the use of the material is not authorised by the copyright owner, its agent, or the law.
@@ -68,4 +68,4 @@ Some hosts, in some jurisdictions, will ignore you. When that happens, stop push
 
 ## Where the certificate fits
 
-Every step above goes smoother when ownership is a fact you demonstrate rather than a story you tell. That is the role of the Chain of Proof certificate: your protection date, the content fingerprints of original and copy, the watermark detection with its marker count and confidence, and a QR-linked public verification page an abuse team can check in thirty seconds. The [enforcement guide](/enforcement/) shows how detection, certificate and notice fit together into one workflow, and Kirpik generates the certificate the moment a detection lands, so the evidence is ready before you have opened the host's complaint form.
+Every step above goes smoother when ownership is a fact you demonstrate rather than a story you tell. That is the role of the Proof of Ownership Certificate: your protection date, the content fingerprints of original and copy, the watermark detection with its marker count and confidence, and a QR-linked public verification page an abuse team can check in thirty seconds. The [enforcement guide](/enforcement/) shows how detection, certificate and notice fit together into one workflow, and Kirpik generates the certificate the moment a detection lands, so the evidence is ready before you have opened the host's complaint form.

@@ -1,4 +1,4 @@
----
+﻿---
 title: "What is an invisible text watermark?"
 description: "An invisible text watermark is an ownership signature carried by the writing itself. How it differs from visible notices, metadata and fingerprints."
 cluster: "How invisible text watermarking works"
@@ -54,7 +54,7 @@ On a Shopify store, the workflow is short. You protect the text you care about: 
 
 Then, when a suspicious page appears, you run [detection](/features/detection/). Paste the suspect text, or give Kirpik the URL and let it fetch the page. Within seconds you know whether your watermark is present, how many markers survived, and how confident the match is.
 
-A positive detection can then become a [Chain of Proof certificate](/features/chain-of-proof/): a dated document pairing your protection record with the detection details, built for DMCA notices and marketplace complaints, with a public verification page anyone can check.
+A positive detection can then become a [Proof of Ownership Certificate](/features/chain-of-proof/): a dated document pairing your protection record with the detection details, built for DMCA notices and marketplace complaints, with a public verification page anyone can check.
 
 ## The honest limits
 

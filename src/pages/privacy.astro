@@ -1,4 +1,4 @@
----
+﻿---
 import Base from "../layouts/Base.astro";
 import PageHero from "../components/PageHero.astro";
 import { SITE } from "../config";
@@ -40,13 +40,13 @@ const updated = "5 July 2026";
         <li><strong>Store information.</strong> Your Shopify store domain, your plan, and the settings you configure in the app, including your store's watermark code.</li>
         <li><strong>Protected content records.</strong> When you protect a product description, blog article or page, the app processes that text to embed the watermark. We do not keep a copy of your full original text. We store SHA-256 content fingerprints, bounded excerpts, word counts and timestamps, which are what detection and certificates need.</li>
         <li><strong>Detection records.</strong> When you run a detection, we record the result, including the URL you checked or an excerpt of the text you pasted, detection details and timestamps, so that results can be reviewed and certificates generated.</li>
-        <li><strong>Chain of Proof certificates.</strong> Certificates you generate, together with the public verification pages that back them, contain the details described on the certificate itself.</li>
+        <li><strong>Proof of Ownership Certificates.</strong> Certificates you generate, together with the public verification pages that back them, contain the details described on the certificate itself.</li>
         <li><strong>Billing.</strong> Subscriptions are handled by Shopify through Shopify Managed Pricing. We see your plan status. We never receive or store your payment card details.</li>
       </ul>
 
       <h2>How we use it</h2>
       <ul>
-        <li>To provide the service: protecting content, running detections, restoring content and generating Chain of Proof certificates.</li>
+        <li>To provide the service: protecting content, running detections, restoring content and generating Proof of Ownership Certificates.</li>
         <li>To operate, secure and improve the app, including debugging, rate limiting and abuse prevention.</li>
         <li>To respond when you contact support.</li>
       </ul>
@@ -57,7 +57,7 @@ const updated = "5 July 2026";
         infrastructure providers required to run the service, for example
         hosting, the managed fetching service used for URL checks, and the
         Internet Archive when building certificate timelines, and where the
-        law requires it. Chain of Proof certificates and their verification
+        law requires it. Proof of Ownership Certificates and their verification
         pages are documents you generate and choose to share for your own
         enforcement purposes.
       </p>

@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Single source of truth for repeated site content (features, pricing, FAQs).
  * Pages import from here so the homepage and inner pages never drift apart.
  */
@@ -44,17 +44,17 @@ export const FEATURES: Feature[] = [
   {
     slug: "chain-of-proof",
     tag: "Evidence",
-    title: "Chain of Proof certificate",
+    title: "Proof of Ownership Certificate",
     short:
       "Turn a detection into a dated, verifiable ownership certificate built for DMCA takedowns.",
-    lead: "Finding your copy on someone else's store is not the same as proving it is yours. When Kirpik detects your watermark, it can generate a Chain of Proof certificate: a dated ownership document with content fingerprints, detection details and a public verification page.",
+    lead: "Finding your copy on someone else's store is not the same as proving it is yours. When Kirpik detects your watermark, it can generate a Proof of Ownership Certificate: a dated ownership document with content fingerprints, detection details and a public verification page.",
     points: [
       { h: "Technical and specific", p: "It records the Protection Signature of your original, the Detected Signature of the copy, detection date, Watermark Security Markers and a confidence figure." },
       { h: "Independently verifiable", p: "A QR code links to a public verification page, so a host, marketplace or lawyer can confirm the certificate is genuine without trusting a PDF." },
       { h: "A timeline, not just a claim", p: "The certificate pairs your protection date with the infringing page's own headers and Internet Archive records, so the order of events is visible at a glance." },
     ],
     image: "/img/chain-of-proof.png",
-    imageAlt: "A Kirpik Chain of Proof text ownership certificate",
+    imageAlt: "A Kirpik Proof of Ownership Certificate",
   },
   {
     slug: "detection",
@@ -215,7 +215,7 @@ export const ARTICLE_CLUSTERS: ArticleCluster[] = [
     items: [
       { title: "The DMCA process for stolen text, step by step", slug: "dmca-for-stolen-text" },
       { title: "What counts as proof when your copy is stolen", slug: "proving-text-ownership" },
-      { title: "Inside a Chain of Proof certificate", slug: "inside-chain-of-proof" },
+      { title: "Inside a Proof of Ownership Certificate", slug: "inside-chain-of-proof" },
       { title: "Using the Internet Archive to prove who published first", slug: "wayback-machine-timeline-evidence" },
       { title: "Getting stolen copy removed from Google's index", slug: "deindexing-stolen-copy" },
     ],
@@ -278,7 +278,7 @@ export const FAQ_GROUPS: FaqGroup[] = [
   {
     title: "Proof and enforcement",
     items: [
-      { q: "What is a Chain of Proof certificate?", a: "A dated ownership document Kirpik generates when your watermark is detected in someone else's page. It records your Protection Signature, the Detected Signature of the copy, detection details, a confidence figure and a QR code that links to a public verification page." },
+      { q: "What is a Proof of Ownership Certificate?", a: "A dated ownership document Kirpik generates when your watermark is detected in someone else's page. It records your Protection Signature, the Detected Signature of the copy, detection details, a confidence figure and a QR code that links to a public verification page." },
       { q: "Why is a certificate better than screenshots?", a: "Screenshots show that two pages look similar. The certificate shows your content carried your store's watermark before the copy appeared, pairs content fingerprints with dates, and can be verified independently by anyone you send it to." },
       { q: "How does the certificate establish who published first?", a: "It combines your protection date, the infringing page's own HTTP headers and the earliest Internet Archive snapshot of the infringing URL. The timeline argument is laid out for you rather than left for you to assemble." },
       { q: "Can Kirpik take the content down for me?", a: "Kirpik gives you the evidence, and the Learn section walks you through DMCA notices, host complaints and search deindexing. Takedown decisions stay in your hands, and for stubborn cases we recommend a specialist." },
@@ -288,7 +288,7 @@ export const FAQ_GROUPS: FaqGroup[] = [
   {
     title: "Plans and billing",
     items: [
-      { q: "Is there a free plan?", a: "Yes. The Free plan protects up to 25 products and 3 articles or pages, includes paste detection, 5 URL checks a month and 1 Chain of Proof certificate, and never expires." },
+      { q: "Is there a free plan?", a: "Yes. The Free plan protects up to 25 products and 3 articles or pages, includes paste detection, 5 URL checks a month and 1 Proof of Ownership Certificate, and never expires." },
       { q: "What do the paid plans add?", a: "Paid ($7.99/month) raises the limits to 100 products and 50 articles and pages, adds batch protection, 20 URL checks and 5 certificates a month. Pro ($19.99/month) removes the caps, adds Auto-Protect and 100 URL checks, and makes certificates unlimited." },
       { q: "Is there a yearly discount?", a: "Yes. Pro is $199 per year, which works out around 17% cheaper than paying monthly." },
       { q: "What happens if I downgrade?", a: "Nothing breaks. If your protected content exceeds the new plan's limits, Kirpik restores the newest items over the cap back to their unprotected state, and everything else carries on as normal." },

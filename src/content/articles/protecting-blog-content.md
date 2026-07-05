@@ -1,4 +1,4 @@
----
+﻿---
 title: "Blogs and buying guides: protecting editorial that took weeks to write"
 description: "Buying guides and blog articles are the most scraped, least defended content on a store. How to protect long-form editorial from scrapers and AI content farms."
 cluster: "By use case"
@@ -45,7 +45,7 @@ Editorial theft has a different endgame from clone stores. You often care less a
 
 1. **Find the copy.** Manual but quick: search an unusual sentence from your guide in quotes. Farms rarely edit deep into an article.
 2. **Confirm it is yours.** Paste the suspect text into Kirpik's detector, check the URL, or use the [free site check](/site-check/). A positive detection reads your store's watermark code out of their page.
-3. **Generate the certificate.** The [Chain of Proof certificate](/features/chain-of-proof/) pairs your protection date with content fingerprints, the copy's own page headers and the Internet Archive's earliest snapshot of the infringing URL. For editorial disputes the timeline is the whole argument, and [the Wayback Machine's role in it](/learn/wayback-machine-timeline-evidence/) is worth understanding.
+3. **Generate the certificate.** The [Proof of Ownership Certificate](/features/chain-of-proof/) pairs your protection date with content fingerprints, the copy's own page headers and the Internet Archive's earliest snapshot of the infringing URL. For editorial disputes the timeline is the whole argument, and [the Wayback Machine's role in it](/learn/wayback-machine-timeline-evidence/) is worth understanding.
 4. **Aim at the index.** A DMCA notice to the host works when the host cares. For farm sites hosted in uncooperative places, the more effective lever is search removal, walked through in [getting stolen copy removed from Google's index](/learn/deindexing-stolen-copy/).
 
 ## Protecting a content library in practice

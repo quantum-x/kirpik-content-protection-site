@@ -1,4 +1,4 @@
----
+﻿---
 title: "The copycat store playbook: cloning a catalogue in an afternoon"
 description: "How clone stores lift an entire Shopify catalogue in hours: scrape the feed, import by CSV or app, republish. And why your copy is the part that convicts them."
 cluster: "Text theft & what it costs"
@@ -58,4 +58,4 @@ No step requires writing a word of product copy. That is the entire appeal, and 
 
 ## Make your copy expensive to steal
 
-You cannot make cloning slower. You can make it riskier. Kirpik embeds an algorithmic invisible watermark into your product descriptions, blog articles and pages, derived from your original text signature, without changing anything you wrote. When a cloner lifts your catalogue, the watermark rides along into their store, and a [Chain of Proof certificate](/features/chain-of-proof/) turns that into dated, verifiable evidence that the words are yours. The afternoon of cloning stays cheap. Keeping the clone up gets harder.
+You cannot make cloning slower. You can make it riskier. Kirpik embeds an algorithmic invisible watermark into your product descriptions, blog articles and pages, derived from your original text signature, without changing anything you wrote. When a cloner lifts your catalogue, the watermark rides along into their store, and a [Proof of Ownership Certificate](/features/chain-of-proof/) turns that into dated, verifiable evidence that the words are yours. The afternoon of cloning stays cheap. Keeping the clone up gets harder.

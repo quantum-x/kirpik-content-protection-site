@@ -1,4 +1,4 @@
----
+﻿---
 title: "How to watermark your Shopify product descriptions"
 description: "A step-by-step guide to watermarking Shopify product descriptions with Kirpik: install, protect, verify nothing changed, then test detection on your own copy."
 cluster: "Choosing & getting started"
@@ -20,7 +20,7 @@ Install Kirpik from the Shopify App Store listing like any other app. It runs em
 
 One thing worth knowing before you even install: Kirpik adds nothing to your storefront. No app embed, no script tag, no pixel. Protection happens to your content, not to your theme, so there is no theme editor step, no "enable app embed" toggle, and no page-speed cost to check for afterwards.
 
-The Free plan is the sensible starting point: $0, up to 25 products, 3 blog articles or pages, paste detection, 5 URL checks a month and 1 Chain of Proof certificate. Enough to protect real content and test the full loop before deciding whether the [paid tiers](/pricing/) earn their keep.
+The Free plan is the sensible starting point: $0, up to 25 products, 3 blog articles or pages, paste detection, 5 URL checks a month and 1 Proof of Ownership Certificate. Enough to protect real content and test the full loop before deciding whether the [paid tiers](/pricing/) earn their keep.
 
 ## Step 2: pick products in the Protect tab
 
@@ -56,7 +56,7 @@ You can also test the URL method by pointing Detect at one of your own product p
 
 ## What you have when it happens for real
 
-The rehearsal loop you just ran is the incident response plan. When a customer, a quoted-phrase Google search or plain luck surfaces a store that reads like yours, you paste their text or check their URL, and in seconds you know whether it carries your watermark. From a positive detection you can generate a [Chain of Proof certificate](/features/chain-of-proof/): a dated ownership document with content fingerprints, detection details and a public verification page, built to sit behind a DMCA notice.
+The rehearsal loop you just ran is the incident response plan. When a customer, a quoted-phrase Google search or plain luck surfaces a store that reads like yours, you paste their text or check their URL, and in seconds you know whether it carries your watermark. From a positive detection you can generate a [Proof of Ownership Certificate](/features/chain-of-proof/): a dated ownership document with content fingerprints, detection details and a public verification page, built to sit behind a DMCA notice.
 
 Two honest notes on scope. Kirpik does not monitor the web on a schedule; finding suspects is your habit, confirming them is Kirpik's job. And protection is per saved version of your text, so if you rewrite a protected description later, re-protect it after editing, or let Auto-Protect handle that on Pro.
 

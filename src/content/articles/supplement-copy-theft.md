@@ -1,4 +1,4 @@
----
+﻿---
 title: "Supplements and food: copied claims are your problem twice"
 description: "Copied supplement copy costs you twice: lost writing, plus regulatory risk when your claims surface beside banned promises. Provenance lets you disown copies."
 cluster: "By use case"
@@ -34,7 +34,7 @@ This is where text provenance earns its keep in a way that goes beyond takedowns
 
 That gives you two moves the unprotected brand does not have:
 
-- **Disown the copy.** You can demonstrate, with a dated [Chain of Proof certificate](/features/chain-of-proof/), that the text originated on your store on a specific date and that the cowboy site's page carries your watermark, meaning they took it from you rather than the reverse. Your protection date, the infringing page's own headers and the Internet Archive's earliest snapshot of their URL line up into a timeline anyone can check.
+- **Disown the copy.** You can demonstrate, with a dated [Proof of Ownership Certificate](/features/chain-of-proof/), that the text originated on your store on a specific date and that the cowboy site's page carries your watermark, meaning they took it from you rather than the reverse. Your protection date, the infringing page's own headers and the Internet Archive's earliest snapshot of their URL line up into a timeline anyone can check.
 - **Take the copy down.** The same certificate supports a DMCA notice to the site's host or a complaint to the marketplace, and it reads very differently from "we believe this text is ours". The mechanics are in [the DMCA process for stolen text](/learn/dmca-for-stolen-text/).
 
 To be precise about what this does and does not do: a watermark does not stop anyone from copying, and Kirpik does not patrol the web on your behalf. Detection happens when you paste suspect text or check a URL. What the watermark changes is the strength of your position once a copy is found. Suspicion becomes evidence.

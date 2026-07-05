@@ -1,4 +1,4 @@
----
+﻿---
 title: "Why the watermark survives copy and paste"
 description: "Kirpik's watermark lives in the text, so it travels through copy-paste, scraping, feed exports and re-theming. How redundancy keeps partial copies detectable."
 cluster: "How invisible text watermarking works"
@@ -62,6 +62,6 @@ So the honest claim is not "your text can never be used against you". It is narr
 
 ## From survival to proof
 
-Survival is only half the story, because a watermark that travels silently is worthless until you read it back. When a suspect page turns up, run it through [detection](/features/detection/): paste the text, or point Kirpik at the URL and let it fetch the page for you. A match reports your store's watermark, the number of security markers recovered and the confidence of the result, and can then be turned into a [Chain of Proof certificate](/features/chain-of-proof/) dated and ready for a takedown notice.
+Survival is only half the story, because a watermark that travels silently is worthless until you read it back. When a suspect page turns up, run it through [detection](/features/detection/): paste the text, or point Kirpik at the URL and let it fetch the page for you. A match reports your store's watermark, the number of security markers recovered and the confidence of the result, and can then be turned into a [Proof of Ownership Certificate](/features/chain-of-proof/) dated and ready for a takedown notice.
 
 That is the whole bet Kirpik makes: you cannot stop copy from being copied, so make every copy carry its own receipt. If you suspect a page is already wearing your words, [check it now](/site-check/) and find out.

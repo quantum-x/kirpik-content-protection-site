@@ -1,4 +1,4 @@
----
+﻿---
 title: "How Kirpik marks your copy without changing a single word"
 description: "Kirpik watermarks your descriptions without altering anything you or a search engine reads. What algorithmic protection means and why there is no public spec."
 cluster: "How invisible text watermarking works"
@@ -40,7 +40,7 @@ At this point a fair reader asks the obvious question: fine, but how, exactly? A
 
 That is a security decision, not a marketing one. An invisible watermark's protection comes from two properties working together: thieves cannot see it, and thieves do not know what to look for. Publish a specification and you keep the first property but hand over the second, along with a recipe for a stripping tool. Every watermarking system that guards text on the open web faces the same trade-off, and the defensible choice is the same one banks make about fraud detection rules: the system is real, its outputs are verifiable, and its internals are not documentation for attackers.
 
-What you get instead of a spec is verifiability where it counts. Detection results come with a recovered marker count and a confidence figure rather than a bare yes or no, so you can see how strong a match is. [How sure is a match?](/learn/watermark-false-positives/) explains how those numbers guard against false positives. And a Chain of Proof certificate carries a QR code to a public verification page, so a host or a lawyer can confirm a certificate is genuine without installing anything or taking your word for it.
+What you get instead of a spec is verifiability where it counts. Detection results come with a recovered marker count and a confidence figure rather than a bare yes or no, so you can see how strong a match is. [How sure is a match?](/learn/watermark-false-positives/) explains how those numbers guard against false positives. And a Proof of Ownership Certificate carries a QR code to a public verification page, so a host or a lawyer can confirm a certificate is genuine without installing anything or taking your word for it.
 
 ## Why length matters: the 20-word floor
 

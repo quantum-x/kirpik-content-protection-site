@@ -1,4 +1,4 @@
----
+﻿---
 title: "Dropshipping clones: same supplier, your words"
 description: "When every store has the same supplier photos, rewritten product copy is the real differentiator. Clones steal it because it converts. Detection takes it back."
 cluster: "By use case"
@@ -43,7 +43,7 @@ Detection is then a two-minute job. Found a suspiciously familiar store through 
 
 ## From detection to takedown, while the product still matters
 
-Dropshipping moves fast, and a winning product has a shelf life. The point of detection is to shorten the clone's. From a positive detection, Kirpik generates a Chain of Proof certificate: a dated ownership document with content fingerprints, the infringing page's own headers, an Internet Archive timeline and a public verification page. That is what you attach to a DMCA notice to the clone's host, a report to Shopify if the clone runs on Shopify, or an ad platform complaint if your copy is fronting their creatives.
+Dropshipping moves fast, and a winning product has a shelf life. The point of detection is to shorten the clone's. From a positive detection, Kirpik generates a Proof of Ownership Certificate: a dated ownership document with content fingerprints, the infringing page's own headers, an Internet Archive timeline and a public verification page. That is what you attach to a DMCA notice to the clone's host, a report to Shopify if the clone runs on Shopify, or an ad platform complaint if your copy is fronting their creatives.
 
 Takedowns backed by verifiable evidence move materially faster than takedowns backed by indignation. And each clone removed while the product is still scaling returns traffic and conversions to the page that earned them.
 
