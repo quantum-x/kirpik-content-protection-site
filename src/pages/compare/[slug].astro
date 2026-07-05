@@ -1,43 +1,58 @@
 ---
+import { existsSync } from "node:fs";
+import { join } from "node:path";
 import Base from "../../layouts/Base.astro";
 import SiteCheckForm from "../../components/SiteCheckForm.astro";
-import CtaBand from "../../components/CtaBand.astro";
 import { SITE } from "../../config";
 import {
-  FEATURED_COMPETITORS,
-  MECHANISMS,
-  CAPABILITIES,
-  KIRPIK_CAPS,
-  APPROACH_LABEL,
-  appCaps,
+  COMPETITORS,
+  COMPETITORS_BY_POPULARITY,
+  SCRIPT_MECHS,
   type Competitor,
-  type Cell,
 } from "../../compare-data";
 
 export function getStaticPaths() {
-  return FEATURED_COMPETITORS.map((app) => ({ params: { slug: app.slug }, props: { app } }));
+  return COMPETITORS.map((app) => ({ params: { slug: app.slug }, props: { app } }));
 }
 
 interface Props {
   app: Competitor;
 }
 const { app } = Astro.props;
-const caps = appCaps(app);
-const mechs = app.mechanisms ?? [];
+
+// Resolved from the project root because the compiled module's own URL moves
+// between dev and build.
+const iconSrc = existsSync(join(process.cwd(), "public", "compare-icons", `${app.slug}.png`))
+  ? `/compare-icons/${app.slug}.png`
+  : null;
 const initial = app.name.replace(/[^A-Za-z0-9]/g, "").charAt(0).toUpperCase() || "A";
 
-const related = FEATURED_COMPETITORS.filter((c) => c.slug !== app.slug)
-  .sort((a, b) => Number(b.primary === app.primary) - Number(a.primary === app.primary))
-  .slice(0, 3);
+const mechs = new Set(app.mechanisms ?? []);
+const hasScript = SCRIPT_MECHS.some((m) => mechs.has(m));
+const hasCopyBlock =
+  mechs.has("right-click-block") || mechs.has("copy-paste-block") || mechs.has("keyboard-shortcut-block");
+const hasAccessRules = mechs.has("country-ip-block");
+const geoOnly = !hasScript && hasAccessRules;
 
-const cell = (v: Cell) =>
-  v === true
-    ? { m: "✓", c: "yes" }
-    : v === false
-      ? { m: "✕", c: "no" }
-      : v === "na"
-        ? { m: "n/a", c: "na" }
-        : { m: "Not stated", c: "un" };
+const isTilkie = !!app.sameDeveloper;
+const scriptBased = ["blocker", "bundle"].includes(app.primary);
+const isWatermark = app.primary === "watermark" && !isTilkie;
+const isMonitor = app.primary === "monitor";
+const isTakedown = app.primary === "takedown";
+
+const approachLine = isTilkie
+  ? "It is the image-side counterpart to Kirpik, built by the same team: an invisible watermark for product photos rather than text."
+  : geoOnly
+    ? "It is an access-control app: it decides who can load the store."
+    : scriptBased
+      ? hasAccessRules
+        ? "It pairs an in-browser blocking script with rules about who can load the store."
+        : "It is a storefront script blocker: everything it does runs inside the visitor's browser tab."
+      : isWatermark
+        ? "It is an image watermark app: it works on your product photos, not your words."
+        : isMonitor
+          ? "It is a copy monitor: a service that scans other sites and reports lookalikes."
+          : "It is a takedown service: it finds copies and files removal requests for you.";
 
 const launchedNice = app.launched
   ? new Date(`${app.launched}T00:00:00Z`).toLocaleDateString("en-GB", { month: "long", year: "numeric", timeZone: "UTC" })
@@ -50,24 +65,44 @@ const meta = [
   launchedNice ? `Listed since ${launchedNice}` : null,
 ].filter(Boolean) as string[];
 
-// "The text question" copy varies by approach.
-const isTilkie = !!app.sameDeveloper;
-const scriptBased = ["blocker", "bundle"].includes(app.primary);
-const isWatermark = app.primary === "watermark" && !isTilkie;
-const isMonitor = app.primary === "monitor";
-const isTakedown = app.primary === "takedown";
+// The same five plain rows as the hub table, them vs Kirpik.
+type Answer = { text: string; yes?: boolean };
+const YES: Answer = { text: "Yes", yes: true };
+const NO: Answer = { text: "No" };
+const row5Them: Answer = isMonitor
+  ? { text: "Match reports, not ownership proof" }
+  : isTilkie
+    ? { text: "Yes, for images", yes: true }
+    : NO;
+const sideRows: { label: string; them: Answer; kirpik: Answer }[] = [
+  { label: "Stops right-click copying in the browser", them: hasCopyBlock ? YES : NO, kirpik: NO },
+  { label: "Stops scrapers and feed copying", them: NO, kirpik: NO },
+  { label: "Protects your text once it leaves your store", them: NO, kirpik: YES },
+  { label: "Proves a stolen description was yours", them: isTilkie ? { text: "For images only" } : NO, kirpik: YES },
+  { label: "Produces evidence for a DMCA takedown", them: row5Them, kirpik: YES },
+];
+
+const related = COMPETITORS_BY_POPULARITY.filter((c) => c.slug !== app.slug)
+  .sort((a, b) => Number(b.primary === app.primary) - Number(a.primary === app.primary))
+  .slice(0, 3);
 ---
 
 <Base
   title={`${app.name} vs Kirpik`}
-  description={`A neutral, listing-based comparison of ${app.name} and Kirpik for protecting Shopify store text: what the app says it does, how the approach works, and what each one means for your product copy.`}
+  description={`A plain, listing-based comparison of ${app.name} and Kirpik: what ${app.name} does, whether it prevents content theft, and where proof of ownership comes from.`}
 >
   <article>
     <header class="chead">
       <div class="container narrow">
-        <a class="chead__back" href="/compare/">← All comparisons</a>
+        <a class="chead__back" href="/compare/">All comparisons</a>
         <div class="versus" aria-hidden="true">
-          <span class="versus__tile"><span class="versus__letter">{initial}</span></span>
+          <span class="versus__tile">
+            {iconSrc ? (
+              <img src={iconSrc} alt="" width="56" height="56" loading="eager" />
+            ) : (
+              <span class="versus__letter">{initial}</span>
+            )}
+          </span>
           <span class="versus__vs">vs</span>
           <span class="versus__tile versus__tile--us">
             <img src="/brand/kirpik-glyph.svg" alt="" width="44" height="22" loading="eager" />
@@ -75,18 +110,14 @@ const isTakedown = app.primary === "takedown";
         </div>
         <h1>{app.name} vs Kirpik</h1>
         <p class="lead">{app.summary}</p>
-        {meta.length > 0 && (
-          <p class="chead__meta">
-            {meta.join("  ·  ")}  ·  <a href={app.url} rel="nofollow noopener" target="_blank">View listing on the Shopify App Store</a>
-          </p>
-        )}
+        {meta.length > 0 && <p class="chead__meta">{meta.join("  ·  ")}</p>}
+        <p class="chead__src">Based on its public Shopify App Store listing, July 2026.</p>
       </div>
     </header>
 
     <div class="container narrow cbody">
       {isTilkie && (
         <section class="disclose" aria-label="Disclosure">
-          <span class="tag tag--amber">Disclosure</span>
           <p>
             <strong>Tilkie is built by the same team as Kirpik.</strong> Both apps are published by
             {SITE.developer}. This is not a rivalry page: Tilkie protects product images, Kirpik protects
@@ -97,187 +128,166 @@ const isTakedown = app.primary === "takedown";
       )}
 
       <section class="block">
-        <h2>What {app.name} says it does</h2>
-        <p class="src">From its Shopify App Store listing, as recorded in June and July 2026:</p>
+        <h2>What {app.name} does</h2>
+        <p>{approachLine} From its listing:</p>
         <ul class="claims">
           {(app.claims ?? []).map((c) => <li>{c}</li>)}
         </ul>
       </section>
 
       <section class="block">
-        <h2>How the approach works, and where it stops</h2>
-        <p class="src">
-          Each card covers one technique the listing states or clearly implies. The limits described are
-          general behaviour of browsers and platforms, not faults of this app.
-        </p>
-        <div class="mechs">
-          {mechs.map((id) => {
-            const mech = MECHANISMS[id];
-            return (
-              <div class="mech">
-                <h3>{mech.label}</h3>
-                <p class="mech__what">{mech.what}</p>
-                {mech.bypass.length > 0 && (
-                  <>
-                    <p class="mech__h">General facts worth knowing</p>
-                    <ul class="mech__list">
-                      {mech.bypass.map((b) => <li>{b}</li>)}
-                    </ul>
-                  </>
-                )}
-                {mech.note && <p class="mech__note">{mech.note}</p>}
-              </div>
-            );
-          })}
-        </div>
-      </section>
-
-      <section class="block">
-        <h2>{app.name} and Kirpik, side by side</h2>
-        <div class="tablewrap card">
-          <table class="ctable">
-            <thead>
-              <tr>
-                <th scope="col">Capability</th>
-                <th scope="col">{app.name}</th>
-                <th scope="col" class="uscol">Kirpik</th>
-              </tr>
-            </thead>
-            <tbody>
-              {CAPABILITIES.map((cap) => {
-                const a = cell(caps[cap.id]);
-                const k = cell(KIRPIK_CAPS[cap.id]);
-                return (
-                  <tr>
-                    <th scope="row">{cap.label}</th>
-                    <td class={`c-${a.c}`}><span class="mk">{a.m}</span></td>
-                    <td class={`c-${k.c} uscol`}><span class="mk">{k.m}</span></td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
-        <p class="legend">
-          Cells are derived from each app's stated features; "Not stated" means the listing does not say.
-          "n/a" means the row is outside what the method touches. The feed row is ✕ by mechanism for any
-          storefront script: Shopify's public feed surfaces are served without storefront JavaScript.
-        </p>
-      </section>
-
-      <section class="block">
-        <h2>The text question</h2>
+        <h2>Can it prevent content theft?</h2>
         {isTilkie ? (
           <>
-            <p>{app.textNote}</p>
             <p>
-              Both apps share the same philosophy: you cannot stop a copy being made, so make every copy
-              carry invisible, provable attribution. Tilkie does it inside the pixels of a photo. Kirpik
-              does it inside the words themselves, with an algorithmic invisible watermark derived from
-              your original text, and turns a detection into a Chain of Proof certificate.
+              Tilkie does not prevent copying, and it does not claim to: any image a browser can display
+              can be saved. What it does is make a copied product photo identifiable, by embedding an
+              invisible watermark in the pixels themselves, and give you detection and a certificate when
+              a copy is found elsewhere. Text is outside its scope in exactly the way images are outside
+              Kirpik's. The plain answer for both apps is no; both are built for proof rather than
+              prevention, one for photos and one for words.
             </p>
+            {app.textNote && <p>{app.textNote}</p>}
+          </>
+        ) : geoOnly ? (
+          <>
+            <p>
+              {app.name} decides who can load your store. Blocking a country, an IP address or a
+              connection type reduces who visits, and a VPN or proxy changes an apparent location in one
+              click. More to the point, an access rule says nothing about what happens to your text after
+              an allowed visitor, or a permitted crawler, has it. Shopify serves the same product text
+              through feeds built for customers, search engines and AI tools, and nothing in the words
+              themselves changes. The plain answer: no.
+            </p>
+            {app.textNote && <p>{app.textNote}</p>}
           </>
         ) : scriptBased ? (
           <>
             <p>
-              {caps.protectsText === true
-                ? `${app.name}'s listing does cover text: it blocks selecting and copying while a visitor is on the page, which adds real friction for a casual copier inside the tab.`
-                : `${app.name}'s stated features centre on images and access control; the text of your product descriptions is not something its listing claims to change.`}
-            </p>
-            <p>
-              What no storefront script changes is where else the same words already live. Every Shopify
-              store publishes its product data through public, machine-readable surfaces such as
-              /products.json, and those are served without any storefront JavaScript running. A script
-              cannot act on a page it is never part of. And once text is copied, by any route, the words
-              themselves carry nothing that ties them back to the store that wrote them.
+              {app.name} works inside the visitor's browser.
+              {hasCopyBlock
+                ? " The script it adds can cancel right-click menus, text selection and copy shortcuts for a customer looking at the page, which is real friction for casual copying."
+                : " The script it adds acts on what a visitor's browser tab will do while the page is open."}
+              {hasAccessRules ? " Its access rules also decide who can load the store at all." : ""}
+              That covers one of the ways your content is served, and only that one. Shopify publishes
+              the same product text through feeds built for customers, search engines and AI tools, and
+              those feeds are served without any storefront JavaScript, so the script never runs where
+              scrapers and catalogue importers actually read. Nothing in the text itself changes either,
+              so a copy that does leave carries no trace of where it came from. The plain answer: no.
             </p>
             {app.textNote && <p>{app.textNote}</p>}
-            <p>
-              Kirpik starts where the tab ends. It embeds an invisible algorithmic watermark, derived from
-              your original text, into your product descriptions, blog articles and pages, without
-              changing a word you wrote and without adding any script to your theme. A suspect page can be
-              checked by paste or URL, and a confirmed detection produces a Chain of Proof certificate
-              built for a DMCA takedown.
-            </p>
           </>
         ) : isWatermark ? (
           <>
             <p>
               {app.name} works on images, and a mark on an image genuinely travels with a copy of that
-              image. That is worth having. It is also the boundary: the product description sitting next
-              to each marked photo is not part of what gets marked, so your words remain exactly as
-              exposed as before, in the page HTML and in Shopify's public feed surfaces that any importer
-              can read.
+              image, which is more than any blocking script can say. It is also the boundary. A product
+              description has no pixels to mark, so your words are left exactly as they were, in the page
+              HTML and in the feeds Shopify serves to customers, search engines and AI tools. A copied
+              description arrives at its new home carrying nothing that ties it back to you. The plain
+              answer: not for text.
             </p>
             {app.textNote && <p>{app.textNote}</p>}
-            <p>
-              Kirpik is the text-side counterpart to image watermarking: an invisible algorithmic
-              watermark derived from your original text, embedded in the copy itself, with nothing visible
-              to shoppers and no change to your words. When the description walks, the signature walks
-              with it, and a detection can be turned into a Chain of Proof certificate.
-            </p>
           </>
         ) : isMonitor ? (
           <>
             <p>
-              Monitoring engages with text in a way blockers do not: it goes looking for pages that match
-              yours. What a match cannot do on its own is settle ownership. Two similar pages are a
-              starting point for an argument, not the end of one, because copied words carry no built-in
-              record of where they came from.
+              {app.name} changes nothing on your store and nothing in your content: it is a service that
+              scans elsewhere and reports what it finds. That is detection after the fact. By the time a
+              lookalike appears in a report, the copy has already been made and published, and coverage
+              follows wherever the service looks, so a copy outside the scanned set goes unfound. The
+              plain answer: no. It tells you theft has happened; it does not stop it.
             </p>
             {app.textNote && <p>{app.textNote}</p>}
-            <p>
-              Kirpik supplies the half a scanner cannot: the mark inside the words. Its invisible
-              algorithmic watermark travels with your text wherever it is pasted, so a detection reads
-              your store's own watermark code out of the copy and a Chain of Proof certificate documents
-              it. Monitoring tells you that text matches; a watermark proves whose text it was. The two
-              complement each other.
-            </p>
-          </>
-        ) : isTakedown ? (
-          <>
-            <p>
-              A takedown service earns its keep after a copy appears: finding it and filing against it.
-              Every filing stands on evidence of ownership, and for text that is precisely the hard part,
-              because copied words arrive carrying nothing of their origin.
-            </p>
-            {app.textNote && <p>{app.textNote}</p>}
-            <p>
-              Kirpik is built for that evidence gap. The invisible algorithmic watermark in your text
-              means a copy can be attributed to your store specifically, and the Chain of Proof
-              certificate assembles fingerprints, dates and an archive timeline into a document a host or
-              marketplace can verify. Detection and proof from Kirpik can feed whatever takedown route you
-              choose, including a service like this one.
-            </p>
           </>
         ) : (
+          <>
+            <p>
+              {app.name} acts after a copy appears: it finds infringing sites or listings and files
+              removal requests. That is enforcement, not prevention; the copy exists, and has usually
+              been trading for a while, before it is found. A filing also stands on evidence of
+              ownership, which for text is the difficult part, because copied words carry nothing of
+              their origin by default. The plain answer: no. It works on theft that has already happened.
+            </p>
+            {app.textNote && <p>{app.textNote}</p>}
+          </>
+        )}
+        {!isTilkie && (
           <p>
-            This app sits outside the content-protection scope, so there is no text story to compare. It
-            is listed here because it appears in the same App Store category.
+            Kirpik's answer to the same question is also no. Prevention is impossible: text a browser can
+            display is text that can be copied. Kirpik's difference is proof, an invisible watermark
+            carried in the words themselves, so a copy can be detected and attributed wherever it
+            surfaces.
           </p>
         )}
+      </section>
+
+      <section class="block">
+        <h2>Can it prove infringement?</h2>
+        {isTilkie ? (
+          <p>
+            Yes, for images, not for text. A Tilkie detection identifies a copied product photo by the
+            watermark in its pixels and produces an ownership certificate built for takedowns. For the
+            words on the page it does nothing, which is exactly where Kirpik picks up; the two apps split
+            the same problem down the middle.
+          </p>
+        ) : isMonitor ? (
+          <p>
+            {app.name}'s reports show that two pages carry similar content. A match is a starting point,
+            not proof: on its own it does not show whose content it was first, because nothing in the
+            copied text ties it back to its origin. The listing does not describe producing ownership
+            evidence for text.
+          </p>
+        ) : (
+          <p>
+            {app.name}'s listing does not describe producing any ownership evidence for text. If a copy
+            of your description turns up on another site, nothing this app does would help you show the
+            words were yours first.
+          </p>
+        )}
+        {app.proofNote && <p>{app.proofNote}</p>}
+        <p>
+          Kirpik is built for that question. Its detection reads your store's own watermark out of a
+          suspect copy, from pasted text or a URL, and a confirmed detection can be issued as a Proof of
+          Ownership Certificate: dated content fingerprints, the infringing page's own timestamps,
+          Internet Archive corroboration and a public verification page, assembled for a DMCA takedown.
+        </p>
+      </section>
+
+      <section class="block">
+        <h2>{app.name} and Kirpik, side by side</h2>
+        <div class="tablewrap">
+          <table class="ctable">
+            <thead>
+              <tr>
+                <th scope="col"><span class="sr-only">Question</span></th>
+                <th scope="col">{app.name}</th>
+                <th scope="col" class="uscol">Kirpik</th>
+              </tr>
+            </thead>
+            <tbody>
+              {sideRows.map((row) => (
+                <tr>
+                  <th scope="row">{row.label}</th>
+                  <td class:list={[{ yes: row.them.yes }]}>{row.them.text}</td>
+                  <td class:list={["uscol", { yes: row.kirpik.yes }]}>{row.kirpik.text}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </section>
     </div>
 
     <SiteCheckForm
       tone="band"
-      heading="See what a scraper sees on your store"
-      sub={scriptBased
-        ? "Enter your store address and look at the public surfaces where your descriptions live. No storefront script runs there, whichever apps are installed."
-        : "Enter your store address and see the public, machine-readable surfaces where your product copy is available right now."}
+      heading="Is your store's content protected?"
+      sub="Enter your Shopify store address and see exactly what a scraper sees, and whether your content is protected."
       cta="Check my store"
     />
 
-    <div class="container narrow cbody">
-      {app.proofNote && (
-        <section class="block">
-          <h2>A note on proof</h2>
-          <p>{app.proofNote}</p>
-        </section>
-      )}
-
+    <div class="container narrow cbody cbody--tail">
       <section class="fineprint">
-        <h2>Method and disclaimer</h2>
         <p>
           This page describes {app.name} using its own public Shopify App Store listing as recorded in
           June and July 2026. Listings change; features, pricing and ratings may differ today. The
@@ -291,106 +301,82 @@ const isTakedown = app.primary === "takedown";
         </p>
       </section>
 
-      {related.length > 0 && (
-        <aside class="related">
-          <h2>Related comparisons</h2>
-          <ul>
-            {related.map((r) => (
-              <li><a href={`/compare/${r.slug}/`}>{r.name} vs Kirpik</a></li>
-            ))}
-          </ul>
-          <p>
-            <a href="/compare/">All comparisons →</a>
-            <a href="/compare/techniques/">Techniques compared →</a>
-          </p>
-        </aside>
-      )}
+      <aside class="related">
+        <h2>Related comparisons</h2>
+        <ul>
+          {related.map((r) => (
+            <li><a href={`/compare/${r.slug}/`}>{r.name} vs Kirpik</a></li>
+          ))}
+        </ul>
+        <p>
+          <a href="/compare/">All comparisons</a>
+          <a href="/compare/techniques/">Techniques compared</a>
+        </p>
+      </aside>
     </div>
   </article>
-
-  <CtaBand
-    heading="Make your words provably yours."
-    sub="An invisible watermark in your copy, detection on demand, and a certificate that ends arguments. Free to start."
-  />
 </Base>
 
 <style>
   .chead { padding-block: clamp(2.4rem, 2rem + 3vw, 4rem) clamp(1.2rem, 3vw, 2rem); }
-  .chead__back { font-family: var(--font-mono); font-size: 0.76rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-faint); }
+  .chead__back { font-weight: 600; font-size: 0.9rem; color: var(--ink-faint); }
   .chead__back:hover { color: var(--orange-deep); }
+  .chead__back::before { content: "\2190\00a0"; }
   .versus { display: flex; align-items: center; gap: clamp(0.8rem, 3vw, 1.4rem); margin-top: 1.6rem; }
   .versus__tile {
-    display: grid; place-items: center;
+    display: grid; place-items: center; overflow: hidden;
     width: clamp(60px, 8vw, 76px); height: clamp(60px, 8vw, 76px);
     background: var(--surface); border: 1px solid var(--line);
     border-radius: 16px; box-shadow: var(--shadow-card);
   }
+  .versus__tile img { width: 100%; height: 100%; object-fit: cover; }
   .versus__letter { font-family: var(--font-mono); font-weight: 600; font-size: clamp(1.5rem, 3vw, 1.9rem); color: var(--ink-soft); }
   .versus__tile--us { border-color: #f2d4bd; background: var(--orange-tint); }
-  .versus__tile--us img { width: 60%; height: auto; }
+  .versus__tile--us img { width: 60%; height: auto; object-fit: contain; }
   .versus__vs { font-family: var(--font-mono); font-weight: 600; font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-faint); }
   .chead h1 { font-size: var(--fs-h1); margin: 1.4rem 0 1rem; }
   .chead .lead { max-width: 64ch; }
   .chead__meta { margin-top: 1.2rem; font-family: var(--font-mono); font-size: 0.78rem; color: var(--ink-faint); line-height: 1.8; }
-  .chead__meta a { color: var(--orange-deep); }
-  .chead__meta a:hover { text-decoration: underline; }
+  .chead__src { margin-top: 0.4rem; font-size: 0.88rem; color: var(--ink-faint); }
 
   .cbody { padding-bottom: clamp(1.6rem, 4vw, 2.6rem); }
+  .cbody--tail { padding-top: clamp(1rem, 3vw, 1.8rem); }
   .block { padding-top: clamp(1.8rem, 4vw, 2.8rem); }
   .block h2 { font-size: clamp(1.45rem, 1.15rem + 1.2vw, 2rem); }
   .block > p { color: var(--ink-soft); line-height: 1.7; margin-top: 0.9rem; max-width: 72ch; }
-  .src { font-size: 0.95rem; }
 
   .disclose { margin-top: 1.8rem; background: var(--amber-tint); border: 1px solid #ecd9b4; border-radius: var(--r-lg); padding: 1.4rem 1.6rem; }
-  .disclose p { margin-top: 0.8rem; color: var(--ink-soft); line-height: 1.65; }
+  .disclose p { color: var(--ink-soft); line-height: 1.65; }
   .disclose strong { color: var(--ink); }
 
   .claims { margin-top: 1rem; display: grid; gap: 0.55rem; max-width: 72ch; }
   .claims li { position: relative; padding-left: 1.6rem; color: var(--ink-soft); line-height: 1.6; }
   .claims li::before {
-    content: "“"; position: absolute; left: 0; top: -0.05em;
+    content: "\201C"; position: absolute; left: 0; top: -0.05em;
     font-weight: 800; font-size: 1.25em; color: var(--amber);
-  }
-
-  .mechs { margin-top: 1.4rem; display: grid; gap: 1rem; }
-  .mech { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-md); padding: 1.3rem 1.4rem; }
-  .mech h3 { font-size: 1.1rem; }
-  .mech__what { color: var(--ink-soft); margin-top: 0.45rem; line-height: 1.6; }
-  .mech__h { margin-top: 0.95rem; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--orange-deep); }
-  .mech__note { margin-top: 0.8rem; color: var(--ink-soft); font-size: 0.93rem; border-left: 2px solid var(--amber); padding-left: 0.9rem; line-height: 1.6; }
-  .mech__list { margin-top: 0.55rem; display: grid; gap: 0.45rem; }
-  .mech__list li { position: relative; padding-left: 1.4rem; color: var(--ink-soft); line-height: 1.6; font-size: 0.96rem; }
-  .mech__list li::before {
-    content: ""; position: absolute; left: 0.1rem; top: 0.66em;
-    width: 6px; height: 6px; border-radius: 50%;
-    background: var(--orange); box-shadow: 0 0 0 2.5px rgba(217, 100, 56, 0.18);
   }
 
   .tablewrap { margin-top: 1.2rem; overflow-x: auto; }
   .ctable { width: 100%; border-collapse: collapse; min-width: 560px; }
-  .ctable th, .ctable td { padding: 0.85rem 1rem; border-bottom: 1px solid var(--line); vertical-align: middle; }
-  .ctable thead th { font-size: 0.74rem; font-family: var(--font-mono); letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink-faint); text-align: center; }
-  .ctable thead th:first-child { text-align: left; }
-  .ctable tbody th { font-weight: 600; font-size: 0.94rem; color: var(--ink); text-align: left; width: 52%; }
+  .ctable th, .ctable td { padding: 0.95rem 1rem; border-bottom: 1px solid var(--line); vertical-align: middle; }
+  .ctable thead th { font-weight: 700; font-size: 0.95rem; color: var(--ink); text-align: center; }
+  .ctable tbody th { font-weight: 600; font-size: 0.98rem; color: var(--ink); text-align: left; width: 46%; }
   .ctable tbody tr:last-child th, .ctable tbody tr:last-child td { border-bottom: 0; }
-  .ctable td { text-align: center; }
+  .ctable td { text-align: center; font-size: 0.98rem; color: var(--ink-faint); }
+  .ctable td.yes { color: var(--ink); font-weight: 700; }
   .ctable .uscol { background: var(--orange-tint); }
-  .ctable thead .uscol { color: var(--orange-deep); }
-  .mk { font-weight: 700; }
-  .c-yes .mk { color: var(--mint); }
-  .c-no .mk { color: var(--red); opacity: 0.8; }
-  .c-na .mk, .c-un .mk { color: var(--ink-faint); font-weight: 600; font-size: 0.82rem; }
-  .legend { font-size: 0.85rem; color: var(--ink-faint); margin-top: 0.8rem; max-width: 80ch; }
+  .ctable td.uscol.yes { color: var(--orange-deep); }
 
   .fineprint { margin-top: clamp(2rem, 5vw, 3rem); padding-top: 1.4rem; border-top: 1px solid var(--line); }
-  .fineprint h2 { font-size: 0.8rem; font-family: var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); }
-  .fineprint p { font-size: 0.85rem; color: var(--ink-faint); line-height: 1.65; margin-top: 0.7rem; max-width: 78ch; }
+  .fineprint p { font-size: 0.85rem; color: var(--ink-faint); line-height: 1.65; max-width: 78ch; }
 
   .related { margin-top: clamp(1.8rem, 4vw, 2.6rem); padding-top: 1.6rem; border-top: 1px solid var(--line); }
-  .related h2 { font-size: 0.8rem; font-family: var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 0.9rem; }
+  .related h2 { font-size: 1.15rem; margin-bottom: 0.9rem; }
   .related ul { display: grid; gap: 0.55rem; }
   .related li a { font-weight: 600; color: var(--ink); }
   .related li a:hover { color: var(--orange-deep); }
   .related > p { margin-top: 0.9rem; display: flex; gap: 1.4rem; flex-wrap: wrap; }
   .related > p a { color: var(--orange-deep); font-weight: 600; }
+
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 </style>

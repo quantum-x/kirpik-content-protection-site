@@ -64,40 +64,79 @@ async function handle(request: Request): Promise<Response> {
 }
 
 const SC_MAX_BYTES = 2_500_000;
+const SC_MAX_HOPS = 3;
+
+function scDomainOk(d: string): boolean {
+  return (
+    /^[a-z0-9][a-z0-9.-]{2,80}$/.test(d) &&
+    d.includes(".") &&
+    !/^\d+\.\d+\.\d+\.\d+$/.test(d) &&
+    !/(^|\.)localhost$|\.local$|\.internal$|\.home$|\.lan$/.test(d)
+  );
+}
+
+/** The only path shapes this endpoint will ever request or follow. */
+function scPathOk(pathAndQuery: string): boolean {
+  return (
+    pathAndQuery === "/sitemap.xml" ||
+    /^\/sitemap[a-z0-9_]{0,40}\.xml(\?from=\d{1,20}&to=\d{1,20})?$/.test(pathAndQuery) ||
+    /^\/blogs\/[a-zA-Z0-9._-]{1,120}\.atom$/.test(pathAndQuery) ||
+    /^\/pages\/[a-zA-Z0-9._-]{1,120}\/?$/.test(pathAndQuery)
+  );
+}
 
 async function scFetch(url: URL): Promise<Response> {
-  const d = (url.searchParams.get("d") || "").toLowerCase();
+  const d = (url.searchParams.get("d") || "").toLowerCase().replace(/\.$/, "");
   const t = url.searchParams.get("t") || "";
   const h = url.searchParams.get("h") || "";
   const f = url.searchParams.get("f") || "";
 
-  const domainOk = /^[a-z0-9][a-z0-9.-]{2,80}$/.test(d) && d.includes(".") && !/^\d+\.\d+\.\d+\.\d+$/.test(d);
   const handleOk = /^[a-zA-Z0-9._-]{1,120}$/.test(h);
   let path: string | null = null;
   if (t === "sitemap") path = "/sitemap.xml";
-  else if (t === "smpart" && /^sitemap[a-z0-9_]{0,40}\.xml(\?from=\d{1,20}&to=\d{1,20})?$/.test(f)) path = `/${f}`;
+  else if (t === "smpart") path = `/${f}`;
   else if (t === "atom" && handleOk) path = `/blogs/${h}.atom`;
   else if (t === "page" && handleOk) path = `/pages/${h}`;
 
-  if (!domainOk || !path) {
-    return scRespond("bad request", 400, "text/plain");
+  // The response type is chosen by the request shape, never by the upstream.
+  const respondType = t === "page" ? "text/plain; charset=utf-8" : "application/xml; charset=utf-8";
+
+  if (!scDomainOk(d) || !path || !scPathOk(path)) {
+    return scRespond("bad request", 400, respondType);
   }
 
   try {
-    const upstream = await fetch(`https://${d}${path}`, {
-      headers: {
-        "User-Agent": "Mozilla/5.0 (compatible; KirpikSiteCheck/1.0; +https://kirpik.app/site-check/)",
-        Accept: "text/html,application/xml,application/atom+xml,*/*",
-      },
-      redirect: "follow",
-      cf: { cacheEverything: true, cacheTtl: 600 },
-    } as RequestInit);
-    if (!upstream.ok) return scRespond(`upstream ${upstream.status}`, 404, "text/plain");
+    // Follow redirects manually so a hop can never leave the allowed shape:
+    // https only, a validated public hostname, and one of the allowed paths.
+    let target = `https://${d}${path}`;
+    let upstream: Response | null = null;
+    for (let hop = 0; hop < SC_MAX_HOPS; hop++) {
+      upstream = await fetch(target, {
+        headers: {
+          "User-Agent": "Mozilla/5.0 (compatible; KirpikSiteCheck/1.0; +https://kirpik.app/site-check/)",
+          Accept: "text/html,application/xml,application/atom+xml,*/*",
+        },
+        redirect: "manual",
+        cf: { cacheEverything: true, cacheTtl: 600 },
+      } as RequestInit);
+      if (upstream.status < 300 || upstream.status >= 400) break;
+      const loc = upstream.headers.get("Location");
+      if (!loc) break;
+      const next = new URL(loc, target);
+      const nextPath = next.pathname + next.search;
+      if (next.protocol !== "https:" || !scDomainOk(next.hostname.toLowerCase()) || !scPathOk(nextPath)) {
+        return scRespond("redirect refused", 404, respondType);
+      }
+      target = next.toString();
+      upstream = null;
+    }
+    if (!upstream || !upstream.ok) {
+      return scRespond(`upstream ${upstream?.status ?? "redirect loop"}`, 404, respondType);
+    }
     const text = (await upstream.text()).slice(0, SC_MAX_BYTES);
-    const ct = upstream.headers.get("Content-Type") || "text/plain";
-    return scRespond(text, 200, ct);
+    return scRespond(text, 200, respondType);
   } catch {
-    return scRespond("fetch failed", 502, "text/plain");
+    return scRespond("fetch failed", 502, respondType);
   }
 }
 
@@ -109,6 +148,8 @@ function scRespond(body: string, status: number, contentType: string): Response 
       "Access-Control-Allow-Origin": "*",
       "Cache-Control": "public, max-age=600",
       "X-Content-Type-Options": "nosniff",
+      "Content-Security-Policy": "default-src 'none'; sandbox",
+      "Content-Disposition": "attachment",
     },
   });
 }

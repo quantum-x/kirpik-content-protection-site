@@ -1,339 +1,244 @@
 ---
+import { existsSync } from "node:fs";
+import { join } from "node:path";
 import Base from "../../layouts/Base.astro";
-import PageHero from "../../components/PageHero.astro";
 import SiteCheckForm from "../../components/SiteCheckForm.astro";
-import CtaBand from "../../components/CtaBand.astro";
 import { SITE } from "../../config";
-import {
-  COMPETITORS,
-  FEATURED_COMPETITORS,
-  TOTAL_COMPARED,
-  APPROACHES,
-  APPROACH_BLURB,
-  CAPABILITIES,
-  KIRPIK_CAPS,
-  countByApproach,
-  countScriptApps,
-  type Approach,
-  type Cell,
-  type CapId,
-} from "../../compare-data";
+import { COMPETITORS_BY_POPULARITY, BLURBS } from "../../compare-data";
 
-const nFeatured = FEATURED_COMPETITORS.length;
-const nScript = countScriptApps();
-const nTakedown = countByApproach("takedown");
+const apps = COMPETITORS_BY_POPULARITY;
 
-// Typical capability picture for each approach group (text-focused).
-// Derived from the mechanisms the listings in each group state; individual
-// app pages show how a specific app maps to it.
-const summaryCols: { key: Approach; short: string; vals: Record<CapId, Cell> }[] = [
+// Every app must have a plain-words one-liner; fail the build if one is missing.
+for (const c of apps) {
+  if (!BLURBS[c.slug]) throw new Error(`Missing hub blurb for ${c.slug}`);
+}
+
+// Icons are fetched by scripts/gen-compare-icons.mjs; where one is missing the
+// row falls back to a neutral letter tile. Resolved from the project root
+// because the compiled module's own URL moves between dev and build.
+const iconsDir = join(process.cwd(), "public", "compare-icons");
+const icon = (slug: string) => (existsSync(join(iconsDir, `${slug}.png`)) ? `/compare-icons/${slug}.png` : null);
+const initial = (name: string) => name.replace(/[^A-Za-z0-9]/g, "").charAt(0).toUpperCase() || "A";
+
+type Answer = { text: string; yes?: boolean };
+const YES: Answer = { text: "Yes", yes: true };
+const NO: Answer = { text: "No" };
+
+// The two questions, technique by technique.
+const questionRows: { label: string; cells: [Answer, Answer, Answer, Answer] }[] = [
+  { label: "Stops right-click copying in the browser", cells: [YES, NO, NO, NO] },
+  { label: "Stops scrapers and feed copying", cells: [NO, NO, NO, NO] },
+  { label: "Protects your text once it leaves your store", cells: [NO, NO, NO, YES] },
+  { label: "Proves a stolen description was yours", cells: [NO, NO, NO, YES] },
   {
-    key: "blocker",
-    short: "Script blockers",
-    vals: {
-      protectsText: true,
-      invisibleOnStorefront: false,
-      noStorefrontScripts: false,
-      travelsWithText: false,
-      worksOnFeeds: false,
-      detectAnywhere: false,
-      proofArtifact: false,
-    },
-  },
-  {
-    key: "bundle",
-    short: "Blocker bundles",
-    vals: {
-      protectsText: true,
-      invisibleOnStorefront: false,
-      noStorefrontScripts: false,
-      travelsWithText: false,
-      worksOnFeeds: false,
-      detectAnywhere: false,
-      proofArtifact: false,
-    },
-  },
-  {
-    key: "watermark",
-    short: "Image watermarks",
-    vals: {
-      protectsText: false,
-      invisibleOnStorefront: false,
-      noStorefrontScripts: "unstated",
-      travelsWithText: "na",
-      worksOnFeeds: true,
-      detectAnywhere: false,
-      proofArtifact: false,
-    },
-  },
-  {
-    key: "monitor",
-    short: "Copy monitors",
-    vals: {
-      protectsText: true,
-      invisibleOnStorefront: true,
-      noStorefrontScripts: true,
-      travelsWithText: false,
-      worksOnFeeds: "na",
-      detectAnywhere: true,
-      proofArtifact: "unstated",
-    },
-  },
-  {
-    key: "takedown",
-    short: "Takedown services",
-    vals: {
-      protectsText: "unstated",
-      invisibleOnStorefront: true,
-      noStorefrontScripts: "unstated",
-      travelsWithText: false,
-      worksOnFeeds: "na",
-      detectAnywhere: true,
-      proofArtifact: "unstated",
-    },
+    label: "Produces evidence for a DMCA takedown",
+    cells: [NO, NO, { text: "Reports matches, no proof" }, YES],
   },
 ];
 
-const mark = (v: Cell) =>
-  v === true
-    ? { m: "✓", c: "yes" }
-    : v === false
-      ? { m: "✕", c: "no" }
-      : v === "na"
-        ? { m: "n/a", c: "na" }
-        : { m: "?", c: "un" };
-
-const appsIn = (key: Approach) => COMPETITORS.filter((c) => c.primary === key);
-
-const GROUP_TITLE: Record<Approach, string> = {
-  blocker: "Storefront script blockers",
-  bundle: "Blocker and access-control bundles",
-  watermark: "Image watermark apps",
-  monitor: "Copy monitors",
-  takedown: "Takedown services",
-  other: "Outside the content-protection scope",
-};
-
 const techniquePages = [
-  { href: "/compare/vs-copy-blockers/", label: "Copy and right-click blockers" },
-  { href: "/compare/vs-visible-watermarks/", label: "Visible watermarks and notices" },
-  { href: "/compare/vs-content-credentials/", label: "Content Credentials and C2PA metadata" },
-  { href: "/compare/vs-zero-width-characters/", label: "Zero-width character tricks" },
-  { href: "/compare/vs-copy-monitors/", label: "Copy monitors and plagiarism scanners" },
-  { href: "/compare/techniques/", label: "All techniques, one table" },
+  { href: "/compare/techniques/", label: "All techniques, one table", desc: "Every protection technique in the category, side by side." },
+  { href: "/compare/vs-copy-blockers/", label: "Copy and right-click blockers", desc: "What a storefront script can block, and the feeds it never touches." },
+  { href: "/compare/vs-visible-watermarks/", label: "Visible watermarks", desc: "Marks that travel with a copied image, and why text carries nothing." },
+  { href: "/compare/vs-content-credentials/", label: "Content Credentials and C2PA", desc: "Provenance metadata, and what happens to it when text is copied." },
+  { href: "/compare/vs-zero-width-characters/", label: "Zero-width characters", desc: "Hidden characters pasted into text, and where the trick falls short." },
+  { href: "/compare/vs-copy-monitors/", label: "Copy monitors", desc: "Scanners that find matching pages, and the ownership question they leave open." },
 ];
 
 const abs = (path: string) => new URL(path, SITE.url).href;
 const itemListJsonLd = {
   "@context": "https://schema.org",
   "@type": "ItemList",
-  name: "Shopify anti-theft category apps, surveyed and compared with Kirpik",
-  description: `A fact-based survey of all ${TOTAL_COMPARED} apps in the Shopify App Store anti-theft category, grouped by how each one works, compared with invisible text watermarking.`,
-  numberOfItems: TOTAL_COMPARED,
-  itemListElement: COMPETITORS.map((c, i) => ({
+  name: "Kirpik vs other Shopify anti-theft apps",
+  description:
+    "Every relevant app in the Shopify App Store anti-theft category, compared with Kirpik's invisible text watermarking, ordered by review count.",
+  numberOfItems: apps.length,
+  itemListElement: apps.map((c, i) => ({
     "@type": "ListItem",
     position: i + 1,
-    name: c.name,
-    url: c.featured ? abs(`/compare/${c.slug}/`) : c.url,
+    name: `${c.name} vs Kirpik`,
+    url: abs(`/compare/${c.slug}/`),
   })),
 };
 ---
 
 <Base
-  title={`Kirpik and the Shopify anti-theft category, compared (${TOTAL_COMPARED} apps)`}
-  description={`We read the public listing of every app in Shopify's anti-theft category: ${TOTAL_COMPARED} of them. Here is what each approach does for your text, where each one stops, and ${nFeatured} side-by-side comparisons.`}
+  title="Kirpik vs other anti-theft apps"
+  description="We analysed every app in Shopify's anti-theft category, over 90 of them, against two questions: does it prevent your content being stolen, and can you prove the infringement? None prevent theft. Here is what each one does."
   jsonLd={itemListJsonLd}
 >
-  <PageHero
-    title="Kirpik and the Shopify anti-theft category, compared"
-    lead={`We read the public App Store listing of every app in the anti-theft category, all ${TOTAL_COMPARED} of them, and grouped each by what it actually does. The question we kept asking: once your product copy leaves your store, does anything travel with it? For ${nScript} of these apps the honest answer is set by the browser, not the app.`}
-  />
-
-  <section class="section" style="padding-top:0">
-    <div class="container">
-
-      <div class="method card">
-        <h2>How this comparison was made</h2>
-        <p>
-          Every app below is described using its own public Shopify App Store listing, read in June and
-          July 2026, with claims quoted or closely paraphrased. The limitations noted are general,
-          verifiable behaviour of web browsers and platforms, not faults of any one app. Features and
-          pricing may have changed since. App names and trademarks belong to their respective owners.
-          Nothing on this page is legal advice.
-        </p>
-      </div>
-
-      <div class="stats">
-        <div class="stat" data-reveal>
-          <span class="stat__n">{TOTAL_COMPARED}</span>
-          <span class="stat__l">app listings reviewed, the full category</span>
-        </div>
-        <div class="stat" data-reveal>
-          <span class="stat__n">{nScript}</span>
-          <span class="stat__l">include scripts that run in the visitor's browser</span>
-        </div>
-        <div class="stat" data-reveal>
-          <span class="stat__n">{nTakedown}</span>
-          <span class="stat__l">offer a takedown service</span>
-        </div>
-        <div class="stat stat--hl" data-reveal>
-          <span class="stat__n">0</span>
-          <span class="stat__l">apps in the category watermark text. Kirpik is the first</span>
-        </div>
-      </div>
-
-      <h2 class="h-sec">What each approach can do for your text</h2>
-      <p class="sub">
-        The typical picture per group, from each group's own stated mechanisms. Individual app pages show
-        how a specific app maps to it.
+  <header class="chub">
+    <div class="container narrow">
+      <h1>Kirpik vs other anti-theft apps</h1>
+      <p class="lead">
+        We analysed every app in Shopify's anti-theft category, over 90 of them, against two simple
+        questions: <strong>does it prevent your content being stolen</strong>, and
+        <strong>if it is stolen, can you prove the infringement?</strong>
       </p>
+      <p>
+        None of them prevent theft. Shopify serves your content through different feeds for customers,
+        search engines and AI tools. "Anti-theft" apps only try to lockdown what a customer sees - but
+        don't protect the other feeds that scrapers and content thieves use.
+      </p>
+      <p>
+        Kirpik protects the text itself, detects stolen copies anywhere on the web, and issues Proof of
+        Ownership Certificates for DMCA takedowns and enforcement.
+      </p>
+    </div>
+  </header>
+
+  <section class="section" style="padding-top:clamp(2rem, 4vw, 3rem)">
+    <div class="container">
+      <h2>The two questions</h2>
       <div class="tablewrap">
-        <table class="ctable">
+        <table class="qtable">
           <thead>
             <tr>
-              <th scope="col">Capability</th>
-              {summaryCols.map((s) => <th scope="col">{s.short}</th>)}
+              <th scope="col"><span class="sr-only">Question</span></th>
+              <th scope="col">Blockers</th>
+              <th scope="col">Image watermarks</th>
+              <th scope="col">Monitors</th>
               <th scope="col" class="uscol">Kirpik</th>
             </tr>
           </thead>
           <tbody>
-            {CAPABILITIES.map((cap) => (
+            {questionRows.map((row) => (
               <tr>
-                <th scope="row">{cap.label}</th>
-                {summaryCols.map((s) => {
-                  const x = mark(s.vals[cap.id]);
-                  return <td class={`c-${x.c}`}><span class="mk">{x.m}</span></td>;
-                })}
-                {(() => {
-                  const x = mark(KIRPIK_CAPS[cap.id]);
-                  return <td class={`c-${x.c} uscol`}><span class="mk">{x.m}</span></td>;
-                })()}
+                <th scope="row">{row.label}</th>
+                {row.cells.map((a, i) => (
+                  <td class:list={[{ uscol: i === 3, yes: a.yes }]}>{a.text}</td>
+                ))}
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <p class="legend">
-        ✓ yes · ✕ no · n/a: outside what the method touches · ?: the listings do not state it. The feed
-        row is ✕ for script-based apps by mechanism: Shopify's public feed surfaces are served without
-        any storefront JavaScript, so a storefront script never runs there.
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <h2>Every app, compared</h2>
+      <p class="sec-sub">
+        All {apps.length} relevant apps in the category, ordered by review count. Each name links to a
+        full side-by-side comparison with Kirpik.
       </p>
-
-      {APPROACHES.map((key) => (
-        <div class="group">
-          <div class="group__head">
-            <h2>{GROUP_TITLE[key]} <span class="group__count">{countByApproach(key)}</span></h2>
-            <p>{APPROACH_BLURB[key]}</p>
-          </div>
-          <ul class="apps">
-            {appsIn(key).map((c) =>
-              c.featured ? (
-                <li class="app app--featured">
-                  <a href={`/compare/${c.slug}/`}>
-                    <span class="app__name">{c.name}</span>
-                    <span class="app__go">Compare →</span>
-                  </a>
-                </li>
-              ) : (
-                <li class="app">
-                  <a href={c.url} rel="nofollow noopener" target="_blank">
-                    <span class="app__name">{c.name}</span>
-                    <span class="app__ext" aria-hidden="true">↗</span>
-                  </a>
-                </li>
-              )
-            )}
-          </ul>
-        </div>
-      ))}
-
-      <div class="tech card">
-        <h2>Technique explainers</h2>
-        <p>The same ground, organised by technique instead of by app.</p>
-        <ul>
-          {techniquePages.map((t) => (
-            <li><a href={t.href}>{t.label}</a></li>
-          ))}
-        </ul>
+      <div class="tablewrap">
+        <table class="apps">
+          <thead>
+            <tr>
+              <th scope="col">App</th>
+              <th scope="col">What it does</th>
+              <th scope="col" class="num">Reviews</th>
+            </tr>
+          </thead>
+          <tbody>
+            {apps.map((c) => {
+              const ic = icon(c.slug);
+              return (
+                <tr class:list={[{ hl: c.featured }]}>
+                  <td class="appcell">
+                    <a href={`/compare/${c.slug}/`}>
+                      {ic ? (
+                        <img src={ic} alt="" width="30" height="30" loading="lazy" />
+                      ) : (
+                        <span class="tile" aria-hidden="true">{initial(c.name)}</span>
+                      )}
+                      <span class="appname">{c.name}</span>
+                    </a>
+                  </td>
+                  <td class="blurb">{BLURBS[c.slug]}</td>
+                  <td class="num">{typeof c.reviews === "number" ? c.reviews : ""}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="container narrow">
+      <h2>Techniques, not apps</h2>
+      <p class="sec-sub">The same ground organised by how the protection works, rather than by app.</p>
+      <ul class="techlist">
+        {techniquePages.map((t) => (
+          <li>
+            <a href={t.href}>{t.label}</a>
+            <span>{t.desc}</span>
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
 
   <SiteCheckForm
     tone="band"
-    heading="Check what your store already exposes"
-    sub="Enter your store address and see the public, machine-readable surfaces where your product copy lives, with or without a blocker app installed."
+    heading="Is your store's content protected?"
+    sub="Enter your Shopify store address and see exactly what a scraper sees, and whether your content is protected."
     cta="Check my store"
   />
 
-  <section class="section" style="padding-top:0">
+  <section class="section" style="padding-top:clamp(1.6rem, 3vw, 2.4rem)">
     <div class="container narrow">
       <p class="foot-note">
-        Method: each app is represented by its own public Shopify App Store listing as recorded in June
-        and July 2026, and listings change over time. Limitations described here are properties of
-        browsers and platforms in general. All app names and trademarks belong to their respective
-        owners and are used for identification only. Kirpik is published by {SITE.developer}, which also
-        publishes Tilkie; that relationship is disclosed wherever Tilkie appears. Nothing here is legal
-        advice.
+        Every app on this page is described from its own public Shopify App Store listing, read in June
+        and July 2026. Listings change, and features, pricing and review counts may differ today. App
+        names and trademarks belong to their respective owners and are used for identification only.
+        Kirpik is published by {SITE.developer} and has no affiliation with any app listed here except
+        Tilkie, which is built by the same team; that relationship is disclosed on its comparison page.
+        Nothing here is legal advice.
       </p>
     </div>
   </section>
-
-  <CtaBand />
 </Base>
 
 <style>
-  .method { padding: 1.6rem 1.8rem; background: var(--paper-2); box-shadow: none; margin-bottom: clamp(2rem, 4vw, 3rem); }
-  .method h2 { font-size: 0.82rem; font-family: var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); }
-  .method p { font-size: 0.92rem; color: var(--ink-soft); line-height: 1.65; margin-top: 0.7rem; max-width: 80ch; }
+  .chub { padding-block: clamp(2.8rem, 2rem + 4vw, 5rem) 0; }
+  .chub h1 { font-size: var(--fs-h1); margin-bottom: 1.2rem; }
+  .chub .lead { margin-bottom: 1rem; }
+  .chub p:not(.lead) { color: var(--ink-soft); line-height: 1.7; margin-bottom: 1rem; max-width: 70ch; }
 
-  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: clamp(2.4rem, 4vw, 3.4rem); }
-  .stat { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-md); padding: 1.3rem; }
-  .stat--hl { background: var(--orange-tint); border-color: #f2d4bd; }
-  .stat__n { display: block; font-size: clamp(1.8rem, 1.4rem + 1.6vw, 2.6rem); font-weight: 800; font-family: var(--font-mono); line-height: 1; color: var(--ink); }
-  .stat--hl .stat__n { color: var(--orange-deep); }
-  .stat__l { display: block; margin-top: 0.5rem; font-size: 0.88rem; color: var(--ink-soft); }
-
-  .h-sec { font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2.1rem); }
-  .sub { color: var(--ink-soft); margin: 0.5rem 0 1.2rem; max-width: 75ch; }
+  h2 { margin-bottom: 1.2rem; }
+  .sec-sub { color: var(--ink-soft); margin: -0.4rem 0 1.4rem; max-width: 72ch; }
 
   .tablewrap { overflow-x: auto; }
-  .ctable { width: 100%; border-collapse: collapse; min-width: 820px; }
-  .ctable th, .ctable td { padding: 0.8rem 0.9rem; border-bottom: 1px solid var(--line); }
-  .ctable thead th { font-size: 0.72rem; font-family: var(--font-mono); letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink-faint); text-align: center; }
-  .ctable thead th:first-child { text-align: left; }
-  .ctable tbody th { font-weight: 600; font-size: 0.93rem; color: var(--ink); text-align: left; width: 32%; }
-  .ctable td { text-align: center; }
-  .ctable .uscol { background: var(--orange-tint); }
-  .ctable thead .uscol { color: var(--orange-deep); }
-  .mk { font-weight: 700; }
-  .c-yes .mk { color: var(--mint); }
-  .c-no .mk { color: var(--red); opacity: 0.8; }
-  .c-na .mk, .c-un .mk { color: var(--ink-faint); font-weight: 600; font-size: 0.84rem; }
-  .legend { font-size: 0.85rem; color: var(--ink-faint); margin-top: 0.8rem; max-width: 85ch; }
 
-  .group { margin-top: clamp(2.2rem, 4vw, 3.2rem); }
-  .group__head h2 { font-size: var(--fs-h3); display: flex; align-items: center; gap: 0.6rem; }
-  .group__count { font-family: var(--font-mono); font-size: 0.78rem; color: var(--orange-deep); background: var(--orange-tint); padding: 0.2em 0.6em; border-radius: var(--r-pill); }
-  .group__head p { color: var(--ink-soft); margin-top: 0.6rem; max-width: 82ch; line-height: 1.65; font-size: 0.97rem; }
+  /* The two questions */
+  .qtable { width: 100%; border-collapse: collapse; min-width: 720px; }
+  .qtable th, .qtable td { padding: 1rem 1.1rem; border-bottom: 1px solid var(--line); }
+  .qtable thead th { font-weight: 700; font-size: 0.98rem; color: var(--ink); text-align: center; }
+  .qtable tbody th { font-weight: 600; font-size: 1.02rem; color: var(--ink); text-align: left; width: 34%; }
+  .qtable td { text-align: center; font-size: 1rem; color: var(--ink-faint); }
+  .qtable td.yes { color: var(--ink); font-weight: 700; }
+  .qtable .uscol { background: var(--orange-tint); }
+  .qtable td.uscol.yes { color: var(--orange-deep); }
 
-  .apps { margin-top: 1.2rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.7rem; }
-  .app a { display: flex; justify-content: space-between; align-items: center; gap: 0.6rem; height: 100%; padding: 0.85rem 1rem; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-md); color: var(--ink); transition: border-color 0.15s ease, transform 0.15s ease; }
-  .app a:hover { border-color: var(--orange); transform: translateY(-1px); }
-  .app__name { font-weight: 600; font-size: 0.93rem; }
-  .app--featured a { border-color: #f2d4bd; background: #fffdfa; }
-  .app__go { font-family: var(--font-mono); font-size: 0.64rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--orange-deep); white-space: nowrap; flex: none; }
-  .app__ext { color: var(--ink-faint); flex: none; }
+  /* Every app, compared */
+  .apps { width: 100%; border-collapse: collapse; min-width: 680px; }
+  .apps th, .apps td { padding: 0.65rem 0.9rem; border-bottom: 1px solid var(--line); text-align: left; }
+  .apps thead th { font-weight: 700; font-size: 0.92rem; color: var(--ink); }
+  .apps .num { text-align: right; font-family: var(--font-mono); font-size: 0.9rem; color: var(--ink-soft); white-space: nowrap; }
+  .apps thead .num { font-family: var(--font-sans); color: var(--ink); }
+  .appcell a { display: flex; align-items: center; gap: 0.7rem; color: var(--ink); font-weight: 600; }
+  .appcell a:hover .appname { color: var(--orange-deep); }
+  .appcell img, .tile { width: 30px; height: 30px; border-radius: 7px; flex: none; }
+  .appcell img { border: 1px solid var(--line); object-fit: cover; }
+  .tile { display: grid; place-items: center; background: var(--sand); color: var(--ink-soft); font-family: var(--font-mono); font-size: 0.85rem; font-weight: 600; }
+  .appname { font-size: 0.97rem; }
+  .blurb { color: var(--ink-soft); font-size: 0.95rem; }
+  tr.hl { background: var(--surface); }
+  tr.hl .appname { font-weight: 800; }
 
-  .tech { margin-top: clamp(2.4rem, 4vw, 3.4rem); padding: 1.7rem 1.8rem; }
-  .tech h2 { font-size: 1.3rem; }
-  .tech p { color: var(--ink-soft); margin: 0.5rem 0 1rem; }
-  .tech ul { display: flex; flex-wrap: wrap; gap: 0.6rem; }
-  .tech a { display: inline-block; padding: 0.5rem 0.95rem; border: 1px solid var(--line-strong); border-radius: var(--r-pill); font-weight: 600; font-size: 0.9rem; color: var(--orange-deep); }
-  .tech a:hover { border-color: var(--orange); }
+  /* Techniques */
+  .techlist li { padding: 0.9rem 0; border-bottom: 1px solid var(--line); }
+  .techlist li:first-child { border-top: 1px solid var(--line); }
+  .techlist a { font-weight: 700; color: var(--ink); }
+  .techlist a:hover { color: var(--orange-deep); }
+  .techlist span { display: block; margin-top: 0.15rem; color: var(--ink-soft); font-size: 0.95rem; }
 
-  .foot-note { font-size: 0.84rem; color: var(--ink-faint); line-height: 1.65; }
+  .foot-note { font-size: 0.85rem; color: var(--ink-faint); line-height: 1.65; }
 
-  @media (max-width: 880px) { .stats { grid-template-columns: repeat(2, 1fr); } .apps { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 560px) { .apps { grid-template-columns: 1fr; } }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 </style>

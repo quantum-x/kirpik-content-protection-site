@@ -159,9 +159,9 @@ export const MECHANISMS: Record<MechanismId, Mechanism> = {
   },
 };
 
-export type Approach = "blocker" | "bundle" | "watermark" | "monitor" | "takedown" | "other";
+export type Approach = "blocker" | "bundle" | "watermark" | "monitor" | "takedown";
 
-export const APPROACHES: Approach[] = ["blocker", "bundle", "watermark", "monitor", "takedown", "other"];
+export const APPROACHES: Approach[] = ["blocker", "bundle", "watermark", "monitor", "takedown"];
 
 export const APPROACH_LABEL: Record<Approach, string> = {
   blocker: "Storefront script blocker",
@@ -169,7 +169,6 @@ export const APPROACH_LABEL: Record<Approach, string> = {
   watermark: "Image watermark",
   monitor: "Copy monitor",
   takedown: "Takedown service",
-  other: "Outside content protection",
 };
 
 export const APPROACH_BLURB: Record<Approach, string> = {
@@ -183,8 +182,6 @@ export const APPROACH_BLURB: Record<Approach, string> = {
     "Server-side services that scan other sites for content matching yours and report lookalikes, sometimes with evidence bundles. Monitoring finds matches; on its own, a match does not establish whose content it was first.",
   takedown:
     "Services that detect infringing sites or marketplace listings and file removal requests for you. They act on copies after they appear, and a filing stands on whatever ownership evidence exists for the content in question.",
-  other:
-    "Apps listed in the same App Store category whose job is something else: theme backups, consent compliance, PII scanning, patent drawings, coupon control, or member gating. They are included for completeness and flagged as outside the content-protection scope, which is a statement about category fit, not quality.",
 };
 
 /* ------------------------------------------------------------------------ */
@@ -246,7 +243,7 @@ export interface Competitor {
 const SHOPIFY = (handle: string) => `https://apps.shopify.com/${handle}`;
 
 /** Mechanisms that require a script running on the storefront. */
-const SCRIPT_MECHS: MechanismId[] = [
+export const SCRIPT_MECHS: MechanismId[] = [
   "right-click-block",
   "copy-paste-block",
   "keyboard-shortcut-block",
@@ -257,18 +254,6 @@ const SCRIPT_MECHS: MechanismId[] = [
 ];
 
 export function appCaps(c: Competitor): Record<CapId, Cell> {
-  if (c.primary === "other") {
-    const na: Record<CapId, Cell> = {
-      protectsText: "na",
-      invisibleOnStorefront: "na",
-      noStorefrontScripts: "na",
-      travelsWithText: "na",
-      worksOnFeeds: "na",
-      detectAnywhere: "na",
-      proofArtifact: "na",
-    };
-    return { ...na, ...(c.capsOverride ?? {}) };
-  }
   const m = new Set(c.mechanisms ?? []);
   const hasScript = SCRIPT_MECHS.some((x) => m.has(x));
   const geoOnly = !hasScript && m.has("country-ip-block");
@@ -963,7 +948,11 @@ const FEATURED: Competitor[] = [
 ];
 
 /* ------------------------------------------------------------------------ */
-/* Remaining apps (hub table only, linked to their own listings)            */
+/* Remaining apps. Every app here also gets a page at /compare/<slug>/.     */
+/* Seven apps listed in the App Store category but outside content          */
+/* protection entirely (theme backups, consent compliance, coupon control,  */
+/* PII scanning, patent drawings, member gating) are excluded from the site */
+/* and do not appear in this file.                                          */
 /* ------------------------------------------------------------------------ */
 
 const TABLE_ONLY: Competitor[] = [
@@ -1823,19 +1812,6 @@ const TABLE_ONLY: Competitor[] = [
     mechanisms: ["right-click-block", "copy-paste-block", "devtools-block", "screenshot-deter", "country-ip-block"],
   },
   {
-    slug: "coupon-blocker-caracal-lite",
-    name: "Caracal Lite: Coupon Blocker",
-    url: SHOPIFY("coupon-blocker-caracal-lite"),
-    developer: "Caracal Project",
-    launched: "2026-04-29",
-    pricing: "$4.99/mo",
-    primary: "other",
-    featured: false,
-    summary: "A margin tool rather than content protection: it neutralises coupon-injector extensions at checkout via a disclosed theme app embed.",
-    claims: ["Neutralize Honey, Rakuten, and coupon injectors", "Theme app embed defensive runtime"],
-    mechanisms: [],
-  },
-  {
     slug: "myshopguardian",
     name: "Myshopguardian",
     url: SHOPIFY("myshopguardian"),
@@ -1868,91 +1844,11 @@ const TABLE_ONLY: Competitor[] = [
     ],
     mechanisms: ["right-click-block", "copy-paste-block", "keyboard-shortcut-block", "devtools-block"],
   },
-  {
-    slug: "theme-backup-1",
-    name: "ThemeSafe - Auto Backup",
-    url: SHOPIFY("theme-backup-1"),
-    developer: "galaxy team",
-    launched: "2023-11-14",
-    pricing: "Free plan; paid $3/mo",
-    primary: "other",
-    featured: false,
-    summary: "Automatic theme backups. A store-management tool listed in this category, not a content-protection app.",
-    claims: ["Automatic theme backups"],
-    mechanisms: [],
-  },
-  {
-    slug: "kvkk",
-    name: "KVKK",
-    url: SHOPIFY("kvkk"),
-    developer: "Turkey E-Commerce",
-    launched: "2021-03-18",
-    rating: "5.0",
-    reviews: 2,
-    pricing: "$4.90 to $19.90/mo",
-    primary: "other",
-    featured: false,
-    summary: "Consent compliance for Turkish KVKK requirements. A privacy tool, not content protection.",
-    claims: ["Consent compliance for Turkish KVKK requirements"],
-    mechanisms: [],
-  },
-  {
-    slug: "bee-keeper",
-    name: "Bee Keeper - Anti Coupon Leak",
-    url: SHOPIFY("bee-keeper"),
-    developer: "Sktch.io",
-    launched: "2023-09-01",
-    pricing: "$29.99/mo",
-    primary: "other",
-    featured: false,
-    summary: "Server-side monitoring of leaked coupon codes with automatic disabling. Adjacent to content protection rather than part of it.",
-    claims: ["Monitor coupon-code leaks and auto-disable leaked codes"],
-    mechanisms: [],
-  },
-  {
-    slug: "patentdrawingai",
-    name: "PatentDrawingAI",
-    url: SHOPIFY("patentdrawingai"),
-    developer: "TMHQ",
-    launched: "2026-04-06",
-    pricing: "Free plan; paid $9 to $79/mo",
-    primary: "other",
-    featured: false,
-    summary: "Generates design-patent drawings. Intellectual-property adjacent, but not storefront content protection.",
-    claims: ["USPTO-style design-patent drawings"],
-    mechanisms: [],
-  },
-  {
-    slug: "pii-compliance-guardian",
-    name: "PII Information Defender",
-    url: SHOPIFY("pii-compliance-guardian"),
-    developer: "Alliance Andeavour",
-    launched: "2025-08-18",
-    pricing: "$15 to $1,000/mo",
-    primary: "other",
-    featured: false,
-    summary: "PII and GDPR compliance scanning. A privacy tool listed in this category, not content protection.",
-    claims: ["Agentic AI PII and GDPR scanning"],
-    mechanisms: [],
-  },
-  {
-    slug: "members-only-2-0",
-    name: "Members Only Section",
-    url: SHOPIFY("members-only-2-0"),
-    developer: "Reason8 Pty Ltd",
-    launched: "2022-07-06",
-    pricing: "$5/mo",
-    primary: "other",
-    featured: false,
-    summary: "Gates content behind member sign-in using a disclosed overlay and tags. An access tool rather than a protection mark.",
-    claims: ["Members-only access gating with an overlay and tags"],
-    mechanisms: [],
-  },
 ];
 
 export const COMPETITORS: Competitor[] = [...FEATURED, ...TABLE_ONLY];
 export const FEATURED_COMPETITORS = FEATURED;
-export const TOTAL_COMPARED = COMPETITORS.length; // 90
+export const TOTAL_COMPARED = COMPETITORS.length; // 83 relevant apps (7 off-category apps excluded)
 
 export function countByApproach(a: Approach): number {
   return COMPETITORS.filter((c) => c.primary === a).length;
@@ -1962,3 +1858,105 @@ export function countByApproach(a: Approach): number {
 export function countScriptApps(): number {
   return COMPETITORS.filter((c) => (c.mechanisms ?? []).some((m) => SCRIPT_MECHS.includes(m))).length;
 }
+
+/** Popularity order for every list on the site: review count descending, ties by rating then name. */
+export function byPopularity(a: Competitor, b: Competitor): number {
+  const r = (b.reviews ?? 0) - (a.reviews ?? 0);
+  if (r !== 0) return r;
+  const g = parseFloat(b.rating ?? "0") - parseFloat(a.rating ?? "0");
+  if (g !== 0) return g;
+  return a.name.localeCompare(b.name);
+}
+
+/** All apps in popularity order. */
+export const COMPETITORS_BY_POPULARITY: Competitor[] = [...COMPETITORS].sort(byPopularity);
+
+/**
+ * Plain-words one-liner for the hub list: what each app does, in the fewest
+ * honest words. Derived from each listing's stated features (June-July 2026).
+ */
+export const BLURBS: Record<string, string> = {
+  "disable-mouse-right-click": "Blocks right-click, copying and shortcuts in the browser",
+  "disable-copy-paste-country": "Blocks copying and filters visitors by country, IP and VPN",
+  "store-shield": "Blocks copying and screens orders, IPs and VPNs",
+  "no-spy": "Blocks copying and spy extensions, filters visitors by IP and VPN",
+  "shogard": "Blocks copying and filters IPs, countries and bots",
+  "kedra-shield-website-security": "Blocks copying and filters countries, IPs, VPNs and bots",
+  "free-watermarks": "Stamps visible watermarks on product images",
+  "cozy-antitheft-for-images-and-more": "Blocks right-click, shortcuts, printing and the console",
+  "storelock": "Detects impersonating sites and sends takedown requests",
+  "viking-watermark": "Stamps visible watermarks on product images in bulk",
+  "suprimg-anti-theft-watermark": "Stamps visible watermarks and blocks right-click",
+  "oh-watermark": "Stamps visible watermarks, with a storefront overlay option",
+  "photolock": "Blocks copying and shields images in the browser",
+  "imagearmor": "Stamps visible watermarks on product images in bulk",
+  "ip-moat": "Scans marketplaces for counterfeits and files removals",
+  "spyblocker-block-competitors": "Blocks copying and filters IPs and bots with a storefront script",
+  "disable-right-click": "Blocks Save As, text selection and copying",
+  "sgtlab-bulk-watermark": "Stamps visible watermarks on product images, pay as you go",
+  "addify-image-watermark": "Stamps visible watermarks, applied automatically to new images",
+  "defendify": "Blocks right-click and shortcuts as a deterrent",
+  "tilkie-image-protection": "Invisibly watermarks product images and proves image theft",
+  "mintallkeep": "Attaches C2PA credentials and NFT records to content",
+  "disable-right-click-3": "Blocks image saving, copying and print shortcuts",
+  "copycat-alert-product-monitor": "Scans chosen domains for copied text and images",
+  "auto-image-watermark-seo": "Stamps visible watermarks in bulk, with image SEO extras",
+  "copyblock": "Blocks right-click and copying as a theme embed",
+  "qf-content-guard": "Stamps visible watermarks and blocks copying",
+  "easy-block-customer-ip-country": "Blocks copying and filters countries, IPs, VPNs and bots",
+  "sales-shield": "Blocks copying and spy extensions, feeds trackers fake data",
+  "x-shield-store-guard": "Filters countries, IPs and bots, and blocks copying",
+  "antitheft-pro": "Blocks right-click, inspect element and copying",
+  "protos": "Blocks copying and filters countries, IPs, VPN and Tor",
+  "scala-anti-spy": "Blocks copying, with country filtering",
+  "shop-shield": "Blocks right-click, image saving and copying",
+  "country-blockeer": "Blocks countries and bots, with copy blocking",
+  "shop-protector-1": "Blocks developer tools and copying, restricts countries",
+  "shieldify": "Blocks copying and printing, filters countries and VPNs",
+  "koi-disable-right-click": "Blocks copying and named spy extensions",
+  "securecommerce-1": "Blocks copying, filters visitors and watches for clone sites",
+  "bl-content-protection": "Blocks right-click, copying and image saving",
+  "disable-right": "Blocks copying and spy extensions, with geo and IP filtering",
+  "firewall-ip-and-country-restriction": "Blocks countries, states and cities, with copy blocking",
+  "easy-block": "Filters visitors by country, IP, language and timezone",
+  "mega-content-protector": "Blocks copying, printing and the console on desktop and mobile",
+  "shop-guard-app": "Blocks copying and touch-hold, with country filtering",
+  "prevent-content-theft": "Blocks right-click, selection and shortcuts, restricts countries",
+  "content-protection": "Blocks copying and spy extensions, with geo filtering",
+  "anty-spy": "Blocks spy extensions, right-click and copying",
+  "nocopy-plagiarism-guard": "Blocks copying and shows a copyright message",
+  "salesdish-content-protection": "Blocks right-click, selection, printing and shortcuts",
+  "shop-protector": "Blocks right-click, copying and view-source shortcuts",
+  "right-click-disable": "Blocks right-click, copying and shortcuts",
+  "switchboard-development": "A toggle suite with an anti-copy shield among its switches",
+  "watchdog": "Blocks copying and filters countries, IPs and bots",
+  "photosentry": "Blocks image saving and tracks blocked attempts",
+  "clipboard-manager": "Blocks copying and appends an attribution link to copied text",
+  "right-click-defender": "Blocks right-click, view-source and copying",
+  "speed-defender": "Blocks copying and hides source code and best-seller sorting",
+  "smart-security": "Blocks right-click and keyboard shortcuts",
+  "shopprotect": "Blocks copying and hides the theme name",
+  "dev-content-protector": "Blocks copying and printing, with spy and IP filtering",
+  "store-fence": "Blocks states, cities and IPs, with copy blocking",
+  "prevent-content-copying": "Blocks right-click, copying and developer tools",
+  "aegis": "Blocks copying, with best-seller protection and country filtering",
+  "dropship-protect": "Blocks named spy extensions, with geo and IP filtering",
+  "threads": "Filters countries, proxies and bots",
+  "stopspy": "Blocks copying and spy extensions, alters public sales data",
+  "r-blocker": "Blocks copying and image saving, with geo and IP filtering",
+  "disable-toolbox-country-block": "Filters countries, IPs, VPNs and selected browsers",
+  "smart-content-protector": "Blocks copying, with a custom legal notice",
+  "ghostify": "Blocks named spy extensions and copying",
+  "veloshield": "Blocks copying and hides best-seller sorting",
+  "fire-protect": "Blocks copying, spy extensions and fake purchases",
+  "anti-spy": "Blocks named spy tools and copying",
+  "shopsecure": "Blocks countries, with per-country product hiding and copy blocking",
+  "right-click-blocker": "Blocks right-click, with print blocking and auto-blur on paid tiers",
+  "clicky-one-click-stickybar": "Blocks copying, image saving and spy extensions",
+  "siteshield-app-pro": "Blocks countries and IPs, with copy blocking",
+  "anti-theft-protection": "Blocks copying and filters countries, IPs and cities",
+  "sa-070-ur-right-click-deny": "Disables right-click on the storefront",
+  "magaza-korumasi-pro": "Blocks right-click and copying, with geo and VPN filtering on paid plans",
+  "myshopguardian": "Blocks right-click and copying as a client-side theme block",
+  "disable-right-click-2": "Blocks right-click, copying, printing and image saving",
+};
