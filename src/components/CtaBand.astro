@@ -10,12 +10,13 @@ const {
   sub = "Kirpik protects your text content, certifies infringement and enables enforcement. Stop paying for fake protection. Install Kirpik for free.",
   tone = "tint",
 } = Astro.props;
+const hasHeadingSlot = Astro.slots.has("heading");
 ---
 
 <section class="section">
   <div class="container">
     <div class="ctaband" data-tone={tone}>
-      <h2>{heading}</h2>
+      <h2>{hasHeadingSlot ? <slot name="heading" /> : heading}</h2>
       <p class="lead">{sub}</p>
       <a class="btn btn--primary ctaband__btn" href={SITE.shopifyAppUrl} rel="noopener" target="_blank">Install now for free</a>
     </div>
