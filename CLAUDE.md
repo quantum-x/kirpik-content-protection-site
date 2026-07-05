@@ -79,4 +79,6 @@ Same family as Tilkie, never copy-pasted. Tokens in `src/styles/global.css`:
 
 ## Terminology (must match the app UI)
 
-"watermark", "invisible text watermark", "Protect/Protection/Protected", "Auto-Protect", "Detect/Detection", "watermark code", "Chain of Proof" (certificate), "Protection Signature", "Watermark Security Markers", "Confidence", "product description", "blog article", "page", "proof of ownership", "DMCA takedown".
+"watermark", "invisible text watermark", "Protect/Protection/Protected", "Auto-Protect", "Detect/Detection", "watermark code", "Protection Signature", "Watermark Security Markers", "Confidence", "product description", "blog article", "page", "DMCA takedown".
+
+Certificate naming (owner decision 2026-07-05): the primary term in ALL site prose is "Proof of Ownership Certificate". "Chain of Proof" appears only as the document's printed title (in imagery) and inside verbatim competitor-listing quotes (Tilkie's). URL slugs keep chain-of-proof where they already exist.
