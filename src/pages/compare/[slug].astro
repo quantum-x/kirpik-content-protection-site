@@ -1,0 +1,399 @@
+---
+import Base from "../../layouts/Base.astro";
+import SiteCheckForm from "../../components/SiteCheckForm.astro";
+import CtaBand from "../../components/CtaBand.astro";
+import { SITE } from "../../config";
+import {
+  FEATURED_COMPETITORS,
+  MECHANISMS,
+  CAPABILITIES,
+  KIRPIK_CAPS,
+  APPROACH_LABEL,
+  appCaps,
+  type Competitor,
+  type Cell,
+} from "../../compare-data";
+
+export function getStaticPaths() {
+  return FEATURED_COMPETITORS.map((app) => ({ params: { slug: app.slug }, props: { app } }));
+}
+
+interface Props {
+  app: Competitor;
+}
+const { app } = Astro.props;
+const caps = appCaps(app);
+const mechs = app.mechanisms ?? [];
+const initial = app.name.replace(/[^A-Za-z0-9]/g, "").charAt(0).toUpperCase() || "A";
+
+const related = FEATURED_COMPETITORS.filter((c) => c.slug !== app.slug)
+  .sort((a, b) => Number(b.primary === app.primary) - Number(a.primary === app.primary))
+  .slice(0, 3);
+
+const cell = (v: Cell) =>
+  v === true
+    ? { m: "✓", c: "yes" }
+    : v === false
+      ? { m: "✕", c: "no" }
+      : v === "na"
+        ? { m: "n/a", c: "na" }
+        : { m: "Not stated", c: "un" };
+
+const launchedNice = app.launched
+  ? new Date(`${app.launched}T00:00:00Z`).toLocaleDateString("en-GB", { month: "long", year: "numeric", timeZone: "UTC" })
+  : null;
+
+const meta = [
+  app.developer ? `By ${app.developer}` : null,
+  app.rating ? `${app.rating}/5${typeof app.reviews === "number" ? ` (${app.reviews} review${app.reviews === 1 ? "" : "s"})` : ""}` : null,
+  app.pricing ?? null,
+  launchedNice ? `Listed since ${launchedNice}` : null,
+].filter(Boolean) as string[];
+
+// "The text question" copy varies by approach.
+const isTilkie = !!app.sameDeveloper;
+const scriptBased = ["blocker", "bundle"].includes(app.primary);
+const isWatermark = app.primary === "watermark" && !isTilkie;
+const isMonitor = app.primary === "monitor";
+const isTakedown = app.primary === "takedown";
+---
+
+<Base
+  title={`${app.name} vs Kirpik`}
+  description={`A neutral, listing-based comparison of ${app.name} and Kirpik for protecting Shopify store text: what the app says it does, how the approach works, and what each one means for your product copy.`}
+>
+  <article>
+    <header class="chead">
+      <div class="container narrow">
+        <a class="chead__back" href="/compare/">← All comparisons</a>
+        <div class="versus" aria-hidden="true">
+          <span class="versus__tile"><span class="versus__letter">{initial}</span></span>
+          <span class="versus__vs">vs</span>
+          <span class="versus__tile versus__tile--us">
+            <img src="/brand/kirpik-glyph.svg" alt="" width="44" height="22" loading="eager" />
+          </span>
+        </div>
+        <span class="eyebrow">Comparison · {APPROACH_LABEL[app.primary]}</span>
+        <h1>{app.name} vs Kirpik</h1>
+        <p class="lead">{app.summary}</p>
+        {meta.length > 0 && (
+          <p class="chead__meta">
+            {meta.join("  ·  ")}  ·  <a href={app.url} rel="nofollow noopener" target="_blank">View listing on the Shopify App Store</a>
+          </p>
+        )}
+      </div>
+    </header>
+
+    <div class="container narrow cbody">
+      {isTilkie && (
+        <section class="disclose" aria-label="Disclosure">
+          <span class="tag tag--amber">Disclosure</span>
+          <p>
+            <strong>Tilkie is built by the same team as Kirpik.</strong> Both apps are published by
+            {SITE.developer}. This is not a rivalry page: Tilkie protects product images, Kirpik protects
+            text, and plenty of stores run both. We wrote it because the two apps come up in the same
+            searches and people ask how they relate.
+          </p>
+        </section>
+      )}
+
+      <section class="block">
+        <h2>What {app.name} says it does</h2>
+        <p class="src">From its Shopify App Store listing, as recorded in June and July 2026:</p>
+        <ul class="claims">
+          {(app.claims ?? []).map((c) => <li>{c}</li>)}
+        </ul>
+      </section>
+
+      <section class="block">
+        <h2>How the approach works, and where it stops</h2>
+        <p class="src">
+          Each card covers one technique the listing states or clearly implies. The limits described are
+          general behaviour of browsers and platforms, not faults of this app.
+        </p>
+        <div class="mechs">
+          {mechs.map((id) => {
+            const mech = MECHANISMS[id];
+            return (
+              <div class="mech">
+                <h3>{mech.label}</h3>
+                <p class="mech__what">{mech.what}</p>
+                {mech.bypass.length > 0 && (
+                  <>
+                    <p class="mech__h">General facts worth knowing</p>
+                    <ul class="mech__list">
+                      {mech.bypass.map((b) => <li>{b}</li>)}
+                    </ul>
+                  </>
+                )}
+                {mech.note && <p class="mech__note">{mech.note}</p>}
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      <section class="block">
+        <h2>{app.name} and Kirpik, side by side</h2>
+        <div class="tablewrap card">
+          <table class="ctable">
+            <thead>
+              <tr>
+                <th scope="col">Capability</th>
+                <th scope="col">{app.name}</th>
+                <th scope="col" class="uscol">Kirpik</th>
+              </tr>
+            </thead>
+            <tbody>
+              {CAPABILITIES.map((cap) => {
+                const a = cell(caps[cap.id]);
+                const k = cell(KIRPIK_CAPS[cap.id]);
+                return (
+                  <tr>
+                    <th scope="row">{cap.label}</th>
+                    <td class={`c-${a.c}`}><span class="mk">{a.m}</span></td>
+                    <td class={`c-${k.c} uscol`}><span class="mk">{k.m}</span></td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+        <p class="legend">
+          Cells are derived from each app's stated features; "Not stated" means the listing does not say.
+          "n/a" means the row is outside what the method touches. The feed row is ✕ by mechanism for any
+          storefront script: Shopify's public feed surfaces are served without storefront JavaScript.
+        </p>
+      </section>
+
+      <section class="block">
+        <h2>The text question</h2>
+        {isTilkie ? (
+          <>
+            <p>{app.textNote}</p>
+            <p>
+              Both apps share the same philosophy: you cannot stop a copy being made, so make every copy
+              carry invisible, provable attribution. Tilkie does it inside the pixels of a photo. Kirpik
+              does it inside the words themselves, with an algorithmic invisible watermark derived from
+              your original text, and turns a detection into a Chain of Proof certificate.
+            </p>
+          </>
+        ) : scriptBased ? (
+          <>
+            <p>
+              {caps.protectsText === true
+                ? `${app.name}'s listing does cover text: it blocks selecting and copying while a visitor is on the page, which adds real friction for a casual copier inside the tab.`
+                : `${app.name}'s stated features centre on images and access control; the text of your product descriptions is not something its listing claims to change.`}
+            </p>
+            <p>
+              What no storefront script changes is where else the same words already live. Every Shopify
+              store publishes its product data through public, machine-readable surfaces such as
+              /products.json, and those are served without any storefront JavaScript running. A script
+              cannot act on a page it is never part of. And once text is copied, by any route, the words
+              themselves carry nothing that ties them back to the store that wrote them.
+            </p>
+            {app.textNote && <p>{app.textNote}</p>}
+            <p>
+              Kirpik starts where the tab ends. It embeds an invisible algorithmic watermark, derived from
+              your original text, into your product descriptions, blog articles and pages, without
+              changing a word you wrote and without adding any script to your theme. A suspect page can be
+              checked by paste or URL, and a confirmed detection produces a Chain of Proof certificate
+              built for a DMCA takedown.
+            </p>
+          </>
+        ) : isWatermark ? (
+          <>
+            <p>
+              {app.name} works on images, and a mark on an image genuinely travels with a copy of that
+              image. That is worth having. It is also the boundary: the product description sitting next
+              to each marked photo is not part of what gets marked, so your words remain exactly as
+              exposed as before, in the page HTML and in Shopify's public feed surfaces that any importer
+              can read.
+            </p>
+            {app.textNote && <p>{app.textNote}</p>}
+            <p>
+              Kirpik is the text-side counterpart to image watermarking: an invisible algorithmic
+              watermark derived from your original text, embedded in the copy itself, with nothing visible
+              to shoppers and no change to your words. When the description walks, the signature walks
+              with it, and a detection can be turned into a Chain of Proof certificate.
+            </p>
+          </>
+        ) : isMonitor ? (
+          <>
+            <p>
+              Monitoring engages with text in a way blockers do not: it goes looking for pages that match
+              yours. What a match cannot do on its own is settle ownership. Two similar pages are a
+              starting point for an argument, not the end of one, because copied words carry no built-in
+              record of where they came from.
+            </p>
+            {app.textNote && <p>{app.textNote}</p>}
+            <p>
+              Kirpik supplies the half a scanner cannot: the mark inside the words. Its invisible
+              algorithmic watermark travels with your text wherever it is pasted, so a detection reads
+              your store's own watermark code out of the copy and a Chain of Proof certificate documents
+              it. Monitoring tells you that text matches; a watermark proves whose text it was. The two
+              complement each other.
+            </p>
+          </>
+        ) : isTakedown ? (
+          <>
+            <p>
+              A takedown service earns its keep after a copy appears: finding it and filing against it.
+              Every filing stands on evidence of ownership, and for text that is precisely the hard part,
+              because copied words arrive carrying nothing of their origin.
+            </p>
+            {app.textNote && <p>{app.textNote}</p>}
+            <p>
+              Kirpik is built for that evidence gap. The invisible algorithmic watermark in your text
+              means a copy can be attributed to your store specifically, and the Chain of Proof
+              certificate assembles fingerprints, dates and an archive timeline into a document a host or
+              marketplace can verify. Detection and proof from Kirpik can feed whatever takedown route you
+              choose, including a service like this one.
+            </p>
+          </>
+        ) : (
+          <p>
+            This app sits outside the content-protection scope, so there is no text story to compare. It
+            is listed here because it appears in the same App Store category.
+          </p>
+        )}
+      </section>
+    </div>
+
+    <SiteCheckForm
+      tone="band"
+      eyebrow="Prove it to yourself"
+      heading="See what a scraper sees on your store"
+      sub={scriptBased
+        ? "Enter your store address and look at the public surfaces where your descriptions live. No storefront script runs there, whichever apps are installed."
+        : "Enter your store address and see the public, machine-readable surfaces where your product copy is available right now."}
+      cta="Check my store"
+    />
+
+    <div class="container narrow cbody">
+      {app.proofNote && (
+        <section class="block">
+          <h2>A note on proof</h2>
+          <p>{app.proofNote}</p>
+        </section>
+      )}
+
+      <section class="fineprint">
+        <h2>Method and disclaimer</h2>
+        <p>
+          This page describes {app.name} using its own public Shopify App Store listing as recorded in
+          June and July 2026. Listings change; features, pricing and ratings may differ today. The
+          limitations discussed are general properties of browsers and platforms rather than defects of
+          this app. App names and trademarks belong to their respective owners and are used for
+          identification only.
+          {isTilkie
+            ? ` Tilkie and Kirpik are both published by ${SITE.developer}; this shared ownership is disclosed above.`
+            : ` Kirpik is published by ${SITE.developer} and has no affiliation with ${app.developer ?? "this app's developer"}.`}
+          Nothing here is legal advice.
+        </p>
+      </section>
+
+      {related.length > 0 && (
+        <aside class="related">
+          <h2>Related comparisons</h2>
+          <ul>
+            {related.map((r) => (
+              <li><a href={`/compare/${r.slug}/`}>{r.name} vs Kirpik</a></li>
+            ))}
+          </ul>
+          <p>
+            <a href="/compare/">All comparisons →</a>
+            <a href="/compare/techniques/">Techniques compared →</a>
+          </p>
+        </aside>
+      )}
+    </div>
+  </article>
+
+  <CtaBand
+    heading="Make your words provably yours."
+    sub="An invisible watermark in your copy, detection on demand, and a certificate that ends arguments. Free to start."
+  />
+</Base>
+
+<style>
+  .chead { padding-block: clamp(2.4rem, 2rem + 3vw, 4rem) clamp(1.2rem, 3vw, 2rem); }
+  .chead__back { font-family: var(--font-mono); font-size: 0.76rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-faint); }
+  .chead__back:hover { color: var(--orange-deep); }
+  .versus { display: flex; align-items: center; gap: clamp(0.8rem, 3vw, 1.4rem); margin-top: 1.6rem; }
+  .versus__tile {
+    display: grid; place-items: center;
+    width: clamp(60px, 8vw, 76px); height: clamp(60px, 8vw, 76px);
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 16px; box-shadow: var(--shadow-card);
+  }
+  .versus__letter { font-family: var(--font-mono); font-weight: 600; font-size: clamp(1.5rem, 3vw, 1.9rem); color: var(--ink-soft); }
+  .versus__tile--us { border-color: #f2d4bd; background: var(--orange-tint); }
+  .versus__tile--us img { width: 60%; height: auto; }
+  .versus__vs { font-family: var(--font-mono); font-weight: 600; font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-faint); }
+  .chead .eyebrow { display: inline-flex; margin-top: 1.4rem; }
+  .chead h1 { font-size: var(--fs-h1); margin: 0.8rem 0 1rem; }
+  .chead .lead { max-width: 64ch; }
+  .chead__meta { margin-top: 1.2rem; font-family: var(--font-mono); font-size: 0.78rem; color: var(--ink-faint); line-height: 1.8; }
+  .chead__meta a { color: var(--orange-deep); }
+  .chead__meta a:hover { text-decoration: underline; }
+
+  .cbody { padding-bottom: clamp(1.6rem, 4vw, 2.6rem); }
+  .block { padding-top: clamp(1.8rem, 4vw, 2.8rem); }
+  .block h2 { font-size: clamp(1.45rem, 1.15rem + 1.2vw, 2rem); }
+  .block > p { color: var(--ink-soft); line-height: 1.7; margin-top: 0.9rem; max-width: 72ch; }
+  .src { font-size: 0.95rem; }
+
+  .disclose { margin-top: 1.8rem; background: var(--amber-tint); border: 1px solid #ecd9b4; border-radius: var(--r-lg); padding: 1.4rem 1.6rem; }
+  .disclose p { margin-top: 0.8rem; color: var(--ink-soft); line-height: 1.65; }
+  .disclose strong { color: var(--ink); }
+
+  .claims { margin-top: 1rem; display: grid; gap: 0.55rem; max-width: 72ch; }
+  .claims li { position: relative; padding-left: 1.6rem; color: var(--ink-soft); line-height: 1.6; }
+  .claims li::before {
+    content: "“"; position: absolute; left: 0; top: -0.05em;
+    font-weight: 800; font-size: 1.25em; color: var(--amber);
+  }
+
+  .mechs { margin-top: 1.4rem; display: grid; gap: 1rem; }
+  .mech { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-md); padding: 1.3rem 1.4rem; }
+  .mech h3 { font-size: 1.1rem; }
+  .mech__what { color: var(--ink-soft); margin-top: 0.45rem; line-height: 1.6; }
+  .mech__h { margin-top: 0.95rem; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--orange-deep); }
+  .mech__note { margin-top: 0.8rem; color: var(--ink-soft); font-size: 0.93rem; border-left: 2px solid var(--amber); padding-left: 0.9rem; line-height: 1.6; }
+  .mech__list { margin-top: 0.55rem; display: grid; gap: 0.45rem; }
+  .mech__list li { position: relative; padding-left: 1.4rem; color: var(--ink-soft); line-height: 1.6; font-size: 0.96rem; }
+  .mech__list li::before {
+    content: ""; position: absolute; left: 0.1rem; top: 0.66em;
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--orange); box-shadow: 0 0 0 2.5px rgba(217, 100, 56, 0.18);
+  }
+
+  .tablewrap { margin-top: 1.2rem; overflow-x: auto; }
+  .ctable { width: 100%; border-collapse: collapse; min-width: 560px; }
+  .ctable th, .ctable td { padding: 0.85rem 1rem; border-bottom: 1px solid var(--line); vertical-align: middle; }
+  .ctable thead th { font-size: 0.74rem; font-family: var(--font-mono); letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink-faint); text-align: center; }
+  .ctable thead th:first-child { text-align: left; }
+  .ctable tbody th { font-weight: 600; font-size: 0.94rem; color: var(--ink); text-align: left; width: 52%; }
+  .ctable tbody tr:last-child th, .ctable tbody tr:last-child td { border-bottom: 0; }
+  .ctable td { text-align: center; }
+  .ctable .uscol { background: var(--orange-tint); }
+  .ctable thead .uscol { color: var(--orange-deep); }
+  .mk { font-weight: 700; }
+  .c-yes .mk { color: var(--mint); }
+  .c-no .mk { color: var(--red); opacity: 0.8; }
+  .c-na .mk, .c-un .mk { color: var(--ink-faint); font-weight: 600; font-size: 0.82rem; }
+  .legend { font-size: 0.85rem; color: var(--ink-faint); margin-top: 0.8rem; max-width: 80ch; }
+
+  .fineprint { margin-top: clamp(2rem, 5vw, 3rem); padding-top: 1.4rem; border-top: 1px solid var(--line); }
+  .fineprint h2 { font-size: 0.8rem; font-family: var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); }
+  .fineprint p { font-size: 0.85rem; color: var(--ink-faint); line-height: 1.65; margin-top: 0.7rem; max-width: 78ch; }
+
+  .related { margin-top: clamp(1.8rem, 4vw, 2.6rem); padding-top: 1.6rem; border-top: 1px solid var(--line); }
+  .related h2 { font-size: 0.8rem; font-family: var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 0.9rem; }
+  .related ul { display: grid; gap: 0.55rem; }
+  .related li a { font-weight: 600; color: var(--ink); }
+  .related li a:hover { color: var(--orange-deep); }
+  .related > p { margin-top: 0.9rem; display: flex; gap: 1.4rem; flex-wrap: wrap; }
+  .related > p a { color: var(--orange-deep); font-weight: 600; }
+</style>

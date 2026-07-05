@@ -1,0 +1,61 @@
+---
+/**
+ * Two-column capability table: a technique or app vs Kirpik.
+ * Cells accept true (tick), false (cross), or a short string for nuance.
+ */
+interface Row {
+  label: string;
+  them: boolean | string;
+  us: boolean | string;
+}
+interface Props {
+  themLabel: string;
+  rows: Row[];
+}
+const { themLabel, rows } = Astro.props;
+---
+
+<div class="cmp card">
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">Capability</th>
+        <th scope="col">{themLabel}</th>
+        <th scope="col" class="us-col">Kirpik</th>
+      </tr>
+    </thead>
+    <tbody>
+      {rows.map((r) => (
+        <tr>
+          <th scope="row">{r.label}</th>
+          <td>
+            {r.them === true ? <span class="yes">✓</span>
+              : r.them === false ? <span class="nox">✕</span>
+              : <span class="val">{r.them}</span>}
+          </td>
+          <td class="us-col">
+            {r.us === true ? <span class="yes">✓</span>
+              : r.us === false ? <span class="nox">✕</span>
+              : <span class="val">{r.us}</span>}
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
+<style>
+  .cmp { overflow-x: auto; }
+  .cmp table { width: 100%; border-collapse: collapse; min-width: 540px; }
+  .cmp th[scope="col"] { font-family: var(--font-mono); font-size: 0.76rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-faint); }
+  .cmp thead th { padding: 1rem; text-align: center; border-bottom: 2px solid var(--line-strong); }
+  .cmp thead th:first-child { text-align: left; }
+  .cmp tbody th { text-align: left; padding: 0.85rem 1rem; font-weight: 600; font-size: 0.95rem; color: var(--ink); border-bottom: 1px solid var(--line); }
+  .cmp tbody tr:last-child th, .cmp tbody tr:last-child td { border-bottom: 0; }
+  .cmp td { text-align: center; padding: 0.85rem 1rem; border-bottom: 1px solid var(--line); }
+  .cmp .us-col { background: var(--orange-tint); }
+  .cmp thead .us-col { color: var(--orange-deep); border-bottom-color: var(--orange); }
+  .cmp .yes { color: var(--mint); font-weight: 800; }
+  .cmp .nox { color: var(--red); font-weight: 800; opacity: 0.75; }
+  .cmp .val { font-size: 0.86rem; font-weight: 600; color: var(--ink-soft); }
+</style>

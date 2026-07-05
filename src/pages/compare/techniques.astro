@@ -1,0 +1,156 @@
+---
+import Base from "../../layouts/Base.astro";
+import PageHero from "../../components/PageHero.astro";
+import CtaBand from "../../components/CtaBand.astro";
+
+type TCell = boolean | string;
+
+interface Technique {
+  name: string;
+  href?: string; // deep-dive page
+  us?: boolean; // Kirpik column
+  cells: TCell[]; // in ROW_LABELS order
+}
+
+const ROW_LABELS = [
+  "Changes your text",
+  "Visible to customers",
+  "Adds scripts to your storefront",
+  "Survives copy-paste off-site",
+  "Produces proof of ownership",
+  "Works on Shopify's feed surfaces",
+];
+
+const TECHNIQUES: Technique[] = [
+  {
+    name: "Storefront blockers",
+    href: "/compare/vs-copy-blockers/",
+    cells: [false, "When copying is tried", true, false, false, false],
+  },
+  {
+    name: "Visible notices & marks",
+    href: "/compare/vs-visible-watermarks/",
+    cells: [true, true, false, "Until deleted", false, "If pasted into copy"],
+  },
+  {
+    name: "Metadata & credentials",
+    href: "/compare/vs-content-credentials/",
+    cells: [false, false, false, false, "Provenance only", "Often stripped"],
+  },
+  {
+    name: "Zero-width tricks",
+    href: "/compare/vs-zero-width-characters/",
+    cells: [true, "Detectable by scanners", false, "Until normalised", false, "While present"],
+  },
+  {
+    name: "Fingerprint monitoring",
+    href: "/compare/vs-copy-monitors/",
+    cells: [false, false, false, "Nothing embedded", "Match reports", "n/a"],
+  },
+  {
+    name: "Invisible algorithmic watermarking",
+    us: true,
+    cells: [false, false, false, true, true, true],
+  },
+];
+
+const cellOut = (v: TCell, rowIdx: number) => {
+  if (typeof v === "string") return { m: v, c: "val" };
+  // For the first three rows, "false" is the desirable answer; render it as a
+  // quiet no rather than a red mark. For the last three, true is good, false bad.
+  if (rowIdx <= 2) return v ? { m: "Yes", c: "warn" } : { m: "No", c: "calm" };
+  return v ? { m: "✓", c: "yes" } : { m: "✕", c: "no" };
+};
+---
+
+<Base
+  title="Text protection techniques compared"
+  description="Storefront blockers, visible notices, metadata and credentials, zero-width tricks, fingerprint monitoring and invisible algorithmic watermarking, in one table: what changes your text, what survives copy-paste, and what produces proof."
+>
+  <PageHero
+    eyebrow="Compare · Techniques"
+    title="Text protection techniques, one table"
+    lead="Six ways people try to protect written store content, judged on the questions that matter for text: does it alter your words, do customers notice, does it survive the copy leaving your site, and can it prove ownership afterwards."
+  />
+
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <div class="tablewrap card">
+        <table class="ttable">
+          <thead>
+            <tr>
+              <th scope="col">Question</th>
+              {TECHNIQUES.map((t) => (
+                <th scope="col" class={t.us ? "uscol" : undefined}>
+                  {t.href ? <a href={t.href}>{t.name}</a> : t.name}
+                  {t.us && <span class="uslabel">Kirpik</span>}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {ROW_LABELS.map((label, i) => (
+              <tr>
+                <th scope="row">{label}</th>
+                {TECHNIQUES.map((t) => {
+                  const x = cellOut(t.cells[i], i);
+                  return <td class={`c-${x.c}${t.us ? " uscol" : ""}`}><span class="mk">{x.m}</span></td>;
+                })}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="legend">
+        Cells describe the typical, publicly documented behaviour of each technique class, not any single
+        product. For the first three rows, "No" is the answer most stores want. Column headings link to
+        the full explainer for each technique.
+      </p>
+
+      <div class="deeper">
+        <h2>Read the technique explainers</h2>
+        <ul>
+          <li><a href="/compare/vs-copy-blockers/">Copy and right-click blockers</a></li>
+          <li><a href="/compare/vs-visible-watermarks/">Visible watermarks and notices</a></li>
+          <li><a href="/compare/vs-content-credentials/">Content Credentials and C2PA</a></li>
+          <li><a href="/compare/vs-zero-width-characters/">Zero-width character tricks</a></li>
+          <li><a href="/compare/vs-copy-monitors/">Copy monitors and plagiarism scanners</a></li>
+          <li><a href="/compare/">The full 90-app category survey</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand
+    heading="One technique checks every box. It happens to be ours."
+    sub="That is why we built it: nothing else marked the words themselves. Judge it on your own store, free."
+  />
+</Base>
+
+<style>
+  .tablewrap { overflow-x: auto; padding: 0.4rem; }
+  .ttable { width: 100%; border-collapse: collapse; min-width: 960px; }
+  .ttable th, .ttable td { padding: 0.85rem 0.9rem; border-bottom: 1px solid var(--line); }
+  .ttable thead th { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink-faint); text-align: center; vertical-align: bottom; line-height: 1.5; }
+  .ttable thead th:first-child { text-align: left; }
+  .ttable thead a { color: var(--orange-deep); text-decoration: underline dotted; text-underline-offset: 3px; }
+  .ttable thead a:hover { color: var(--orange); }
+  .uslabel { display: block; margin-top: 0.3rem; font-size: 0.62rem; letter-spacing: 0.14em; color: var(--orange-deep); }
+  .ttable tbody th { font-weight: 600; font-size: 0.94rem; color: var(--ink); text-align: left; min-width: 200px; }
+  .ttable tbody tr:last-child th, .ttable tbody tr:last-child td { border-bottom: 0; }
+  .ttable td { text-align: center; }
+  .ttable .uscol { background: var(--orange-tint); }
+  .mk { font-weight: 700; }
+  .c-yes .mk { color: var(--mint); }
+  .c-no .mk { color: var(--red); opacity: 0.8; }
+  .c-warn .mk { color: var(--red); font-size: 0.86rem; opacity: 0.85; }
+  .c-calm .mk { color: var(--mint); font-size: 0.86rem; }
+  .c-val .mk { color: var(--ink-soft); font-weight: 600; font-size: 0.82rem; }
+  .legend { margin-top: 0.9rem; font-size: 0.85rem; color: var(--ink-faint); max-width: 85ch; }
+
+  .deeper { margin-top: clamp(2.2rem, 4vw, 3rem); }
+  .deeper h2 { font-size: var(--fs-h3); }
+  .deeper ul { margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 0.6rem; }
+  .deeper a { display: inline-block; padding: 0.5rem 0.95rem; border: 1px solid var(--line-strong); border-radius: var(--r-pill); font-weight: 600; font-size: 0.9rem; color: var(--orange-deep); }
+  .deeper a:hover { border-color: var(--orange); }
+</style>

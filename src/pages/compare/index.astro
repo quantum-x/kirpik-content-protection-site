@@ -1,0 +1,341 @@
+---
+import Base from "../../layouts/Base.astro";
+import PageHero from "../../components/PageHero.astro";
+import SiteCheckForm from "../../components/SiteCheckForm.astro";
+import CtaBand from "../../components/CtaBand.astro";
+import { SITE } from "../../config";
+import {
+  COMPETITORS,
+  FEATURED_COMPETITORS,
+  TOTAL_COMPARED,
+  APPROACHES,
+  APPROACH_BLURB,
+  CAPABILITIES,
+  KIRPIK_CAPS,
+  countByApproach,
+  countScriptApps,
+  type Approach,
+  type Cell,
+  type CapId,
+} from "../../compare-data";
+
+const nFeatured = FEATURED_COMPETITORS.length;
+const nScript = countScriptApps();
+const nTakedown = countByApproach("takedown");
+
+// Typical capability picture for each approach group (text-focused).
+// Derived from the mechanisms the listings in each group state; individual
+// app pages show how a specific app maps to it.
+const summaryCols: { key: Approach; short: string; vals: Record<CapId, Cell> }[] = [
+  {
+    key: "blocker",
+    short: "Script blockers",
+    vals: {
+      protectsText: true,
+      invisibleOnStorefront: false,
+      noStorefrontScripts: false,
+      travelsWithText: false,
+      worksOnFeeds: false,
+      detectAnywhere: false,
+      proofArtifact: false,
+    },
+  },
+  {
+    key: "bundle",
+    short: "Blocker bundles",
+    vals: {
+      protectsText: true,
+      invisibleOnStorefront: false,
+      noStorefrontScripts: false,
+      travelsWithText: false,
+      worksOnFeeds: false,
+      detectAnywhere: false,
+      proofArtifact: false,
+    },
+  },
+  {
+    key: "watermark",
+    short: "Image watermarks",
+    vals: {
+      protectsText: false,
+      invisibleOnStorefront: false,
+      noStorefrontScripts: "unstated",
+      travelsWithText: "na",
+      worksOnFeeds: true,
+      detectAnywhere: false,
+      proofArtifact: false,
+    },
+  },
+  {
+    key: "monitor",
+    short: "Copy monitors",
+    vals: {
+      protectsText: true,
+      invisibleOnStorefront: true,
+      noStorefrontScripts: true,
+      travelsWithText: false,
+      worksOnFeeds: "na",
+      detectAnywhere: true,
+      proofArtifact: "unstated",
+    },
+  },
+  {
+    key: "takedown",
+    short: "Takedown services",
+    vals: {
+      protectsText: "unstated",
+      invisibleOnStorefront: true,
+      noStorefrontScripts: "unstated",
+      travelsWithText: false,
+      worksOnFeeds: "na",
+      detectAnywhere: true,
+      proofArtifact: "unstated",
+    },
+  },
+];
+
+const mark = (v: Cell) =>
+  v === true
+    ? { m: "✓", c: "yes" }
+    : v === false
+      ? { m: "✕", c: "no" }
+      : v === "na"
+        ? { m: "n/a", c: "na" }
+        : { m: "?", c: "un" };
+
+const appsIn = (key: Approach) => COMPETITORS.filter((c) => c.primary === key);
+
+const GROUP_TITLE: Record<Approach, string> = {
+  blocker: "Storefront script blockers",
+  bundle: "Blocker and access-control bundles",
+  watermark: "Image watermark apps",
+  monitor: "Copy monitors",
+  takedown: "Takedown services",
+  other: "Outside the content-protection scope",
+};
+
+const techniquePages = [
+  { href: "/compare/vs-copy-blockers/", label: "Copy and right-click blockers" },
+  { href: "/compare/vs-visible-watermarks/", label: "Visible watermarks and notices" },
+  { href: "/compare/vs-content-credentials/", label: "Content Credentials and C2PA metadata" },
+  { href: "/compare/vs-zero-width-characters/", label: "Zero-width character tricks" },
+  { href: "/compare/vs-copy-monitors/", label: "Copy monitors and plagiarism scanners" },
+  { href: "/compare/techniques/", label: "All techniques, one table" },
+];
+
+const abs = (path: string) => new URL(path, SITE.url).href;
+const itemListJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "Shopify anti-theft category apps, surveyed and compared with Kirpik",
+  description: `A fact-based survey of all ${TOTAL_COMPARED} apps in the Shopify App Store anti-theft category, grouped by how each one works, compared with invisible text watermarking.`,
+  numberOfItems: TOTAL_COMPARED,
+  itemListElement: COMPETITORS.map((c, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    name: c.name,
+    url: c.featured ? abs(`/compare/${c.slug}/`) : c.url,
+  })),
+};
+---
+
+<Base
+  title={`Kirpik and the Shopify anti-theft category, compared (${TOTAL_COMPARED} apps)`}
+  description={`We read the public listing of every app in Shopify's anti-theft category: ${TOTAL_COMPARED} of them. Here is what each approach does for your text, where each one stops, and ${nFeatured} side-by-side comparisons.`}
+  jsonLd={itemListJsonLd}
+>
+  <PageHero
+    eyebrow="Compare"
+    title="Kirpik and the Shopify anti-theft category, compared"
+    lead={`We read the public App Store listing of every app in the anti-theft category, all ${TOTAL_COMPARED} of them, and grouped each by what it actually does. The question we kept asking: once your product copy leaves your store, does anything travel with it? For ${nScript} of these apps the honest answer is set by the browser, not the app.`}
+  />
+
+  <section class="section" style="padding-top:0">
+    <div class="container">
+
+      <div class="method card">
+        <h2>How this comparison was made</h2>
+        <p>
+          Every app below is described using its own public Shopify App Store listing, read in June and
+          July 2026, with claims quoted or closely paraphrased. The limitations noted are general,
+          verifiable behaviour of web browsers and platforms, not faults of any one app. Features and
+          pricing may have changed since. App names and trademarks belong to their respective owners.
+          Nothing on this page is legal advice.
+        </p>
+      </div>
+
+      <div class="stats">
+        <div class="stat" data-reveal>
+          <span class="stat__n">{TOTAL_COMPARED}</span>
+          <span class="stat__l">app listings reviewed, the full category</span>
+        </div>
+        <div class="stat" data-reveal>
+          <span class="stat__n">{nScript}</span>
+          <span class="stat__l">include scripts that run in the visitor's browser</span>
+        </div>
+        <div class="stat" data-reveal>
+          <span class="stat__n">{nTakedown}</span>
+          <span class="stat__l">offer a takedown service</span>
+        </div>
+        <div class="stat stat--hl" data-reveal>
+          <span class="stat__n">0</span>
+          <span class="stat__l">apps in the category watermark text. Kirpik is the first</span>
+        </div>
+      </div>
+
+      <h2 class="h-sec">What each approach can do for your text</h2>
+      <p class="sub">
+        The typical picture per group, from each group's own stated mechanisms. Individual app pages show
+        how a specific app maps to it.
+      </p>
+      <div class="tablewrap">
+        <table class="ctable">
+          <thead>
+            <tr>
+              <th scope="col">Capability</th>
+              {summaryCols.map((s) => <th scope="col">{s.short}</th>)}
+              <th scope="col" class="uscol">Kirpik</th>
+            </tr>
+          </thead>
+          <tbody>
+            {CAPABILITIES.map((cap) => (
+              <tr>
+                <th scope="row">{cap.label}</th>
+                {summaryCols.map((s) => {
+                  const x = mark(s.vals[cap.id]);
+                  return <td class={`c-${x.c}`}><span class="mk">{x.m}</span></td>;
+                })}
+                {(() => {
+                  const x = mark(KIRPIK_CAPS[cap.id]);
+                  return <td class={`c-${x.c} uscol`}><span class="mk">{x.m}</span></td>;
+                })()}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="legend">
+        ✓ yes · ✕ no · n/a: outside what the method touches · ?: the listings do not state it. The feed
+        row is ✕ for script-based apps by mechanism: Shopify's public feed surfaces are served without
+        any storefront JavaScript, so a storefront script never runs there.
+      </p>
+
+      {APPROACHES.map((key) => (
+        <div class="group">
+          <div class="group__head">
+            <h2>{GROUP_TITLE[key]} <span class="group__count">{countByApproach(key)}</span></h2>
+            <p>{APPROACH_BLURB[key]}</p>
+          </div>
+          <ul class="apps">
+            {appsIn(key).map((c) =>
+              c.featured ? (
+                <li class="app app--featured">
+                  <a href={`/compare/${c.slug}/`}>
+                    <span class="app__name">{c.name}</span>
+                    <span class="app__go">Compare →</span>
+                  </a>
+                </li>
+              ) : (
+                <li class="app">
+                  <a href={c.url} rel="nofollow noopener" target="_blank">
+                    <span class="app__name">{c.name}</span>
+                    <span class="app__ext" aria-hidden="true">↗</span>
+                  </a>
+                </li>
+              )
+            )}
+          </ul>
+        </div>
+      ))}
+
+      <div class="tech card">
+        <h2>Technique explainers</h2>
+        <p>The same ground, organised by technique instead of by app.</p>
+        <ul>
+          {techniquePages.map((t) => (
+            <li><a href={t.href}>{t.label}</a></li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <SiteCheckForm
+    tone="band"
+    eyebrow="See it for yourself"
+    heading="Check what your store already exposes"
+    sub="Enter your store address and see the public, machine-readable surfaces where your product copy lives, with or without a blocker app installed."
+    cta="Check my store"
+  />
+
+  <section class="section" style="padding-top:0">
+    <div class="container narrow">
+      <p class="foot-note">
+        Method: each app is represented by its own public Shopify App Store listing as recorded in June
+        and July 2026, and listings change over time. Limitations described here are properties of
+        browsers and platforms in general. All app names and trademarks belong to their respective
+        owners and are used for identification only. Kirpik is published by {SITE.developer}, which also
+        publishes Tilkie; that relationship is disclosed wherever Tilkie appears. Nothing here is legal
+        advice.
+      </p>
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>
+
+<style>
+  .method { padding: 1.6rem 1.8rem; background: var(--paper-2); box-shadow: none; margin-bottom: clamp(2rem, 4vw, 3rem); }
+  .method h2 { font-size: 0.82rem; font-family: var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); }
+  .method p { font-size: 0.92rem; color: var(--ink-soft); line-height: 1.65; margin-top: 0.7rem; max-width: 80ch; }
+
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: clamp(2.4rem, 4vw, 3.4rem); }
+  .stat { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-md); padding: 1.3rem; }
+  .stat--hl { background: var(--orange-tint); border-color: #f2d4bd; }
+  .stat__n { display: block; font-size: clamp(1.8rem, 1.4rem + 1.6vw, 2.6rem); font-weight: 800; font-family: var(--font-mono); line-height: 1; color: var(--ink); }
+  .stat--hl .stat__n { color: var(--orange-deep); }
+  .stat__l { display: block; margin-top: 0.5rem; font-size: 0.88rem; color: var(--ink-soft); }
+
+  .h-sec { font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2.1rem); }
+  .sub { color: var(--ink-soft); margin: 0.5rem 0 1.2rem; max-width: 75ch; }
+
+  .tablewrap { overflow-x: auto; }
+  .ctable { width: 100%; border-collapse: collapse; min-width: 820px; }
+  .ctable th, .ctable td { padding: 0.8rem 0.9rem; border-bottom: 1px solid var(--line); }
+  .ctable thead th { font-size: 0.72rem; font-family: var(--font-mono); letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink-faint); text-align: center; }
+  .ctable thead th:first-child { text-align: left; }
+  .ctable tbody th { font-weight: 600; font-size: 0.93rem; color: var(--ink); text-align: left; width: 32%; }
+  .ctable td { text-align: center; }
+  .ctable .uscol { background: var(--orange-tint); }
+  .ctable thead .uscol { color: var(--orange-deep); }
+  .mk { font-weight: 700; }
+  .c-yes .mk { color: var(--mint); }
+  .c-no .mk { color: var(--red); opacity: 0.8; }
+  .c-na .mk, .c-un .mk { color: var(--ink-faint); font-weight: 600; font-size: 0.84rem; }
+  .legend { font-size: 0.85rem; color: var(--ink-faint); margin-top: 0.8rem; max-width: 85ch; }
+
+  .group { margin-top: clamp(2.2rem, 4vw, 3.2rem); }
+  .group__head h2 { font-size: var(--fs-h3); display: flex; align-items: center; gap: 0.6rem; }
+  .group__count { font-family: var(--font-mono); font-size: 0.78rem; color: var(--orange-deep); background: var(--orange-tint); padding: 0.2em 0.6em; border-radius: var(--r-pill); }
+  .group__head p { color: var(--ink-soft); margin-top: 0.6rem; max-width: 82ch; line-height: 1.65; font-size: 0.97rem; }
+
+  .apps { margin-top: 1.2rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.7rem; }
+  .app a { display: flex; justify-content: space-between; align-items: center; gap: 0.6rem; height: 100%; padding: 0.85rem 1rem; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-md); color: var(--ink); transition: border-color 0.15s ease, transform 0.15s ease; }
+  .app a:hover { border-color: var(--orange); transform: translateY(-1px); }
+  .app__name { font-weight: 600; font-size: 0.93rem; }
+  .app--featured a { border-color: #f2d4bd; background: #fffdfa; }
+  .app__go { font-family: var(--font-mono); font-size: 0.64rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--orange-deep); white-space: nowrap; flex: none; }
+  .app__ext { color: var(--ink-faint); flex: none; }
+
+  .tech { margin-top: clamp(2.4rem, 4vw, 3.4rem); padding: 1.7rem 1.8rem; }
+  .tech h2 { font-size: 1.3rem; }
+  .tech p { color: var(--ink-soft); margin: 0.5rem 0 1rem; }
+  .tech ul { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+  .tech a { display: inline-block; padding: 0.5rem 0.95rem; border: 1px solid var(--line-strong); border-radius: var(--r-pill); font-weight: 600; font-size: 0.9rem; color: var(--orange-deep); }
+  .tech a:hover { border-color: var(--orange); }
+
+  .foot-note { font-size: 0.84rem; color: var(--ink-faint); line-height: 1.65; }
+
+  @media (max-width: 880px) { .stats { grid-template-columns: repeat(2, 1fr); } .apps { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px) { .apps { grid-template-columns: 1fr; } }
+</style>
