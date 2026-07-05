@@ -6,7 +6,7 @@ import CtaBand from "../components/CtaBand.astro";
 
 <Base
   title="Enforcement & takedowns"
-  description="How a Kirpik Proof of Ownership Certificate supports a DMCA notice, a hosting complaint and Google deindexing when your Shopify text is stolen. Practical, honest, and not legal advice."
+  description="How a Kirpik Proof of Ownership Certificate supports a DMCA notice, a hosting complaint and removal from Google when your Shopify text is stolen. Not legal advice."
 >
   <PageHero
     title="The Enforcement Guide"
@@ -18,7 +18,7 @@ import CtaBand from "../components/CtaBand.astro";
       <div class="prose">
         <h2>Successful takedowns require proof</h2>
         <p>
-          Hosts, registrars and search engines process complaints in volume.
+          The companies that host websites and the search engines that list them process complaints in volume.
           The person reading yours has never heard of your store and cannot
           know who wrote what. What moves them is a specific, checkable
           demonstration that the text is yours and predates the theft.
@@ -26,26 +26,24 @@ import CtaBand from "../components/CtaBand.astro";
         <p>
           That is a harder bar for text than for images. Two product
           descriptions can legitimately resemble each other, and "we sell the
-          same thing" is a common defence. The job of the evidence is to close
-          that door: not "these pages are similar" but "this exact text carries
+          same thing" is a common defence. The evidence must rule that defence
+          out: not "these pages are similar" but "this exact text carries
           this store's watermark, was protected on this date, and appeared on
           the infringing page later".
         </p>
 
         <h2>What a Proof of Ownership Certificate contains</h2>
         <p>
-          When Kirpik detects your watermark in a suspect page, it can generate
-          a Proof of Ownership Certificate: a dated ownership document built to be
-          read by an abuse desk. Each certificate records:
+          When Kirpik detects your watermark in a suspect page, you can generate
+          a Proof of Ownership Certificate from that detection: a dated
+          ownership document built for the people who handle these complaints.
+          Each certificate records:
         </p>
         <ul>
-          <li>A unique certificate ID and the scope of the document</li>
-          <li>Your date of protection and the Protection Signature, a SHA-256 fingerprint of your original content</li>
-          <li>The content title and the original URL on your store</li>
-          <li>The infringing URL, its own Last-Modified headers and the detection date</li>
-          <li>The Detected Signature of the stolen text, the count of recovered Watermark Security Markers and a confidence figure</li>
-          <li>The earliest Internet Archive snapshot of the infringing page, corroborating the timeline through a source neither side controls</li>
-          <li>A side-by-side comparison of your original and the modified version</li>
+          <li>A unique certificate ID, the scope of the document, your date of protection and the Protection Signature recorded for your original content</li>
+          <li>Your original page and the infringing page, with the detection date and the dates the infringing page itself reports</li>
+          <li>The earliest Internet Archive snapshot of the infringing page, a record neither side controls</li>
+          <li>The recovered Watermark Security Markers, the Confidence figure and a side-by-side comparison of your original and the modified version</li>
           <li>A QR code linking to a public verification page, so anyone can confirm the certificate is genuine without trusting the PDF</li>
         </ul>
         <p>
@@ -57,27 +55,34 @@ import CtaBand from "../components/CtaBand.astro";
         <h2>Route one: the DMCA notice</h2>
         <p>
           For most stolen text the first move is a DMCA takedown notice sent to
-          the infringing site's host. A valid notice identifies your original
-          work, identifies the infringing material by URL, and includes the
-          required statements and your signature. Attach or link the Proof of Ownership Certificate as your supporting evidence. Text is fully
-          protected by copyright the moment you write it, so product
-          descriptions, buying guides and blog articles all qualify.
+          the company that hosts the infringing site. A valid notice identifies
+          your original work, identifies the infringing material by URL, and
+          includes the required statements and your signature. Attach the
+          certificate PDF or include its public verification link as your
+          supporting evidence. Text is fully protected by copyright the moment
+          you write it, so product descriptions, blog articles and pages all
+          qualify.
         </p>
         <p>
-          Our guide <a href="/learn/dmca-for-stolen-text/">The DMCA process for
-          stolen text, step by step</a> walks through finding the right
-          recipient, wording each required element, and what to do when a
-          counter-notice arrives.
+          Once sent, the hosting company reviews the notice and either removes
+          the material or forwards the notice to the site owner, who can
+          formally dispute it. Our guide
+          <a href="/learn/dmca-for-stolen-text/">The DMCA process for stolen
+          text, step by step</a> walks through finding the right recipient,
+          wording each required element, and what to do if the site owner
+          disputes your notice (a counter-notice).
         </p>
 
         <h2>Route two: the hosting complaint</h2>
         <p>
-          Some sites sit with hosts that operate their own abuse processes
-          alongside or instead of the DMCA, especially outside the United
-          States. The approach is the same: identify the host through a WHOIS
-          or DNS lookup, find their abuse contact, and submit the infringing
-          URL together with your certificate. Hosts vary widely in speed, but a
-          verifiable evidence package consistently outperforms an angry email.
+          Some sites sit with hosting companies that operate their own
+          complaint procedures alongside or instead of the DMCA, especially
+          outside the United States. The approach is the same: find the
+          company that hosts the site (the DMCA guide above shows how), find
+          its complaints address, and send the infringing web address together
+          with your certificate. Hosting companies vary widely in speed, and a
+          verifiable evidence package gives their team something they can act
+          on.
         </p>
 
         <h2>Route three: removal from Google</h2>
@@ -86,20 +91,21 @@ import CtaBand from "../components/CtaBand.astro";
           that it ranks. Google accepts copyright removal requests for search
           results, and a successful request removes the infringing page from
           results even while the page itself stays up. For a store whose stolen
-          content is outranking the original, this is often the fastest fix.
-          See <a href="/learn/deindexing-stolen-copy/">Getting stolen content
-          removed from Google's index</a> for the process.
+          content is outranking the original, this can be the quickest relief,
+          and you can file it alongside a DMCA notice rather than instead of
+          one. See <a href="/learn/deindexing-stolen-copy/">Getting stolen
+          content removed from Google's index</a> for the process.
         </p>
 
         <h2>When to bring in a specialist</h2>
         <p>
-          Most cases end after one well-evidenced notice. A minority do not:
-          the infringer hides behind privacy services, reposts under a new
-          domain, or ignores everything. For those, we recommend engaging an
-          intellectual property solicitor or a takedown specialist rather than
-          grinding through it alone. Arrive with your Proof of Ownership
-          Certificate and the notices you have already sent, and most of the
-          discovery work is already done.
+          A well-evidenced notice is often the last step needed. When it is
+          not, the infringer hides behind privacy services, reposts under a
+          new domain, or ignores everything. For those cases, we recommend
+          engaging an intellectual property lawyer or a takedown specialist
+          rather than handling it alone. Arrive with your Proof of Ownership
+          Certificate and the notices you have already sent, and the
+          fact-finding is already done.
         </p>
       </div>
 
@@ -108,10 +114,10 @@ import CtaBand from "../components/CtaBand.astro";
           <h3>The playbook</h3>
           <ol>
             <li>Detect your watermark in the suspect page</li>
-            <li>Generate the Proof of Ownership Certificate</li>
-            <li>Send the DMCA notice or host complaint</li>
+            <li>Generate the certificate from the detection</li>
+            <li>Send the DMCA notice or hosting complaint</li>
             <li>Request removal from Google if the stolen page ranks</li>
-            <li>Bring in a specialist for the stubborn few</li>
+            <li>Bring in a specialist if the infringer ignores you</li>
           </ol>
         </div>
         <div class="card sidecard">
@@ -142,6 +148,5 @@ import CtaBand from "../components/CtaBand.astro";
   .sidecard--steps li { color: var(--ink-soft); padding-left: 0.2rem; }
   .sidecard--steps li::marker { color: var(--orange); font-weight: 600; font-family: var(--font-mono); }
   .sidecard--muted { background: var(--paper-2); box-shadow: none; }
-  .sidecard--muted p { font-size: 0.85rem; color: var(--ink-faint); }
   @media (max-width: 880px) { .enf { grid-template-columns: 1fr; } .enf__side { position: static; } }
 </style>
