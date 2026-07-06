@@ -124,6 +124,8 @@ export interface Plan {
   feats: string[];
   cta: string;
   featured: boolean;
+  /** Yearly billing option, shown as a Monthly/Yearly toggle on plan cards. */
+  yearly?: { price: string; save: string };
 }
 
 export const PLANS: Plan[] = [
@@ -138,12 +140,14 @@ export const PLANS: Plan[] = [
     blurb: "For stores that need batch protection and monthly certificates.",
     feats: ["Up to 100 products", "50 blog articles and pages", "Batch protection", "20 URL checks / month", "5 certificates / month"],
     cta: "Choose Paid", featured: true,
+    yearly: { price: "$79", save: "18% less than monthly billing" },
   },
   {
     name: "Pro", price: "$19.99", per: "/ month",
     blurb: "Auto-Protect and unlimited certificates for large stores.",
     feats: ["Unlimited products, articles & pages", "Auto-Protect on save", "100 URL checks / month", "Unlimited certificates"],
     cta: "Go Pro", featured: false,
+    yearly: { price: "$199", save: "17% less than monthly billing" },
   },
 ];
 
@@ -283,8 +287,8 @@ export const FAQ_GROUPS: FaqGroup[] = [
     title: "Pricing",
     items: [
       { q: "Is there a free plan?", a: "Yes. The Free plan protects up to 25 products and 3 articles or pages, includes paste detection, 5 URL checks a month and 1 Proof of Ownership Certificate, and never expires." },
-      { q: "What do the paid plans add?", a: "Paid ($7.99/month) raises the limits to 100 products and 50 articles and pages, adds batch protection, 20 URL checks and 5 certificates a month. Pro ($19.99/month) removes the caps, adds Auto-Protect and 100 URL checks, and makes certificates unlimited." },
-      { q: "Is there a yearly discount?", a: "Yes. Pro is $199 per year, which works out around 17% cheaper than paying monthly." },
+      { q: "What do the paid plans add?", a: "Paid ($7.99/month or $79/year) raises the limits to 100 products and 50 articles and pages, adds batch protection, 20 URL checks and 5 certificates a month. Pro ($19.99/month or $199/year) removes the caps, adds Auto-Protect and 100 URL checks, and makes certificates unlimited." },
+      { q: "Is there a yearly discount?", a: "Yes. Paid is $79 per year and Pro is $199 per year, which works out around 17% cheaper than paying monthly." },
       { q: "What happens if I downgrade?", a: "Nothing breaks. If your protected content exceeds the new plan's limits, Kirpik restores the newest items over the cap back to their unprotected state, and everything else carries on as normal." },
     ],
   },

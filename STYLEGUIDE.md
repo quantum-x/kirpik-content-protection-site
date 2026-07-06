@@ -39,9 +39,10 @@ A headline is short, concrete, and answers a question the reader has or should h
 
 Approved patterns, from the locked pages:
 - Question that the page answers: **"Is your store's content protected?"**
-- Plain naming of the thing: **"Kirpik vs other anti-theft apps"**, **"Protect your text. Protect your brand."**
+- Challenge and answer (owner-authored, front-page H1 2026-07-06): **"Think you can't prevent plagiarism? Think again."**
+- Plain naming of the thing: **"Kirpik vs other anti-theft apps"**
 - Action triad: **"Protect content. Prove infringement. Enforce your rights."** / **"Protect, prove, enforce: how Kirpik works."**
-- Direct factual statement: **"Kirpik does not modify your content, slow down your site or affect SEO."**, **"Nothing changes for you or your customers."**, **"Your content is protected; your site's performance is untouched."**, **"Kirpik's watermark algorithm is resilient:"**, **"Shopify exposes direct feeds of your products, blogs and pages."**
+- Direct factual statement: **"Kirpik does not modify your content, slow down your site or affect SEO."**, **"No negative impacts on speed, sales or SEO."**, **"Your content is protected; your site's performance is untouched."**, **"Kirpik's watermark algorithm is resilient:"**, **"Shopify exposes direct feeds of your products, blogs and pages."**
 
 Rejected examples and why (keep these as calibration):
 | Rejected | Fault |
@@ -84,7 +85,7 @@ Never "Add to Shopify" (merchants do not "add things to Shopify"). Never a CTA w
 - Approved description of the mechanism (the ONLY one, see CLAUDE.md non-disclosure): "algorithmic invisible watermark derived from your original text signature" / "invisible markers". Never anything more specific, and never crypto vocabulary (no "encrypted", "cryptographic", "HMAC", "blockchain", "notarised").
 - **The noun "copy" is banned** (owner ruling: confusing). The merchant's material is "content" or "text", never "copy" ("product copy", "your copy", "stolen copy" are all violations). A duplicate is "the stolen content", "the infringing version" or "a duplicate". The verb remains allowed where unavoidable ("copy and paste", "copied", the "Copy text" button), but prefer constructions that do not need it. "Words" only in owner-approved lines.
 - Enforcement actors, in the owner's register: "eCommerce Platforms, Search Engines, Hosting Providers and Domain Registrars". In explanatory prose, plain forms: "the company that hosts the thief's site", "the marketplace carrying the listing".
-- Prices: Free $0 / Paid $7.99 per month / Pro $19.99 per month or $199 per year (17% less). USD. Certificates: 1 lifetime on Free, 5 a month on Paid, unlimited on Pro.
+- Prices: Free $0 / Paid $7.99 per month or $79 per year (18% less) / Pro $19.99 per month or $199 per year (17% less). USD. Certificates: 1 lifetime on Free, 5 a month on Paid, unlimited on Pro.
 
 ## 6. Page structure
 
@@ -155,7 +156,7 @@ The full truthful-claims register is in CLAUDE.md; the review-tested essentials:
 
 ## 11. Locked pages and lines (do not re-litigate)
 
-- **Front page**: H1 "Protect your text. Protect your brand."; hero lead (Proof of Ownership Certificates / DMCA sentence); site-check band heading + sub; "Protect content. Prove infringement. Enforce your rights." + card titles; "Nothing changes for you or your customers."; "Kirpik's watermark algorithm is resilient:" + its body; "Prove infringement and enforce your rights."; "Start free."; "Common questions"; closing band (section 4).
+- **Front page** (owner revision 2026-07-06): H1 "Think you can't prevent plagiarism? Think again."; hero lead ("Kirpik protects Shopify product descriptions, articles and pages with invisible text watermarks." + Proof of Ownership Certificates / DMCA sentence); site-check band heading + sub; "Protect content. Prove infringement. Enforce your rights." + card titles; "No negative impacts on speed, sales or SEO." (set wide, must not wrap on desktop) with column "No content modifications"; "Kirpik's watermark algorithm is resilient:" + its body; "Prove infringement and enforce your rights."; "Start for free. Kirpik grows with your business."; "Common questions"; closing band (section 4).
 - **/compare/**: H1 "Kirpik vs other anti-theft apps"; the three intro paragraphs (with the customers/search-engines/AI-tools feeds sentence); table columns "True protection" / "Proof & enforcement"; popularity ordering.
 - **/site-check/**: H1 "Is your store's content protected?"; lead (descriptions, blog posts and pages); "Shopify exposes direct feeds of your products, blogs and pages."; verdict "None of your content is protected"; products/blog posts/pages sections; no paste-a-text tool, ever.
 - **/how-it-works/**: H1 "Protect, prove, enforce: how Kirpik works."; steps "Protect your text" / "Prove Infringement" / "Enforce your rights" with owner-authored leads; dark section heading + body verbatim; standard closing band.

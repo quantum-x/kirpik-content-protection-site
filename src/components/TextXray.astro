@@ -146,9 +146,10 @@ const marked = COPY.map((p, i) => markup(p, i * 3 + 1));
     letter-spacing: 0.07em; text-transform: uppercase;
     padding: 0.4em 0.7em; border-radius: var(--r-pill);
   }
-  .xray__tag--left { left: 12px; background: var(--paper-2); color: var(--ink); border: 1px solid var(--line); }
+  .xray__tag--left { left: 12px; background: var(--paper-2); color: var(--ink); border: 1px solid var(--line); transition: opacity 0.2s; }
   .xray__tag--right { right: 12px; background: var(--orange); color: #fff; opacity: 0; transition: opacity 0.2s; }
   .xray[data-revealed] .xray__tag--right { opacity: 1; }
+  .xray[data-covered] .xray__tag--left { opacity: 0; }
 
   .xray__divider { position: absolute; top: 0; bottom: 0; left: var(--pos); width: 2px; background: rgba(24,28,47,0.85); box-shadow: 0 0 0 1px rgba(255,255,255,0.25); z-index: 4; }
   .xray__handle {
@@ -178,6 +179,7 @@ const marked = COPY.map((p, i) => markup(p, i * 3 + 1));
       const clamped = Math.max(0, Math.min(100, v));
       fig.style.setProperty("--pos", clamped + "%");
       fig.toggleAttribute("data-revealed", clamped < 78);
+      fig.toggleAttribute("data-covered", clamped < 22);
     };
     range.addEventListener("input", () => set(Number(range.value)));
     set(Number(range.value));

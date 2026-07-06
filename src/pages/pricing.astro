@@ -27,11 +27,19 @@ const jsonLd = {
     },
     {
       "@type": "Offer",
-      name: "Paid",
+      name: "Paid (monthly)",
       price: "7.99",
       priceCurrency: "USD",
       description:
         "100 products, 50 blog articles and pages, batch protection, 20 URL checks and 5 certificates a month. Billed monthly.",
+    },
+    {
+      "@type": "Offer",
+      name: "Paid (yearly)",
+      price: "79",
+      priceCurrency: "USD",
+      description:
+        "The Paid plan billed once a year, around 18% less than paying monthly.",
     },
     {
       "@type": "Offer",
@@ -56,7 +64,7 @@ const jsonLd = {
 
 <Base
   title="Pricing"
-  description="Kirpik plans for Shopify text protection: Free forever, Paid at $7.99/month, Pro at $19.99/month or $199/year. All prices USD, billed through Shopify."
+  description="Kirpik plans for Shopify text protection: Free forever, Paid at $7.99/month or $79/year, Pro at $19.99/month or $199/year. All prices USD, billed through Shopify."
   jsonLd={jsonLd}
 >
   <PageHero
@@ -67,17 +75,23 @@ const jsonLd = {
   <section class="section" style="padding-top:0">
     <div class="container plans">
       {PLANS.map((p) => (
-        <article class:list={["card", "plan", { "plan--featured": p.featured }]} data-plan={p.name} data-reveal>
+        <article
+          class:list={["card", "plan", { "plan--featured": p.featured }]}
+          data-plan={p.name}
+          data-reveal
+          data-monthly={p.yearly ? p.price : undefined}
+          data-yearly={p.yearly?.price}
+        >
           {p.featured && <span class="plan__flag">Recommended</span>}
           <h2 class="plan__name">{p.name}</h2>
-          {p.name === "Pro" && (
-            <div class="billing" role="group" aria-label="Pro billing period">
+          {p.yearly && (
+            <div class="billing" role="group" aria-label={`${p.name} billing period`}>
               <button type="button" class="billing__opt is-on" data-billing="monthly">Monthly</button>
               <button type="button" class="billing__opt" data-billing="yearly">Yearly</button>
             </div>
           )}
           <p class="plan__price"><span class="plan__amount">{p.price}</span><span class="plan__per"> {p.per}</span></p>
-          {p.name === "Pro" && <p class="plan__save" hidden>17% less than monthly billing</p>}
+          {p.yearly && <p class="plan__save" hidden>{p.yearly.save}</p>}
           <p class="plan__blurb">{p.blurb}</p>
           <ul class="plan__feats">
             {p.feats.map((f) => (
@@ -197,22 +211,21 @@ const jsonLd = {
 </style>
 
 <script>
-  // Pro billing toggle: switches the displayed price between monthly and
-  // yearly. Progressive enhancement; the page defaults to monthly without JS.
-  const pro = document.querySelector('[data-plan="Pro"]');
-  if (pro) {
-    const amount = pro.querySelector(".plan__amount");
-    const per = pro.querySelector(".plan__per");
-    const save = pro.querySelector(".plan__save") as HTMLElement | null;
-    const opts = pro.querySelectorAll<HTMLButtonElement>(".billing__opt");
+  // Billing toggle on plan cards: switches the displayed price between
+  // monthly and yearly. Progressive enhancement; defaults to monthly.
+  document.querySelectorAll<HTMLElement>(".plan[data-yearly]").forEach((card) => {
+    const amount = card.querySelector(".plan__amount");
+    const per = card.querySelector(".plan__per");
+    const save = card.querySelector<HTMLElement>(".plan__save");
+    const opts = card.querySelectorAll<HTMLButtonElement>(".billing__opt");
     opts.forEach((btn) => {
       btn.addEventListener("click", () => {
         opts.forEach((o) => o.classList.toggle("is-on", o === btn));
         const yearly = btn.dataset.billing === "yearly";
-        if (amount) amount.textContent = yearly ? "$199" : "$19.99";
+        if (amount) amount.textContent = (yearly ? card.dataset.yearly : card.dataset.monthly) ?? "";
         if (per) per.textContent = yearly ? " / year" : " / month";
         if (save) save.hidden = !yearly;
       });
     });
-  }
+  });
 </script>

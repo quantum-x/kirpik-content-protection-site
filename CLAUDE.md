@@ -44,8 +44,8 @@ Always accurate to the product (verified against the app codebase):
 - Watermark survives copy-paste, scraping, editing, partial deletion, reformatting, re-rendering.
 - Detection: paste text or check a URL from the app (rate-limited per plan). No automated web monitoring exists; never claim scheduled scanning.
 - Chain of Proof certificate: SHA-256 content fingerprints ("Protection Signature"), immutable protection snapshots, infringing page Last-Modified headers, Wayback Machine timeline corroboration, Watermark Security Markers count, Confidence %, QR-verified public verification page.
-- Plans: Free $0 (25 products, 3 articles/pages, 5 URL checks/mo, 1 lifetime certificate) / Paid $7.99/mo (100 products, 50 articles/pages, batch protect, 20 URL checks, 5 certs/mo) / Pro $19.99/mo or $199/yr (unlimited, auto-protect, 100 URL checks, unlimited certs).
-- CTA: https://apps.shopify.com/kirpik-content-protection (app under Shopify review as of 2026-07).
+- Plans: Free $0 (25 products, 3 articles/pages, 5 URL checks/mo, 1 lifetime certificate) / Paid $7.99/mo or $79/yr (100 products, 50 articles/pages, batch protect, 20 URL checks, 5 certs/mo) / Pro $19.99/mo or $199/yr (unlimited, auto-protect, 100 URL checks, unlimited certs).
+- CTA: https://apps.shopify.com/kirpik-content-protection (approved and live on the Shopify App Store as of 2026-07-06).
 
 Forbidden claims: "cryptographically signed", "encrypted", "HMAC", "blockchain", "notarized", "guaranteed", "stops/prevents copying" (we prove theft, we do not prevent it), collection protection, automated monitoring, surviving "any" transformation.
 

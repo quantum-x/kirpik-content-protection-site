@@ -33,8 +33,10 @@ const jsonLd = [
     url: SITE.url,
     offers: [
       { "@type": "Offer", name: "Free", price: "0", priceCurrency: "USD" },
-      { "@type": "Offer", name: "Paid", price: "7.99", priceCurrency: "USD" },
-      { "@type": "Offer", name: "Pro", price: "19.99", priceCurrency: "USD" },
+      { "@type": "Offer", name: "Paid (monthly)", price: "7.99", priceCurrency: "USD" },
+      { "@type": "Offer", name: "Paid (yearly)", price: "79", priceCurrency: "USD" },
+      { "@type": "Offer", name: "Pro (monthly)", price: "19.99", priceCurrency: "USD" },
+      { "@type": "Offer", name: "Pro (yearly)", price: "199", priceCurrency: "USD" },
     ],
     publisher: { "@id": `${SITE.url}/#organization` },
   },
@@ -55,11 +57,12 @@ const jsonLd = [
   <section class="hero">
     <div class="container hero__grid">
       <div class="hero__copy">
-        <h1 class="display">Protect your text. <em>Protect your brand.</em></h1>
+        <h1 class="display">Think you can't prevent plagiarism? <em>Think again.</em></h1>
         <p class="lead">
-          Kirpik invisibly watermarks your product descriptions, articles and
-          pages. If your content is stolen, Kirpik generates legal Proof of
-          Ownership Certificates for DMCA takedowns and enforcement action.
+          Kirpik protects Shopify product descriptions, articles and pages
+          with invisible text watermarks. If your content is stolen, Kirpik
+          generates legal Proof of Ownership Certificates for DMCA takedowns
+          and enforcement action.
         </p>
         <div class="hero__ctas">
           <a class="btn btn--primary" href={SITE.shopifyAppUrl} rel="noopener" target="_blank">Install now for free</a>
@@ -115,12 +118,12 @@ const jsonLd = [
   <!-- ======================= Nothing changes ======================= -->
   <section class="section">
     <div class="container">
-      <div class="narrow" style="text-align:center">
-        <h2>Nothing changes for you or your customers.</h2>
+      <div style="text-align:center">
+        <h2>No negative impacts on speed, sales or SEO.</h2>
       </div>
       <div class="nc__grid">
         <div class="nc__col" data-reveal>
-          <h3>Your text is not modified</h3>
+          <h3>No content modifications</h3>
           <p>Every word, heading and comma stays exactly as you wrote it. Readers see your text, unchanged.</p>
         </div>
         <div class="nc__col" data-reveal>
@@ -186,15 +189,27 @@ const jsonLd = [
   <section class="section" id="pricing">
     <div class="container">
       <div class="narrow" style="text-align:center">
-        <h2>Start free.</h2>
+        <h2>Start for free. Kirpik grows with your business.</h2>
       </div>
 
       <div class="plans">
         {PLANS.map((p) => (
-          <div class:list={["card", "plan", { "plan--featured": p.featured }]} data-reveal>
+          <div
+            class:list={["card", "plan", { "plan--featured": p.featured }]}
+            data-reveal
+            data-monthly={p.yearly ? p.price : undefined}
+            data-yearly={p.yearly?.price}
+          >
             {p.featured && <span class="plan__flag">Recommended</span>}
             <h3>{p.name}</h3>
-            <p class="plan__price">{p.price}<span> {p.per}</span></p>
+            {p.yearly && (
+              <div class="billing" role="group" aria-label={`${p.name} billing period`}>
+                <button type="button" class="billing__opt is-on" data-billing="monthly">Monthly</button>
+                <button type="button" class="billing__opt" data-billing="yearly">Yearly</button>
+              </div>
+            )}
+            <p class="plan__price"><span class="plan__amount">{p.price}</span><span class="plan__per"> {p.per}</span></p>
+            {p.yearly && <p class="plan__save" hidden>{p.yearly.save}</p>}
             <p class="plan__blurb">{p.blurb}</p>
             <ul class="plan__feats">
               {p.feats.map((f) => (
@@ -314,8 +329,16 @@ const jsonLd = [
     background: var(--orange); color: #fff; padding: 0.35em 0.75em; border-radius: var(--r-pill);
   }
   .plan__price { font-size: 2.3rem; font-weight: 800; letter-spacing: -0.03em; margin: 0.5rem 0 0.2rem; }
-  .plan__price span { font-size: 0.95rem; font-weight: 600; color: var(--ink-faint); letter-spacing: 0; }
+  .plan__price .plan__per { font-size: 0.95rem; font-weight: 600; color: var(--ink-faint); letter-spacing: 0; }
   .plan__blurb { color: var(--ink-soft); font-size: 0.95rem; margin-bottom: 1.1rem; }
+  .billing { display: inline-flex; border: 1.5px solid var(--line-strong); border-radius: var(--r-md); padding: 3px; gap: 3px; margin-top: 0.7rem; align-self: flex-start; }
+  .billing__opt {
+    font-size: 0.85rem; font-weight: 700; padding: 0.4em 0.9em;
+    border-radius: calc(var(--r-md) - 4px); color: var(--ink-soft);
+    transition: background-color 0.15s ease, color 0.15s ease;
+  }
+  .billing__opt.is-on { background: var(--orange); color: #fff; }
+  .plan__save { font-size: 0.88rem; font-weight: 700; color: var(--mint); margin-top: 0.1rem; }
   .plan__feats { display: grid; gap: 0.5rem; margin-bottom: 1.6rem; }
   .plan__feats li { display: flex; align-items: baseline; gap: 0.55em; font-size: 0.95rem; color: var(--ink-soft); }
   .plan__feats svg { color: var(--mint); flex: none; }
@@ -347,3 +370,23 @@ const jsonLd = [
   .faq[open] summary::after { transform: translateY(-50%) rotate(45deg); }
   .faq p { padding: 0 0 1.2rem; color: var(--ink-soft); max-width: 65ch; }
 </style>
+
+<script>
+  // Billing toggle on plan cards: switches the displayed price between
+  // monthly and yearly. Progressive enhancement; defaults to monthly.
+  document.querySelectorAll<HTMLElement>(".plan[data-yearly]").forEach((card) => {
+    const amount = card.querySelector(".plan__amount");
+    const per = card.querySelector(".plan__per");
+    const save = card.querySelector<HTMLElement>(".plan__save");
+    const opts = card.querySelectorAll<HTMLButtonElement>(".billing__opt");
+    opts.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        opts.forEach((o) => o.classList.toggle("is-on", o === btn));
+        const yearly = btn.dataset.billing === "yearly";
+        if (amount) amount.textContent = (yearly ? card.dataset.yearly : card.dataset.monthly) ?? "";
+        if (per) per.textContent = yearly ? " / year" : " / month";
+        if (save) save.hidden = !yearly;
+      });
+    });
+  });
+</script>
